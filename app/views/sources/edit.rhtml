@@ -1,0 +1,28 @@
+<%
+	colors={"new"=>"BFB","contacted"=>"88D","requires_action"=>"FBB", "published"=>"EEA"}
+%>
+<body style="background-color:#<%=colors[@source.status]%>">
+
+<h1>Editing source: 
+			<%if @source.url and not @source.url.empty?%>
+			<a  target="_" href="<%=@source.url%>"><%=@source.name%></a>
+			<%else%>
+				<%=@source.name%>
+			<%end%>
+			<%if @source.blog_url and not @source.blog_url.empty?%>
+				(<a target="_" href="<%=@source.blog_url%>">mention</a>)
+			<%end%>
+	
+	</h1>
+
+<%= form_tag({:action => 'update',:id => @source},  :multipart=>true)%>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Edit' %>
+</form>
+
+<%= link_to 'Show', :action => 'show', :id => @source %> |
+<%= link_to 'Back', :action => 'list' %>
+
+
+<%=render(:partial=>"source_notes",:locals=>{:source=>@source})%>
+</body>

@@ -1,0 +1,155 @@
+<%@full_width_footer=true%>
+<link rel="alternate" type="application/rss+xml" title="RSS" href='<%=url("/rss/featured")%>' />
+<meta name="description" content="Enter your bands. Get an e-mail when they come to town. A community calendar of upcoming local live music." />
+<%if @youser and @youser.errors and not @youser.errors.empty?%>
+	<div class="error">
+	<ul>
+	<%
+		@youser.errors.each{|error|
+			%>
+		    <li><%=error-%></li>
+			<%
+		} if @youser
+	%>
+	</ul>
+	</div>
+<%end-%>
+<%if false and @youser and not @youser.normal?%>
+<div class='nag'>Next: to make it easier to log in, you should <a href='<%=url("/settings")%>'>choose a username and password</a>.</div>
+<%end%>
+
+<div id="main-full-width">
+<div >
+<%#=render(:partial=>'shared/search')%>
+        	<div id='calndar_view'>  
+    			<%if cookies['calndar_view']=='venues'&&@view!=:calendar%>
+            <%=render_component(:controller=>'edit',:action=>'venues_partial',:params=>params+{:metro_code=>@metro_code})%>
+    			<%elsif cookies['calndar_view']=='friends'&&@view!=:calendar%>
+            <%=render_component(:controller=>'edit',:action=>'friends_partial',:params=>params+{:metro_code=>@metro_code})%>
+    			<%elsif cookies['calndar_view']=='add_SP_bands'&&@view!=:calendar%>
+            <%=render_component(:controller=>'edit',:action=>'add_bands_partial',:params=>params+{:metro_code=>@metro_code})%>
+    			<%elsif cookies['calndar_view']=='your_SP_shows'&&@view!=:calendar%>
+            <%=render_component(:controller=>'edit',:action=>'your_shows_partial',:params=>params+{:metro_code=>@metro_code})%>
+    			<%elsif cookies['calndar_view']=='_feed'&&@view!=:calendar%>
+              <%=render_component(:controller=>'edit',:action=>'feed_partial',:params=>params+{:metro_code=>@metro_code})%>
+          <%else%>
+            <%cookies['calndar_view']='full_SP_calendar'%>
+            <%=render_component(:controller=>'edit',:action=>'calendar_partial',
+              :params=>params+{:metro_code=>@metro_code,:offset=>@offset,:days_to_show=>@days_to_show})%>
+    			<%end%>
+    		</div>
+        <div id='list_view' >
+        	<%some_featured=false%>
+        	<%features=Match.current_with_feature%>
+        	<%some_featured=true if features and not features.empty?%>
+    			<%if cookies['list_view']=='popular' or 
+    			    ((cookies['list_view'].nil? or cookies['list_view'].strip.empty? or cookies['list_view']!='edit') and not some_featured)%>
+            <%=render_component(:controller=>'edit',:action=>'popular_partial',
+              :params=>params+{:metro_code=>@metro_code,:some_featured=>some_featured})%>
+    			<%elsif cookies['list_view']=='new'%>
+            <%=render_component(:controller=>'edit',:action=>'new_partial',
+              :params=>params+{:metro_code=>@metro_code,:some_featured=>some_featured})%>
+          <%else%>
+            <%=render_component(:controller=>'edit',:action=>'featured_partial',
+              :params=>params+{:metro_code=>@metro_code,:some_featured=>some_featured})%>
+          <%end%>
+        </div>
+          <%if not params[:bare]%>
+            <%if @youser%>
+            <%=render(:partial=>'shared/floating_account_column')%>
+            <%else%>
+            <%#=render(:partial=>'shared/floating_column_logged_out')%>
+            <%end%>
+          <%end%>
+          <div style='clear:left'></div>
+	<%#=render(:partial =>"shared/calendar")%>
+	<%#=render(:partial =>"shared/recently_added_shows")%>
+	<div align="right">
+	<%if false #@metro_code=="boston"%>
+	<span style="vertical-align:super">
+		|
+	<a href='<%=url("/feed.pcast")%>'>podcast</a> of bands with upcoming shows in <%=@metro.capitalize%>.
+	</span>
+	<%end%>
+	</div>
+	</div>
+	<div style='clear:right'></div>
+</div>
+
+<%=form_remote_tag (:update =>"result",
+					:html=>{
+					  :id=>'hidden_form',
+					  :name=>'hidden_form'
+				  },
+					:url =>{:action => "add_remote"})
+					-%>
+          <input type="hidden" name="hidden_term_text" value=""/>
+          <input type="hidden" name="note" value=""/>
+          <input type="hidden" name="note_entity" value=""/>
+  <%=render(:partial=>"shared/authenticate_client")%>
+</form>
+
+<script>
+  
+  function add(term_text,term_id)
+  {
+    ta = $('youser_terms_as_text')
+  	if ($('youser_terms_as_text').value==null) $('youser_terms_as_text').value="";
+  	$('youser_terms_as_text').value=trim($('youser_terms_as_text').value)
+  	if ($('youser_terms_as_text').value.match(/\n$/)==null)
+  	{
+  		$('youser_terms_as_text').value+="\n";
+  	}
+  	$('youser_terms_as_text').value+=term_text.toLowerCase();
+  	$('youser_terms_as_text').value=trim($('youser_terms_as_text').value+'\n');
+    jQuery("#image_"+term_id).attr('src','/images/check.png')
+    jQuery("#"+term_id).addClass('term_added');
+  	ta.focus();
+  	ta.scrollTop = ta.scrollHeight;
+//    jQuery('#related_terms').load('/edit/related_terms');
+    lightup();
+  }
+
+  lightup = function(e){
+    _$("#step_2,#step_3,#step_4").removeClass("inactive_step").addClass("active_step")
+    //_$(".signup_footer").hide()
+  }
+  
+function direct_add(term_text,term_id,note,note_entity)
+{
+  jQuery("#refresh").show();
+  form = document.hidden_form;
+  form.elements['hidden_term_text'].value=term_text
+  if (note) form.elements['note'].value=note
+  if (note_entity) form.elements['note_entity'].value=note_entity
+  new Ajax.Updater('', form.action, {asynchronous:true, evalScripts:true, onComplete: null, parameters:Form.serialize(form)}); 
+  form.elements['hidden_term_text'].value=''
+  //jQuery("#"+term_id).html("<span style='vertical-align:-4px'><a><img src='/images/check.png'/></a></span> "+term_text)
+  jQuery("#image_"+term_id).attr('src','/images/check.png')
+  jQuery("#"+term_id).addClass('term_added')
+//  jQuery("#my_bands").val("refresh");
+  return false;
+}
+  function update_terms_and_shows(all)
+  {
+    jQuery("#refresh").hide();
+    jQuery("#my_terms").addClass("faded_50")
+    params=''
+    if (all) params='?show_all=true'
+    jQuery('#my_terms').load("<%=url('/edit/my_terms')%>"+params,function(){
+      jQuery("#my_terms").removeClass("faded_50")
+    });
+    jQuery('#my_shows').load("<%=url('/edit/my_shows')%>");
+  }
+
+  function update_related_terms()
+  {
+//    jQuery('#my_related_terms').load("<%=url('/edit/my_related_terms')%>");
+  }
+  
+  function refresh_terms()
+  {
+      update_terms_and_shows()
+  }
+  
+</script>

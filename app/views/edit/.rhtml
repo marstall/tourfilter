@@ -1,0 +1,75 @@
+<div class="box" style="min-height:31.25em">
+<%if !@youser_known-%>
+<div class="box_header">
+		<span style="font-size:1.15em">Search for shows.</span>
+</div>
+<div class="smaller">1. Enter one or more band names; search results for boston clubs will appear as you type.
+	<span style="display:none;color:green" id="loading">...</span>  
+
+</div>
+  <%else%>
+<div class="box_header">
+     bands you're tracking:
+</div>
+  <%end%>
+<%=form_tag ({:action => 'index'}, :multipart => true)-%>
+<%=text_area_tag ("terms_as_text",params[:terms_as_text],:size => "16x12") -%>
+<%if not @youser_known%>
+<%= observe_field(:terms_as_text,
+                  :frequency => 1,
+                  :update => :results,
+                  :loading => "Element.show('loading')",
+                  :complete => "Element.hide('loading')",
+                  :url => {:action => :search}
+                  )%>
+<%end%>
+<div style="padding:2px"></div>
+<%if !@youser_known%>
+<div class="box_header">
+			<span style="font-size:1.15em">Get notified.</span>
+		<div class="smaller">
+			2. After you've entered some bands, create an account. You will get one email when any of your bands come to town (no spam, ever).
+		</div>
+</div>
+	<%=text_field(:user,:name,"size" => 7,
+		:value=>"Username",
+		:class=>"signup",
+		:onfocus=>"if (this.value=='Username') this.value=''",
+		:onblur=>"if (this.value=='') this.value='Username'"
+		)%>
+	<%=text_field(:user,:password,"size" => 7,
+		:id=>"password",
+		:class=>"signup",
+		:value=>"Password",
+		:onfocus=>"if (this.value=='Password') {this.value='';this.type='password';}",
+		:onblur=>"if (this.value=='') {this.value='Password';this.type='text';}"
+		)%>
+<div style="padding:2px"></div>
+	<%=text_field(:user,:email_address,"size" => 16,
+		:value=>"Email address",
+		:class=>"signup",
+		:onfocus=>"if (this.value=='Email address') this.value=''",
+		:onblur=>"if (this.value=='') this.value='Email address'"
+		)%>
+		<div style="padding:2px"></div>
+		<div align=right>
+				<%= submit_tag 'Sign up' %>&nbsp;&nbsp;&nbsp;&nbsp;
+		</div>
+<%else%>
+<%= submit_tag 'Save' %>
+<%end%>
+<%= end_form_tag %>
+
+<div class="error">
+<%if @youser&&@youser.errors-%>
+<ul>
+<%
+	@youser.errors.each{|error|
+		%>
+	    <li><%=error-%>
+		<%
+	} if @youser
+%>
+</ul>
+<%end-%>
+</div>

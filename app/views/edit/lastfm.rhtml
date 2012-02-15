@@ -1,0 +1,21 @@
+<div id='main-full-width'>
+<h2><img style='vertical-align:-4px;margin-right:4px;height:30px' src='/images/lastfm_icon.png'/>last.fm import</h2>
+<div class='content'>
+<div style='margin:1em'></div>
+<%
+  if @youser.normal?
+    name = @youser.lastfm_username||@youser.name
+  else
+    name = ""
+  end
+%>
+    Enter your last.fm username:   
+    <%=form_remote_tag (:update =>"result",
+    					:url =>{:action => 'lastfm_handler'})
+    					-%><img style='vertical-align:-6px;margin-right:0px;height:20px' src='/images/lastfm_icon.png'/><input type='text' name='username' value='<%=name%>' length=64>
+      	<%= submit_tag 'Import' %>
+      </form>
+</div>
+
+<div class="error" id="result"></div>
+</div>

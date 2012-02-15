@@ -1,0 +1,16 @@
+<%users!=@users%>
+<%if not @users or @users.empty?%>
+<div style='color:red'>no results</div>
+<%
+else
+	%>
+	<h2>
+	  Found <%=@users.size%> results for <%=params[:query]%>
+	</h2>
+	<div class='underline'>
+	<%@users.each {|user|%>
+	<%=link_to user.name,
+		:controller=>"users",
+		:action => user.name%>
+		<%}%><br>
+<%end%>

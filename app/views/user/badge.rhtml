@@ -1,0 +1,16 @@
+<%begin%>
+<div class="tourfilter" style="max-width:300px;padding-top:5px;padding-bottom:2px">
+<div class="tourfilter-header" style="color:#777;font-weight:bold">
+<%=@title%></div>
+<%
+        @badge_matches[0..@num-1].each { |match|
+%> 
+<div class="tourfilter-listing">
+<a <%="target='params[:target]'" if params[:target]%> href="http://www.tourfilter.com/<%=@metro_code%>/<%=match.term.url_text%>"><%=match.term.text.downcase%></a> <%=match.page.place.name.downcase[0..12]%>
+        <%="(#{match.very_short_time_description})" if match.very_short_time_description and not match.very_short_time_description.empty?%><br>
+</div>
+<%}%>
+more on <a href="http://www.tourfilter.com/<%=@metro_code%>/users/<%=@user.name%>">tourfilter</a> ...
+</div>
+<%rescue
+end%>

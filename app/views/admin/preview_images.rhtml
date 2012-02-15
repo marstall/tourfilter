@@ -1,0 +1,103 @@
+<style>
+
+a img { border: 0; }
+
+.light a:link { text-decoration: none; color: #bbb; font-weight:normal}
+.light a:visited { text-decoration: none; color: #bbb; font-weight:normal}
+.light a:hover { text-decoration: underline; }
+.light a:active { text-decoration: underline; }
+
+.light {color:#ddd}
+
+
+a:link { text-decoration: underline; color: black; }
+a:visited { text-decoration: underline; color: black; }
+a:hover { text-decoration: underline; }
+a:active { text-decoration: underline; }
+.top {float:left}
+.lines{float:right;line-height:1.7em;margin-top:0.25em;color:#fff;background-color:#fff;padding:0.25em;border-left:1em solid;border-bottom:1px solid;border-color:#fff;margin-bottom:1em;padding-right:0em}
+.line_{text-align:right;color:#777;padding:0.25em;font-size:12px;font-family:terminal,monospace;}
+.line{text-align:right;background-color:#fff;padding:0.25em;font-size:12px;font-family:terminal,monospace}
+.para{font-size:smaller;font-face:Georgia;font-weight:bolder;margin-right:0.25em;}
+</style>
+
+<div style='margin-left:10%;width:800px;font-family:georgia'>
+<%= javascript_include_tag :defaults %>
+<body>
+<div style='margin-left:40px;background-color:#add;padding:0.25em;font-size:1.25em;'>
+tourfilter boston
+</div>
+<div>
+<%
+@images.each{|image|
+	next unless image.term_text
+	%>
+		<div style='float:left;margin-top:20px'>
+			12/3
+		</div>
+		<div style='margin-left:40px;margin-top:1em;padding-top:3px;border-top:0.33em solid;border-color:black'>
+		<div style='float:left'>
+			<img width=200px src='<%=image.url%>'></src>
+		</div>
+		<div style = 'margin-left:210px;'>
+			<div class='top'>
+			<div id='lines_<%=image.id%>' style='font-size:2em;line-height:1.3em' onhover='$("lines_<%=image.id%>").toggle()'>
+			<%=image.term_text.downcase%>
+			</div>
+			Other Lives, the Mad Town Crew<br>
+			Somerville Theatre<br>
+			<span class='light'>tracked by <a href=''>lucy</a>, <a href=''>stacy</a>, <a href=''>mrho</a>, <a href=''>12 others</a></span><br>
+
+			</div>
+			<div class='lines' style='display:block'>
+			<span class='line_'>tickets at</span><span class='line'><a href=''>ticketmaster</a> <a href=''>stubhub</a></span><br>
+			</div>
+		</div>
+		<div style='clear:both'></div>
+		</div>
+	</tr>
+<%
+} if @images.size>0
+%>
+</div>
+<br>
+<script>
+function set_term_cookie(term_text)
+{
+	set_cookie("term_text",term_text,7)
+}
+
+function get_term_cookie()
+{
+	return get_cookie("term_text")
+}
+
+function popup(url)
+{
+	window.open(url,"window","status=1,location=1,toolbar=1,resizable=1,menubar=1,bookmarks=1,directories=1,scrollbars=1")
+}
+
+function band_page_popup(term_text,url)
+{
+	set_term_cookie(term_text);
+	popup(url);
+}
+
+function myspace_popup(term_text,url)
+{
+	set_term_cookie(term_text);
+	popup(url);
+}
+
+function google_image_popup(term_text)
+{
+	set_term_cookie(term_text);
+	url = "http://images.google.com/images?client=safari&rls=en&q="+term_text+"&ie=UTF-8&oe=UTF-8&um=1&sa=N&tab=wi"
+	popup(url);
+}
+
+
+	
+</script>
+
+</body>

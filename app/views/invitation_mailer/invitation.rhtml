@@ -1,0 +1,18 @@
+<%=@invitation.from_user.name%> has invited you to join Tourfilter <%=controller.metro%>!
+
+Tourfilter searches club websites in <%=controller.metro%> and sends you email when your favorite bands come to town.
+
+Tourfilter is free (and spam-free).
+
+<%if @invitation.message and not @invitation.message.strip.empty?-%>
+<%=@invitation.from_user.name%> said, "<%=@invitation.message%>"
+
+<%end-%>
+signup/find out more: 
+http://www.tourfilter.com/accept_invite/<%=@controller.metro_code%>/<%=@ticket-%>
+
+Thanks,
+Tourfilter
+
+
+

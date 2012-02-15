@@ -1,0 +1,14 @@
+
+<%=text_field_tag(:username,"","size" => 16,
+	:value=>"find a user",
+	:onfocus=>"if (this.value=='find a user') this.value=''",
+	:onblur=>"if (this.value=='') this.value='find a user'"
+	)%>
+<%= observe_field(:username,
+                  :frequency => 0.5,
+                  :update => :username_results,
+                  :url => {:controller => "browse",
+						   :action => :find_user}
+                  )%>
+<div style="padding:2px"></div>
+<div id="username_results"></div>

@@ -1,0 +1,17 @@
+<%users!=@users%>
+<%if not @users or @users.empty?%>
+<div style='color:red'>no results</div>
+<%
+else
+	%>
+	<h3 style='border-top:4px solid #ddd;padding-top:4px;margin-top:4px'>
+	  Found <%=@users.size%> results for <%=params[:query]%>
+	</h3>
+	<div class='underline content' style='line-height:22px'>
+	<%@users.each {|user|%>
+	<%=link_to user.name,
+		:controller=>"users",
+		:action => user.name%><br>
+		<%}%>
+	</div>
+<%end%>

@@ -1,0 +1,45 @@
+<%=render(:partial=>'shared/calendar_options',:locals=>{:options_label=>@options_label,:nav_array=>@nav_array})%>
+<%if @youser%>
+  <div class='smaller' style='padding:4px;background-color:#ffc;margin-bottom:6px'>
+    See someone on tourfilter whose taste you like? Click on the "Follow" button on their profile page & you'll see their upcoming concerts here.
+  </div>
+<h2>
+  find people
+<span class='small underline gray' style='font-weight:normal'>find tourfilter members to follow in <%=@metro.downcase%></span>
+</h2>
+<%=form_remote_tag (:update =>"result",
+					:loading => "$(submit).disabled=true",
+					:complete => "$(submit).disabled=false",
+					:id=>'add_form',
+					:url =>{:action => "find_users"})
+					-%>
+<div style='float:left;padding-top:3px'>
+  Enter email address or username:
+</div>  
+<div style='float:left;'>
+   <input type='text' name='query'> <input id='submit' type='submit' name='' value='Find'><br>
+<div class='small underline gray' style='color:#999;margin-left:4px;line-height:8px;font-size:10px;font-weight:normal'>partial usernames ok</div>
+</div>
+<div style='clear:both'></div>
+<div id='result'></div>
+</form>
+<br>
+<br>
+<h2>
+friends' calendar
+</h2>
+<%
+    matches=Match.recommended_matches_within_n_days_for_user(42,@youser)
+    @recommended_days,@recommended_matches=matches2calendar(matches)
+%>
+<%=render(:partial =>"shared/recommended_calendar",
+        :locals=>{
+                :short_dates=>true,
+                :break_between_days=>false,
+                :recommended_days => @recommended_days,
+                :recommended_matches => @recommended_matches,
+                :page=>'me'
+        })%>
+<%else%>
+<div class='scarcity_message'>You must be logged in to do that! <a href='<%=url("/login")%>'>login</a> or <a href='<%=url("/signup")%>'>create an account</a></div>
+<%end%>

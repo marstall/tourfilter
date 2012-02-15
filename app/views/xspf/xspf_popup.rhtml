@@ -1,0 +1,40 @@
+<% sort = params[:sort]||params[:id]%>
+<link href="/stylesheets/tourfilter.css" media="screen" rel="Stylesheet" type="text/css" /><html>
+<head>
+<title>Songs by bands coming to <%=@metro%></title>
+</head>
+<body style="background-color:#E6E6E6">
+<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0"
+width="400" height="168" >
+        <param name="allowScriptAccess" value="sameDomain"/>
+        <param name="movie" value="/xspf_player.swf"/>
+        <param name="quality" value="high"/>
+        <param name="bgcolor" value="#E6E6E6"/>
+    <embed src="/xspf_player/xspf_player.swf?playlist_url=/<%=@metro_code%>/xspf/<%=sort%>&autoplay=true&info_button_text=track%20this/more%20info" 
+    quality="high" bgcolor="#E6E6E6" name="xspf_player" allowscriptaccess="sameDomain"
+    type="application/x-shockwave-flash"
+    pluginspage="http://www.macromedia.com/go/getflashplayer"
+    align="center" height="168" width="400"> </embed>
+</object>
+<div style="font-family:sans-serif;width:400px;font-size:0.7em;text-align:right;margin-top:2px;margin-left:4px">
+<span style="background-color:#f0f0f0;padding-top:6px;padding-bottom:6px;padding-left:4px;padding-right:4px;margin:6px">
+<form method="get" action="/xspf/xspf_popup">
+sort <select onChange="forms[0].submit()"
+ 			 style="font-size:1em;font-family:sans-serif;background-color:#e6e6e6" 
+			name="sort">
+	<option value="by_date_added" <%="selected" if sort=="by_date_added"%>>by date added</option>
+	<option value="by_concert_date" <%="selected" if sort=="by_concert_date"%>>by date of show</option>
+	<option value="by_club_name" <%="selected" if sort=="by_club_name"%>>by club</option>
+	<option value="by_num_trackers" <%="selected" if sort=="by_num_trackers"%>>by # trackers</option>
+	<option value="random" <%="selected" if sort=="random"%>>shuffle</option>
+</select>&nbsp;
+</form>
+</span>
+</div>
+<script src="/javascripts/application.js?1167205990" type="text/javascript"></script>	
+<script>
+track_page_view()
+</script>
+
+</body>

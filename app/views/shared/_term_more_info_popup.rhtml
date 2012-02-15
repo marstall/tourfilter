@@ -1,0 +1,33 @@
+<%if match_id%>
+<%match=Match.find(match_id)%>
+<%id=match.id%>
+<%term=match.term%>
+<%elsif term_id%>
+<%term=Term.find(term_id)%>
+<%id=term.id%>
+<%end%>
+<%term_text=term.text%>
+<%i=0%>
+<div class='more_info_wrapper more_info_wrapper_redbox' >
+<div class='popup_h1'>
+<span class='gray'>quick info:</span>&nbsp;<%=term_text.downcase%>
+<div style='float:right' class='underline'>
+    <%=render(:partial=>'shared/lala_link',:locals=>{:term=>term,:cl=>'popup_listen',:show_icon=>false})%>
+</div>
+</div>
+
+<%#=render(:partial=>'shared/term_more_info_track',:locals=>{:match=>match,:i=>i+=1})%>
+<%metro_cache(:controller => "rolling_6_months", :action => "term_more_info_popup_#{id}") do%>
+<%#=render(:partial=>'shared/term_more_info_bing',:locals=>{:term_text=>term_text,:i=>i+=1})%>
+<div class='popup_h2'>videos</div>
+<%=render(:partial=>'shared/term_more_info_youtube',:locals=>{:term_text=>term_text,:i=>i+=1})%>
+<%if term.articles%>
+<div class='popup_h2'>reviews</div>
+  <%=render(:partial=>'shared/echonest_stories',:locals=>{:multiple=>'true',:height=>32,:term_text=>term.text})%>
+<%end%>
+</div>
+<%#=render(:partial=>'shared/term_more_info_lala',:locals=>{:term_text=>term_text,:i=>i+=1})%>
+<%end%>
+<%if is_admin?%>
+<%=render(:partial=>'shared/term_more_info_feature',:locals=>{:term_text=>term_text,:i=>0,:match_id=>match_id||nil})%>
+<%end%>

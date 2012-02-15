@@ -1,0 +1,30 @@
+<div id='main-full-width'>
+<h1 style='text-transform:none'><span style='vertical-align:-4px;margin-right:4px'><img src='/images/itunes_icon.png'/></span>iTunes import (beta)</h1>
+<div class="error" id="result"></div>
+<div class='instruction'>
+    <span class='instruction_number'>1</span> 
+    <span class='instruction_text'>
+    Within iTunes, select menu item <span style='color:Green'>File > Library > Export Library</span>
+    </span>
+</div>
+<div class='instruction'>
+<span class='instruction_number'>2</span> 
+<span class='instruction_text'>
+Save Library.xml and note its location
+</span>
+</div>
+<div class='instruction'>
+<span class='instruction_number'>3</span> 
+<span class='instruction_text'>
+Upload Library.xml:
+
+  <%=form_tag ({:action => 'itunes'},{:multipart=>"true"})-%>
+  <%=file_field_tag("library")%>
+	<%= submit_tag 'Upload' %>
+</form>
+</span>
+</div>
+<div>Note: iTunes import is in a trial phase. Please email us at <a href='mailto:info@tourfilter.com'>info@tourfilter.com</a> to let us know how it went for you!</div>
+<br>
+<div>In particular, if you have a particularly large iTunes library with a lot of artists you *don't* want to track, proceed with caution!</div>
+ </div>

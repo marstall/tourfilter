@@ -1,0 +1,185 @@
+<link rel="alternate" type="application/rss+xml" title="RSS" href="/rss/<%=@youser.name%>" />
+
+<%@show_venues=true%>
+<div id="right-column">
+<div id="right-column-body">
+<%
+	recommenders = @youser.recommenders
+	if !recommenders.nil?&&recommenders.size>0
+%>
+
+You get recommendations from:
+<ul>
+    <%recommenders.each {|recommender|%>
+        <li><%=link_to recommender.name,  
+        "/users/#{recommender.name}"%>
+
+		<%
+		recommendations = recommender.current_recommendations(5)
+		if recommendations and not recommendations.empty?
+			%><br><span class="smaller"><%
+			recommendations.each{|recommendation|
+	   		  match=recommendation.match
+			-%>
+						&nbsp;&nbsp;<%=link_to "#{match.term.text}",
+							 "/bands/index/#{h match.term.url_text}"%>&nbsp;
+						<%=link_to "#{match.very_short_time_description}",
+							match.page.url
+							%><br>
+			<%}%>
+			</span>
+		<%end%>
+        <%}%>
+
+</ul>
+<br>
+<%end%>
+all recommended upcoming shows:
+<ul>
+<%cache(:controller => "home", :action => "recommendations") do%>
+<%
+recommendations = Recommendation.current
+recommendations.each { |recommendation|
+	match=recommendation.match
+%>
+	<li>
+		<%=link_to "#{match.term.text}",
+			 "/bands/index/#{h match.term.url_text}"%>
+		<div class="smaller">
+		<%=link_to "#{match.page.place.name} #{match.very_short_time_description}",
+			match.page.url
+			%> <br>by 
+			<%=link_to recommendation.user.name,
+			:controller=>"users",
+			:action => recommendation.user.name
+			-%>
+			</div>
+</li>
+<%}%>
+</ul>
+<%end%>
+<br>
+<%
+	recommendees = @youser.recommendees
+	if !recommendees.nil?&&recommendees.size>0
+%>
+
+You give recommendations to:
+<ul>
+    <%recommendees.each {|recommendee|%>
+        <li><%=link_to recommendee.name,  
+        "/users/#{recommendee.name}"%><br>
+        <%}%>
+</ul>
+<%end%>
+
+</div>
+</div>
+<div id="main">
+<div class="header1">
+<div style="float:right;"><%= link_to 'edit / delete', "/edit"%></div>
+<div style="float:left;">your bands</div>
+<div style="padding:2px;clear:left"></div>
+<%=form_remote_tag(:update =>"status",
+					:url =>{:action => 'add'})
+					-%>
+<%=text_field_tag("term", value = "search for/add a band", options = {})-%><span style="display:none" id="add_button">&nbsp;<%=submit_tag "add"%></span>
+<span id="status"></span>
+<%= end_form_tag %>
+<%= observe_field(:term,
+                  :frequency => 0.5,
+                  :update => :unsaved_results,
+				  :complete => "Element.show('add_button');",
+                  :url => {:action => :search}
+                  )-%>
+<ul><span id="unsaved_results"></span></ul>
+</div>
+<ul>
+<span id="saved_results"></span>
+<%@matched_terms.each { |term|%>
+<li>
+<%=render(	:partial => 'shared/term',
+				:locals => { :term => term,
+							 :parent_user_id => @youser_id 
+							}
+				)%>	
+<%}%>
+<%@unmatched_terms.each { |term|%>
+<li>
+<%=render(	:partial => 'shared/term',
+				:locals => { :term => term,
+							 :parent_user_id => @youser_id 
+							}
+				)%>	
+<%}%>
+</ul> 
+<div align="right">
+<span style="vertical-align:super">
+	<%=link_to "Get tourfilter on your desktop:","/ical/about"%>
+</span>
+<span style="vertical-align:20%">
+	<a border=0 href="/ical/about"><img border=0 src="images/ical.gif"></a>
+	<a border=0 href="/rss/<%=@youser.name%>"><img border=0 src="images/rss.gif"></a>
+</span>
+<br>
+
+</div>
+
+</div>
+<script>
+function update_recommended_matches()
+{
+	// check to see if we are logged in. If not, skip the ajax and just show ALL the track this links ...
+	var url = "<%=url_for :controller => 'data', :action => 'recommended_matches', :user_id => @youser.id %>"
+	var ajax = new Ajax.Request(
+	        url, 
+	        {
+	                method: 'get', 
+	                onComplete: on_recommended_matches_complete
+	        });
+}
+
+function on_recommended_matches_complete(originalRequest)
+{
+	
+	var ids = [-1];
+	if (originalRequest!=null)
+	{
+		var ids = originalRequest.responseText.split(/,/) // tokenize the returned ids on comma
+	}
+	// go through all spans in the document and find the track_this_n spans
+	// for each _n that is _not_ in the ids returned by the shared_terms method.
+	// for each non-match, change visibility to visible and fade the element up.
+	var spans = $A(document.getElementsByTagName("span")) // get all spans in the document
+	var i=0;
+	spans.each(function(span) {
+		// see if their id is 'track_this_' followed by something
+		i++;
+		if (span.id.substring(0,15)=="recommend_this_")
+		{
+	//		alert(span.id)
+			// see if this span is for a match recommended by the youser.
+			matched = ids.find(function(id) {
+				return (("recommend_this_"+id)==span.id);
+			});
+			// if not recommended yet, show 'recommend this' link
+			if (matched==null)
+			{
+				try
+				{
+					span.innerHTML="(<a href='/recommend/index/"+span.id.substring(15)+"'>recommend this show</a>)";
+				}
+				catch (e)
+				{
+					
+				}
+			}
+		}
+	})
+}
+
+$("term").focus()
+$("term").select()
+update_recommended_matches();
+</script>
+</script>

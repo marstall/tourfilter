@@ -1,0 +1,37 @@
+<%recommender_ids||=nil%>
+<%periodicity||="periodic"%>
+<%old_date_string=""%>
+<table width=100% cellpadding=4 style='font-size:16px'>
+<%days.each{|day|-%>
+	<%matches[day].each_with_index{|match,i|-%>
+		<tr>
+			<td>
+				<%="#{day.month}/#{day.day}"-%>
+			</td>
+			<td>
+				<%redirect_string = @periodicity=='weekly' ? 'w' : 'm'%>
+				<a rel="nofollow" 		
+					href='http://www.tourfilter.com/<%=@metro_code%>/<%=redirect_string%>/<%=match.id%>'><%=match.term.text.downcase%></a>
+				<%if recommender_ids and not recommender_ids.empty?
+					# show "(also tracked by user1, user2, x others)"
+				    term_users=match.term.recent_users if match.term
+					if term_users and not term_users.empty?
+						recommender_string=""
+						num_recommenders=0
+						term_users.each {|user|
+							next unless recommender_ids[user.id]
+							num_recommenders+=1
+							break if num_recommenders>2-%>
+							<%recommender_string+=user.name.downcase+" "-%>
+						  <%}-%>
+							 <span style='font-size:smaller;color:#999'><%=recommender_string.strip-%></span>
+					<%end-%>
+				<%end-%>
+			</td>
+			<td >
+			<%=match.page.place.name.downcase-%> 
+			</td>
+		</tr>
+		<%}-%>
+	<%}-%>
+</table>

@@ -1,0 +1,71 @@
+<meta http-equiv="refresh" content="60">
+
+<%page_size=500%>
+<%offset=(params[:offset]||0).to_i%>
+<%cnt = Action.count%>
+<%max = offset+(page_size-1)%>
+<%max=cnt if max>cnt %>
+<div id="main-full-width">
+<h2>feed
+  <div style='float:right;padding-top:10px;padding-right:4px;' class='gray small underline'>
+    
+  <%if offset>0%>
+  <a href='/<%=@metro_code%>/feed'>home</a>
+  <a href='/<%=@metro_code%>/feed?offset=<%=offset-page_size%>'>prev</a>
+  <%end%>
+  showing <%=offset%>-<%=max%> of <%=cnt%>
+  <%if max<cnt%>
+  <a href='/<%=@metro_code%>/feed?offset=<%=offset+page_size%>'>next</a>
+  <%end%>
+  </div>
+  <div style='clear:right' ></div>
+</h2>
+<div class='feed ' style='margin-top:6px'>
+<table cellpadding=6 cellspacing=0 width=100%>
+<%Action.find(:all,:offset=>offset,:limit=>250,:order=>'id desc').each_with_index{|action,i|%>
+  <%
+    cl=nil
+    if action.action=='registered'
+      cl='feed_registered'
+    end
+    
+  %>
+  <tr style='<%="background-color:#eee" if i%2==0 and not cl%>' class='<%=cl if cl%>'>
+    <td><a href='/<%=action.metro_code%>'><%=action.metro_code%></a></td>
+<!--    <td><%=action.created_at.month%>/<%=action.created_at.day%> <%=action.created_at.hour%>:<%=action.created_at.min%></td>-->
+    <td ><%=time_ago_in_words action.created_at%> ago</td>
+    <td ><a href='/<%=action.metro_code%>/users/<%=action.username%>'><%=action.username%></a>
+    <span style='font-weight:bold'><%=action.action%>
+    <%=action.object_type%></span> <%=action.object_description%></span></td>
+    <td class='underline'>
+      <%if action.note && action.note.size>1%>
+      <%=action.note%> 
+        <%if action.note_entity%>
+        (<%=action.note_entity%>)
+        <%end%>
+    <%end%>
+    <%if action.referer_domain && action.referer_domain.size>1%>
+    <span style='position:absolute;'>
+      <a href='http://<%=action.referer_domain%>/<%=action.referer_path%>'><%=action.referer_domain%></a>
+    </span>
+    <%end%>
+  </td>
+  </tr>
+<%}%>
+</table>
+<h2>
+  <div style='float:right;padding-top:10px;padding-right:4px;' class='gray small underline'>
+    
+  <%if offset>0%>
+  <a href='/<%=@metro_code%>/feed'>home</a>
+  <a href='/<%=@metro_code%>/feed?offset=<%=offset-page_size%>'>prev</a>
+  <%end%>
+  showing <%=offset%>-<%=max%> of <%=cnt%>
+  <%if max<cnt%>
+  <a href='/<%=@metro_code%>/feed?offset=<%=offset+page_size%>'>next</a>
+  <%end%>
+  </div>
+  <div style='clear:right' ></div>
+</h2>
+</div>
+</div>

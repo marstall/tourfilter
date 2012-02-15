@@ -1,0 +1,59 @@
+<%@youser=youser if not @youser%>
+<%@term_text=term_text if not @term_text%>
+<%if not @youser%>
+	<div style="color:grey;line-height:1.3em;font-family:helvetica;font-weight:bolder">
+<%if @request.env['HTTP_REFERER']=~/iconcertcal/i%>
+		Welcome to Tourfilter, iConcertCal users!	
+<%elsif @request.env['HTTP_REFERER']!~/tourfilter/%>
+<%end%>
+	</div>
+<%
+#	if @request.env['HTTP_REFERER']=~/tourfilter/
+		padding="0.5em"
+#	else
+#		padding="padding:2.5em;padding-bottom:1em;padding-top:1em;"
+#	end
+%>
+<div class="realbig" style="<%=padding%>;margin-bottom:4px;color:grey">
+<span name="track_this" class="underline" id="track_this">
+<span class="error" style="line-height:3.3em;font-size:3em;font-family:helvetica;font-weight:bolder">
+	Create a free account to get e-mail when
+		<span class="highlight"><%=Term.initial_capsify(@term_text).gsub("\s+","&nbsp;")%></span> come<%="s" if @term_text.last!="s"%> to <%=@metro%>.</span>
+	<div style="height:4px"></div>
+<div id="mini_register"></div>
+<div class="realbig">
+<span id="result" class="error" style="padding:0px;margin:0px"></span>
+<%=form_remote_tag (:update =>"result",
+					:loading => "$(submit).value='Processing ...';$(submit).disabled=true",
+					:complete => "$(submit).value='Sign up';$(submit).disabled=false",
+					:url =>{:controller => 'edit', :action => 'remote_post'})
+					-%>
+	<input type="hidden" name="youser[terms_as_text]" value="<%=term_text%>">
+	<%=text_field(:youser,:name,"size" => 15,
+		:value=>"Username",
+		:class=>"signup",
+		:onfocus=>"Element.show('newsletter');if (this.value=='Username') this.value=''",
+		:onblur=>"if (this.value=='') this.value='Username'"
+		)%>
+	<%=text_field(:youser,:password,"size" => 15,
+		:id=>"password",
+		:class=>"signup",
+		:value=>"Password",
+		:onfocus=>"Element.show('newsletter');if (this.value=='Password') {this.value='';this.type='password';}",
+		:onblur=>"if (this.value=='') {this.value='Password';this.type='text';}"
+		)%>
+	<%=text_field(:youser,:email_address,"size" => 21,
+		:value=>"Email address",
+		:class=>"signup",
+		:onfocus=>"Element.show('newsletter');if (this.value=='Email address') this.value=''",
+		:onblur=>"if (this.value=='') this.value='Email address'"
+		)%>
+				<%= submit_tag '1-Step Signup (No spam, ever!)',:id=>'submit'	 %>
+		<div id="newsletter" style="display:none;margin:2px;border:0" class="term_more"><%=check_box(:youser,:wants_weekly_newsletter,{},"true","false")%>send me a weekly newsletter about my bands (new cds, recommendations, etc.)</div>
+<%=render(:partial=>"shared/authenticate_client")%>
+<%= end_form_tag -%>
+</div>
+</span>
+</div>
+<%end%>
+

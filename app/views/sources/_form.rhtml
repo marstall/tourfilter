@@ -1,0 +1,71 @@
+<%= error_messages_for 'source' %>
+
+<!--[form:source]-->
+<table><tr><td valign=top>
+
+<p><label for="source_name">Name</label><br/>
+<%= text_field 'source', 'name'  %></p>
+<p><label for="source_description">Description</label><br/>
+<%= text_area 'source', 'description','cols'=>32,'rows'=>4 %></p>
+
+
+<p><label for="source_person1_firstname">Person1 firstname</label><br/>
+<%= text_field 'source', 'person1_firstname'  %></p>
+
+<p><label for="source_person1_lastname">Person1 lastname</label><br/>
+<%= text_field 'source', 'person1_lastname'  %></p>
+
+<p><label for="source_person1_title">Person1 title</label><br/>
+<%= text_field 'source', 'person1_title'  %></p>
+
+<p><label for="source_person1_email">Person1 email</label><br/>
+<%= text_field 'source', 'person1_email'  %></p>
+
+<p><label for="source_person1_phone">Person1 phone</label><br/>
+<%= text_field 'source', 'person1_phone'  %></p>
+
+</td><td valign=top>
+
+<div style="background-color:#AAF;padding:0.5em">
+
+<p><label for="source_status">Status</label><br>
+<%= select 'source', 'status', %w{ new contacted requires_action published}%></p>
+<p><label for="source_category">Category</label><br>
+<%= select 'source', 'category', ["music blog","culture blog","city blog","online zine","other blog","print - daily","print - weekly","print - monthly","radio","tv","band message board","music message board","other"]%></p>
+
+<p><label for="source_locale">Locale</label><br>
+<%= select 'source', 'locale', Metro.allNames+%w{ US UK international}%></p>
+
+<p><label for="source_genre">Genre</label><br>
+<%= select 'source', 'genre', %w{ n/a rock jazz classical electronic world experimental other}%></p>
+</div>
+<p><label for="source_url">Url</label><br/>
+<%= text_field 'source', 'url'  %></p>
+<p><label for="source_rss_url">Rss Url</label><br/>
+<%= text_field 'source', 'rss_url'  %></p>
+
+</td>
+<td valign=top>
+
+<div style="background-color:#FDD;padding:0.5em">
+<p><label for="source_blog_url">Mention url
+	<%if @source.blog_url and not @source.blog_url.empty?%>
+		<a href="<%=@source.blog_url%>">link</a>
+	<%end%>
+	</label><br/>
+<%= text_field 'source', 'blog_url'  %></p>
+
+<p><label for="source_mention_date">mention date</label><br/>
+<%= date_select 'source', 'mention_date'  %></p>
+		<p><label for="source_genre">Feature on about page</label><br>
+<%= select 'source', 'feature', ["","feature1","feature2","feature3"]%></p>
+<p><label for="source_blurb">Blurb</label><br/>
+<%= text_area 'source', 'blurb','cols'=>32,'rows'=>4 %></p>
+
+<p><label for="source_blurb">Logo</label><br/>
+<%#=file_column_field "source","image"%><br>
+<%#=image_tag url_for_file_column("source","image") rescue ""%><br>
+</td>
+</tr></table>
+<!--[eoform:source]-->
+

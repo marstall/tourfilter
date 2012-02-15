@@ -1,0 +1,16 @@
+<%show_initially||=false%>
+<%narrowest=false unless narrowest%>
+<%featured||=false%>
+<%cl||='listen'%>
+<%
+  id="meta_line_1_"
+  id+="featured_" if featured
+  id+=match.id.to_s
+%>
+<span id='<%=id%>' class='<%="websites" unless show_initially%>' style='<%="display:inline !important" if show_initially%>'>
+	<%term=match.term%>
+	<%text||= narrowest ? "info" : "videos&nbsp;&amp;&nbsp;reviews"%>
+	<span id='show_more_<%=match.id%>' class='<%=cl%>' >
+		<a class='pop' href='<%=url("/edit/term_more_info_popup/#{match.id}")%>'><%=text%></a>
+	</span>
+</span>

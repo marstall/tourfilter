@@ -1,0 +1,49 @@
+<% h1 = "Tickets Available for <a href='/#{@match.term.url_text}'>#{@match.term.text.downcase.capitalize}</a> at #{@match.page.place.name} on #{@match.very_short_time_description}"-%>
+<% @page_title = "Tickets Available for #{@match.term.text.downcase.capitalize} at #{@match.page.place.name} on #{@match.very_short_time_description}"-%>
+
+
+<span class='underline'>
+<h1><%=h1%></h1>
+</span>
+<div id='main_full-width' class='underline'>
+<table width=100% class='standard_table' cellpadding=0 cellspacing=0>
+	<tr class='table_row_header'>
+		<th class='table_cell_header' >vendor</th>
+		<th class='table_cell_header' >section</th>
+		<th class='table_cell_header' >row</th>
+		<th class='table_cell_header' >quantity</th>
+		<th class='table_cell_header' >$/ticket</th>
+	</tr>
+	<%@ticket_offers.each_with_index{|to,i|%>
+		<tr class='table_row_<%=i%2%>'>
+			<td class='smaller gray table_cell_<%=i%2%>'><%=to.source%></td>
+			<td class='table_cell_<%=i%2%>'>
+			<%#=to.section%>
+			<%=ticket_link(@external_click_hash,{'url'=>to.url},to.section[0..30],
+				{
+					:page_section=>"compare",
+					:term_text=>@match.term.text
+				},
+				{:alt_text=>"go to #{to.source}.com to buy ticket"},false)%>
+
+			</td>
+			<td class='table_cell_<%=i%2%>'><%=to.row||"-"%></td>
+			<td class='table_cell_<%=i%2%>'><%=to.total_quantity||"-"%></td>
+			<td class='table_cell_<%=i%2%>'>
+			<%=ticket_link(@external_click_hash,{'url'=>to.url},number_to_currency(to.price),
+				{
+					:page_section=>"compare",
+					:term_text=>@match.term.text
+				},{:alt_text=>"go to #{to.source}.com to buy ticket"},false)%>
+			</td>
+			<td align=left class='table_cell_<%=i%2%>'>
+			<%=ticket_link(@external_click_hash,{'url'=>to.url},'buy tickets',
+				{
+					:page_section=>"compare",
+					:term_text=>@match.term.text
+				},{:alt_text=>"go to #{to.source}.com to buy ticket"},false)%>
+			</td>
+		</tr>
+	<%}%>
+</table>
+</div>

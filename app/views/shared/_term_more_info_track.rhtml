@@ -1,0 +1,11 @@
+<%term=match.term%>
+<%if term.track%>
+<div class='more_info_main_header underline'>
+MP3
+</div>
+<%end%>
+
+<div class='more_info_body'>
+
+	<%=render(:partial=>'shared/mp3_player',:locals=>{:mp3_url=>term.track.url})%>
+</div>

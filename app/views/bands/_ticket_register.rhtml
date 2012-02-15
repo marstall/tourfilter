@@ -1,0 +1,64 @@
+<%return if not @future_matches%>
+<%@youser=youser if not @youser%>
+<%@term_text=term_text if not @term_text%>
+<%@future_matches=future_matches if not @future_matches%>
+<%if not @youser%>
+<div class="band_page_bricks underline" style="<%=brick_style%>">
+	<div class="brick_label" style='margin-top:1em;'>
+		have/want tickets?
+	</div>
+	<div class="brick_content " style="vertical-align:top">
+<%=form_remote_tag (:update =>"result",
+					:loading => "$(submit).value='Processing ...';$(submit).disabled=true",
+					:complete => "$(submit).value='Post';$(submit).disabled=false",
+					:url =>{:controller => 'edit', :action => 'remote_post'})
+					-%>
+	<table valign=top>
+		<tr><td colspan=2>
+			<span id='result' class="error" style="background-color:#eee;padding:0.25em;">
+				have/want <%=@term_text.downcase%> tickets? post here!
+			</span>
+				</td></tr>
+		<tr><td align=right>email address</td>
+			<td>
+	<input type="hidden" name="youser[terms_as_text]" value="<%=term_text%>">
+	<input type="hidden" id="terms_as_text" name="youser[terms_as_text]" value="<%=@term_text%>"/>
+	<input type="hidden" name="youser[registration_code]" value="ticket_register"/>
+	<input type="hidden" name="youser[registration_type]" value="basic"/>
+	<input class='signup' type="text" name="email_address" >
+	<span class='smaller gray'>no spam, ever! others can contact you as 'anon'
+</td>
+</tr>
+
+<tr><td align=right>show</td>
+	<td>
+		<%if @future_matches and not @future_matches.empty?%>
+		<select name='match_id'>
+		<%@future_matches.each{|match|%>
+			<option value='<%=match.id%>'><%=match.dropdown_description%></option>
+		<%}%>
+		</select>
+		<%end%>
+	</td>
+</tr>
+<tr><td d align=right style='line-height:1em' valign=top>about the tickets<br> you want/have
+	</td>
+	<td>
+		<textarea name='body' rows=4 cols=60></textarea>
+	</td>
+</tr>
+<tr><td></td>
+	<td>
+		<%= submit_tag 'post',:id=>'submit'	 %>
+	</td>
+</tr>
+</table>
+<%=render(:partial=>"shared/authenticate_client")%>
+</form>
+	</div>
+</div>
+<%end%>
+
+ 
+
+

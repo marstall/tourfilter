@@ -1,0 +1,20 @@
+<div id="main-full-width">
+<div class="header1">
+	Send a private message to <%=@user.name%>
+</div>
+&nbsp;<%=@user.name%> will receive an email immediately containing the full text of your message, along with a link to your profile so that s/he can reply to you. 
+<br>
+<div class="error" id="result"></div>
+<%=form_remote_tag (:update =>"result",
+					:loading => "$(submit).value='Processing ...';$(submit).disabled=true",
+					:complete => "$(submit).value='Send';$(submit).disabled=false",
+					:url =>{:action => 'handler'})
+					-%>
+<div class="header2">
+	Message<br>
+</div>
+<%=text_area_tag ("message",params[:terms_as_text],:size => "96x4") -%>
+<br><br>
+<input id='submit' type='submit' name='next' value='Send'>
+	<input type="hidden" name="user_name" value="<%=@user.name%>">
+</form>

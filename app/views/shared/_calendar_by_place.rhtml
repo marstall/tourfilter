@@ -1,0 +1,81 @@
+<h2>venues</h2>
+<%num_columns||=3%>
+	<%cache(:controller => "nightly", :action => "terms_by_place_#{num_columns}") do%>
+	<div style="border:black 1px">
+	<table style="width:99%;padding:0em;margin:0em;border:1px" cellspacing=0 cellpadding=0>
+		<tr valign=top>
+			<td style='vertical-align:top'>
+		<%
+		i=0
+		col=1
+		num_places_with_matches=0
+		places = Place.find_all_active(@metro_code,false)
+		num_places=places.size
+		places_without_matches=Array.new
+		place_matches = Hash.new
+		num_matches=0
+		places.each {|place|
+			place_matches[place.name]=place.matches_within_n_days
+			if place_matches[place.name] and not place_matches[place.name].empty?
+				num_places_with_matches+=1 
+				num_matches+=place_matches[place.name].size
+				num_matches+=1 # add a virtual match for the place for layout purposes
+			else
+				places_without_matches<<place
+			end
+		}
+		col_num=0
+	%>
+	<% 
+		if num_places_with_matches==0
+			%>
+			<ul>
+				<li>
+				No shows yet in <%=@metro%>. Sign up and add some!
+				</li>
+		</ul>
+			<%
+		end
+	%>
+	<%
+		num_per_column = num_matches/num_columns
+		num_per_column+=1 if num_per_column<num_matches
+		num_per_column=1 if num_per_column<1
+		place_index=-1
+		places[0..200].each {|place|%>
+			<%
+			place_index+=1
+			matches = place_matches[place.name]
+			if matches and not matches.empty?
+				i+=matches.size # count each place as a match for layout purposes
+	%>
+	<div class="club_section">
+	<div class="club_heading">
+<!--		<div style='float:right'>
+				<a border=0 href='<%=url("/search/ical/#{place.url_name }")%>'><img border=0 height=12px src="/images/ical.gif"></a>
+				<a border=0 href='<%=url("/search/rss/#{place.url_name}")%>'><img border=0 src="/images/rss.gif"></a>
+		</div>
+-->
+		<div class=''>
+			<a href='<%=url("/clubs/#{place.url_name}")%>'><%=place.name%></a> <span class='hint'><%=i%></span>
+		</div>
+	<div style='clear:both'></div>
+	</div> <!--club_heading-->
+	<div class='club_body'>
+	<%=render(:partial =>"shared/mini_calendar",:locals=>{:place=>place,:page=>'clubs'})%>
+	</div>
+	</div><!-- club_section-->	
+			<%end%>
+			<%
+			next_place=places[place_index+1]
+			if (i>=num_per_column|| 
+				(next_place and place_matches[next_place.name].size+i>num_per_column+6))  and col+1<=num_columns
+				col+=1
+				i=0
+				%>
+				</td><td style='padding-left:0.5em;vertical-align:top'>
+				
+			<%end%>
+			<%}%>
+		</td></tr></table>
+	<%end%>

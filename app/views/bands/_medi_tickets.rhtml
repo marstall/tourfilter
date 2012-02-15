@@ -1,0 +1,19 @@
+<div style="padding:1em;background-color:#FF8">
+	<div class="underline error" style="padding:0.5em;color:#e55;font-size:1em;font-family:verdana">
+		<%future_matches.each{|match| next unless match.has_affiliate_tickets?%>
+		<div class="" style="margin:0px;padding:1em;line-height:1em;font-weight:bold;background-color:#ffc">
+		<%=match.term.text.downcase%> at <%=match.page.place.name.downcase%> <%=match.very_short_time_description%> <span style='underline'><%=render(:partial=>'shared/branded_tickets',:locals=>
+			{
+				:match=>match,
+				:page_section=>"popup",
+				:term_text=>@term_text,
+				:mellow=>true,
+				:buy=>true
+			})%></span>
+		</div>
+		<%}%>
+	</div>
+</div>
+<div style="background-color:#FF8;text-align:right;color:#777;font-size:1em;font-family:verdana;text-align:right;font-size:smaller">
+		<a onClick="RedBox.close();return false;" href="#">close this</a>&nbsp;
+</div>

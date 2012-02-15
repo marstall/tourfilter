@@ -1,0 +1,7 @@
+<%cl='tracker_icon_mini' if cl.nil?%>
+<%st="" if st.nil?%>
+<div class='<%=cl%>' style="<%=st%>">
+  <div class='num_trackers_mini <%='num_trackers_mini_four_digits' if term.num_trackers>=100%>''>
+  <a title='<%=term.num_trackers%> are tracking <%=term.text.downcase%> in <%=@metro_code.downcase%>' href='<%=url("/trackers/#{term.url_text}")%>'><%=term.num_trackers%></a>
+  </div>
+</div>

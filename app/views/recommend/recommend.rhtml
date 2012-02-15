@@ -1,0 +1,34 @@
+<div class="header1">
+<%= form_tag :action => 'index', :id => @match.id %>
+Recommend 
+	<%=link_to "#{@match.term.text} at #{@match.page.place.name} #{@match.time_description}", 
+			   @match.page.url%>
+	 
+	</div>
+<%if @youser.recommendees.size>0%>
+<ul><li>to your recommendees 
+<%@youser.recommendees.each { |user|
+	%>
+    <%= link_to user.name, "/users/#{user.name}" %>
+	<%
+	}%></li> 
+<%end%>
+<li>to
+the following email addresses, separated by comma (optional):<br>	<%=text_area('recommendation','contacts_as_text','cols'=>60,'rows'=>5)%><br>
+</li>
+<div style="height:2px"></div>
+<li>Why should people go see this show? (optional)<br>
+<%=text_area('recommendation','text','cols'=>60,'rows'=>5)%><br>
+<span class="smaller gray">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this message will accompany email notifications and also appear on tourfilter.com</span></li>
+<div style="height:2px"></div>
+<li>URL of a legal MP3 (like from a band or label website)<br>
+<%=text_field(:recommendation,:mp3_url,"size" => 60)%><br>
+<span class="smaller gray">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;example: http://www.somebandsite.com/mp3s/song.mp3</span>
+</li>
+</li>
+</ul>
+<br>
+<%= submit_tag 'Recommend' %>
+</form>
+
+

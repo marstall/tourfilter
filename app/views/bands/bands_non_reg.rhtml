@@ -1,0 +1,62 @@
+<meta name="keywords" content="boston, <%=@term.text%>, music, live music, rock music, email, notification, concerts" />
+<% @page_title = "#{@term.text.downcase}"-%>
+<div id="main-full-width" style="padding:1em">
+<% 
+	future_matches=@term.future_matches
+	if future_matches and not future_matches.empty?
+		@page_title+=" at #{future_matches.first.page.place.name.downcase}"
+	end
+%>
+<div class="underline error" style="padding:1em;line-height:1.3em;font-size:1em;font-family:helvetica;font-weight:bolder">
+	<span>Enter your email address to get notified when
+		<%=Term.initial_capsify(@term_text).gsub("\s+","&nbsp;")%>&nbsp;come<%="s" if @term_text.last!="s"%> to <%=@metro%>.
+<span id="result" class="error" style="padding:0px;margin:0px"></span>
+<div style="height:6px"></div>
+<%=form_remote_tag (:update =>"result",
+					:loading => "$(submit).value='Processing ...';$(submit).disabled=true",
+					:complete => "$(submit).value='Sign up';$(submit).disabled=false",
+					:url =>{:controller => 'edit', :action => 'remote_post'})
+					-%>
+	<input type="hidden" name="youser[terms_as_text]" value="<%=@term_text%>"/>
+	<input type="hidden" name="youser[registration_type]" value="basic"/>
+	<%=text_field(:youser,:email_address,"size" => 21,
+		:value=>"Email address",
+		:class=>"signup",
+		:onfocus=>"Element.show('newsletter');if (this.value=='Email address') this.value=''",
+		:onblur=>"if (this.value=='') this.value='Email address'"
+		)%>
+				<%= submit_tag 'sign up (no spam, ever!)',:id=>'submit'	 %>
+		<div id="newsletter" style="display:none;margin:2px;border:0" class="term_more"><%=check_box(:youser,:wants_weekly_newsletter,{},"true","false")%>send me a weekly <%=@metro.downcase%> concert calendar, too</div>
+<%=render(:partial=>"shared/authenticate_client")%>
+<%= end_form_tag -%>
+</span>
+</div>
+<div style="margin-top:1em">
+<%if future_matches and not future_matches.empty?%>
+		<div class="vevent"> <!-- hCalendar support -->
+		<span style="padding:1em" class="header1 header1_links">upcoming <span class="name summary"><%=@term.text%></span> show<%="s" if future_matches.size>1%> =>
+		<%future_matches.each_with_index{|match,i|%>
+					<%=" |&nbsp;&nbsp;" if i>0%>
+					<a href="<%=match.page.url%>" onClick="track_click(this);return true">
+					at <span class="location"><%=match.page.place.name%></span> 
+					<abbr class="dtstart" 
+					title="<%=match.year%>-<%=match.month.to_s.gsub (/^(.)$/,'0\1')%>-<%=match.day.to_s.gsub(/^(.)$/,'0\1')%>"><%=match.time_description%></abbr>
+				    </a>
+					<span class="recommend-this highlight" id="flag"></span>
+					<%if match.flag_count>0%>
+						<script>$("flag").innerHTML="<span style='color:red'>flagged!</span>"</script>
+					<%end%>
+			<%}%>
+		<%end%>
+		</span>
+</div>
+<div style="margin-top:1.4em" >
+	<span class="header1_links" style="padding:1em">
+	<a style = "text-decoration: underline;" href='<%=url("/#{@term.url_text}")%>'>more about <%=@term.text.downcase%></a>
+	</span>
+</div>
+</div>
+</div>
+
+
+

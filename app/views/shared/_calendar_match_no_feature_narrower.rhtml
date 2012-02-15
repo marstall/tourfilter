@@ -1,0 +1,77 @@
+<%show_created_at||=false%>
+<%hide_venues||=false%>
+<%match=matches.first%>
+<div class='calendar_match_row_<%=index%2+1%> no_feature_calendar_item'  id="match_<%=match.id %>"  
+  onmouseover='mouseover(<%=match.id%>);' 
+	onmouseout='mouseout(<%=match.id%>);'
+  >
+	<%match=matches.first%>
+	<%term=match.term%>
+	<%page=match.page%>
+	<%place=match.page.place%>
+	<%feature=match.feature%>
+		<div class='calendar_match_row' style="<%='' if match.featured%>">
+			<%unless show_date_headers%>
+				<div class='narrow_calendar_date' style='float:left;'>
+					<%=match.short_time_description%>
+				</div>
+			<%end%>
+			  <%if feature%>
+  			<div style='float:left'>
+			  <div style='text-align:center;padding:2px;background-color:#ddf5f5;margin-right:4px'>
+          <a title="editors&#146; pick! click for a capsule review" href='<%=url(match.entry_url)%>'><img width=80px src='<%=feature.image.small_url%>'/></a>
+          </div>
+        </div>
+			  <%else%>
+			  <div style='float:left;margin-top:6px'>
+			  <%if show_date_headers%>
+          <%=render(:partial=>'shared/tracker_icon',:locals=>{:term=>term})%>
+        <%end%>
+        </div>
+  		  <%end%>
+			<div class='calendar_match_column_1 calendar_match_no_feature_term_text' style='float:left'>
+					<%if match.featured%>
+					<div style='margin-bottom:4px''> <span class='small_editors_pick' >editors' pick</span>
+					  </div>
+				<%end%>
+				<div id='match_<%=match.id%>'>
+						<%=link_to term.text_with_the,"/"+term.url_text%> 
+						<%if show_created_at%>
+    					<span class="result_date gray smaller" style='text-transform:uppercase;font-size:10px'>
+    						<%=match.created_at.month%>/<%=match.created_at.day%>
+    					</span>
+    				<%end%>
+						<%=render(:partial=>'shared/more_less_info_link',:locals=>{:calendar_view=>true,:match=>match,:cl=>'calendar_listen'})%>
+					</div>
+					<%if matches.size>1%>
+					<div class='gray smaller smaller'><%matches[1..matches.size-1].each_with_index{|_match,i|%>
+						<div id='match_<%=_match.id%>'>
+						  <%=link_to _match.term.text_with_the,"/"+_match.term.url_text%> 
+    						<%=render(:partial=>'shared/more_less_info_link',:locals=>{:calendar_view=>true,:match=>_match,:cl=>'calendar_listen'})%>
+						</div>
+						<%}%>
+					</div>
+					<%end%>
+					<%if match.user%>
+					<div class='added_by'>
+					  added by <a href='<%=url("/users/#{match.user.name}")%>'><%=match.user.name%></a>
+					</div>
+					<%end%>
+			</div> <!-- column 1 -->
+			<div class='calendar_match_column_2' style="<%='margin-left:410px' if hide_venues%>">
+				<div style='float:right'>
+				<%=render(:partial=>'shared/tickets',:locals=>{:match=>match,:page_type=>'calendar',:show_icon=>true})%>
+				</div>
+				<div class="calendar_match_no_feature_term_text" style='min-width:200px;vertical-align:20%'>
+				<%if hide_venues%>
+        <%=render(:partial=>'shared/term_rich_data',:locals=>{:term=>match.term,:show_header=>false})%>
+				<%else%>
+					<%=link_to place.name, 
+						:controller=>"clubs",
+						:action=>place.url_name rescue ""%>
+				<%end%>
+			</div>
+			</div> <!--column 2-->
+		<div style='clear:both'></div>
+		</div> <!-- calendar_match_row -->
+</div>

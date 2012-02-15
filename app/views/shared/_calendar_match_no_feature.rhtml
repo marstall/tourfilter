@@ -1,0 +1,69 @@
+<%match=matches.first%>
+<div class='calendar_match_row_<%=index%2+1%> no_feature_calendar_item'  id="match_<%=match.id %>"  onmouseover='mouseover("<%=day.to_s%>",this,<%=match.id%>);' 
+	onmouseout='mouseout("<%=day.to_s%>",this,<%=match.id%>,"<%=match.term_text.gsub(/[\' ]/,"_")%>");'>
+	<%match=matches.first%>
+	<%term=match.term%>
+	<%page=match.page%>
+	<%place=match.page.place%>
+		<div class='calendar_match_row'>
+		<div class='  calendar_match_row_<%=index%2+1%>_column_1'>
+			<!-- div class='hint_big'>
+			<%#=render(:partial=>'shared/trackers',:locals=>{:term=>term})%>
+			</div-->
+			<div class='calendar_match_column_1'>
+			<%unless show_date_headers%>
+				<span class="result_date" style='width:60px'>
+					<%=match.date_for_sorting.month%>/<%=match.date_for_sorting.day%></span>
+			<%end%>
+			<span class="calendar_match_no_feature_term_text">
+			<%=link_to term.text_with_the,"/"+term.url_text%>
+				<%if matches.size>1%>
+				<span class='gray smaller smaller'><%matches[1..matches.size-1].each_with_index{|_match,i|%>
+						<%_term=_match.term%><%=link_to _term.text_with_the,"/"+_term.url_text%>
+					<%}%>
+					<%if match.user%>
+      			<span class='gray smaller' style='font-size:12px;text-transform:lowercase'>added by <a href='<%=url("/users/"+match.user.name)%>'><%=match.user.name%></a>.</span>
+      		<%end%>
+    		  
+					</span>
+				<%end%>
+				</span>
+				<span id='meta_line_1_<%=matches.first.id%>' class='websites'>
+					<span id='show_less_<%=match.id%>' style='display:none' class='less_info'>
+						<a href='#' 
+					onclick='$("more_info_<%=match.id%>").innerHTML="";Element.show("show_more_<%=match.id%>");Element.hide("show_less_<%=match.id%>");$("match_<%=match.id%>").style.border="0px";$("match_<%=match.id%>").style.borderTop="4px solid #eee";$("match_<%=match.id%>").style.marginBottom="0px";return false;'>less&nbsp;info<span style='vertical-align:-4px'><img src='/images/up_arrow.png'/></span></a>
+						</span>
+					<span id='show_more_<%=match.id%>' class='more_info' >
+					    <%=link_to_remote("more&nbsp;info<span style='vertical-align:-4px'><img src='/images/down_arrow.png'/></span>", 
+					                        :update=>"more_info_#{matches.first.id}",
+:loaded=>"Element.show('show_less_#{match.id}');Element.hide('show_more_#{match.id}');$('match_#{match.id}').style.border='6px dotted #ddf5f5';$('match_#{match.id}').style.marginBottom='1px';",
+											:complete => visual_effect(:slidedown),
+											:id=>"link_#{match.id}",	
+					                        :url =>{
+					                            :controller => 'edit',
+					                            :action => 'term_more_info',
+					                            :match_id => match.id})
+					                        %>
+					</span>
+				</span>
+				</div>
+		</div> <!-- column 1 -->
+		<div class='calendar_match_column_2 calendar_match_row_<%=index%2+1%>_column_2'>
+			<div style='float:right' >
+				<%=render(:partial=>'shared/tickets',:locals=>{:match=>match,:page_type=>'calendar'})%>
+			</div>
+			<span class="calendar_match_no_feature_place_name red_links" >
+			<%=link_to place.name, 
+				:controller=>"clubs",
+				:action=>place.url_name rescue ""%>
+				<%if place.num_shows and place.num_shows>0%>
+				<span class='hint'><a href='/search/<%=match.page.place.name%>'><%=place.num_shows%></a></span>
+				<%end%>
+			</span>
+			<div style='clear:right'></div>
+		</div> <!--column 2-->
+
+		<div style='clear:left'></div>
+				<div id='more_info_<%=matches.first.id%>'></div>
+		</div> <!-- calendar_match_row -->
+</div>

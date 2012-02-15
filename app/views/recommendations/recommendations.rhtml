@@ -1,0 +1,33 @@
+<div id="main-full-width">
+<div class="header1">
+Upcoming user-recommended shows
+</div>
+<%@recommendations.each { |recommendation|
+	match=recommendation.match
+%>
+<span class="gray" style="text-transform:lowercase">
+<%=link_to "#{match.term.text}",
+						"/#{match.term.url_text}",
+						:onclick=>"track_click(this);return true;"
+						%>&nbsp;
+</span>						
+	<span class="gray">&#8220;<%=recommendation.text%>&#8221;</span>
+<span class="gray smaller">
+	&nbsp;said <%=link_to recommendation.user.name,
+		:controller=>"users",
+		:action => recommendation.user.name
+		-%>
+		<%=time_ago_in_words(recommendation.created_at)%> ago
+&nbsp; <span style="background-color:#eee;text-transform:lowercase">
+	at <%=match.page.place.name%> 
+<%time_description=match.very_short_time_description%>
+<%="#{time_description}" if time_description and not time_description.empty?%>
+</span>
+<%if recommendation.mp3_url%>
+&nbsp;<a href="<%=recommendation.mp3_url%>">listen</a>
+<%end%>
+</span>
+		<div style="height:6px"></div>
+<%}%>
+</div>
+<script>Delicious.Mp3.go();</script>

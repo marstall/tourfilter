@@ -1,0 +1,224 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:fb="http://www.facebook.com/2008/fbml">
+<%if !@fragment%>
+	<head>
+<meta name="verify-v1" content="XkDMxOJ8KMbX5WUCSaSSZ5DwuwkjBBfcTBW50KE84+k=" />
+		<%
+		  if @not_in_a_city
+  			title="search - tourfilter | concert search engine, concert tickets, live music notifications, calendar of upcoming concerts" 
+			else
+  			title="tourfilter: spam-free concert alerts" 
+  			title="tourfilter #{@metro.downcase}: spam-free concert alerts" if @metro
+  			title="#{@page_title}" if @page_title
+#  			title="#{@page_title} - tourfilter: #{@metro||''.downcase} concert alerts" if @page_title and @append_minimal_title
+  			title=@page_title if @page_title and @no_append_title
+			end
+		%>
+	  <title><%=title%></title>
+	  <%= stylesheet_link_tag 'tourfilter' %>
+<%unless @no_javascript%>
+	<%= javascript_include_tag "application" %>	
+<%end%>	
+</head>
+<script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
+<script>
+jQuery(document).ready(function(){
+	jQuery(".pop").colorbox({
+		width:800,scrolling:false,opacity:0.5,transition:'none',speed	:0,
+		onComplete:function(){jQuery.fn.colorbox.resize()}});
+});
+</script>
+	<body>
+	  <!--
+	  <div class='above_header'>
+	    <span class='above_header_span'>
+          <%prompt="search for concerts"%>
+          <%=text_field_tag(:summary,"","size" => 32, :id=>'search_input',
+          	:value=>prompt,
+          	:onfocus=>"if (this.value=='#{prompt}') this.value='';$('clear').style.visibility='visible'",
+          	:onblur=>"if (this.value=='') this.value='#{prompt}';if (this.value.length()>0) {$('clear').style.visibility='hidden'}"
+          	)%>
+  			&nbsp;
+	      </span>
+	    </div>
+	  -->
+	  <%if  @show_imports #!@youser%>
+	  <div class='above_header'>
+	    <span class='above_header_span'>
+	    import! 
+<!--	    <span class='above_header_icon'><img height=20px src='/images/itunes_icon.png'></span>
+	    <a href='http://www.tourfilter.local:3000/boston/itunes?signup=true'>iTunes</a> 
+      or-->
+	    <span class='above_header_icon'><img height=20px src='/images/lastfm_icon.png'></span>
+	    <span class='underline'><a href='http://www.tourfilter.local:3000/boston/lastfm?signup=true'>last.fm</a> </span>
+	    </span>
+	  </div>
+	  <%end%>
+    	<%unless @hide_login or @not_in_a_city%>
+  	  <div class='above_header'>
+          <div id="right-header">
+          <%unless @youser%>
+    			<%end%>
+    			<%if is_admin?%>
+    			<span class='header_menu_item ' >
+    				<a href="<%=url('/feed')%>">feed</a>
+    			</span>
+    			<%end%>
+    			<span class='header_menu_item '>
+    				<a href="/search">search</a>
+    			</span>
+    			<span class='header_menu_item '>
+    				<a href="<%=url('/metros')%>">other metros</a>
+    			</span>
+    			<span >
+    			  <%unless @hide_login%>
+              <%if !@youser_logged_in-%>
+        			<span class='header_menu_item' >
+        				<a href="<%=url('/edit/homepage_signup_link')%>">sign up</a>
+        			</span>
+                <span class='header_menu_item '>
+                <a href="<%=url('/login')%>">log in</a>
+                </span>
+              <%else-%>
+        			<span class='header_menu_item'>
+        				<a href="<%=url('/submit_show')%>">submit a show</a>
+        			</span>
+                <span class='header_menu_item '>
+                <%= link_to 'logout', :action => :logout%>
+                <%="<span style='color:#e77'>a</span>" if is_admin?%>
+                </span>
+            <%end%>
+            </span>
+            <%end%>
+    		</div>
+  	  </div>
+  	  <br>
+    	<%end%>	  
+    <div id='inner_body'>
+			<%unless @hide_header%>
+      <div id='logo' >
+        <div style='float:right;padding:12px'>
+          <%#=render(:partial=>'shared/instant_search')%>
+        </div>
+        <div style='float:left'>
+          <div class='logo_tourfilter'><a href='/'>Tourfilter</a></div>
+          <div class='logo_metro'><a href='<%=url("/")%>'><%=@metro%></a></div>
+          <div class='logo_title'><%=@header_title%></div>
+        </div>
+        <div style='clear:both'></div>
+      </div>
+      <div class='signup ' style='display:none'>
+        <div class='gray_links underline' style='float:right'><a href='/login'>login</a></div>
+        <div style='float:left' class='underline'>
+          spam-free concert alerts: <a href="<%=url('/edit')%>">sign up</a>
+        </div>
+        <div style='clear:both'></div>
+        </div>
+<%end%>
+<div id="tf_header">
+	<div id="left-header">
+		<span id='logo'><a href='/<%=@metro_code%>'>tourfilter</a></span>
+		<%if not @hide_metro and not @not_in_a_city%>
+		<span id="logo_metro"><a href='/<%=@metro_code%>'><%=@metro.downcase unless @not_in_a_city%></a></span>
+		<%end%><br>
+	</div>
+    <br>
+</div>
+	<div style="clear:both;"></div>
+	<div style="padding:2px"></div>
+<%if flash[:notice]%>
+	<div class="notice"><%= flash[:notice] %><%= flash[:error] %></div>
+<%end%>
+<%if flash[:error]%>
+	<div class="error"><%= flash[:notice] %><%= flash[:error] %></div>
+<%end%>
+<%end%> <!-- if ! fragment -->
+
+<%= @content_for_layout %>
+
+<%if !@fragment and not @hide_footert%>
+	<%
+#		footer_style="footer"
+		footer_style="footer-full-width" #if @full_width_footer
+#		footer_style="footer-doublenarrow" if @double_wide_right_column
+	%>
+	<div class='footer' id="<%=footer_style%>">
+		<span class='footer_menu_item'>
+			<a href="http://www.tourfilter.com/about">about tourfilter</a>
+		</span>
+	<%unless @not_in_a_city%>
+	<span id="blargh" class='footer_menu_item'></span> 
+	<script>
+	var domain="filter.com"
+	domain="tour"+domain
+	var email="inf"+""+""+"o"
+	email=email+"@"
+	email=email+""
+	email=email+domain
+	blargh=email
+	// SPAMMERS - GET A LIFE!
+	$("blargh").innerHTML="<a href='mailto:"+blargh+"'>corrections/questions</a>"
+	</script>
+		<%end%>
+		<span class='footer_menu_item' style='float:right'>
+    	   <span style='vertical-align:-4px'> <img height='20px' src='/images/twitter.png'/></span> <a href='http://www.twitter.com/tourfilter'>follow us on twitter!</a>
+    	    </span>
+	</div>
+</div>
+
+<%if ENV['RAILS_ENV']!='development'%>
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+	var pageTracker = _gat._getTracker("UA-529349-1");
+	pageTracker._initData();
+	pageTracker._trackPageview();
+</script>
+
+<%if false%>
+<!-- Start Quantcast tag -->
+<script type="text/javascript" src="http://edge.quantserve.com/quant.js"></script>
+<script type="text/javascript">_qacct="p-6dfYUhvdgBulU";quantserve();</script>
+<noscript>
+<a href="http://www.quantcast.com/p-6dfYUhvdgBulU" target="_blank"><img src="http://pixel.quantserve.com/pixel/p-6dfYUhvdgBulU.gif" style="display: none;" border="0" height="1" width="1" alt="Quantcast"/></a>
+</noscript>
+<!-- End Quantcast tag -->
+<%end%>
+<%end%>
+</div>
+
+</body>
+<script type="text/javascript">
+var _sf_async_config={uid:21126,domain:"tourfilter.com"};
+(function(){
+  function loadChartbeat() {
+    window._sf_endpt=(new Date()).getTime();
+    var e = document.createElement('script');
+    e.setAttribute('language', 'javascript');
+    e.setAttribute('type', 'text/javascript');
+    e.setAttribute('src',
+       (("https:" == document.location.protocol) ? "https://a248.e.akamai.net/chartbeat.download.akamai.com/102508/" : "http://static.chartbeat.com/") +
+       "js/chartbeat.js");
+    document.body.appendChild(e);
+  }
+  var oldonload = window.onload;
+  window.onload = (typeof window.onload != 'function') ?
+     loadChartbeat : function() { oldonload(); loadChartbeat(); };
+})();
+
+</script>
+	</html>
+<%end%> <!-- if ! fragment -->
+<script>
+// test
+
+//pageTracker._trackEvent('1test3', '21test', '1tes2t', 3);
+</script>
+
+<%if false #ENV['RAILS_ENV']!='development'%>
+<script>
+track_page_view()
+</script>
+<%end%>

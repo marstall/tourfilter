@@ -1,0 +1,17 @@
+<%begin%>
+				<a href='<%=url("/private_message/send/#{uto.user.id}")%>'>reply</a>&nbsp;
+<%rescue%>
+<%end%>
+				<%if is_admin? or (uto.user_id and uto.user_id==@youser_id.to_i)-%>
+					<a href='<%=url("/delete_uto/#{uto.id}")%>'>delete posting</a>
+				<%end-%>
+				<%if uto.flag_count>0%>
+					flagged!
+					<%if is_admin?%>
+						[<a href='<%=url("/unflag_uto/#{uto.id}")%>'>unflag</a>]
+					<%end%>
+				<%end%>
+						<%again= uto.flag_count>0 ? " again" : ""%>
+						<%if @youser and not session["flagged_#{uto.id}"]%>
+							<a onclick='return confirm("really flag?")'href='<%=url("/flag_uto/#{uto.id}")%>'>flag<%=again%></a>
+						<%end%>

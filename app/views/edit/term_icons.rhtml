@@ -1,0 +1,7 @@
+<h2>logos</h2>
+<div style='border-bottom:1px black solid;padding:0px;margin:0px'>
+<%Echonest.logos.each_key{|key|%>
+  <%next unless key=~/pitchfork|tiny|avclub|aquarius/%>
+  <img style='position:relative;top:<%=(Echonest.logo_adj[key]||0)/2%>px' height='<%=16+(Echonest.logo_adj[key]||0)%>px' src='<%=Echonest.logos[key]%>'/>
+<%}%>
+</div>

@@ -1,0 +1,79 @@
+<%num=(params[:num]||5).to_i%>
+<%show_created_at=true if show_created_at.nil?%>
+<%order_by=params[:order_by]||"created_at desc"%>
+<%
+  if order_by!="created_at desc" and order_by!="term_num_trackers desc" and order_by!="date_for_sorting"
+    return
+  end
+%>
+<%#metro_cache(
+  :controller => "nightly", 
+  :action => "rich_uncollated_calendar_narrowest_#{order_by}_#{num}") do%>
+  <div style='float:right'><a href='http://developer.echonest.com'><img src='/images/echonest.gif'</a></div>
+  <div style='clear:right'></div>
+<table>
+  <tr>
+    <td colspan=2 class='editors_pick'>
+      
+      artist
+    </td>
+    <td class='editors_pick'>
+      reviewers
+    </td>
+    <td class='editors_pick'>
+    </td>
+</tr>
+<%matches=Match.matches_within_n_days_for_user(180,0,nil,"#{order_by},page_id",num)%>
+  <%page||="new_calendar"%>
+  <%page_type||="new_calendar"%>
+  <%terms_shown=Hash.new%>
+  <%matches.each_with_index{|match,i|%>
+    <%term=match.term%>
+    <%place=match.page.place%>
+    <%break if i>num%>
+    <%next if terms_shown[match.term.text_with_the]%>
+    <%terms_shown[match.term.text_with_the]=true%>
+    <tr>
+      <td valign=top>
+        <%=render(:partial=>'shared/tracker_icon',:locals=>{:term=>match.term})%>
+      </td>
+      <td valign=top>
+				<div id='match_<%=match.id%>' style='margin-top:4px'>
+						<%=link_to term.text_with_the,"/"+term.url_text%> 
+				</div>
+				<div class="gray_links smaller" >
+				<%=link_to place.name, 
+					:controller=>"clubs",
+					:action=>place.url_name rescue ""%>
+  					<span class="gray">
+  						<%=match.date_for_sorting.month%>/<%=match.date_for_sorting.day%>
+  					</span>
+				</div>
+				<%if show_created_at%>
+					<div class="result_date">
+						added <%=match.created_at.month%>/<%=match.created_at.day%>
+					</div>
+				<%end%>
+      </td>
+      <td >
+        <%=render(:partial=>'shared/term_rich_data',:locals=>{:term=>match.term})%>
+      </td>
+      <td nowrap>
+				  <%=render(:partial=>'shared/more_less_info_link',
+				    :locals=>{:calendar_view=>true,:show_initially=>true,:match=>match,:cl=>''})%>
+      </td>
+    </tr>
+  <%}%>
+  </table>
+<%#end%>
+<%if false%>
+<h2>top sources</h2>
+<table>
+<%Echonest.source_counts.each{|sc|%>
+  <tr>
+    <td><%=sc[:count]%></td>
+    <td><%=sc[:domain]%></td>
+  </tr>
+<%}%>
+</table>
+<%end%>

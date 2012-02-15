@@ -1,0 +1,36 @@
+<%uto=user_ticket_offer%>
+<div class='user_ticket_offer'>
+		<div class='user_ticket_offer_match_description'>
+	<%if uto.match_id%>
+			<div><a href='<%=url("/#{uto.match.term.url_text}")%>'><%=uto.match.term.text.downcase%></a></div> 
+			<div class='smaller'><%=uto.match.page.place.name.downcase%> on <%=uto.match.very_short_time_description%></div>
+	<%else%>
+			<%=uto.match_description%>
+	<%end%>
+		</div>
+		<div class='user_ticket_offer_body' >
+		<a href='<%=url("/users/#{uto.user.name.downcase}")%>'><%=uto.user.name.downcase%></a> said, &#8220;<%=uto.body%>&#8221;
+ <span class='underline gray'><a href='<%=url("/private_message/send/#{uto.user.name.downcase}")%>'>reply</a>
+			</span>
+			<div style='float:right;'>
+				<span class='header1' style='margin-right:2px;'>
+				<%if is_admin? or uto.user_id and uto.user_id==@youser_id.to_i%>
+					<a href='<%=url("/delete_uto/#{uto.id}")%>'>delete posting</a>
+				<%end%>
+			</span>
+				<%if uto.flag_count>0%>
+					<span class='header1 error'>flagged!</span>
+					<%if is_admin?%>
+						[<a href='<%=url("/unflag_uto/#{uto.id}")%>'>unflag</a>]
+					<%end%>
+				<%end%>
+						<%again= uto.flag_count>0 ? " again" : ""%>
+						<%unless session["flagged_#{uto.id}"]%>
+						<span class='header1'>
+							<a href='<%=url("/flag_uto/#{uto.id}")%>'>flag<%=again%></a>
+						</span>
+						<%end%>
+			</div>
+			<div style='clear:both'></div>
+	</div>
+</div>

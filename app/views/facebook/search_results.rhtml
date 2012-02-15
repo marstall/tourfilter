@@ -1,0 +1,10 @@
+<%
+	label = "upcoming '#{@query||''}' shows"
+%>
+<fb:header icon="false" decoration="no_padding"><%=label%></fb:header>
+<%=render(:partial =>"facebook_calendar",
+                :locals=>{:shared_events=>@shared_events,
+                :term=>@query,
+				:show_friends=>false
+                })%>
+here

@@ -1,0 +1,42 @@
+<%term=match.term%>
+<%page=match.page%>
+<%precis = page.precis(term.text)%>
+<div>
+<div style='clear:right'></div>
+</div>
+<h2>
+<div style='float:right;padding:2px;padding-right:4px'>
+    <%=render(:partial=>'shared/lala_link',:locals=>{:term=>match.term,:cl=>'popup_listen'})%>
+</div>
+<div style='float:left'>
+<%=term.text.downcase%>
+<%if term.url%>
+<%end%>
+ at <%=page.place.name.downcase%> <%=match.time_description.downcase%>
+<!--
+<a href='<%=url("/#{term.url_text}")%>'>track</a>
+<a href='<%=url("/#{term.url_text}")%>'>more info</a>
+-->
+</div>
+<div style='clear:both'></div>
+</h2>
+<%if match.feature%>
+<div>
+<div class='feature_calendar_item_image' style='float:left;padding-right:0.25em'>
+	<img id='<%=term.id%>' width=160px src='<%=match.feature.image.medium_url%>' >
+</div>
+<div style='padding:2px;padding-bottom:3px;'>
+<%=render(:partial=>'shared/featured_match_blog_style_narrow',:locals=>{:match=>match,:calendar_view=>true,:no_title_line=>true})%>
+</div>
+	<div style='clear:both'></div>
+</div>
+<%end%>
+<div class='more_info_body'>
+<div class='more_info_list_result_item underline more_info_body_alternating_1'>
+<%=render(:partial=>'shared/tracked_by_sentence',:locals=>{:term=>term})%><br>
+<%precis = page.precis(term.text)%>
+<%if not match.feature and precis.size>term.text.size+4 and precis.strip!=term.text.strip%>
+<div class='precis'>[listing excerpt] <%=precis%></div>
+<%end%>
+</div>
+</div>

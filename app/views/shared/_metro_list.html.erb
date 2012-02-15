@@ -1,0 +1,24 @@
+<%metro_cache(:controller => "nightly", :action => 'metro_list') do%>
+<div id='metro_list'>
+  <%metros = Metro.find_all_curated_and_active%>
+  <%metro_hash = Hash.new%>
+
+  <%metros.each{|metro|metro_hash[metro.code]=metro}%>
+  <%
+    metro_pairs=Array.new
+    metros.collect{|m|
+      name=m.name
+      if m.country_code=='us'|| m.country_code=='ca'
+        #name+=", #{m.state.upcase}" if m.state
+      else
+        name+=", #{m.country_code.upcase}" 
+      end
+      %>
+			<div class='metro_list_item'>
+				<a href='/<%=m.code%>'><%=name.gsub(" ","&nbsp;").strip%></a>
+			</div>
+<%
+    }
+  %>
+</div>
+<%end%>

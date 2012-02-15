@@ -1,0 +1,90 @@
+<%cl='co_width' if params[:co]%>
+<%cl||=''%>
+<%cutoff=10%>
+<%num_related||=3%>
+<%terms = @youser.terms("terms_users.created_at desc",false)%>
+<%if terms and not terms.empty?%>
+<div class='<%=cl%>'>
+<table width=100% cellpadding=0 cellspacing=0 style='margin:0px;padding:0p'>
+  <tr>
+    <td class='my_terms_header'>
+      band name
+    </th>
+    <td colspan=4 style='padding-left:6px' class='my_terms_header'>
+      similar bands - click <span style='vertical-align:-4px'>
+          <img id='image_<%=id%>' src='/images/add.gif'/>
+      </span>
+      to add to your list
+    </th>
+  </tr>
+<%
+terms_used=Hash.new
+terms.each{|term| 
+  if term.is_a? Term
+    term_text=term.text
+  else
+    term_text=term
+  end
+  terms_used[term_text]=true
+  }
+  i=0
+  
+terms.each_with_index { |_term,j|%>
+  <%
+    term=nil
+    if _term.is_a? String
+      begin
+        term = Term.find_by_text(_term) 
+      rescue
+      end
+      term ||= Term.new(:text=>_term)
+    else
+      term=_term
+    end
+  %>
+  <%alternating="#fff"%>
+  <%alternating="#f0f0f0" if j%2==0 and (j<cutoff||params[:show_all]=='true')%>
+<tr >
+    <td style='padding:4px;border-top:1px solid #eee;background-color:<%=alternating%>' class='my_term_text'><a href='<%=url("/#{term.url_text}")%>'><%=term.text.downcase[0..20]%></a></td>
+      <%if j<cutoff||params[:show_all]=='true'%>
+      <%i=0%>
+      <%related_terms=term.related_terms_combo(50)||[]%>
+      <%related_terms.each{|related_term|%>
+        <%next if terms_used[related_term.related_term_text]%>
+        <%id=related_term.id%>
+        <%i+=1%>
+        <%next if i>num_related%>
+        <%terms_used[related_term.related_term_text]=true%>
+        <td style='padding-left:6px;padding-top:4px;border-top:1px solid #eee;background-color:<%=alternating%>' valign=top nowrap>
+        <span class='my_related_term' id='<%=id%>'>
+          <span style='vertical-align:-4px'>
+            <a  href="#" 
+                onclick="return direct_add('<%=related_term.related_term_text%>',<%=id%>,'your bands/similar band','<%=term.text%>')">
+              <img id='image_<%=id%>' src='/images/add.gif'/></a></span><a href='<%=url("/#{Term.make_url_text(related_term.related_term_text)}")%>'><%=related_term.related_term_text[0..20]%></a>
+        </span>
+        </td>
+      <%}%>
+      <%i.upto(4){|i|%>
+        <td style='padding-left:6px;padding-top:4px;border-top:1px solid #eee;background-color:<%=alternating%>' valign=top nowrap></td>
+      <%}%>
+    </td>
+    <%elsif j==cutoff&&terms.size>cutoff&&!params[:show_all]%>
+      <td colspan=2><div class='underline show_more'><a href='#' onclick='jQuery("#working").show();update_terms_and_shows(true)'>show more recommendations&gt;&gt;</a></div><div id='working' class='show_more' style='color:green;display:none'>loading ...</div></td>
+    <%end%>
+</tr>
+<%}-%>
+</table>
+</div>
+<%else%>
+  you haven't added any bands!
+<%end%>
+<script>
+function refresh_terms()
+{
+  <%if params[:show_all]%>
+    update_terms_and_shows(true)
+  <%else%>
+    update_terms_and_shows()
+  <%end%>
+}
+</script>

@@ -1,0 +1,60 @@
+<%term_text=@term.text%>
+<%#cache(
+  :controller => "rolling_6months", 
+  :action => "echonest_band_page_reviews_#{term.url_text}") do%>
+    <%show_header||=false%>
+    <%articles=Echonest.new.get_articles(term_text,"reviews")%>
+    <%logos=Echonest.logos%>
+    <%height||=16%>
+    <%height=height.to_i%>
+    <%hosts=Hash.new%>
+    <%desired=Echonest.desired%>
+    <%finals=Array.new%>
+    <%articles.each{|article|%>
+      <%hosts[article[:host]]=article%>
+    <%}%>
+    <%
+      hosts.each_key{|host|
+          desired.each{|desired_host|
+            finals<<hosts[host] if desired_host==host
+            }
+        }
+    %>
+    <%if finals and not finals.empty?%>
+    <h2>reviews
+      <span style='vertical-align:-45%'>
+      <a href='http://developer.echonest.com'><img style='height:40px' src='/images/echonest.gif'</a>
+      </span>
+      </h2>
+    <div class='secondary_column_body'>
+    <%end%>
+    <%finals.each{|article|%>
+    <div class='band_page_review'>
+      <div style='float:left;padding:4px'>
+        <img 
+          style='position:relative;top:2px'     
+          height='<%=32+(Echonest.logo_adj[article[:host]]||0)%>px' 
+          src='<%=Echonest.logos[article[:host]]%>'
+        />
+      </div>
+      <div class='underline'>
+        <a target='review' title='<%=article[:title]%>' href='<%=article[:url]%>'>
+        <%=article[:title]%>
+        </a>
+      </div>
+      <div>
+        <a target='review' title='<%=article[:title]%>' href='<%=article[:url]%>'>
+        <%=article[:description][0..140]%> ... 
+        </a>
+      </div>
+      <div  style='text-align:right'>
+        <a target='review' title='<%=article[:title]%>' href='<%=article[:url]%>'>
+          <span style='font-style:italic'>- <%=Echonest.names[article[:host]]%></span>
+        </a>
+      </div>
+    <div style='clear:left'></div>
+      </div>
+    <%}%>
+    </div>
+<%#end%>
+

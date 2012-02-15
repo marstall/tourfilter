@@ -1,0 +1,28 @@
+  xml.instruct! :xml, :version=>"1.0" 
+  xml.rss(:version=>"2.0"){
+    xml.channel{
+      xml.title(@rss_title)
+      xml.link("http://www.tourfilter.com/#{@metro_code}")
+      xml.language("en")
+      description="(#{DateTime::now().strftime('%a').downcase}) "
+      @matches.each {|match|
+            term = match.term.text.downcase.titleize
+            term.gsub! /(the|and|\&|)\s/i,'' # nix 'the', 'and', '&'
+            term=term[0..9]
+            place_name=match.page.place.name.downcase
+            place_name.gsub! /['.]/,''
+            place_name=place_name.titleize
+            place_name.gsub! /(the|and|\&)\s/i,'' # nix 'the', 'and', '&'
+            place_name.gsub! /\s/,'' # nix spaces and vowels 
+            place_name=place_name[0..5]
+            event="#{term}@#{place_name} "
+            break if description.size+event.size>160
+            description+=event
+        }
+      xml.description(description)
+      xml.item do
+          xml.description(description)
+          xml.pubDate(DateTime::now().strftime("%a, %d %b %Y %H:%M:%S %z"))
+        end
+    }
+  }

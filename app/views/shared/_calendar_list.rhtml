@@ -1,0 +1,31 @@
+<table cellpadding=0 cellspacing=0>
+<%num=0%>
+<%0.upto(Integer(num_days)) {|offset|%>
+<%day = DateTime.now+offset%>
+<%showings = Showing.find_for_day(day,place)%>
+<%next if showings.nil? or showings.empty?%>
+<tr>
+	<td colspan=2>
+		<div style="float:left;margin-right:0em;padding-right:0em;">
+		<span class='date-grid'>
+			<%="Today, " if offset==0%>
+			<%="Tomorrow, " if offset==1%>
+			<%=Date::DAYNAMES[day.wday]%>
+			<%=Date::MONTHNAMES[day.month]%> <%=day.day%>
+		</span>
+	</div>
+	</td>
+</tr><tr><td colspan=2>
+				<%=render(:partial=>'shared/showing_calendar_list',
+					:collection=>showings,
+					:locals=>
+						{
+							:row_class=>"grid-row-#{num%2}"
+						})
+				%>
+</td></tr>
+<tr><td style="height:1em"></td></tr>
+<%num+=1%>
+<%}%>
+</table>
+	

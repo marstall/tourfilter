@@ -1,0 +1,29 @@
+metro: <%=@controller.metro_code%>    
+
+flag event: <%=@event_description||"unknown"%>
+
+match id: <%=@match.id%>
+
+match flag count: <%=@match.flag_count||"nil"%>
+
+match description: <%=@match.term.text%> at <%=@match.page.place.name%> on <%=@match.time_description%>
+
+<%if @user-%>
+user: <%=@user.name%> (http://www.tourfilter.com/<%=@controller.metro_code%>/users/<%=@user.name%>)
+<%else-%>
+user: not logged in/unknown
+<%end-%>
+
+request ip address: <%=@controller.request.env["REMOTE_ADDR"]%>
+
+request referer: <%=@controller.request.env["HTTP_REFERER"]%>
+
+psid: <%=@controller.get_cookie(:psid)%>
+
+date: <%=@sent_on%>
+
+match url: http://www.tourfilter.com/bands/admin/<%=@controller.metro_code%>/<%=@match.term.url_text%>
+
+----------------------------------------------------------
+Listing Excerpt:
+"... <%=@match.page.precis(@match.term.text,'<<<','>>>')%> ..."

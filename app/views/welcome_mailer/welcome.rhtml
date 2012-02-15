@@ -1,0 +1,44 @@
+Thanks for signing up for Tourfilter <%=@controller.metro%>!
+
+<%if @user.registration_type=="normal"-%>
+Your username: <%=@user.name%>
+
+<%end-%>
+<%if @user.registration_type=="normal"%>
+To retrieve a forgotten password: http://www.tourfilter.com/<%=@controller.metro_code%>/lost_password
+<%else%>
+Your password is <%=@user.password%>. You can change it at http://www.tourfilter.com/<%=@controller.metro_code%>/settings.
+
+Log in using your email address and password.
+<%end%>
+
+<%if @user.registration_type=="normal"-%>
+Your public band list: http://www.tourfilter.com/<%=@controller.metro_code%>/users/<%=@user.name%>
+
+<%end-%>
+Manage your band list: http://www.tourfilter.com/<%=@controller.metro_code%>
+
+Thanks,
+Tourfilter
+
+p.s. you can reply to this email with questions/feedback
+
+
+
+ABOUT TOURFILTER
+
+Tourfilter.com, launched in Cambridge, MA in April of 2006, is a complete concert resource for 50 cities in the US, UK, Canada, Australia and Ireland. Tourfilter provides concert alerts, a concert search engine, calendars, feeds and editors' picks.
+
+HOW IT WORKS
+1. Sign up + enter your favorite bands, or import your last.fm top artists. We'll recommend other artists to you based on these.
+2. Our custom search engine directly searches thousands of venue websites and ticketsellers nightly for your bands.
+3. When a show with one of your bands in it is found, a human confirms it, and we send you a single email.
+
+FEATURES
+- spam-free concert email alerts for only your bands.
+- lightning-fast 79-city concert search engine
+- ability to "follow" other users in your city and see their calendars on your homepage
+- editors' picks for many cities. shows we like, think are important, etc.
+- concert calendars for 79 cities and thousands of venues, with every user's shows combined
+- iCal, RSS and json feeds for every city, venue and user
+- lists of popular and new shows for every city

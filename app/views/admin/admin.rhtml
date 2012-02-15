@@ -1,0 +1,10 @@
+<div id="main">
+<div class="header1"> Tourfilter Administrative tasks</div>
+<ul>
+<li><%=link_to "Manage #{@metro} Shows",:action =>"admin_matches"%></li>
+<li><a href='<%=url("/places")%>'>Manage <%=@metro%> Clubs</a></li>
+<li><a href='<%=url("/sources/list")%>'>Manage Sources</a></li>
+<li><a href='<%=url("/notes/list")%>'>Latest Source Notes</a></li>
+
+<ul>
+</div>

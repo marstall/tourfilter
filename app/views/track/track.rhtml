@@ -1,0 +1,63 @@
+<meta name="keywords" content="boston, <%=@term.text%>, music, live music, rock music, email, notification, concerts" />
+<% @page_title = "track #{@term.text.downcase}"-%>
+<div id="main-full-width">
+<div id="explanation" class="explanation" style="line-height:2.5em">
+	<span class="bigmark">Hi, welcome to Tourfilter. <br>
+		A free, simple concert notification service.<br>
+		We search <%=Metro.count_all_places_all_metros%> club websites nightly in <%=Metro.count_all_metros%> cities.<br>
+		Try it!
+		<br>
+	<div style="height:12px"></div>
+<div 
+	style="text-align:left;line-height:1.75em;padding:0.5em;    border-color:#faa;border-width:10px;border-style:dotted;">
+		To track <span class="realbig"><%=@term.text%></span>, first CLICK ON YOUR CITY => 
+		<%Metro.find_all_active.each{|metro|%>
+			<%metro_code=metro.code
+			metro_code="www" if metro_code=="boston"%>
+		<a href="http://www.tourfilter.com/<%=metro_code%>/homepage?term_text=<%=@term.text%>"><%=metro.name%></a>&nbsp;
+		<%}%>
+</div>
+</div>
+		
+	
+
+<!--
+<div id="main-full-width">
+<div id="explanation" class="explanation">
+	<span class="bigmark">Welcome to Tourfilter</span><br>
+	<span class="bigslogan">Never miss another show!</span><br>
+	<ul>
+	<li>
+		<span class="realbig">You</span>
+		<span class="big">enter your favorite bands.</span>
+	</li>
+	<li>
+		<span class="realbig">We</span>
+		<span class="big">search a comprehensive list of club websites in your town nightly for new shows.</span>
+	</li>
+	<li>
+		<span class="realbig">You</span>
+		<span class="big">get an email in time to buy tickets. Simple. Try it!</span>
+	</li>
+</ul>
+</div>
+<div style="height:4px"></div>
+	<div class="header1" style="height:1em;padding:0.25em;margin-bottom:1px">
+		Click on your city to get started
+	</div>
+<div class="explanation" 
+	style="text-align:left;line-height:2.5em;padding:2em"
+	>
+	<span class="bigslogan">Track
+		<span class="realbig" style="padding:0.05em"><%=@term.text%></span> in => 
+		<%Metro.find_all_active.each{|metro|%>
+		<a href="."><%=metro.name%></a>&nbsp;
+		<%}%>
+	</span>
+</div>
+
+</div>
+
+-->
+
+

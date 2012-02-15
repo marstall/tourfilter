@@ -1,0 +1,28 @@
+<%@page_title = "calendar"%>
+<div id="main-full-width">
+<div id="upcoming">
+<div class="header1" style="height:1em;padding-top:0.25em;padding-bottom:0.5em">
+	<div style="float:left">
+		upcoming <%=@metro%> shows <span class="tomorrow_line2"></span>
+	</div>
+	<div class="subhead" style="float:right" align=right>
+<%if SETTINGS['date_type']=='uk'%>
+ 		today is <%=Time.now.day%>/<%=Time.now.month%>
+<%else%>
+		today is <%=Time.now.month%>/<%=Time.now.day%>
+<%end%>
+	</div>
+</div>
+<div >
+<div style="height:2px"></div>
+<%cache(:controller => "edit", :action => "homepage_calendar") do%>
+<%
+    @days,@matches=controller.setup_calendar(nil,nil,42)
+%>
+	<%#=render(:partial =>"shared/tonights_shows")%>
+	<%#=render(:partial =>"shared/terms_as_text")%>
+	<%=render(:partial =>"shared/calendar_with_features",:locals=>{:show_date_headers=>true})%>
+	<%=render(:partial =>"shared/recently_added_shows")%>
+<%end%>
+</div>
+</div>

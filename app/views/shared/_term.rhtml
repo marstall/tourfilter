@@ -1,0 +1,42 @@
+<%cl||=''%>
+<%hide_track_link||=false%>
+<%note||='unknown - term'%>
+<%note_entity||=nil%>
+<%url_text= Term.make_url_text(term_text)%>
+<%if not hide_track_link%>
+<%
+  image_url='/images/add.gif'
+  if @youser and @youser.tracks_term(term_text)
+    cl='faded_50'
+  else
+    cl=''
+  end
+%>
+<%end%>
+<span id="track_this_<%=url_text%>" style='vertical-align:-2px;' class='<%=cl%>'>
+<%if @youser%>
+			    <%= link_to_remote("<img src='#{image_url}'>", 
+			                        :update=>"track_this_#{url_text}",
+				                    :loading => "Element.show('tracking_#{url_text}')",
+				                    :complete => "new Effect.Highlight('term_#{url_text}',{startcolor:'#b0e0e0',endcolor:'#ffffff'});Element.hide('tracking_#{url_text}');Element.hide('track_this_#{url_text}')",
+			                        :url =>{
+			                            :controller => 'user',
+			                            :action => 'term',
+			                            :term_text => term_text,
+			                            :note => note,
+			                            :note_entity => note_entity
+			                            })
+			                        %>
+<%else%>
+<%if not hide_track_link%>
+  <a href='<%=url("/"+url_text)%>'>
+    <img src='<%=image_url%>'/>
+  </a>
+<%end%>
+<%end%>
+</span>
+<span class='<%=cl||"term-text"%>' id="term_<%=url_text %>">
+	<a href='<%=url("/"+url_text)%>'><%=term_text%></a>
+</span> 
+<span style="display:none;color:green" id="tracking_<%=term.id if !term.nil?%>">tracking ...</span>
+

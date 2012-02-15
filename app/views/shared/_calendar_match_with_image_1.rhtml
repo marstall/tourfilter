@@ -1,0 +1,99 @@
+<%term = matches.first.term%>
+		<div class='image_calendar_item'
+			onmouseover='mouseover_featured(this,<%=matches.first.id%>);' 
+			onmouseout='mouseout_featured(this,<%=matches.first.id%>);' 		
+		>
+			<div class='item_image'>
+				<img id='<%=term.id%>' width=200px src='<%=term.image.medium_url%>' >
+			</div>
+				<div class='image_match_text'>
+					<div class='match_title_line'>
+						<span class='match_title'>
+							<a id='a_<%=term.id%>' href='<%=url("/#{term.url_text}")%>'><%=term.text_with_the.downcase%></a>
+						</span>
+						<span id='meta_<%=matches.first.id%>' class='calendar_match_image_meta_block '>
+							<%if matches.first.term_url%>
+								<span class='website'>
+									<a onclick="track_click(this);return true;" href="<%=matches.first.term_url%>">official website</a> 
+								</span>
+							<%end%>
+							<span class='website official_website'>
+							    <%= link_to_remote("more info &raquo;", 
+							                        :update=>"bing_#{matches.first.id}",
+													:loading=>"close_open_more_info_popup('bing_#{matches.first.id}');",
+							                        :url =>{
+							                            :controller => 'edit',
+							                            :action => 'term_more_info',
+							                            :term_text => matches.first.term_text})
+							                        %>
+							</span >
+							<span id = 'admin_<%=matches.first.id%>' class='calendar_match_admin_actions'>
+								<a onclick='return confirm("really remove this image?")' href='<%=url("/admin/unfeature?term_text=#{matches.first.term.encoded_text}")%>'>delete image</a>
+								<a target='add_image' href='<%=url("/admin/add_images?term_text=#{matches.first.term.encoded_text}")%>'>change image</a>
+							</span>
+						</span>
+					</div>
+					<div class='match_location_line'>
+						<span class='match_location'>at <a href=''><%=matches.first.page.place.name.downcase%></a></span>
+						<%ticket_urls,price_low,price_high = matches.first.ticket_urls%>
+						<span class='match_ticket'>
+						<%if false and ticket_urls and not ticket_urls.empty?-%>
+							<%ticket_urls.each{|ticket_url|-%>
+								<a href='<%=ticket_url["url"]%>'>&raquo;buy&nbsp;tickets</a>
+							<%}%>
+						<%end%>
+						</span>
+						<span class='match_with'>
+							<%if matches and matches.size>1%>
+							with
+							<%matches[1..matches.size].each_with_index{|match,i|-%><%=", " unless i==0-%>
+							<%if match.term.image%>
+								<a id='a_<%=match.term.id%>' onmouseover='xnew Effect.Highlight($("a_<%=match.term.id%>"));$("<%=matches.first.term.id%>").src="<%=match.term.image.url rescue ''%>"' href='<%=url("/#{match.term.url_text}")%>'>
+							<%else%>
+								<a href='<%=url("/#{match.term.url_text}")%>'>
+							<%end%>
+							<%=match.term.text_with_the.downcase-%></a><%}-%>
+							<%end%>
+						</span>
+					</div>
+					<div id='mtb_<%=term.id%>' class='match_tracked_by'>
+						<%
+							# show "(also tracked by user1, user2, x others)"
+							min_users=0
+						    term_users=term.recent_normal_users if term
+						%><%if term_users&&term_users.size>min_users%>tracked by <%
+							term_users.each_with_index {|user,i|-%><% 
+						#		next if user.id==Integer(parent_user_id) #skip user whose page it is
+						    	if i>2
+									num_others = term_users.size-(3+min_users)	
+									anchor_text = "#{num_others} other"
+									anchor_text+="s" if num_others>1
+									-%> and <%=anchor_text-%><%break
+									end-%><%=", " if i>0-%><%=link_to user.name.downcase, "/users/#{user.name}"-%><%}-%>
+						<%related_terms = term.find_related_terms_terms(4)%>
+						<%if related_terms and not related_terms.empty?%>
+						<br>
+						who also track <%related_terms.each_with_index{|related_term,i|%><%=", " if i>0%><a href='<%=url("/#{related_term.url_text}")%>'><%=related_term.text.downcase%></a><%}%>
+						<%end%>
+						<%end%>
+					</div>
+		<%if true # term.track%>
+			<div class='image_match_mp3_player' id = 'track_<%=matches.first.id%>'>
+				<%=render(:partial=>'shared/mp3_player',:locals=>{:track=>term.track})%>
+			</div>
+		<%end%>
+			</div>
+			<div class='lines' style='display:none'>
+				<span class='line_'>find tickets at
+			<%if ticket_urls and not ticket_urls.empty?-%>
+					<%ticket_urls.each{|ticket_url|-%>
+						<a href='<%=ticket_url["url"]%>'><%=ticket_url['source']%></a>
+					<%}%>
+			<%else%>
+				<a href='<%=matches.first.page.place.url%>'><%=matches.first.page.place.name.downcase%></a>
+			<%end%>
+				</span>
+			</div>
+		<div style='clear:both'></div>
+</div>
+			<div id='bing_<%=matches.first.id%>'></div>

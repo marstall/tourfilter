@@ -1,0 +1,21 @@
+<%match=Match.find(match_id)%>
+<%i=0%>
+<div class='more_info_wrapper'>
+<%#=render(:partial=>'shared/term_more_info_basic',:locals=>{:match=>match,:i=>i+=1})%>
+<%#=render(:partial=>'shared/term_more_info_track',:locals=>{:match=>match,:i=>i+=1})%>
+<%=render(:partial=>'shared/term_more_info_bing',:locals=>{:term_text=>match.term_text,:i=>i+=1})%>
+<table width=100%>
+	<tr>
+		<td width=50%>
+			<%=render(:partial=>'shared/term_more_info_youtube',:locals=>{:term_text=>match.term_text,:i=>i+=1})%>
+		</td>
+		<td width=50%>
+			<%=render(:partial=>'shared/term_more_info_lala',:locals=>{:term_text=>match.term_text,:i=>i+=1})%>
+		</td>
+	</tr>
+</table>
+<%=render(:partial=>'shared/term_more_info_npr',:locals=>{:term_text=>match.term_text,:i=>i+=1})%>
+<%if is_admin?%>
+<%=render(:partial=>'shared/term_more_info_feature',:locals=>{:term_text=>match.term_text,:i=>i+=1,:match_id=>match_id})%>
+<%end%>
+</div>
