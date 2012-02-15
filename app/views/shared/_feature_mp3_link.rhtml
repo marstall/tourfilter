@@ -1,4 +1,0 @@
-<%return unless feature and feature.mp3_url and feature.mp3_url=~/http/%>
-<span class='listen'>
-	<a onClick="window.open('<%=url("/featured_playlist/#{feature.id}")%>','flash','width=420,height=210');return false;" href='<%=url("/featured_playlist/#{feature.id}")%>'><span class='listen_icon'><img style='height:16px;'src='/images/play.png'/></span>listen</a>
-</span>

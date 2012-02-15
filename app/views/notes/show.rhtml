@@ -1,9 +1,0 @@
-<% for column in Note.content_columns %>
-<p>
-  <b><%= column %>:</b> <%= simple_format(String(@note.send(column))) %>
-
-</p>
-<% end %>
-
-<%= link_to 'Edit', :action => 'edit', :id => @note %> |
-<%= link_to 'Back', :action => 'list' %>

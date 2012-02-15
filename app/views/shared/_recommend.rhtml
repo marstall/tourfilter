@@ -1,8 +1,0 @@
-<%
-	if youser&&youser.id==Integer(parent_user_id)&&!match.is_recommended_by_user(youser)
-%>
-			(<%=link_to "recommend this show",
-					:controller => 'recommend',
-					:id => match.id
-				%>)
-	<%end%>

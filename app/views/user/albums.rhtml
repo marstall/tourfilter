@@ -1,7 +1,0 @@
-<%@items.each{|item|%>
-				<%formatted_price=Float((item.lowest_used_price||item.lowest_new_price)/100) rescue "n/a"%>
-				<%formatted_price= formatted_price.to_s.sub(/\.0$/,'')%>
-				<%term_string=" (#{item.term_text})" if item.term_text.downcase.strip != item.artist.downcase.strip%>
-				<%title="'#{item.title}' by #{item.artist}#{term_string}, released #{item.release_date.month rescue '?'}/#{item.release_date.year rescue '?'}, from $#{formatted_price}	"%>
-				<a href="<%=item.detail_page_url%>"><img title="<%=title%>" alt="<%=title%>"  src='<%=item.medium_image_url%>'></a>
-<%}%>

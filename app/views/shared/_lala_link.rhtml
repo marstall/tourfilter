@@ -1,5 +1,0 @@
-<%show_icon=true if show_icon.nil?%>
-<%cl||='listen'%>
-<span class=' <%=cl%>'>
-	<a onClick="window.open('<%=url("/lala_popup/#{term.url_text}")%>','flash','width=420,height=220');return false;" href='<%=url("/lala_popup/#{term.url_text }")%>'><%if show_icon%><span class='listen_icon'><img style='height:16px;'src='/images/play.png'/></span><%end%>listen</a>
-</span>

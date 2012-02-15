@@ -1,7 +1,0 @@
-<%@full_width_footer=true%>
-<div id="main-full-width">
-THANKS!!
-You have successfully flagged this match (<i><%=@match.term.text%> at <%=@match.page.place.name.downcase%> <%="#{@match.time_description.downcase}" if @match.time_description%></i>). <br><br>A human will take a look very soon and make any changes that need to be made (typically either changing the date or removing the listing altogether).<br><br>
-
-<a style="text-decoration:underline" class="underline" href='<%=url("/#{@match.term.url_text}")%>'>&laquo; return to <%=@match.term.text%></a>
-</div>

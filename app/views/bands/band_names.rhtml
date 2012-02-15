@@ -1,6 +1,0 @@
-<div class="header1">bands with the word '<%=@word%>' in their name</div>
-<div style="padding:0.25em;text-transform: lowercase">
-<%@term_words.each{|term_word|%>
-	<p><a href='<%=url("/#{term_word.term.url_text}")%>'><%=term_word.term.text%></a>
-<%}%>
-</div>

@@ -1,9 +1,0 @@
-<%narrow||=false%>
-<%mini||=false%>
-<%header||=false%>
-<%if @featured_matches and (not @featured_matches.empty?) and header%>
-<h3><%=header%></h3>
-<%end%>
-<%@featured_matches.each{|match|%>
-	  <%=render(:partial=>'shared/featured_match_mini',:locals=>{:match=>match})%>
-<%}%>

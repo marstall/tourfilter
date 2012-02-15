@@ -1,3 +1,0 @@
-class BrowseBandsController < ApplicationController  
-  
-end

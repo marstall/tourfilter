@@ -1,7 +1,0 @@
-<%npr=Npr.new(logger)%>
-<%stories = npr.story_results_for_term(term_text,1)%>
-<%if stories and not stories.empty?%>
-<span style='vertical-align:20%'>
-<a href='http://www.npr.org/search/index.php?searchinput=<%=term_text%>&topicId=1039&tabId=all&dateId=0&prgId=0&topicId=1039'><img height='16px' src='/images/npr.gif'></a>
-</span>
-<%end%>
