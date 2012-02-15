@@ -1,0 +1,12 @@
+<%if feature.image_credit_url and not feature.image_credit_url.strip.empty?%>
+  <div class='image_credit'>
+    <%
+      desc = feature.image_credit_description
+      if desc.nil? or desc.strip.empty?
+  		  uri = URI.parse(feature.image_credit_url)
+        desc=uri.host
+      end
+    %>
+    image: <a href='<%=feature.image_credit_url%>'><%=desc%></a>
+    </div>
+<%end%>

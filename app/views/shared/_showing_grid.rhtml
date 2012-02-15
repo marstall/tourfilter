@@ -1,0 +1,14 @@
+<%showing=showing_grid%>
+<%movie=showing.movie%>
+<div class="listing-small">
+<%if movie.image and showing_grid_counter<0%>
+<div><img width="120px" src="<%=movie.image.url%>"/></div>
+<%end%>
+<div class="title-grid">
+	<%if showing.url%>
+		<a href="<%=showing.url%>"><%=movie.title%></a>
+	<%else%>
+		<%=movie.title%>
+	<%end%>
+</div>
+</div>

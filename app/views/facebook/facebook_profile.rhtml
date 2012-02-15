@@ -1,0 +1,103 @@
+<%
+	# logic:
+	# if there is no metro_code
+	#	if is-own-profile
+	#		show select metro prompt
+	#	else
+	#		show nothing
+	#	end
+	# else
+
+		# if there are bands and there is a metro_code
+		# 	show concert list
+		# else
+		#   if is-own-profile
+		# 	  show add bands prompt
+		#   else
+		#	  show non-you scarcity message specific for metro
+		#	end
+		# end
+	# end
+	
+	# no matter what:
+	# show search box
+	
+	# if is-own-profile
+	#   show 'refresh' link
+	# end
+%>			
+<div id="profile_all">
+<%domain="facebook.tourfilter.com"%>
+<%#domain = "www.tourfilter.local:3000" if ENV['RAILS_ENV']=='development'%>
+<%
+	shared_events=(@my_shared_events||[])#+(@friends_shared_events||[])
+	# if there is no metro_code
+%>
+<%if not @metroo_code or @metroo_code.strip.empty?%>
+<fb:header icon="false" decoration="no_padding"> upcoming shows for <fb:name uid="<%=@facebook_userid%>"/></fb:header>
+<fb:if-is-own-profile>
+	<br>You haven't chosen a metro.
+		<div style="background-color:#f7f7f7;padding:0.5em;margin-top:0.5em;font-size:1em">
+			<a href="http://apps.facebook.com/facebook">choose your metro!</a>
+		</div>
+	<br>
+<fb:else>
+<div style="margin:0.5em">
+ No upcoming shows found. 
+</div>
+</fb:else>
+</fb:if-is-own-profile>
+<%else%>
+<fb:header icon="false" decoration="no_padding"> upcoming <%=@metroo_name.downcase%> shows for <fb:name uid="<%=@facebook_userid%>"/></fb:header>
+<%if shared_events.nil? or shared_events.empty?%>
+	<br>
+<fb:if-is-own-profile>
+	No upcoming shows found<%=" in #{@metroo_name.downcase}" if @metroo_name%> for your bands. 
+		<div style="background-color:#f7f7f7;padding:0.5em;font-size:1em;margin-top:0.5em">
+  			<a href="http://www.facebook.com/editprofile.php?personal">add some bands!</a>
+		</div>
+<fb:else>
+<div style="margin:0.5em">
+ No upcoming shows found. 
+</div>
+</fb:else>
+</fb:if-is-own-profile>
+		<br>
+<%
+else
+	shared_events=shared_events[0..15]
+	shared_events.sort!{|x,y| x.date <=> y.date}
+%>
+<%=render(:partial =>"facebook_calendar",
+                :locals=>{:shared_events=>shared_events,
+                :term=>@query,
+                :metro_code=>@metroo_code,
+				:show_friends=>true
+                })%>
+<%end%>
+<%end%>
+
+<div style="background-color:#DDF5F5;padding:0.5em">
+<form method="get" action="http://search.tourfilter.com/search">
+<input type="search" class="inputtext inputsearch" id="query" name="query" value="" results="10" />
+<input type="submit" value="tourfilter search "/>
+</form>
+</div>
+<fb:if-is-own-profile>
+<div style="float:right">
+<form id="profile_form">
+	<a 
+		clickrewriteurl="http://<%=domain%>/facebook/refresh"
+		clickrewriteid="profile_all"
+        clickrewriteform="profile_form"
+        href=""		
+>
+		refresh
+	</a>
+</form>
+</div>
+<div style="clear:right"></div>
+</fb:if-is-own-profile>
+</div>
+
+

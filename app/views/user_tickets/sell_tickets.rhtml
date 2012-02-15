@@ -1,0 +1,67 @@
+<%= javascript_include_tag "controls" %>	
+
+<title></title>
+<div id="main_full_width">
+<div class="header1">
+	have/want tickets
+</div>
+<div style='float:right'>
+		<div class="club_heading" style="padding:0.5em;padding-bottom:0em;width:20em;"><span class="subhead">
+		<span style="background-color:white;color:red;font-family:terminal,monospace;padding:0.25em;padding-right:0em;">
+			No scalping, please!
+		</span>
+		<span style="background-color:white;font-family:terminal,monospace;padding:0.25em;padding-left:0em;">
+			Please don't sell tickets for more than 15% over face value.
+		</span>
+		</div>
+		<div class="club_heading" style="padding:0.5em;width:20em;"><span class="subhead">
+		<span style="background-color:white;font-family:terminal,monospace;padding:0.25em">
+			people will be able to reply directly to your posting via <b>anonymous tourfilter private&nbsp;messaging</b>, so no need to put extra contact info if you don't feel like it.
+		</span>
+		</div>
+		<div class="club_heading" style="padding:0.5em;width:20em;"><span class="subhead">
+		<span style="background-color:white;font-family:terminal,monospace;padding:0.25em">
+			<%=@metro%> shows only.
+		</span>
+		</div>
+		<div style="padding:0.5em;width:20em;">
+		<span class='underline'>
+			<a href='<%=url("/have_want_tickets?own_only=true")%>'>view your existing ticket postings</a>
+		</span>
+		</div>
+</div>
+<div class="error" id="result"></div>
+<%=form_remote_tag (:update =>"result",
+					:loading => "$(submit).value='Processing ...';$(submit).disabled=true",
+					:complete => "$(submit).value='submit';$(submit).disabled=false",
+					:url =>{:action => 'handler'})
+					-%>
+<table>
+<tr>
+	<td colspan=2>
+		who, where, when <span class='gray smaller'>(ex: 'o positive at the channel 12/25')</span>
+	<div class='autocomplete'>
+		<%= text_field_with_auto_complete :match, :description, :autocomplete => "off", :size=>60 %>	
+	</div>
+	<script>$('match_description').focus()</script>
+	</td>
+</tr>
+<tr>
+<td valign=top align=left colspan=2>
+	<br>
+	about the tickets you want/have, the price, how you can exchange, etc.
+	<br>
+  <%=text_area_tag 'body', nil, :rows => 7, :cols => 58%>
+
+	</td>
+	</tr>
+<tr><td></td><td>
+	<br>
+<input type=submit name='submit' value='submit'>
+	<br>
+	<br>
+	</td></tr>
+</form>
+</table>
+<div style="clear:right"></div>
+<br>

@@ -1,0 +1,23 @@
+<!--
+<div id="right-column">
+	<div id="right-column-header">
+		<%#=render(:partial => "shared/find_user")%>
+	</div>
+	<div id="right-column-body">
+		 	
+	</div>
+	</div>
+</div>
+-->
+<div id="main-full-width">
+<div class="header1">
+upcoming shows tracked by tourfilter users
+</div>
+<%cache(:controller => "edit", :action => "terms_by_place") do%>
+<%=render(:partial =>"shared/recently_added_shows")%>
+<%=render(:partial =>"shared/terms_by_place")%>
+<%end%>
+</div>
+<script>
+apply_calendar_styles();	
+</script>

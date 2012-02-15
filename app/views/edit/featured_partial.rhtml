@@ -1,0 +1,19 @@
+<%=render(:partial=>'shared/calendar_options',:locals=>{:options_label=>@options_label,:nav_array=>@nav_array})%>
+<div class='editors_pick_header' style='display:none'
+  onmouseover='$("featured_feed_icons").style.display="inline";' 
+  onmouseout='$("featured_feed_icons").style.display="none";' 
+>
+  <div style='float:right;display:none' id='featured_feed_icons'>
+	<span style="vertical-align:-5%">
+		<a border=0 href='<%=url("/ical/featured")%>'><img border=0 src="/images/ical.gif"></a>
+	</span>
+	<span style="vertical-align:-5%">
+		<a border=0 href='<%=url("/rss/featured")%>'><img border=0 src="/images/rss.gif"></a>
+	</span>
+	</div>
+	editors' picks
+</div>
+<div onmouseover='$("featured_feed_icons").style.display="inline";' 
+onmouseout='$("featured_feed_icons").style.display="none";' >
+<%=render(:partial=>"shared/featured_calendar",:locals=>{:mini=>true,:num=>30})%>
+</div>

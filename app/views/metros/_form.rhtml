@@ -1,0 +1,16 @@
+<%= error_messages_for 'metro' %>
+
+<!--[form:metro]-->
+<p><label for="metro_name">Name</label><br/>
+<%= text_field 'metro', 'name'  %></p>
+
+<p><label for="metro_code">Code</label><br/>
+<%= text_field 'metro', 'code'  %></p>
+
+<p><label for="metro_num_places">Num places</label><br/>
+<%= text_field 'metro', 'num_places'  %></p>
+
+<p><label for="metro_num_places">Status</label><br/>
+<%= select 'metro', 'status', %w{ active inactive }%>
+<!--[eoform:metro]-->
+

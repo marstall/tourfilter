@@ -1,0 +1,7 @@
+<body style='background-color:#fff'>
+<%= stylesheet_link_tag 'tourfilter' %>
+<%= javascript_include_tag "application" %>	
+<div style='padding:1em'>
+<%=render(:partial=>"shared/term_more_info",:locals=>{:term_text=>params[:term_text],:match_id=>params[:match_id]})%>
+</div>
+</body>

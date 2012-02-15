@@ -1,0 +1,22 @@
+Really send the following emails?<br>
+
+<%Match.new_future_matches.each{|match|%>
+		<strong><%=match.term.text%></strong>
+		at 
+		<%=match.page.place.name%>
+		on
+		<%=match.month%>/<%=match.day%>, to
+		<%match.term.users.each{|user|%>
+			<%=user.name%> 
+		<%}%><br>
+	<%}%>
+	<span class="highlight" id="results">
+			    <%=link_to_remote("Really send!", 
+									:update => "results",
+									:loading => "start_working_mode();$('results').innerHTML='sending (please be patient, may take awhile)...';",
+									:complete => "end_working_mode();",
+			                        :url =>{
+			                            :controller => 'admin',
+			                            :action => 'send_match_emails'}) 
+			                        %>
+	</span>

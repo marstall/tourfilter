@@ -1,0 +1,6 @@
+<%cache(
+  :controller => "rolling_6months", 
+  :action => "echonest_reviews_#{term.url_text}") do%>
+<%=render(:partial=>'shared/echonest_stories',:locals=>{:type=>'reviews',:term_text=>term.text})%>
+<%end%>
+

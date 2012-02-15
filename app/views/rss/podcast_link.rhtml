@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pcast PUBLIC "-//Apple Computer//DTD PCAST 1.0//EN" "http://www.itunes.com/dtds/pcast-1.0.dtd">
+<% 
+	path="/podcast"
+	path="/rss/#{params[:user_name]}" if params[:user_name]
+%>
+
+<pcast version="1.0">
+	<channel>
+		<link rel="feed" 
+			 type="application/rss+xml" 	
+			href="http://www.tourfilter.com/<%=@metro_code%><%=path%>" />
+			<title>Tourfilter <%=@metro.capitalize%></title>
+			<subtitle>Songs by bands coming to <%=@metro.capitalize%></subtitle>
+</channel>
+</pcast>

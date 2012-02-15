@@ -1,0 +1,40 @@
+<%@full_width_footer=true%>
+<div class='underline' id='main-full-width'>
+<table style='width:100%;'>
+	<tr>
+		<td style='width:33%;vertical-align:top'>
+<div class='header1' >US metros</div>
+	<table style='width:100%' cellspacing=0 cellpadding=3>
+		<tr style='vertical-align:top;padding:1em;'>
+			<td style='vertical-align:top;padding:0.25em;text-transform:capitalize'>
+	<%@us_metros.each_with_index{|metro,i|%>
+		<div style='margin-bottom:4px'>
+		<%=render(:partial=>'shared/metro',:locals=>{:metro=>metro})%>
+		</div>
+		<%="</td><td style='vertical-align:top;text-transform:capitalize'>" if i==Integer(@us_metros.size/2)%>
+	<%}%>
+	</td></tr></table>
+</td>
+<td style='width:33%;vertical-align:top;'>
+		<div class='header1'>UK metros</div>
+		<div style='padding:0.25em;text-transform:capitalize'>
+	<%@uk_metros.each_with_index{|metro,i|%>
+		<div style='margin-bottom:4px'>
+			<%=render(:partial=>'shared/metro',:locals=>{:metro=>metro})%>
+</div>
+	<%}%>
+</div>
+</td>
+<td style='width:33%;vertical-align:top'>
+		<div class='header1'>international metros</div>
+		<div style='padding:0.25em;text-transform:capitalize'>
+	<%@international_metros.each{|metro|%>
+		<div style='margin-bottom:4px'>
+		<%=render(:partial=>'shared/metro',:locals=>{:metro=>metro})%>
+		</div>
+	<%}%>
+</div>
+</td>
+</tr>
+</table>
+</div>

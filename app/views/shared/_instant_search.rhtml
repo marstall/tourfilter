@@ -1,0 +1,13 @@
+<%prompt="search for concerts"%>
+<%=text_field_tag(:summary,"","size" => 32,"height"=>"32px",
+	:value=>prompt,
+	:onfocus=>"if (this.value=='#{prompt}') this.value='';$('clear').style.visibility='visible'",
+	:onblur=>"if (this.value=='') this.value='#{prompt}';if (this.value.length()>0) {$('clear').style.visibility='hidden'}"
+	)%>
+
+<%= observe_field("summary",
+                  :frequency => 0.5,
+                  :update => :results,
+                  :url => {:controller => "search",
+						   :action => :search_results}
+                  )%>

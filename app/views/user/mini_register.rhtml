@@ -1,0 +1,33 @@
+<div class="realbig" style="color:gray;padding:0.5em">
+<span id="result" class="error" style="padding:0px;margin:0px"></span>
+Create an account to get an email when <strong><%=@term.text%></strong> comes to town:<br>
+<div style="height:4px;"></div>
+<%=form_remote_tag (:update =>"result",
+					:loading => "$(submit).value='Processing ...';$(submit).disabled=true",
+					:complete => "$(submit).value='Sign up';$(submit).disabled=false",
+					:url =>{:controller => 'edit', :action => 'remote_post'})
+					-%>
+	<input type="hidden" name="youser[terms_as_text]" value="<%=@term.text%>">
+	<%=text_field(:youser,:name,"size" => 15,
+		:value=>"Username",
+		:class=>"signup",
+		:onfocus=>"if (this.value=='Username') this.value=''",
+		:onblur=>"if (this.value=='') this.value='Username'"
+		)%>
+	<%=text_field(:youser,:password,"size" => 15,
+		:id=>"password",
+		:class=>"signup",
+		:value=>"Password",
+		:onfocus=>"if (this.value=='Password') {this.value='';this.type='password';}",
+		:onblur=>"if (this.value=='') {this.value='Password';this.type='text';}"
+		)%>
+	<%=text_field(:youser,:email_address,"size" => 21,
+		:value=>"Email address",
+		:class=>"signup",
+		:onfocus=>"if (this.value=='Email address') this.value=''",
+		:onblur=>"if (this.value=='') this.value='Email address'"
+		)%>
+				<%= submit_tag 'Sign up',:id=>'submit' %>
+<%=render(:partial=>"shared/authenticate_client")%>
+</form>
+</div>

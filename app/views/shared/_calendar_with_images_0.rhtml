@@ -1,0 +1,31 @@
+<%days,days_pages,shows=controller.setup_calendar_collated(nil,@days_to_show)%>
+
+<%page||="calendar_with_images"%>
+<%page_type||="calendar_with_images"%>
+<%direct_club_link||=nil%>
+<%days.each_with_index{|day,i|%>
+		<%has_day=true%>
+<div class='gray match_left_gutter match_calendar_date'>
+<%if @short_dates%>
+		<%=Date::DAYNAMES[day.to_date.wday]%>, <%=Date::MONTHNAMES[day.month]%> <%=day.day%>
+<%else%>
+		<%=Date::DAYNAMES[day.to_date.wday][0..2].upcase%> <%=day.month%>/<%=day.day%>
+<%end%>		
+</div>
+<div style='clear:both'></div>
+ 	<%days_pages[day].each{|page|%>
+		<%="<td></td>" if not has_day%>
+		<%has_day=false%>
+		<%begin%>
+		<div>
+		<%#cache(:controller => "calendar_match", :action => match.id) do%>
+		<%=render(:partial=>'shared/calendar_match_with_image',:locals=>{:matches=>shows[day][page]})%>
+		<%end%> <!-- end cache -->
+		</div>
+	<%}%>
+<%if @break_between_days%>
+<div style='height:8px;background-color:white;margin-top:8px;'></div>
+<%end%>
+<%}%>
+<script type="text/javascript" src="http://static.delicious.com/js/playtagger.js"></script>
+

@@ -1,0 +1,7 @@
+<div class="newly_added" style="padding:0.25em">
+	newly added shows: <%Match.current(10,"id desc").each {|match|%>
+		<span style="padding-right:0px;margin:0px;border:0px"><img src="/images/star.gif"></span>
+		<%=link_to match.term.text, "/#{match.term.url_text}"%>
+	<%}%>
+	<%=link_to 'more...', "/recently_added_shows"%>
+</div>

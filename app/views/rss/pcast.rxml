@@ -1,0 +1,33 @@
+  xml.instruct! :xml, :version=>"1.0" 
+  xml.rss(:version=>"2.0"){
+    xml.channel{
+      xml.title(@rss_title)
+      xml.link("http://www.tourfilter.com/#{@metro_code}")
+      xml.description("tourfilter podcast: songs by bands coming to  #{@metro_code}")
+      xml.language("en")
+      @tracks.each {|track|
+          shared_term = track.shared_term
+          next unless shared_term
+          xml.item do
+          title="#{shared_term.text} ("
+          last_match=nil
+          Term.find_by_text(shared_term.text).future_matches.each{|match|
+              last_match = match
+              title+="#{match.page.place.name} #{match.very_short_time_description}, "
+            }
+            title= title.rstrip.gsub(/,$/,"")
+            title+=")"
+
+            xml.title(title)
+            # rfc822
+            xml.pubDate(last_match.created_at.strftime("%a, %d %b %Y %H:%M:%S %z")) if last_match
+            xml.enclosure(:url=>"http://www.tourfilter.com/mp3s/#{track.filename}",:type=>"audio/mpeg")
+            xml.link("http://www.tourfilter.com/#{@metro_code}/#{shared_term.url_text}")
+            xml.guid(track.id)
+#            rescue
+#            end
+          end
+      }
+    }
+  }
+

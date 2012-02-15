@@ -1,0 +1,169 @@
+<meta name="keywords" content="boston, <%=@term.text%>, music, live music, rock music, email, notification, concerts" />
+<% @page_title = "#{@term.text.downcase}"-%>
+<% 
+	future_matches=@term.future_matches
+	if future_matches and not future_matches.empty?%>
+		<div class="vevent"> <!-- hCalendar support -->
+		<div class="header1">upcoming <span class="name summary"><%=@term.text%></span> show<%="s" if future_matches.size>1%>!</div>
+		<ul>
+		<%future_matches.each{|match|%>
+				<li >
+					<a href="<%=match.page.url%>" onClick="track_click(this);return true">
+					at <span class="location"><%=match.page.place.name%></span> 
+					<abbr class="dtstart" title="<%=match.year%>-<%=match.month.to_s.gsub (/^(.)$/,'0\1')%>-<%=match.day.to_s.gsub(/^(.)$/,'0\1')%>"><%=match.time_description%></abbr>
+				    </a>
+			<span name="recommend_this" class="recommend-this" id="recommend_this_<%=match.id%>">
+				<span style="color:gray">|</span> 
+				<% if @youser%>
+				<%=link_to "recommend this show", :controller=>"recommend",:action=>"index",:id=>match.id%>
+				<%else%>
+				<a href="#" onClick="must_login()">recommend this show</a>
+				<%end%>
+			</span>
+			<span style="color:gray">|</span> 
+				<span class="recommend-this highlight" id="flag"></span>
+			<%if match.flag_count==0%>
+				<script>$("flag").innerHTML="<a onClick=\"return confirm('Report this listing as inaccurate (wrong band, wrong date, etc.)?')\" title='tell us this listing is innaccurate' href='/flag/flag_match/<%=match.id%>'>flag as inaccurate</a>"</script>
+			<%else%>
+				<script>$("flag").innerHTML="<span style='color:red'>flagged!</span>"</script>
+			<%end%>
+			
+			<div id="result_#{match.id}">
+						<div class="precis">
+							<%=match.page.precis @term.text%>
+						</div>
+						<div class="match_comments" id="comments_#{match.id}">
+<%cache(:controller => "bands", :action => "match_comments",:id=>"#{match.id}") do%>
+							<%=render(:partial =>"shared/match_comments",
+								:locals=>{
+									:match=>match,
+									:num=>5,
+									})%>
+<%end%>
+						</div>
+						<% recommendations = match.recommendations
+						if recommendations&& !recommendations.empty?
+							recommendations.each {|recommendation|next%>
+								<div style="padding:2px"></div>
+								<div class="header2">
+									<span class="gray smaller">
+									<%if recommendation.text and not recommendation.text.empty?%>
+										&#8220;<%=recommendation.text%>
+									<%if recommendation.mp3_url%>
+									&nbsp;<a href="<%=recommendation.mp3_url%>"></a>
+									<%end%>&#8221;
+										&nbsp;said 
+									<%else%>
+										recommended by 
+									<%end%>
+									<%=link_to recommendation.user.name,
+											:controller=>"users",
+											:action => recommendation.user.name
+											-%>
+											<%=time_ago_in_words(recommendation.created_at)%> ago
+									</span>
+								</div>
+							<%}%>
+							<%end%>
+					</li>
+					<div style="height:4px"></div>
+			<%}%>
+			</div><!-- vevent-->
+	</ul>
+	<br>
+	<%end%>
+	<div style="text-align:right;margin-bottom:0.5em;">
+		<%if @term.url%>
+		<span style="padding:0.25em;background-color:#FAA"><a onclick="track_click(this);return true;" href="<%=@term.url%>"><%=@term.text.downcase%> official website&nbsp;</a></span>
+			<%end%>
+	</div>
+	<div class="header1" style="height:1em;padding:0.25em">
+		<div style="float:left">
+				people who track <%=@term.text.downcase%>
+		</div>
+		<div align=right style="float:right">
+		<%=@term.text.downcase%> 
+		<a onclick="track_click(this);return true;"
+		   href="http://en.wikipedia.org/wiki/<%=@term.wikipedia_url_text%>">on wikipedia</a>
+		</div>
+	</div>
+<%cache(:controller => "bands", :action => "tracker_section",:id=>"#{@term.url_text}") do%>
+<div class="gray">
+<ul>
+<%term_users=@term.users%>
+<%if @unknown or term_users.empty?%>
+No-one tracks <%=@term.text%> in <%=@metro%>.
+<%end%>
+<%term_users.first(50).each {|user|%>
+<%
+	user_terms = user.terms.first(10)
+%>
+<li><%=link_to user.name,"/users/#{user.name}"-%>
+<%
+next if !user_terms || user_terms.size==1
+-%>
+, who also tracks
+<%
+	i=0
+	user.terms.first(10).each {|_term|
+		i+=1
+		next if _term.id==@term.id
+		comma=""
+		comma="," unless i>=10
+		%>
+			<%=link_to _term.text,"/#{_term.url_text}"%><span style="color:gray"><%=comma%></span>
+	<%}%></li>
+<%}%>
+</ul>
+</div>
+<%end%> <!--cache-->
+</div>
+
+<script>
+function show_playlist_link(i)
+{
+	$("album_name_"+i).innerHTML=$("playlist_"+i).innerHTML;
+	new Effect.Highlight("album_name_"+i);
+}
+</script>
+
+<script>
+function must_login()
+{
+	alert("You must be logged in to do that. Creating an account is free!");
+}
+
+function update_track_this()
+{
+	// check to see if we are logged in. If not, skip the ajax and just show "track this" ...
+	if (get_cookie("user_id")=='')
+	{
+		return;
+	}
+
+	var url = "<%=url_for :controller => 'data', :action => 'does_user_track_term', :id => @term.id %>"
+	var ajax = new Ajax.Request(
+	        url, 
+	        {
+	                onComplete: on_complete
+	        });
+}
+
+function on_complete(originalRequest)
+{
+	if (originalRequest==null || originalRequest.responseText=="no")
+	{
+		$("track_this").getElementsByTagName("a")[0].innerHTML=" track <%=@term.text.downcase%>"
+		new Effect.Highlight('track_this');		
+	}
+	else
+	{
+		$("track_this").innerHTML="You track <%=@term.text.downcase%>"
+	}
+}
+
+update_track_this();
+</script>
+
+<script>Delicious.Mp3.go();</script>
+

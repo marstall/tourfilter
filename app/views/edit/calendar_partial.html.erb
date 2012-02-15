@@ -1,0 +1,15 @@
+<%=render(:partial=>'shared/calendar_options',:locals=>{:options_label=>@options_label,:nav_array=>@nav_array})%>
+<%=render(:partial =>"shared/trim_calendar_container",
+  :locals=>
+  {
+    :narrower=>true,
+    :show_date_headers=>true,
+    :offset=>params[:offset],
+    :days_to_show=>params[:days_to_show]||30
+    })%>
+<div class='underline ' style='margin-bottom:8px;float:right'>
+show 
+  <span class='highlight' style='padding:4px'><a href='<%=url("/homepage/30")%>'>30 days</a></span> 
+  <span class='highlight' style='padding:4px'><a href='<%=url("/homepage/365")%>'>all</a></span>
+</div>
+<div style='clear:right'></div>

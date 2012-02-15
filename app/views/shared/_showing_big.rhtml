@@ -1,0 +1,60 @@
+<%showing=showing_big%>
+	<%movie=showing.movie%>
+	<%place=showing.place%>
+<div class="listing">
+<div>
+	<div id="title-block" style="float:left">
+		<span class='title'>
+		<%if showing.url%>
+		<a href="<%=showing.url%>"><%=movie.title%></a>
+		<%else%>
+		<%=movie.title%>
+		<%end%>
+		</span>
+		<span class='place'>
+		<a href="<%=place.url%>"><%=place.name%></a>
+		</span> 
+	</div>
+	<div id="time-block" style="float:right;">
+		<span class='meta-data'>
+			<span class='time'>
+			<%if showing.date.month==Time.new.month and showing.date.day==Time.new.day-%>
+			<span class='tonight'>today</span>
+			<%else-%>
+				<span class='day'>
+				<%=Date::DAYNAMES[showing.date.wday].downcase%></span>,
+				<%=Date::MONTHNAMES[showing.date.month].downcase%> <%=showing.date.day%> 
+			<%end-%>
+			<%=showing.time_string.strip.downcase%>
+		</span>
+	</div>
+</div>
+<div style="clear:both"></div>
+<div class='showing'>
+<div class='synopsis'>
+  <%image = movie.image%>
+  <%if movie.youtube_id and movie.youtube_id!="-1"%>
+<div style="float:left;width:435px">
+<%= render :partial => 'shared/youtube_video',:locals=>{:youtube_id=>movie.youtube_id} %>
+</div>
+  <%elsif image%>
+<div style="float:left;padding-right:0.5em;padding-bottom:0.5em;">
+<img src="<%=image.url%>"/>
+</div>
+  <%end%>
+
+<div style="padding:0em;">
+<%if movie.basic_facts-%>
+<span class="basic-facts">
+	<%=movie.basic_facts%>
+</span>
+<%end-%>
+	<%=movie.synopsis.strip if movie.synopsis%>
+	<%unless movie.youtube_id and movie.youtube_id!="-1"-%>
+	<span class="fix-video"><a href="/movie/edit/<%=movie.id%>">&nbsp;find a trailer for '<%=movie.title%>'</a></span>
+	<%end%>
+</div>
+<div style="clear:both"></div>
+
+</div>
+</div>

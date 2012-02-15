@@ -1,0 +1,24 @@
+<% if shared_events and shared_events.size>0%>
+<table>
+<% shared_events.each{|shared_event| -%>
+<%
+        term=term.sub /^\w+:/,""
+        term.strip!
+        summary=shared_event.summary.downcase
+%>
+<%
+        location=shared_event.location.downcase.strip
+%>
+<%
+        metro_name=shared_event.metro_name.downcase.strip
+        metro_name.gsub!(" ","&nbsp;")
+%>
+/
+                <%=shared_event.date.month%>/<%=shared_event.date.day%>
+                <a href="<%=shared_event.url%>"><%=summary%></a>
+                        <%=location[0..20] if @metroo_code and not @metroo_code.strip.empty?%>
+                        <%="#{metro_name}" unless @metroo_code and not @metroo_code.strip.empty?%>
+<% }-%>
+<%else%>
+        no upcoming shows.
+<%end%>

@@ -1,0 +1,18 @@
+	<%hype_tracks=Track.find_by_term(term_text,'mp3','hype',3)%>
+	<%if hype_tracks and not hype_tracks.empty?%>
+		hype machine blog search results
+			<a href='http://hypem.com/search/<%=term_text%>'>more</a>
+	</div>
+		<div class='underline more_info_body_alternating_2 more_info_body'>
+			<%hype_tracks.each_with_index{|track,i|%>
+				<div class="term_more_entry_<%=i%2+1%>">
+					<div style="float:right">
+						<%=render(:partial=>'shared/mp3_player',:locals=>{:track=>track,:height=>20})%>
+					</div>
+					<div style="float:left">
+						<%=track.description.gsub(/More at.*/,"")%>
+					</div>
+					<div style="clear:left"></div>
+				</div>
+				<%}%>
+	<%end%>

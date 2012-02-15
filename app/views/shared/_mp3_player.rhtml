@@ -1,0 +1,14 @@
+<%height||=24%>
+<%width||=190%>
+<%if mp3_url and mp3_url=~/http/-%>
+<object type="application/x-shockwave-flash" data="/audio_player/player.swf" id="audioplayer" height="<%=height%>" width="<%=width%>">
+
+<param name="movie" value="/audio_player/player.swf">
+<param name="FlashVars" value="playerID=1&amp;soundFile=<%=mp3_url%>">
+<param name="quality" value="high">
+<param name="menu" value="false">
+<param name="lefticon" value="#ffc">
+<param name="righticon" value="#ffc">
+<param name="wmode" value="transparent">
+</object>
+<%end-%>

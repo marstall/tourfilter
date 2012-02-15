@@ -1,0 +1,75 @@
+<div style='margin-left:0.75em;margin-right:0.75em;margin-bottom:4px;height:340px'>
+<%=form_remote_tag (:update =>"result",
+					:loading => "$(submit).value='Processing ...';$(submit).disabled=true",
+					:complete => "$(submit).value='Save';$(submit).disabled=false",
+					:url =>{:controller=>'edit',:action => 'feature_handler'})
+					-%>
+<%if match_id%>
+  <%match = Match.find(match_id)%>
+<%else%>
+  <%term = Term.find_by_text(term_text)%>
+  <%matches = term.future_matches%>
+  <%if not matches.empty?%>
+    <%match = matches.first%>
+    <%match_id=match.id%>
+  <%else%>
+    <%return%>
+  <%end%>
+<%end%>
+<%@feature = match.feature%>
+
+<input type='hidden' name='feature[match_id]' value='<%=match_id%>'>
+<input type='hidden' name='feature[term_text]' value='<%=term_text%>'>
+<div class="error" id="result"></div>
+<div class='more_info_header'>
+	feature this show to <%=@metro.downcase%> homepage 
+	<%if @feature%>
+	<a href='<%=url("/edit/unfeature/#{@feature.id}")%>'>unfeature</a>
+	<%end%>
+</div>
+<div class='more_info_body_alternating_2 more_info_body '>
+<table>
+	<tr>
+		<td valign=top>
+		<div style='padding:0.25em'>
+			<div class='light_field_header'>image url</div>
+			<div>
+				<%=text_field(:feature,:image_url,"size" => 45)%> 
+			</div>
+			<div class='light_field_header'>image credit url</div>
+			<div>
+				<%=text_field(:feature,:image_credit_url,"size" => 45)%> 
+			</div>
+			<div class='light_field_header'>image credit description</div>
+			<div>
+				<%=text_field(:feature,:image_credit_description,"size" => 45)%> 
+			</div>
+		</div>
+    	<div class='light_field_header' style='padding-left:1em;'>
+    	<%=check_box(:featurex,:dont_tweet,{},"true","false")%> don't tweet
+    	<%=check_box(:featurex,:match_specific,{},"true","false")%> applies to this show only
+    	</div>
+  	<div class='light_field_header' style='padding-left:1em;'>
+  				<input id='submit' type='submit' name='button' value='Feature'>
+  				<input id='submit' type='submit' name='button' value='Cancel'>
+  	</div>
+	</td>
+	<td valign=top>
+		<div style='padding:0.25em'>
+			<div class='light_field_header'>description</div>
+			<div>
+					<%=text_area(:feature,:description,"cols" => 45, "rows" => 20)%>
+			</div>
+		</div>
+	</td>
+	</tr>
+	<tr>
+		<td>
+	</td>
+	<td>
+	</td>
+	</tr>
+</table>
+</div>
+</form>
+</div>

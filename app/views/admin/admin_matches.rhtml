@@ -1,0 +1,201 @@
+<%= javascript_include_tag :defaults %>
+<div style='background-color:add;padding:0.25em;font-size:1.5em'>
+Administer matches</div>
+<%if @problem_pages and @problem_pages.size>0%>
+<br>
+<div style='background-color:eaa;padding:0.25em;'>Problem pages</div>
+<div style="padding:0.25em">
+<table cellpadding=0 style="background-color:d55">
+	<tr style="color:ffa">
+		<td>
+			place
+		</td>
+		<td>
+			url
+		</td>
+		<td>
+			cons. errors&nbsp;&nbsp;
+		</td>
+		<td>
+			last changed
+		</td>
+	</tr>
+<%@problem_pages.each{|page|%>
+<tr>
+<td>
+	<a href='<%=url("/place/edit/#{page.place.id}")%>'><%=page.place.name%></a>
+</td>
+<td>
+	<a href="<%=page.url%>"><%=page.url%></a>
+</td>
+<td>
+	<%=page.num_consecutive_errors%>
+</td>
+<td>
+	<%=page.last_changed_at||"unknown"%>
+</td>
+</tr>
+<%}%>
+</table>
+<%end%>
+<br>
+</div>
+
+<div style='background-color:ada;padding:0.25em;'>New matches</div>
+Make sure all these matches are really shows that people would want to know about.<br>
+<%load_raw_body=true%>
+<%load_raw_body=false if params[:raw_body]=="0"%>
+<%default_per_page=500%>
+<%num=Integer(params[:num]||default_per_page)%>
+<%start=Integer(params[:start]||-1)%>
+<%num_matches = Match.count_new_future_matches_for_admin%>
+<%matches = Match.new_future_matches_for_admin(num,start,"places.name asc,terms.text",load_raw_body)
+#	matches+=Match.find(:all, :conditions => "status='approved'")
+#	matches+=Match.find(:all, :conditions => "status='invalid'", :order => "id desc", :limit => 20)
+%>
+<div style='background-color:dad;padding:1em'>
+<span style="background-color:#FFC;">
+<%fudge_factor=0.1%>
+<%=num_matches%> new future matches found.<br>
+</span>
+displaying <%=start+1%>-<%=start+num%><br>
+<%if start>0%>
+<a href='<%=url("/admin/admin_matches?start=#{start-num}&num=#{num}")%>'>previous <%=num%></a> 
+<%end%>
+<%if start+num<num_matches%>
+<a href='<%=url("/admin/admin_matches?start=#{Integer(start+(num*(1-fudge_factor)))}&num=#{num}")%>'>next <%=num%></a> 
+<%end%>
+</div>
+<table>
+	<tr>
+	<th align="left">id</th>
+	<th align="left">band</th>
+	<th align="left">precis</th>
+	<th align="left">date</th>
+	<th align="left">club</th>
+	<th align="left">trackers</th>
+	<th align="left">html body</th>
+</tr>
+<%=params[:id]%>
+<script>
+function toggle_match_status(match_id)
+{
+ new Ajax.Updater("execution_block",'<%=url("/admin/toggle_match_status/")%>'+match_id,{evalScripts: true});
+}
+</script>
+<%cookies[:positives_only]='1' if params[:positives_only]%>
+<%cookies[:positives_only]=nil if params[:clear_positives]%>
+<div id="execution_block"></div>
+<%
+i=0
+num_positives=0
+matches.each{|match|
+	i=i+1
+	begin
+# sql =  " select matches.*, terms.text as match_term_text,pages.url as match_page_url,"
+# sql += " place.name as match_page_place_name, pages.body as match_page_body"
+	%>
+
+	<%positive=false%>
+	<%precis=match.page_precis_for_admin(match.match_page_body,match.match_term_text)%>
+	<%regexp="(?:(Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sept?(?:ember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?).? ((?:(?:[123][0-9])|(?:[0][1-9])|(?:[1-9]))(?![0-9])))|(?:([01]?[0-9]) ((?:(?:[123][0-9])|(?:[0][1-9])|(?:[1-9]))(?![0-9])))"%>
+	<%regexp.gsub!("/"," ")%>
+	<%regexp = "((#{regexp})|(1?\\d\\s([0134][05])\\s?(am|pm)?)|(\\d.*(am|pm))|\\$)"%>
+	<%if (((not match.page.month) and precis=~/#{regexp}/i) or (match.page.month and precis=~/\d/))%>
+	<%positive=true%>
+	<%num_positives+=1%>
+	<%end%>
+	<%if positive #(not cookies[:positives_only]) or positive%>
+<%users = match.term.users%><%if users.size>0%>
+	<tr id="row_<%=match.id%>" onClick="toggle_match_status(<%=match.id%>)">
+		<td valign="top" class="track_name_<%=i%2+1%>">
+			<%=match.id%>
+		</td>
+		<td valign="top" class="track_name_<%=i%2+1%>">
+			<strong><%=match.match_term_text.downcase rescue '#error'%></strong>
+		</td>
+		<td valign="top" class="track_name_<%=i%2+1%>">
+			<div class="subhead">
+				<%#regexp= match.page.place.calculate_regexps[:all_regexps]%>
+				<%if positive%>
+				<span style='background-color:ffc'>
+				<%else%>
+				<span>	
+				<%end%>
+				<%=precis||"no precis available"%>
+			</span>
+			</div>
+		</td>
+		<td style="border-left:1px black" nowrap valign="top" class="track_name_<%=i%2+1%>">
+			<%=render(:partial => "correct_date", :locals =>
+			                {
+			                 :match => match
+			                }
+			                )-%>
+		</td>
+			<td valign="top" class="track_name_<%=i%2+1%>">
+				<a target="0" href="<%=match.match_page_url rescue ''%>"><%=match.match_page_place_name rescue 'error'%></a>
+			</td>
+		
+		<td valign="top" class="track_name_<%=i%2+1%>">
+
+<span style="background-color:#bbb"><%=users.size%></span>&nbsp;<%users[0..10].each{|user|%>
+                                <%=user.name%> 
+<%}%>
+				<span style="color:#bbb"><%=match.match_term_source%></span>
+		</td>
+
+		<td valign="top" style="background-color:#777;" class="track_name_<%=i%2+1%>">
+			<%
+#				date_block=match.date_block
+#				if date_block["((((("]
+#					if match.month_position=='before'
+#						date_block=date_block[date_block.index("(((((")..date_block.size]
+#					else
+#						date_block=date_block[0..date_block.index(")))))")]
+#					end
+#				end
+#				date_block.gsub!("+++++","<span style='font-weight:bolder;color:aaa;'>")
+#				date_block.gsub!("(((((","<span style='font-weight:bolder;color:faf;'>")
+#				date_block.gsub!("[[[[[","<span style='font-weight:bolder;color:faa;'>")
+#				date_block.gsub!("-----","</span>")
+#				date_block.gsub!(")))))","</span>")
+#				date_block.gsub!("]]]]]","</span>")
+			%>
+			<div class="subhead">
+				<%#=date_block||"no date block available"%>
+			</div>
+		</td>
+	</tr>
+	<%end%>
+	<%end%>
+<%
+rescue => e
+	%>
+	</td></tr><tr><td><%=match.id%></td><td colspan=7><%=e%></td></tr>
+	<%
+end
+} if matches.size>0%>
+</table>
+<p>positives only: <%=cookies[:positives_only]?'yes':'no'%></p>
+<p>algorithmic positives: <%=num_positives%> out of <%=num%></p>
+<p>algorithmic negatives: <%=num-num_positives%> out of <%=num%></p>
+<br>
+<div style='background-color:dad;padding:1em'>
+<span class="highlight">
+<%num=Integer(params[:num]||default_per_page)%>
+<%start=Integer(params[:start]||0)%>
+<%_end=num+start%>
+<%_end=matches.size if _end>matches.size%>
+<%=matches.size if matches%> new future matches found.<br>
+</span>
+displaying <%=start+1%>-<%=_end%><br>
+<%if start!=0%>
+<a href='<%=url("/admin/admin_matches?start=#{start-num}&num=#{num}")%>'>previous <%=num%></a> 
+<%end%>
+<%if _end!=matches.size%>
+<a href='<%=url("/admin/admin_matches?start=#{start+num}&num=#{num}")%>'>next <%=num%></a> 
+<%end%>
+</div>
+
+

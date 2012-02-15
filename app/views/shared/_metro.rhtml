@@ -1,0 +1,12 @@
+<%
+return if not metro.active?
+	url_path_portion = ""
+	url_path_portion = request.request_uri unless request.request_uri =~/search|users|clubs|settings|about|me|homepage|password/
+	url_path_portion.gsub! "#{@metro_code}/",""
+	url_path_portion = "/#{url_path_portion}" if url_path_portion and url_path_portion !~ /\// and !url_path_portion.strip.empty?
+%>
+<%if metro.code!=@metro_code %>
+<a href="http://www.<%=@domain_stub%>/<%=metro.code%><%=url_path_portion%>"><%=metro.name.downcase.gsub(/\s/,"&nbsp;")%></a>
+<%else%>
+<%=metro.name.downcase.gsub(/\s/,"&nbsp;")%>
+<%end%>

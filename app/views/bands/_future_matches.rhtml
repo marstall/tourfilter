@@ -1,0 +1,118 @@
+<%if future_matches and not future_matches.empty?%>
+<div style='width:800px;margin-top:8px'></div>
+<table width=100% cellpadding=0 cellspacing=0>
+  
+<%future_matches.each_with_index{|match,i|%>
+  <%place=match.page.place%>
+	<%term=match.term%>
+	<div class='band_page_match'>
+    <div style='font-size:10px;color:#fbb;margin-bottom:4px'>
+      UPCOMING SHOW
+    </div>
+			<%if match.page.url%>
+				<%=@term.text.downcase%> <%=ticket_link(@external_click_hash,
+					{'url'=>match.page.url},
+					"at #{match.page.place.name.downcase} #{match.time_description.downcase}",
+					{
+						:page_section=>"main_show",
+						:term_text=>@term_text
+					},{:alt_text=>"buy/browse tickets"}
+					)%>
+			<%else%>
+				at <%=match.page.place.name.downcase%> <%=match.time_description.downcase%>
+			<%end%>
+				<%=render(:partial=>'shared/tickets',:locals=>
+					{
+						:match=>match,
+						:page_section=>"main_show",
+						:term_text=>@term_text
+					})%>
+	<div style='margin-top:4px' id="result_#{match.id}">
+				<%precis = match.page.precis(@term.text)%>
+				<%unless precis.strip.downcase==@term.text.strip.downcase%>
+				<div class="precis">
+					<b>listing excerpt</b>&nbsp;<%=precis%>
+				</div>
+				<%end%>
+		</div>
+	</div>
+
+		<div>
+		  <%if match.user%>
+  			<span class='highlight' style='font-size:12px;text-transform:lowercase'>added by <a href='<%=url("/users/"+match.user.name)%>'><%=match.user.name%></a>.</span>
+  		<%end%>
+			</div>
+		<div>
+		<div style='margin-bottom:10px'></div>
+		<%#if @youser and (@youser.is_admin or @youser.privs =~ /manage_matches/)%>
+		<div style="display:none" class="admin_section">
+		<div style="height:6px"></div>
+		<span style="color:grey;background-color:#ddd;padding:0.45em;margin-top:1em" >(admin)
+				<%if match.flag_count>0%>
+				<a href='<%=url("/flag/unflag_match/#{match.id}")%>'>unflag</a> 
+				|
+				<%end%>
+				<a onClick="return confirm('invalidate this show?')" href='<%=url("/flag/invalidate_match/#{match.id}")%>'>invalidate</a> | 
+		<form method=post action='<%=url("/flag/change_match_date")%>'>
+		change date: 
+			<input type="hidden" name="id" value="<%=match.id%>">
+			<input size=2 type='text' name='month' value='<%=match.date_for_sorting.month rescue ""%>'>
+			<input size=2 type='text' name='day' value='<%=match.date_for_sorting.day rescue ""%>'>
+			<input size=4 type='text' name='year' value='<%=match.date_for_sorting.year rescue ""%>'>
+			<input id='submit' type='submit' name='next' value="set date + send correction to all band's trackers">
+		</form>
+		</span>
+						<div style="height:6px"></div>
+		</div>	
+</div>
+	<%}%>
+<%end%>
+<%if not future_matches or future_matches.empty?%>
+<div style='margin-bottom:2px;border:0px solid #eee;color:#aaa'>
+  no upcoming <b><%=@term.text%></b> shows found in <%=@metro.downcase%>, but you can <a href='http://www.tourfilter.com/search/<%=@term.url_text%>'>search in other cities</a>, or search ticketsellers:</div>
+<div style='<%="background-color:#ffc;margin-bottom:0.25em" unless request.env["HTTP_REFERER"]=~/tourfilter/%>'>
+<div style='float:left;margin:1em;margin-left:0em;'>
+<table style='padding:2em;background-color:#ffc'>
+  <tr>
+    <td colspan=4 align=left>
+  <%="no shows found. " if not future_matches or future_matches.empty?%>search for tickets:<br>
+  </td>
+  </tr>
+  <tr><td height=4px></td></tr>
+  <tr>
+    <td style='background-color:#ddf5f5;padding:4px;border:1px solid #ccc;'>
+    ticketmaster
+    <%ticketmaster_url="http://ticketsus.at/tourfilter?CTY=37&DURL=http://www.ticketmaster.com/search?q=#{@term.encoded_text}"%>
+  	<%=ticket_link(@external_click_hash,{'url'=>ticketmaster_url},"<img style='vertical-align:-20%' src='/images/ticketmaster.gif'>",
+  			{
+  			  :page_type=>'band',
+  				:page_section=>"blind_ticket_search",
+  				:term_text=>@term.encoded_text
+  			},
+  			{
+  				:alt_text=>"find #{@term.text} tickets on ticketmaster"
+  			}
+  	)%>    
+    </td>
+    <td style='padding:0px'>&nbsp;or&nbsp;</td>
+  <td style='background-color:#ddf5f5;padding:4px;border:1px solid #ccc;'>
+    stubhub
+    <%stubhub_url="http://www.anrdoezrs.net/click-2904311-10595228?url=http://www.stubhub.com/search/doSearch?searchStr=#{@term.encoded_text}"%>
+  	<%=ticket_link(@external_click_hash,{'url'=>stubhub_url},"<img style='height:20px;vertical-align:-20%' src='/images/stubhub.gif'>",
+  			{
+  			  :page_type=>'band',
+  				:page_section=>"blind_ticket_search",
+  				:term_text=>@term.encoded_text
+  			},
+  			{
+  				:alt_text=>"find #{@term.text} tickets on stubhub"
+  			}
+  	)%>    
+</td>
+</tr>
+</table>
+</div>
+<div style='clear:left'></div>
+</div>
+<%end%>
+

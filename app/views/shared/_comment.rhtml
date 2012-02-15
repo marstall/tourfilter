@@ -1,0 +1,20 @@
+<%
+if comment_counter%2==0
+	wrapper_name="comment_wrapper_1"
+else
+	wrapper_name="comment_wrapper_2"
+end
+%>
+<div class="<%=wrapper_name%>" id="comment_<%=comment.id%>">
+	<%return if not comment.user%>
+	<span class="underline">
+	<%=textilize_without_paragraph(strip_tags(comment.text.strip))-%></span> &mdash; <a href="/users/<%=comment.user.name%>"><%=comment.user.name%></a> on <%=comment.created_at.month%>/<%=comment.created_at.day%>	<span class="underline" id="delete_<%=comment.id%>"></span>
+	<script>
+		if (get_cookie('<%=@metro_code%>_user_id')==<%=comment.user.id%>)
+		{
+			<%delete_comment_url="/bands/delete_comment/#{comment.id}"%>
+			$("delete_<%=comment.id%>").innerHTML="<a onClick=\"return confirm('Really delete this comment?')\" href='<%=url(delete_comment_url)%>'>delete</a>"
+		}
+	</script>
+			
+</div>

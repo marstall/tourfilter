@@ -1,0 +1,7 @@
+<ul >
+<% @shared_events.each{|shared_event| -%>
+  <li >
+    <div class="smaller"><%=shared_event.source%> => <%=shared_event.summary%> at <%=shared_event.location%> (<%=shared_event.date.month%>/<%=shared_event.date.day%>)</div>
+  </li>
+<% } -%>
+</ul>

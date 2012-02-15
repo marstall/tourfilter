@@ -1,0 +1,82 @@
+  <%= javascript_include_tag :defaults %>
+<div style='background-color:add;padding:0.25em;font-size:1.5em'>
+Administer imports</div>
+<div style='background-color:ada;padding:0.25em;'>New imports</div>
+Make sure all these imports are really shows that people would want to know about.<br>
+<%
+	if params[:term]
+		ats =  ArtistTerm.find_matches_by_term(params[:term])
+	elsif params[:unlikely]=="1"
+		ats =  ArtistTerm.find_unlikely_matches(params[:order])
+	else
+		ats =  ArtistTerm.find_likely_matches(params[:order],params[:offset]||"0",params[:num]||"10000")
+	end
+%>
+<div style='background-color:dad;padding:1em'>
+<span class="highlight">
+<%=ats.size if ats%> new imports found.<br>
+</span>
+</div>
+<table>
+	<tr>
+	<th align="left">id</th>
+	<th align="left">term_text</th>
+	<th align="left">source</th>
+	<th align="left">artist name</th>
+	<th align="left">club</th>
+	<th align="left">date</th>
+</tr>
+<%=params[:id]%>
+<script>
+function validate_import(at_id)
+{
+ new Ajax.Updater("execution_block",'<%=url("/admin/validate_import/")%>' + at_id,{evalScripts: true});
+}
+function invalidate_import(at_id)
+{
+ new Ajax.Updater("execution_block",'<%=url("/admin/invalidate_import/")%>'+at_id,{evalScripts: true});
+}
+</script>
+<div id="execution_block"></div>
+<%
+i=0
+ats.each{|at|
+	i=i+1
+	begin
+	%>
+	<tr id="row_<%=at.id%>" >
+		<td valign="top" class="track_name_<%=i%2+1%>" onClick="validate_import(<%=at.id%>)">
+			<%=at.id%>
+		</td>
+		<td valign="top" class="track_name_<%=i%2+1%>" onClick="validate_import(<%=at.id%>)">
+			<%=term_text=at.term_text.downcase%>
+		</td>
+		<td valign="top" class="track_name_<%=i%2+1%>" onClick="validate_import(<%=at.id%>)">
+			<%event=ImportedEvent.find(at.imported_event_id)%>
+			<%=event.source%>
+			<%if event.source=='user'%>
+			<br><span style='font-size:smaller;color:gray'><%=event.username%>&nbsp;<%=event.user_metro%></span>
+			<%end%>
+		</td>
+		<td valign="top" class="track_name_<%=i%2+1%>" onClick="invalidate_import(<%=at.id%>)">
+			<%=at.artist_name.downcase.gsub(term_text,"<strong>#{term_text}</strong>")%>
+		</td>
+		<td onClick="invalidate_import(<%=at.id%>)">
+		<a target="0" href="<%=at.url%>"><%=at.name%></a><br>
+		<%=at.city%>, <%=at.state%> 
+		</td>
+		<td nowrap onClick="invalidate_import(<%=at.id%>)">
+		<%=at.date%>
+		</td>
+	</tr>
+<%
+rescue => e
+	%>
+	</td></tr><tr><td><%=at.id%></td><td colspan=7><%=e%></td></tr>
+	<%
+end
+} if ats.size>0%>
+</table>
+<br>
+
+

@@ -1,0 +1,13 @@
+<% 
+	match=@match if @match
+	%>
+<div style="background-color:faa" id="result_<%=match.id%>"></div>
+<div id="match_date_<%=match.id%>">
+<%=form_remote_tag (:update =>"result_#{match.id}",
+					:url =>{:action => 'correct_date'})
+					-%>
+<input id="month_<%=match.id%>" onFocus="$('month_<%=match.id%>').value='';Element.show('button_<%=match.id%>')" size=2 type="text" name="month" value="<%=match.month%>">/<input onFocus="$('day_<%=match.id%>').value='';Element.show('button_<%=match.id%>')" id="day_<%=match.id%>" size=2 type=text name="day" value="<%=match.day%>">
+<div><input id="button_<%=match.id%>" value="set" type=submit style="display:none"></div>
+<input type="hidden" name="id" value="<%=match.id%>">
+</form>
+</div>

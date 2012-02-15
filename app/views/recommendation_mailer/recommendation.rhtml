@@ -1,0 +1,25 @@
+Hi,
+
+Using Tourfilter, <%=@recommendation.user.name%> just recommended the following upcoming show to you:
+
+<%=@recommendation.match.term.text%> at <%=@recommendation.match.page.place.name%> <%=@recommendation.match.time_description%>
+details at: http://www.tourfilter.com/<%=@controller.metro_code%>/<%=@recommendation.match.term.url_text%>
+
+<%if @recommendation.text!=nil&&!@recommendation.text.empty?-%>
+<%=@recommendation.user.name%> says, "<%=@recommendation.text%>"
+<%end-%>
+
+<%if @recommendation.mp3_url-%>
+listen: <%=@recommendation.mp3_url%>
+<%end-%>
+
+stop this mail/see other bands <%=@recommendation.user.name%> likes: 
+http://www.tourfilter.com/<%=@controller.metro_code%>/users/<%=@recommendation.user.name%>
+
+Thanks,
+Tourfilter
+
+p.s. you can reply to this email with questions/feedback
+
+
+

@@ -1,0 +1,28 @@
+<script>
+	function show_movie(youtube_id,showing_id)
+	{
+		new Ajax.Updater(
+         "youtube-box-"+showing_id,
+ 		 "/play_youtube_video/"+youtube_id
+         );
+		Element.show('fix-video');
+	}
+</script>
+<%if movie.youtube_id and movie.youtube_id!="-1"%>
+<span id='youtube-box-<%=showing.id%>' class='fix-video' style="font-size:1em">
+<a border=0 href="#" onClick="show_movie('<%=movie.youtube_id%>','<%=showing.id%>');return false;">
+			view trailer
+		</a>
+</span>
+		<span id='fix-video' class="fix-video" style='display:none;text-align:right;line-height:18px;'><a href="/movie/edit/<%=movie.id%>">not the right trailer?</a></span>
+<%else%>
+	<span class="fix-video" style='padding:2em;padding-left:2.25em'>
+		<span style="padding:1em;background-color:#EDF5F5">
+		<a href="/movie/edit/<%=movie.id%>">find a trailer</a>
+		<%if movie.youtube_id=="-1"%>
+			<br>(note: <br>someone already <br>looked and could- <br>n't find one)
+		<%end%>
+		</span>
+	</span>
+<%end%>
+

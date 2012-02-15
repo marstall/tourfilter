@@ -1,0 +1,9 @@
+<span id="message"><%=@message%></span>
+<script>
+	new Effect.Fade("message",{duration:3}); // fade the success message out
+	<%if @success%>
+		$("term").value="";
+		$("saved_results").innerHTML=$("unsaved_results").innerHTML+$("saved_results").innerHTML
+		$("unsaved_results").innerHTML='';
+	<%end%>
+</script>  

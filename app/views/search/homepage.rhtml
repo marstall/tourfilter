@@ -1,0 +1,106 @@
+<html>
+	<head>
+		<meta name="verify-v1" content="XkDMxOJ8KMbX5WUCSaSSZ5DwuwkjBBfcTBW50KE84+k=" />
+		<style>
+			body {
+				background-color: white;
+				color: #000000;
+				margin: 0.5em;
+				font-family: Georgia, Garamond, Times, Sans-Serif;
+				font-size: 1em;
+				font-weight: normal;
+				line-height: 1.35em;
+			}
+			h1
+			{
+				font-family: Georgia, Garamond, Times, Sans-Serif;
+				font-size: 1em;
+				font-weight: normal;
+				margin-top:0px;
+				background-color: #DDF5F5;padding: 0.25em 0.25em 0.25em 0.25em;
+				padding:0.5em;
+				padding-bottom:0.5em;
+				margin-bottom:1em;				
+			}
+			#homepage {
+				margin-left:27%;
+				margin-top:15%;
+				margin-right:30%;
+			    border:dotted;
+				padding:1em;
+			    border-color:#ddf5f5;
+				border-width:0px;
+				min-width:440px;
+				white-space:nowrap;
+				}
+	
+			.homepage_body
+			{
+				text-align:center;
+				margin-top:0em;	
+				padding-top:0em;
+				padding-top:0.5em;
+				padding-left:0.1em;
+				padding-bottom:0.25em
+			}	
+
+			.homepage_message
+			{
+				margin-top:1em;
+				font-family:helvetica;
+				padding:1em;
+				padding-left:0px;
+				font-size: smaller;
+				color: #777;
+			}
+
+
+			.smaller {font-size:smaller}
+			.gray {color: #777;}
+		</style>		
+		<title>tourfilter | concert search engine, concert community, concert alerts, concert calendars</title>
+		<meta name="keywords" content="search engine, concert search engine,music, live music, rock music, email, notification, concerts" />
+	</head>
+	<body>
+	<div id="homepage">
+		<h1>
+				tourfilter
+			<span class="smaller gray">
+				find concerts in 60 US cities
+			</span>
+		</h1>
+		<div class='homepage_body'>
+			<form method='get' action="/search">
+			<%=text_field_tag("query","","size" => 32,
+				:value=>@query||"enter band name",
+				:onfocus=>"if (this.value=='enter band name') this.value=''",
+				:onblur=>"if (this.value=='') this.value='enter band name'"
+				)%>
+			<input type='submit' name='search' value='search' tabindex=1>
+			<div class='homepage_message'>or, view calendar + set up alerts for your city => 
+			<%= select 'source', 'locale', [""]+Metro.all_active_for_select,{},{:onchange=>"location.href='/'+this.value"} %></div>
+			</form>
+		</div>
+	</div>
+<%if ENV['RAILS_ENV']!='development'%>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-529349-1");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+
+<!-- Start Quantcast tag -->
+<script type="text/javascript" src="http://edge.quantserve.com/quant.js"></script>
+<script type="text/javascript">_qacct="p-6dfYUhvdgBulU";quantserve();</script>
+<noscript>
+<a href="http://www.quantcast.com/p-6dfYUhvdgBulU" target="_blank"><img src="http://pixel.quantserve.com/pixel/p-6dfYUhvdgBulU.gif" style="display: none;" border="0" height="1" width="1" alt="Quantcast"/></a>
+</noscript>
+<!-- End Quantcast tag -->
+
+<%end%>
+</body>
+</html>

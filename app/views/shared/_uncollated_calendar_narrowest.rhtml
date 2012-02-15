@@ -1,0 +1,28 @@
+<script>
+jQuery(document).ready(function(){
+	jQuery(".pop").colorbox({
+		width:800,scrolling:false,opacity:0.5,transition:'none',speed	:0,
+		onComplete:function(){jQuery.fn.colorbox.resize()}});
+});
+</script>
+<%show_created_at=true if show_created_at.nil?%>
+<%order_by||="created_at desc"%>
+<%metro_cache(
+  :controller => "nightly", 
+  :action => "uncollated_calendar_narrowest_#{order_by}") do%>
+<%matches=Match.matches_within_n_days_for_user(180,0,nil,"#{order_by},page_id",num)%>
+  <%page||="new_calendar"%>
+  <%page_type||="new_calendar"%>
+  <%terms_shown=Hash.new%>
+	<div style='border-top:4px solid #eee'>
+  <%matches.each_with_index{|match,i|%>
+    <%break if i>num%>
+    <%next if terms_shown[match.term.text_with_the]%>
+    <%terms_shown[match.term.text_with_the]=true%>
+  	<div>
+  			<%=render(:partial=>'shared/calendar_match_no_feature_narrowest',
+  				:locals=>{:show_date_headers=>false,:show_created_at=>show_created_at,:day=>nil,:matches=>[match],:index=>i})%>
+    </div>
+  <%}%>
+  </div>
+<%end%>

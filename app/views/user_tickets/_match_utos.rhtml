@@ -1,0 +1,29 @@
+<%match = utos.first.match rescue nil%>
+<div class='user_ticket_offer underline'>
+                <div class='user_ticket_offer_match_description'>
+                        <%if match%>
+                                <a href='<%=url("/#{match.term.url_text}")%>'><%=match.term.text.downcase%></a>
+                                        <div class='smaller'><%=match.page.place.name.downcase%> on <%=match.very_short_time_description%></div>
+                        <%else%>
+                                        <%=match_description%>
+                        <%end%>
+                </div>
+<div>           
+                <%utos.each{|uto|%>
+                <div class='user_ticket_offer_body'>
+                                <div class='user_ticket_offer_metadata'>
+                                        <span class='gray'><%=distance_of_time_in_words uto.created_at,Time.now%> ago</span>
+                                        <%=render(:partial=>'user_ticket_offer_actions',:locals=>{:uto=>uto})%>
+                                </div>
+                         <%=uto.body%> --
+                        <%if uto.user.name=='anon'-%>
+                                anon
+                        <%else-%>
+                                <a href='<%=url("/users/#{uto.user.name.downcase}")%>'><%=uto.user.name.downcase%></a>
+                        <%end-%>
+                                <div style='clear:right'></div>
+                                </div>
+                                <%}%>
+                        </div>
+                                <div style='clear:both'></div>
+                </div>

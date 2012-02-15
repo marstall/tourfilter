@@ -1,0 +1,52 @@
+<%
+	recommenders=@youser.recommenders
+	recommender_ids=Hash.new
+	recommenders.each{|recommender|recommender_ids[recommender.id]=true}
+%>
+			<table width=100%>
+<%@recommended_days.each{|day|%>
+<tr><td class="gray" style="text-transform:lowercase" nowrap valign=top>
+		<%has_day=true%>
+<%if @short_dates%>
+		<%=Date::DAYNAMES[day.to_date.wday]%>, <%=Date::MONTHNAMES[day.month]%> <%=day.day%>
+<%else%>
+		<%=Date::DAYNAMES[day.to_date.wday][0..2]%>, 
+		<%=Date::MONTHNAMES[day.month][0..2]%> <%=day.day%>
+<%end%>		
+		</td>		
+	<%@recommended_matches[day].each{|match|%>
+		<%="<td></td>" if not has_day%>
+		<%has_day=false%>
+		<td valign=top>
+		<span class="term-text" >
+		<%=link_to match.term.text,"/"+match.term.url_text%></span>
+		<span class="tracked_by" style="font-size:1em;color: #bbb;text-transform:lowercase">at <%=link_to match.page.place.name, 
+			:controller=>"clubs",
+			:action=>match.page.place.url_name rescue ""%></span>
+			<%# tracked by chris,mary, joy, 1 other%>
+				<%
+					# show "(also tracked by user1, user2, x others)"
+				    term_users=match.term.recent_users if match.term
+					if term_users and not term_users.empty?
+				%>
+				<%recommender_string=""
+					num_recommenders=0
+				%>
+				<%
+					term_users.each {|user|-%>
+					<%next unless recommender_ids[user.id]
+						num_recommenders+=1
+					%> 			
+						<%recommender_string+=link_to(user.name, '/users/'+user.name)+" "-%>
+				    <%}-%>
+					<span class="tracked_by">by <%=recommender_string%>
+			</span><%end%>	
+			<div id="term_more_<%=match.term.id%>"></div>
+		</td>
+	</tr>
+	<%}%>
+<%if @break_between_days%>
+<tr><td height=4px></td></tr>
+<%end%>
+<%}%>
+</table>

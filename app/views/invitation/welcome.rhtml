@@ -1,0 +1,39 @@
+<%if @youser and @youser.registration_type=="basic"%>
+<div class="header2">Welcome to  Tourfilter</div>
+<span class="underline">You have created a basic tourfilter account. Thank you! You will receive an email the next time our search engine finds an upcoming <span class=""><%=Term.initial_capsify(@youser.terms_as_text_sentence)%></span> show in <%=@metro%>. You have been emailed a temporary password (change it <a href="/settings">here</a>). You can add more bands by visiting <a href="http://<%=@metro_code%>.tourfilter.com"><%=@metro_code%>.tourfilter.com</a> and logging in using your email address and password.</span>
+<br>
+<br>
+<%end%>
+<div id="main-full-width">
+<div class="error" id="result"></div>
+<%=form_remote_tag (:update =>"result",
+					:loading => "$(submit).value='Processing ...';$(submit).disabled=true",
+					:complete => "$(submit).value='Invite';$(submit).disabled=false",
+					:url =>{:action => 'handler'})
+					-%>
+<div class="header2">
+	Invite friends to join tourfilter
+</div>
+
+		Email Address(es) to invite<br>
+	<div class="subhead">
+		Enter one or more email addresses, separated by commas. 
+	</div>
+<%=text_area_tag ("email_addresses",params[:terms_as_text],:size => "96x4") -%>
+<br>
+	Message<br>
+	<div class="subhead">
+		Optionally, enter a message to your invitees.
+	</div>
+<%=text_area_tag ("message",params[:terms_as_text],:size => "96x4") -%>
+<div style="height:8px"></div>
+	<input id='submit' type='submit' name='invite' value='Invite'>
+</form>
+<%=form_remote_tag (:update =>"result",
+					:loading => "$(submit).value='Processing ...';$(submit).disabled=true",
+					:url =>{:action => 'handler'})
+					-%>
+<span class="smaller"><a href="/<%=@metro_code%>">No thanks.</a></span>
+</form>
+<div style="height:8px"></div>
+

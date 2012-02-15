@@ -1,0 +1,10 @@
+<%if @term_text%>
+
+<li><span id="<%=@term_text%>"><%=render(	:partial => 'shared/term',
+				:locals => { 
+				 :term_text => @term_text,
+				 :hit_page => @hit_page,
+				 :parent_user_id =>@youser_id
+							}
+				)-%></span></li>
+<%end%>

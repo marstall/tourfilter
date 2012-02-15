@@ -1,0 +1,32 @@
+<%show_date_header||=false%>
+<%days_to_show||=30%>
+<table width=100% cellpadding=0 cellspacing=0 style='margin-top:2px'>
+	<tr>
+		<td width=66% valign=top  style='padding-right:4px'>
+			<%=render(:partial=>'shared/calendar_header_custom',:locals=>{:label=>"editors' picks"})%>
+			<%=render(:partial=>"shared/featured_calendar",:locals=>{:num=>3})%>
+			<%=render(:partial=>'shared/calendar_header_custom',:locals=>{:label=>"venues"})%>
+			<%=render(:partial=>"shared/calendar_by_place",:locals=>{:show_date_headers=>show_date_header,:days_to_show=>@days_to_show,:offset=>@offset,:num_columns=>2})%>
+		</td>
+		<td width=33% valign=top style='border-left:4px solid #eef5f5;padding-left:4px;margin-left:4px'>
+			<%=render(:partial=>'shared/calendar_header_custom',:locals=>{:label=>'calendar'})%>
+			<%=render(:partial =>"shared/narrow_calendar",:locals=>{:show_date_headers=>true,:days_to_show=>@days_to_show,:offset=>@offset})%>
+		</td>
+	</tr>
+</table>
+<script>
+	function mouseover(day_id,div,match_id,calendar_view)
+	{
+		$(calendar_view+"_meta_line_1_"+match_id).style.visibility='visible'
+	}
+
+	function mouseout(day_id,div,match_id,term_text,calendar_view)
+	{
+		if (calendar_view==undefined)
+		{
+			calendar_view='false'
+		}
+		$(calendar_view+"_meta_line_1_"+match_id).style.visibility='hidden'
+	}
+</script>
+

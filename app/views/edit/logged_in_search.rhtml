@@ -1,0 +1,33 @@
+<li>
+	<span class="term-text">
+		<%return if not @term_text or @term_text.strip.empty?%>
+	<%= link_to @term_text,
+				 url("/#{h @term_text}")%>
+	</span>
+	<span class="smaller">
+	<%
+#		return if not @match
+#		begin
+if @match
+			%>
+			<br><a href="<%=@match.page.url%>"><%=@match.page.place.name%></a>
+			<%="(#{@match.very_short_time_description})" if not @match.very_short_time_description.empty?%>
+			<%
+		elsif @hit_page
+			@hit_page.determine_date_from_context(@term_text.strip)
+			date=""
+			if @hit_page.calculated_day
+				month = @hit_page.month
+				month = @hit_page.calculated_month if not month
+				day = @hit_page.day
+				day = @hit_page.calculated_day if not day
+				date="#{month}/#{day}"
+			end
+			%>
+			<br><a href="<%=@hit_page.url%>"><%=@hit_page.place.name%></a>
+			<%="(#{date})" if not date.empty?%>			
+			<%else%>
+			<br>(no upcoming shows)
+		<%end%>
+	</span>	
+</li>

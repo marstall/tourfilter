@@ -1,0 +1,37 @@
+<% 
+	match=@match if @match
+	background_color="green" if match.status==""
+	%>
+<div id="match_<%=match.id%>">
+<%	
+	other_statuses = %w{approved invalid} 
+	background_color="yellow"
+	if match.status=='new'
+		other_statuses = %w{approved invalid} 
+		background_color="yellow"
+	end
+	if match.status=='approved'
+		other_statuses = %w{invalid} 
+		background_color="green"
+	end
+	if match.status=='invalid'
+		other_statuses = %w{approved} 
+		background_color="red"
+	end
+%>
+<div style="color:black;font-size:smaller;background-color:<%=background_color%>">
+<%=match.status%>
+</div>
+<%other_statuses.each{|other_status|%>
+<div style="color:black;font-size:smaller;background-color:#aaa">
+<%=link_to_remote("#{other_status}", 
+					:update => "match_#{match.id}",
+                    :url =>{
+                        :controller => 'admin',
+                        :action => 'manage_match',
+                        :status => other_status,
+                        :id => match.id}) 
+                    %><br>
+</div>
+<%}%>
+</div>

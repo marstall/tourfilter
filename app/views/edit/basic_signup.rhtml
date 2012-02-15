@@ -1,0 +1,71 @@
+<div id='main-full-width' >
+<h2>
+	Sign up
+</h2>
+<div style='background-color:#fff'>
+<%if !@youser_logged_in-%>
+<div id="result" class="error"></div>
+<table>
+<tr><td>
+<%=form_remote_tag (:update =>"result",
+					:loading => "$(submit).value='Processing ...';$(submit).disabled=true",
+					:complete => "$(submit).value='Sign up';$(submit).disabled=false",
+					:url =>{:action => 'remote_post'})
+					-%>
+<%=render(:partial=>"shared/authenticate_client")%>
+<input type="hidden" name="youser[registration_code]" value="redirect_<%=params[:redirect_url]%>"/>
+<input type="hidden" name="youser[registration_type]" value="submission"/>
+<input type="hidden" name="redirect_url" value="<%=params[:redirect_url]%>"/>
+<table>
+<tr>    
+<td>username</td>
+<td>
+	<%=text_field(:youser,:name,"size" => 16)%>
+	
+</td>
+</tr>
+<tr>    
+<td>email address</td>
+<td>
+	<%=text_field(:youser,:email_address,"size" => 16)%>
+	
+</td>
+</tr>
+<tr>
+	<td>password</td>
+<td>
+	<%=password_field(:youser,:password,"size" => 16)%>
+</td>
+</tr>
+<tr><td colspan=2>
+		<div style="padding:2px"></div>
+		<div style="margin:0px;padding:2px;border:0	" class="term_more"><%=check_box(:youser,:wants_weekly_newsletter,{},"true","false")%>send me a weekly <%=@metro.downcase%> concert calendar</div>
+		<div style="padding:2px"></div>
+</td></tr>
+<tr><td></td><td>		
+      <%= submit_tag 'Sign up' -%>&nbsp;</td>
+</tr>
+</table>
+</td>
+<td valign=top style='padding:0.5em;'>
+<span style='padding:0.5em;background-color:#eee' >
+	Already have a Tourfilter <%=@metro%> account? <span class='underline'><a href="<%=url login_url(params[:redirect_url])%>">log in</a></span>!
+</span>
+<br>
+<br>
+<span style='padding:0.5em;background-color:#eee' >
+	We will never send you spam!
+</span>
+</td></tr>		
+	</form>
+</table>
+<%else-%>
+<%end%>
+<br>
+
+</div>
+</div>
+  
+ <script>
+ $('youser_name').focus();
+</script>

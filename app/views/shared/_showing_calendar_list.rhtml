@@ -1,0 +1,106 @@
+	<%showing=showing_calendar_list%>
+	<%movie=showing.movie%>
+	<%place=showing.place%>
+<%style="padding-top:1em" if movie.synopsis%>
+<div class="<%=row_class%>" style="<%=style%>">
+<div class='showing_list' style="margin-left:0px">
+	<div class="listing-small">
+	<div>
+		<div style="float:left">
+			<span class='title-small'>
+				<%if showing.url%>
+				<a href="<%=showing.url%>"><%=movie.title%>
+				<%else%>
+				<a href="<%=showing.place.url%>"><%=movie.title%>
+				<%end%>
+				</a>
+			</span>
+			<span class='place-small'>
+				<a href="<%=place.url%>"><%=place.name%></a>
+			</span> 
+		</div>
+				<span class='time-small' style="margin-left;0.5em">
+					<%=showing.time_string.gsub("at","").strip.downcase%>
+				</span>
+		
+ 	    <%if not (movie.synopsis or movie.basic_facts)%>
+		<%if (movie.youtube_id.nil? or movie.youtube_id=="-1")%>
+			<span class="fix-video" style="padding:0.5em;background-color:#EDF5F5">
+				<a href="/movie/edit/<%=movie.id%>">find/upload a trailer</a>
+				<%if movie.youtube_id=="-1" %>
+					(note: someone already looked on youtube and couldn't find one)
+				<%end%>
+			</span>
+		<%else%>
+		<%=render(:partial=>"shared/movie_youtube_icon_small",
+			:locals=>
+			{
+				:movie=>movie,
+				:showing=>showing
+			}
+		)%>
+		<%end%>		
+		<%end%>
+		
+				
+		<div style="clear:right"></div>
+	</div>
+	</div>	
+	<div style="clear:right"></div>
+<%if movie.synopsis%>
+	<div style="float:right;padding-left:0.5em;padding-bottom:0.5em;padding-top:0.25em;vertical-align:top">
+<%if movie.youtube_id and movie.youtube_id!="-1"%>
+		<%=render(:partial=>"shared/movie_youtube_icon",
+			:locals=>
+			{
+				:movie=>movie,
+				:showing=>showing
+			}
+		)%>
+<%end%>
+	</div>
+	<div class='synopsis-small'>
+	<%if movie.image%>
+	<div style="float:left;padding:0.5em;padding-left:0em;">
+	<img height= 125px src="<%=movie.image.url%>"/>
+	</div>
+	<%end%>
+		<%if movie.basic_facts-%>
+			<%=clean movie.basic_facts%>
+		<%end-%>
+		<%=clean movie.synopsis.strip[0..1024] if movie.synopsis%>
+		<!--
+		<span class='synopsis-notes'>
+			<a href="">imdb</a></a>
+			<a href="">mrqe</a></a>
+		</span>-->
+		<%last_date,num_shows=movie.last_date(place)%>
+		<span class="synopsis-notes-2">
+			<%if last_date and last_date.month!=showing.date.month and last_date.day!=showing.date.day%>
+				<%if last_date-DateTime.now<5%>
+					showing through <%=Date::DAYNAMES[last_date.wday].downcase%>
+				<%else%>
+					showing through <%=Date::MONTHNAMES[last_date.month][0..2].downcase%> <%=last_date.day%>
+				<%end%>
+			<%else%>
+				<%if num_shows>1%>
+				final showing
+				<%else%>
+				one day only
+				<%end%>
+			<%end%>
+		</span>
+
+<%if (movie.youtube_id.nil? or movie.youtube_id=="-1") and (movie.synopsis or movie.basic_facts)%>
+	<span class="fix-video" style="padding:0.5em;background-color:#EDF5F5">
+		<a href="/movie/edit/<%=movie.id%>">find/upload a trailer</a>
+		<%if movie.youtube_id=="-1" %>
+			(note: someone already looked on youtube and couldn't find one)
+		<%end%>
+	</span>
+<%end%>		
+	</div>
+<%end%>
+</div>
+<div style="clear:both"></div>
+</div>

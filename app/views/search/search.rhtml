@@ -1,0 +1,58 @@
+<%if @query%>
+<div id="main-full-width" style=''>
+  <h2>
+  		Search for concerts: <%=@query%>
+  		<%@page_title= "search for concerts + tickets in 55 U.S. cities"%>
+  </h2>
+<div>
+<%else%>
+<meta name="keywords" content="concerts, concert search engine" />
+<div id="main-full-width" style=''>
+<h2>
+		Search for concerts 
+		<%@page_title= "search for concerts + tickets in 55 U.S. cities"%>
+</h2>
+<div>
+<%end%>
+<%if @query and false%>
+<form method='get' action="/search">
+<div style='float:right;margin-top:0.5em;'>
+	<span style ="padding:0.2em;padding-left:0.1em" class='search_highlight'>
+free <%=@query%> concert email alerts! choose metro =></span>
+ <%= select 'object', 'metro_code', [""]+Metro.allNames%>
+<input type='hidden' name='query' value='<%=@query%>'>	
+<input type='submit' name='signup' value='next >>' tabindex=2>
+</div>
+</form>
+<%end%>
+<form method='get' action="/search">
+<div style="float:left;padding-top:0.5em;padding-left:0.1em;padding-bottom:0.25em">
+<%=text_field_tag("query","","size" => 32,
+	:value=>@query||"enter band, venue or city",
+	:onfocus=>"if (this.value=='enter band, venue or city') this.value=''",
+	:onblur=>"if (this.value=='') this.value='enter band name'"
+	)%>
+<input type='submit' name='search' value='search' tabindex=1>
+</form>
+	
+</div>
+<div style='clear:both'></div>
+</div>
+<%#= observe_field("query",
+                  :frequency => 0.1,
+                  :update => :results,
+                  :url => {:controller => "search",
+						   :action => "search_results"}
+                  )%>
+<div style="padding:2px"></div>
+<div id="results"> 
+<%if @query and not @query.empty?%>
+<%=render(:partial =>"search_results",
+		:locals=>{:@shared_events=>@shared_events,
+		:@term=>@query,
+		:@controller=>controller
+		})%>
+<%end%>
+</div>
+</div>
+</div>

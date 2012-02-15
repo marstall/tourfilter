@@ -1,0 +1,85 @@
+<%@full_width_footer=true%>
+<div id="main-full-width">
+<h1 style='margin-top:4px;font-size:1.3em'>tourfilter feeds</h1>
+<div class='text_body'>
+<p>
+Tourfilter searches thousands of small and large venues for concerts and makes 100% of its listing data available freely via RSS, ICal, JSON and formattable javascript/document.write(). No API key, registration, etc. are required. Lightning-fast, pre-cached feeds are provided for dozens of US+UK cities, thousands of venues and tens of thousands of artists.
+</p>
+</div>
+<h1>Feed URL + request format</h1>
+<div class='text_body underline'>
+All feed requests use the following URL pattern (see the following sections for examples of use):<br><br>
+	<span class='underline' style='font-family:monospace;padding:1em;margin:1em;background-color:#ffc'>
+		http://www.tourfilter.com/search/(json|rss|ical|badge)/(band|metro|venue):&lt;query&gt;
+	</span>
+	<br><br>
+</div>
+<h1>searching for an artist's shows</h1>
+<div class='text_body underline'>
+<p>
+	To get a list of a particular artist's upcoming shows across all metros, use the <span style='color:green;background-color:#ffc;margin:2px;font-family:monospace;font-size:16px'>band:</span> query prefix. For example, to find out when the Magnetic Fields are playing:
+	<table style='vertical-align:top;padding:1em;border:1px solid #fff;font-family:monospace' cellpadding=2>
+<tr>
+	<td style='border-bottom:0px solid #ccc;background-color:#eee;padding:0.25em'>
+	format
+	</td>
+	<td style='border-bottom:0px solid #ccc;background-color:#eee;padding:0.25em'>
+		feed url
+	</td>
+	</tr>
+	<tr><td style='padding:0.25em'><span style='color:green'>json</span></td><td><a href='http://www.tourfilter.com/search/json/band:magnetic+fields'>http://www.tourfilter.com/search/json/band:magnetic+fields</a></td></tr>
+	<tr><td><span style='color:green'>rss</span></td><td><a href='http://www.tourfilter.com/search/rss/band:magnetic+fields'>http://www.tourfilter.com/search/rss/band:magnetic+fields</a></td></tr>
+	<tr><td><span style='color:green'>ical</span></td><td><a href='http://www.tourfilter.com/search/ical/band:magnetic+fields'>http://www.tourfilter.com/search/ical/band:magnetic+fields</a></td></tr>
+	<tr><td> <span style='color:green'>javascript</span></td><td> <a href='http://www.tourfilter.com/search/badge/band:magnetic+fields'>http://www.tourfilter.com/search/badge/band:magnetic+fields</a></td></tr>
+</table>
+</div>
+<h1>getting all the shows from a particular venue</h1>
+<div class='text_body underline'>
+<p>
+	Prefix your query with <span style='color:green;background-color:#ffc;margin:2px;font-family:monospace;font-size:16px'>venue:</span> to restrict your search to a particular venue. For example, to get all the upcoming shows at the middle east in cambridge, ma, use the following urls:
+	<table style='vertical-align:top;padding:1em;border:1px solid #fff;font-family:monospace' cellpadding=2>
+<tr>
+	<td style='border-bottom:0px solid #ccc;background-color:#eee;padding:0.25em'>
+	format
+	</td>
+	<td style='border-bottom:0px solid #ccc;background-color:#eee;padding:0.25em'>
+		feed url
+	</td>
+	</tr>
+	<tr><td style='padding:0.25em'><span style='color:green'>json</span></td><td><a href='http://www.tourfilter.com/search/json/venue:middle+east'>http://www.tourfilter.com/search/json/venue:middle+east</a></td></tr>
+	<tr><td><span style='color:green'>rss</span></td><td><a href='http://www.tourfilter.com/search/rss/venue:middle+east'>http://www.tourfilter.com/search/rss/venue:middle+east</a></td></tr>
+	<tr><td><span style='color:green'>ical</span></td><td><a href='http://www.tourfilter.com/search/ical/venue:middle+east'>http://www.tourfilter.com/search/ical/venue:middle+east</a></td></tr>
+	<tr><td> <span style='color:green'>javascript</span></td><td> <a href='http://www.tourfilter.com/search/badge/venue:middle+east'>http://www.tourfilter.com/search/badge/venue:middle+east</a></td></tr>
+</table>
+
+</div>
+
+<h1>getting all the shows from a particular metro</h1>
+<div class='text_body underline'>
+<p>
+	Prefix your query with <span style='color:green;background-color:#ffc;margin:2px;font-family:monospace;font-size:16px'>metro:</span> to restrict your search to a particular metro area. For example, to get all the upcoming shows in the boston area, use the following urls:
+	<table style='vertical-align:top;padding:1em;border:1px solid #fff;font-family:monospace' cellpadding=2>
+<tr>
+	<td style='border-bottom:0px solid #ccc;background-color:#eee;padding:0.25em'>
+	format
+	</td>
+	<td style='border-bottom:0px solid #ccc;background-color:#eee;padding:0.25em'>
+		feed url
+	</td>
+	</tr>
+	<tr><td style='padding:0.25em'><span style='color:green'>json</span></td><td><a href='http://www.tourfilter.com/search/json/metro:boston'>http://www.tourfilter.com/search/json/metro:boston</a></td></tr>
+	<tr><td><span style='color:green'>rss</span></td><td><a href='http://www.tourfilter.com/search/rss/metro:boston'>http://www.tourfilter.com/search/rss/metro:boston</a></td></tr>
+	<tr><td><span style='color:green'>ical</span></td><td><a href='http://www.tourfilter.com/search/ical/metro:boston'>http://www.tourfilter.com/search/ical/metro:boston</a></td></tr>
+	<tr><td> <span style='color:green'>javascript</span></td><td> <a href='http://www.tourfilter.com/search/badge/metro:boston'>http://www.tourfilter.com/search/badge/metro:boston</a></td></tr>
+</table>
+
+</div>
+<h1>et cetera</h1>
+<div class='text_body underline'>
+	All matching listings are returned with each response, so there is no need to page your requests. In return for the free use of tourfilter's listings,
+	we ask only that you <span style='color:green;font-weight:bold;background-color:#ffc'>link to the specific tourfilter.com url provided with
+	every data item in our feeds. </span> please make the link be adjacent to your data, and make it as prominent or nearly as prominent as your own data. Thank you!
+<p>
+	
+</p>
+</div>

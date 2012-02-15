@@ -1,0 +1,9 @@
+<%uto=user_ticket_offer%>
+<div class='band_page_user_ticket_offer'>
+				<div class='user_ticket_offer_metadata'>
+					<span class='gray'><%=distance_of_time_in_words uto.created_at,Time.now%> ago</span>
+					<%=render(:partial=>'user_tickets/user_ticket_offer_actions',:locals=>{:uto=>uto})%>
+				</div>
+			 <%=uto.body%> -- <a href='<%=url("/users/#{uto.user.name.downcase}")%>'><%=uto.user.name.downcase%></a>
+			<span class='gray smaller'><%=uto.match_description%></span>
+</div>

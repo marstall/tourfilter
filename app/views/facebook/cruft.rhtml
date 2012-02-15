@@ -1,0 +1,712 @@
+<form id="profile_form">
+	<a 
+		clickrewriteurl="http://<%=domain%>/facebook/refresh"
+		clickrewriteid="profile_all"
+        clickrewriteform="profile_form"
+        href=""		
+>
+		refresh
+	</a>
+</form>
+
+<%domain = "www.tourfilter.local:3000"%>
+<%if ENV['RAILS_ENV']=='development'%>
+<form method="post" action="/facebook">
+<%select_array=Metro.all_active_for_select(false,true)%>
+<%else%>
+<form id="import_form">
+<%end%>
+<%if @tourfilter_username%>
+<div style="background-color:#DDF5F5;padding:0.5em;margin-top:0.5em">
+tourfilter username <input type="text" value="<%=@tourfilter_username||''%>"/>
+<input 
+	clickrewriteurl="http://facebook.tourfilter.com/facebook/"
+	clickrewriteid="body"
+	clickrewriteform="import_form"
+	type="submit" value="import bands">
+</form>
+<%else%>
+
+				<td nowrap valign="bottom" id="<%=i%>" class="track_name_<%=i%2+1%>">
+			<%=render(:partial => "correct_date", :locals =>
+			                {
+			                 :match => match
+			                }
+			                )-%>
+			<%=render(:partial => "manage_match", :locals =>
+			                {
+			                 :match => match
+			                }
+			                )-%>
+			</td>
+
+<div style="font-size:10px;font-family:verdana;color:#ccc;text-align:right">
+cq <%=queries.count_with_label :controller%> | 
+vq <%=queries.count_with_label :view%> |
+tt <%=queries.total_time.to_s[0..6]%>
+</div>
+
+<script>
+function toggle_more_info(match_id)
+{
+	less_text='&laquo; less info';
+	more_text='more info &raquo;';
+	link_text=$('link_'+match_id).innerHTML;
+	if (link_text==less_text)
+	{
+		new_text=more_text;
+		$('more_info_'+match_id).innerHTML='';
+	}
+	else 
+	{
+		new_text=less_text
+	}
+	$('link_'+match_id).children[0].innerHTML=new_text
+}
+</script>
+
+
+<%controller.connect_to_the_correct_database%>
+<%place_url_name="" if not place_url_name %>
+<select id="place" onSelect="handle_club_click('<%=@metro_code%>')">
+	<option value="" <%="selected" if place_url_name=="all"%>>all venues</option>
+	<%#=place_url_name%>
+	<%Place.find_all_active(@metro_code).each{|place|%>
+		<option value="<%=place.url_name%>" <%="selected" if place_url_name==place.url_name%>><%=place.name.downcase%><%="  (#{place.num_shows})" if place.num_shows and Integer(place.num_shows)>0%></option>
+	<%}%>
+</select>
+<span style='text-transform:lowercase'>
+<%= select 'source', 'locale', ["all cities"]+Metro.allNames%></p>
+</span>
+
+
+<%if false%>
+	<div style="padding:1em">No upcoming shows with known dates. <a href="#" onClick="Element.show('long_scarcity');return false;">help &raquo;</a>
+	<div id="long_scarcity" style="display:none;background-color:#FFC;padding:2em;line-height:1.5em">When we searched  the <%=@num_places%> <%=@metro%> club websites last night, we couldn't find any shows for your calendar.<br><br>
+		If you <strong>just created your account</strong>, some shows may take overnight to show up here.<br><br>
+		
+		Also, there might be some shows we couldn't determine the date for - they would be listed next to the band name in the 'your bands' section below.<br><br>			
+		You can add more bands to your list one of two ways:
+		<ul>
+			<li>the easy way: <strong>manually</strong> by typing them in <a href='<%=url("/edit/edit")%>'>here</a> (we'll give you recommendations as you do). 
+			<li>the really easy way: <strong>stealing</strong> bands from other users' lists. Browse from list to list by clicking on member names. When you see a band you want to track, click on 'track this' and it will be added to your list. The <a href='<%=url("/clubs")%>'>club listing page</a> is a good starting place to find users.</ul><br><br>
+				<div align=center><a href="#" onClick="Element.hide('long_scarcity');return false;">&laquo;ok&raquo;</a></div>
+				
+				</div>
+	</div>
+<%end%>
+
+<div style="height:3px"></div>
+<%terms_alpha=[]#@youser.terms_alpha%>
+<!--
+<div class="header1" style="height:1em;padding:0.25em">
+	<div style="float:left">
+			your band<%="s" if terms_alpha.size!=1%>
+	</div>
+	<div id="manage_recommendations" align=right style="float:right">	
+	</div>
+	<div style="clear:both"></div>
+</div>
+<script>
+new Ajax.Updater(
+         'manage_recommendations',
+ 		 '<%=url("/user/manage_recommendations/#{@youser.id}")%>'
+         );
+</script>
+-->
+<div style="padding-left:0.25em">
+<%terms_alpha.each { |term|%>
+<%=render(	:partial => 'shared/term',
+				:locals => { :term => term,
+							 :parent_user_id => @youser.id,
+							}
+				)-%>	<br>
+<%}-%>
+<%if false and terms_alpha.size==0%>
+		<div style="padding:1em">
+		<div id="long_scarcity2" style="background-color:#FFC;padding:1em;line-height:1.5em">
+			You haven't added any bands.
+			You can add more bands to your list one of two ways:<br>
+			<ul>
+				<li>the easy way: <strong>manually</strong> by typing them in <a href='<%=url("/edit/edit")%>'>here</a> (we'll give you recommendations as you do). 
+				<li>the really easy way: <strong>stealing</strong> bands from other users' lists. Browse from list to list by clicking on member names. When you see a band you want to track, click on 'track this' and it will be added to your list. The <a href='<%=url("/clubs")%>'>club listing page</a> is a good starting place to find users.</ul>
+</div>
+		</div>
+<%end%>
+
+</div>
+
+<span id="login_header">
+<%if !@youser_logged_in-%>
+<span id ="login_form" style="display:none">
+<input type='hidden' name='redirect_url' value='<%=request.path%>'>
+<%= form_tag :action=>'login'-%>
+<span class='super_menu_item'>username/email
+    <%=text_field_tag(:name,"","size" => 16,
+		:value=>"",
+		:class=>"signup"
+		)%>
+</span>
+<span class='super_menu_item'>password
+    <%=password_field_tag(:password,"","size" => 16,
+		:id=>"password",
+		:class=>"signup"
+		)%>
+      <%= submit_tag 'Login' -%>&nbsp;
+</span>
+	</form>
+</span>
+<span id='login_link' >
+<span class='super_menu_item '>
+	<a href="<%=url('/signup')%>">sign up</a>
+</span>
+<span class='super_menu_item'>
+<a onClick="$('login_link').style.display='none';$('login_form').style.display='inline';$('name').focus();return false;" href="ajax">log in</a>
+</span>
+</span>
+<%else-%>
+<span class='super_menu_item'>
+<%if @youser.name=='anon'%>
+you are <a href='<%=url("/")%>'><%=@youser.name.downcase%></a>
+<%else%>
+you are <a href='<%=url("/users/#{@youser.name.downcase}")%>'><%=@youser.name.downcase%></a>
+<%end%>
+<%="(admin)" if is_admin?%>
+</span>
+<span class='super_menu_item'>
+<%= link_to 'logout', :action => :logout%>
+</span>
+<%end%>
+
+<div class='feature_calendar_item_image' style='float:left;margin-right:1em;margin-bottom:1em'>
+	<img src='<%=feature.image.medium_url%>' style='width:160px;padding:0px'>
+	<div class='gray' style='width:160px;font-size:12px;line-height:16px'>
+  	<span style='font-style:none;text-transform:uppercase'><%=@term.text%></a></span>
+  	<span style='font-style:italic;'>&#8220;<%=feature.description%>&#8221;</span>
+  	&#8212;<a href='<%=url("/users/#{feature.user.name}")%>'><%=feature.user.name%></a>, 
+  	editors' pick, <%=feature.updated_at.month%>/<%=feature.created_at.day%>/<%=feature.created_at.year%>
+	</div>
+</div>
+
+  <h2>
+  			my bands
+  </h2>
+  <div style="padding-left:0.25em,text-transform:lowercase" >
+  <table>
+    <tr>
+      <td>
+        band name
+      </td>
+      <td>
+        similar to
+      </td>
+      <td>
+        tracked by
+      </td>
+     </tr>
+  <%
+  @youser.terms.each { |term|%>
+  <tr>
+    <td valign=top>
+      <span class='red_term_text'><a href='<%=url("/#{term.url_text}")%>'><%=term.text%></a></span>
+  </td>
+  <td valign=top>
+    <span class='smaller gray'>
+      <%term.related_terms(5).each_with_index{|related_term,i|%><a 
+        href='<%=url("/#{term.url_text}")%>'><%=related_term.related_term.text.downcase%></a><br><%}%>
+    </span>
+</td>
+  	<td valign=top>
+        <span class='smaller gray'>
+          <%term.recent_normal_users(5).each_with_index{|user,i|%><a 
+            href='<%=url("/users/#{user.name}")%>'><%=user.name%></a><br<%}%>
+      </span>
+  	</td>
+  </tr>
+  <%}-%>
+</table>
+  </div>
+
+
+  h1_original {
+    font-size: 1.5em;
+    font-weight: bold;
+    font-family: helvetica;
+    background-color: white;
+    color: black;
+    background-color: #eef5f5;
+    padding: 0.25em;
+    margin-left: 0em;
+    border-top: 1px;
+    border-bottom: 1px;
+    margin-bottom: 4px;
+    margin-top: 0px; }
+
+  h1x {
+    font-family: Helvetica, Verdana, Garamond, Times, Sans-Serif;
+    font-size: 1em;
+    font-weight: normal;
+    margin-top: 0px;
+    background-color: #dDF5F5;
+    padding: 0.25em;
+    padding-right: 0.35em;
+    padding-top: 0.5em;
+    padding-bottom: 0.6em;
+    height: 1em;
+    margin-left: 0em;
+    border-top: 1px;
+    border-bottom: 1px;
+    margin-bottom: 1px; }
+
+  h1 {
+  	font-size:2em;
+  	font-family:helvetica;
+  	font-weight:normal;
+  	margin-bottom:8px;
+  	padding:4px;
+  	border-bottom:1px solid #eee;
+  	color:black;
+  }
+
+  <div id='d' style='background-color:#caf;'
+    onmouseover='document.getElementById("d").style.backgroundColor="white"'
+    onmouseout='document.getElementById("d").style.backgroundColor="#caf"'
+  >
+  <div style='float:left'>div</div>
+  <div>foo</div>
+  </div>
+  <div style='clear:left'></div>
+  <hr>
+
+
+  <div id='d' style='background-color:#fac;overflow:auto'
+    onmouseover='document.getElementById("d").style.backgroundColor="white"'
+    onmouseout='document.getElementById("d").style.backgroundColor="#fac"'
+  >
+      		<div class='calendar_match_row' style="">
+      			  <div style='float:left'>
+      <div class='tracker_icon'>
+        <div class='num_trackers ' >
+        <a title='470 are tracking dropkick murphys' href='/boston/trackers/dropkick-murphys'>470</a>
+        </div>
+        <div class='track_link underline' >
+          <a href='/boston/trackers/dropkick-murphys'>tracking</a>
+          </div>
+      </div>
+
+              </div>
+
+      			<div class='calendar_match_column_1 calendar_match_no_feature_term_text' style='float:left'>
+      				<div id='match_113132'>
+      						<a href="/boston/dropkick-murphys">the dropkick murphys</a> 
+
+
+
+
+
+
+      <span id='meta_line_1_113132' class='websites' style=''>
+
+
+      	<span id='show_more_113132' class='blog_entry_footer_link' >
+      		<a class='pop' href='/boston/edit/term_more_info_popup/113132'>quick&nbsp;info</a>
+      	</span>
+
+        	<span id='show_more_113132' >
+
+
+      <span class=' calendar_listen'>
+      	<a onClick="window.open('/boston/lala_popup/dropkick-murphys','flash','width=420,height=220');return false;" href='/boston/lala_popup/dropkick-murphys'><span class='listen_icon'><img style='height:16px;'src='/images/play.png'/></span>listen</a>
+      </span>
+        	</span>
+      </span>
+      					</div>
+      			</div> <!-- column 1 -->
+      			<div style='margin-left:310px;margin-top:0px'>
+      				<div style='float:right'>
+      <span class='underline ' id='buy_tickets_113132'>
+      	<span style='vertical-align:-10%'>
+      	<a rel='nofollow' onclick='pageTracker._trackEvent('ticket--click', '', 'Dropkick Murphys', 0);' id='1d66070b4b6dc748170b03805aa1c26c' border=0 alt="find tickets at houseofblues.com" title="find tickets at houseofblues.com" href='#'><img src='/images/ticket.png'/></a>
+        		        <script>
+                  document.getElementById("1d66070b4b6dc748170b03805aa1c26c").href="/r/?ec[url]=http://www.houseofblues.com/tickets/searchresults.php%3Fvenue=Boston&ec[term_text]=Dropkick%20Murphys&ec[page_section]=&";
+              </script></span>
+
+
+      </span>
+
+      				</div>
+      					<div class="calendar_match_no_feature_term_text" style='min-width:200px'>
+      					<a href="/boston/clubs/house_of_blues">House Of Blues</a>
+      					</div>
+
+            				<div class='narrow_calendar_date' style='float:left;margin-top:7px'>
+            					3/12
+            				</div>
+
+      			</div> <!--column 2-->
+      		<div style='clear:both'></div>
+      		</div> <!-- calendar_match_row -->
+      </div>
+
+      <div class='calendar_options'><span class='calendar_option_pressed' >calendar</span></div>
+      <br>
+      <br>
+      <br>
+      <br>
+
+
+        <h2>
+        			my bands
+        </h2>
+        <div style="padding-left:0.25em,text-transform:lowercase" >
+        <table width=100% cellpadding=4 cellspacing=0>
+          <tr style='padding:4px;background-color:#ddf5f5'>
+            <td>
+              band name
+            </td>
+            <td>
+              similar
+            </td>
+            <td>
+              trackers  
+            </td>
+           </tr>
+
+      <%metro_cache(:controller => "nightly", :action => "band_list_#{@youser.name}") do%>
+        <%
+        @youser.terms.each_with_index { |term,i|%>
+          <%
+            if i%2==0
+              color="#fff"
+            else
+              color="#eef5f5"
+            end
+          %>
+
+        <tr style='padding:4px;background-color:<%=color%>'>
+          <td style='padding:4px;' valign=top>
+            <span class='red_term_text'><a href='<%=url("/#{term.url_text}")%>'><%=term.text.downcase%></a></span>
+        </td>
+        <td valign=top>
+          <span class='smaller gray'>
+            <%related_terms=term.related_terms(5)%>
+            <%related_terms.each_with_index{|related_term,i|%><a 
+              href='<%=url("/#{term.url_text}")%>'><%=related_term.related_term.text.downcase rescue ''%></a><br><%} if related_terms%>
+          </span>
+      </td>
+        	<td valign=top>
+              <span class='smaller gray'>
+                <%term.recent_normal_users(5).each_with_index{|user,i|%><a 
+                  href='<%=url("/users/#{user.name}")%>'><%=user.name%></a><br><%}%>
+            </span>
+        	</td>
+        </tr>
+        <%}-%>
+      </table>
+        </div>
+        <%end%>
+        
+        
+        <div class='signup_footer'>
+          <div class='signup_blurb'>
+            <div class='blurb_logo'><a href='http://books.google.com/books?id=WCkEAAAAMBAJ&lpg=PA12&ots=O7Wwo2bDhu&dq=%22no%20more%20no-shows%22%20tourfilter&pg=PA12#v=onepage&q&f=false'><img style='width:140px' class='blurb_img' src='/images/billboard.jpg'></a></div>
+            <div class='blurb_text' >
+              <span class='blurb_quote_mark'>&ldquo;</span>Valuable service for concertgoers ... no way would I know about all these shows. Until now.<span class='blurb_quote_mark'>&rdquo;</span>
+            </div>
+          </div>
+          <div class='signup_blurb'>
+            <div class='blurb_logo'><img style='width:180px' class='blurb_img' src='/images/rollingstone.gif'></div>
+            <div class='blurb_text'>
+              <span class='blurb_quote_mark'>&ldquo;</span>Lean, mean, pretty cool ... could become the Craigslist of the concert-info-world<span class='blurb_quote_mark'>&rdquo;</span>
+            </div>
+          </div>
+          <div class='signup_blurb'>
+            <div class='blurb_logo'><a href='http://www.boston.com/ae/music/articles/2007/01/26/show_me/'><img style='width:220px' class='blurb_img' src='/images/bostonglobe.gif'></a></div>
+            <div class='blurb_text' >
+              <span class='blurb_quote_mark'>&ldquo;</span>Casts its net far ... spare, uncluttered interface<span class='blurb_quote_mark'>&rdquo;</span>
+            </div>
+          </div>
+          <div style='clear:left'></div>
+          </div>
+        
+        
+          <%if @related_terms and not @related_terms.empty?%>
+          <table cellpadding=0 cellspacing=0>
+            <tr>
+              <tbody class='suggested_terms_header'>
+              <td>suggested
+                <span class='underline'>
+                <%if true #@youser%>
+                <%= link_to_remote("refresh",
+                            :update=>'related_terms',
+                              :url =>{
+                                  :controller => 'edit',
+                                  :action => 'related_terms',
+                                  :num=>params[:num]},
+                                  :random=>true,
+                                :html=>{:id=>'refresh_link'})
+                              %>
+                <%end%>
+                </span>
+                </td>
+              <%if not @related_terms.last.default?%>
+              <td class='related_why'>
+                why
+              </td>
+              <%end%>
+            <tbody>
+            </tr>
+
+          <%@related_terms.each{|related_term|%>
+          <tr cellpadding=1 >
+            <tbody class="suggested_terms">
+            <%id=related_term.id||"0"%>
+          <td id='<%=id%>'><a class='shiny_button small_shiny_button' href="#" 
+            onclick="return add('<%=related_term.related_term_text%>',<%=id%>)">add</a>&nbsp;<%=related_term.related_term_text%> </td>
+          <%if not @related_terms.last.default?%>
+          <td valign=bottom class='related_why'>
+          <%if not related_term.default?%>
+          <%=related_term.term_text%>
+          <%else%>
+          <span style='color:#ccc'>popular </span>
+          <%end%>
+          </td>
+          <%end%>
+            </tbody>
+          </tr>
+          <%}%>
+          </table>
+          <%end%>
+          <%if true%>
+          <div style='text-align:right;padding:4px;padding-right:6px;font-size:12px' class='underline'>
+          <%if @youser%>
+          <%if params[:num]%>
+          <%= link_to_remote("more",
+                      :update=>'related_terms',
+                        :url =>{
+                            :controller => 'edit',
+                            :action => 'related_terms',
+                            :num => params[:num]||25,
+                            :random=>'true'},
+                          :html=>{:id=>'more_link'})
+                        %>
+          <%else%>
+          <%= link_to_remote("more",
+                      :id=>'more_link',
+                      :update=>'related_terms',
+                        :url =>{
+                            :controller => 'edit',
+                            :action => 'related_terms',
+                            :num => params[:num]||25,
+                            },
+                            :html=>{:id=>'more_link'})
+                        %>
+          <%end%>
+          <%end%>
+          </div>
+          <%end%>
+          <script>
+          //	new Effect.Appear('related_terms',{to:0.5})
+
+          jQuery("#related_terms").fadeIn();
+          </script>
+
+
+          <%
+          # now load the javascript that will invoke the page that 'dynamifies' the page based on who's seeing it
+          %>
+          <script>
+          function update_shared_terms()
+          {
+          	// check to see if we are logged in. If not, skip the ajax and just show ALL the track this links ...
+          	if (get_cookie("user_id")=='')
+          	{
+          		on_shared_terms_complete(null);
+          		return;
+          	}
+
+          	var url = "<%=url_for :controller => 'data', :action => 'shared_terms', :user_id => @user.id %>"
+          	var ajax = new Ajax.Request(
+          	        url, 
+          	        {
+          	                onComplete: on_shared_terms_complete
+          	        });
+          }
+
+          function on_shared_terms_complete(originalRequest)
+          {
+          	var ids = [-1];
+          	if (originalRequest!=null)
+          	{
+          		var ids = originalRequest.responseText.split(/,/) // tokenize the returned ids on comma
+          	}
+          	// go through all spans in the document and find the track_this_n spans
+          	// for each _n that is _not_ in the ids returned by the shared_terms method.
+          	// for each non-match, change visibility to visible and fade the element up.
+          	var spans = $A(document.getElementsByTagName("span")) // get all spans in the document
+          	var i=0;
+          	spans.each(function(span) {
+          		// see if their id is 'track_this_' followed by something
+          		if (span.id.substring(0,11)=="track_this_")
+          		{
+          			// see if this span is for a term shared by the youser.
+          			matched = ids.find(function(id) {
+          				return (("track_this_"+id)==span.id);
+          			});
+          			// if not shared, change CSS properties.
+          			if (matched==null)
+          			{
+          				try
+          				{
+          					span.getElementsByTagName("a")[0].innerHTML="track this" // add text
+          				}
+          				catch (e)
+          				{
+
+          				}
+          			}
+          		}
+          	})
+          }
+
+          update_shared_terms();
+          </script>
+          
+          
+          <!--div class='band_page_more_info ' >
+          <%#=render(:partial=>'shared/more_less_info_link',:locals=>{:show_initially=>true,:cl=>'',:match=>@term.matches.first})%>
+          </div-->
+
+            <%#played_with_terms=@term.played_with(10)%>
+            <%if false and played_with_terms and not played_with_terms.empty?%>
+            <h2>played with</h2>
+            <div class='secondary_column_body'>
+              <%played_with_terms.first(10).each_with_index{|played_with_term,i|-%>
+              <div class='secondary_row_<%=i%2%>'>
+                <%=render(:partial=>'shared/term',:locals=>{:term_text=>played_with_term.text})%>
+              </div>
+              <%} %>
+            </div>
+            <%end%>
+            <%if false%>
+            <div class='blue_secondary_column_brick'>
+            <h2>video <a target='new' href='http://www.youtube.com/results?search_query=<%=@term_text%>'><span style='vertical-align:-15%'><img height=20px src='/images/youtube.png'/></span></a></h2>
+            <div class='secondary_column_body'>
+            <%#=render(:partial=>'shared/band_page_youtube',:locals=>{:term_text=>@term_text,:i=>1,:num=>1})%>
+            </div>
+            </div>
+
+            <%if @term.url%>
+            <div class='blue_secondary_column_brick'>
+              <h2 class='underline' style='font-size:smaller'>
+              <a href='<%=@term.url%>'>official <%=@term.text.downcase%> website</a>
+              </h2>
+            </div>
+            <%end%>
+            <div class='blue_secondary_column_brick'>
+            <%#=render(:partial=>'shared/band_page_reviews',:locals=>{:term=>@term})%>
+            </div>
+            <%end%>
+            
+            
+
+            <%
+            # now load the javascript that will invoke the page that 'dynamifies' the page based on who's seeing it
+            %>
+            <script>
+            function update_shared_matches()
+            {
+            	// check to see if we are logged in. If not, skip the ajax and just show ALL the track this links ...
+            	if (get_cookie("user_id")=='')
+            	{
+            		on_shared_matches_complete(null);
+            		return;
+            	}
+
+            	var url = "<%=url_for :controller => 'data', :action => 'shared_matches_with_user', :id => @user.id %>"
+            	var ajax = new Ajax.Request(
+            	        url, 
+            	        {
+            	                onComplete: on_shared_matches_complete
+            	        });
+            }
+
+            function on_shared_matches_complete(originalRequest)
+            {
+            	var ids = [-1];
+            	if (originalRequest!=null)
+            	{
+            		var ids = originalRequest.responseText.split(/,/) // tokenize the returned ids on comma
+            	}
+            	// go through all spans in the document and find the track_this_n spans
+            	// for each _n that is _not_ in the ids returned by the shared_terms method.
+            	// for each non-match, change visibility to visible and fade the element up.
+            	var spans = $A(document.getElementsByTagName("span")) // get all spans in the document
+            	var i=0;
+            	spans.each(function(span) {
+            		// see if their id is 'track_this_' followed by something
+            		if (span.id.substring(0,17)=="match_track_this_")
+            		{
+            			// see if this span is for a term shared by the youser.
+            			matched = ids.find(function(id) {
+            				return (("match_track_this_"+id)==span.id);
+            			});
+            			// if not shared, change CSS properties.	
+            			if (matched==null)
+            			{
+            				try
+            				{
+            					span.getElementsByTagName("a")[0].innerHTML="track this" // add text
+            				}
+            				catch (e)
+            				{
+
+            				}
+            			}
+            		}
+            	})
+            }
+            update_shared_matches();
+            </script>
+            
+						<%if false #unless @sponsored_matches.nil? or @sponsored_matches.empty?%>
+						<div style="margin-left:2px;margin-bottom:12px">
+						<span style="padding:6px;background-color:#ffc;font-size:18px;font-family:verdana,helvetica,serif">
+						<span style="font-size:14px">sponsored <%=@metro.downcase%>  tickets</span>&nbsp;
+						<%@sponsor_matches.each_with_index{|match,i|
+							break if i>=4
+							next if not match.stubhub_url%>
+							<%label = "#{match.term.text.downcase} tickets"%>
+						<span class='ticket-link' style="font-weight:bolder;padding:2px;color:#999;font-size:15px;background-color:#fde">
+							<%=ticket_link(nil,{"url"=>match.stubhub_url},label,
+								{
+									:link_source=>'mail',
+									:page_type=>@periodicity,
+									:page_section=>"sponsor",
+									:term_text=>match.term.text
+								},false
+							)-%></span><span style="font-size:14px"><%=match.very_short_time_description%></span>&nbsp;&nbsp;
+						<%}	%>
+						</span>
+						</div>
+						<%end%>
+						
+						<!--					
+												<%if recommender_ids and not recommender_ids.empty?
+													# show "(also tracked by user1, user2, x others)"
+												    term_users=match.term.recent_users if match.term
+													if term_users and not term_users.empty?
+														recommender_string=""
+														num_recommenders=0
+														term_users.each {|user|
+															next unless recommender_ids[user.id]
+															num_recommenders+=1
+															break if num_recommenders>2
+															%>
+															<%recommender_string+=link_to(user.name, '/users/'+user.name)+" "-%>
+														  <%}-%>
+															 (<%=recommender_string.strip-%>)			
+													<%end #if term_users and not term_users.empty?%>
+												<%end #if recommender_ids and not recommender_ids.empty?%>
+						-->
+						

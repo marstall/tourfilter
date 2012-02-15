@@ -1,0 +1,120 @@
+<html>
+<head>
+<style>
+a img { border: 0; }
+a:link { text-decoration: underline; color: #369; }
+a:visited { text-decoration: underline; color: #369; }
+a:hover { text-decoration: underline; }
+a:active { text-decoration: underline; }
+
+.ticket-link a:link { text-decoration: underline; color: #369; }
+.ticket-link a:visited { text-decoration: underline; color: #369; }
+.ticket-link a:hover { text-decoration: underline; }
+.ticket-link a:active { text-decoration: underline; }
+
+h1
+{
+	background-color:#ddf5f5;
+	font-size:16px;
+	padding:8px;
+	font-family:Verdana;
+}
+
+.bod
+{
+	font-size:12px;
+}
+</style>
+</head>
+<body>
+<%terms=@user.terms%>
+<%if terms.size>0%>
+<%if @user_matches.nil? or @user_matches.empty?%>
+<h1>your upcoming shows </h1> 
+<div class='bod' style='padding-left:4px'>
+no upcoming shows for bands tracked by <%=@user.name%>.
+	<a href='http://www.tourfilter.com/<%=@metro_code%>'>add some more bands!</a>
+	</p>
+</div>
+<%end%>
+
+	<%unless @user_matches.nil? or @user_matches.empty?%>
+	<h1>from <a href='http://www.tourfilter.com/<%=@metro_code%>'>tourfilter</a>: your upcoming shows </h1> 
+	<div class='bod'>
+	<%=render(:partial=>'mail_calendar_narrow_2',
+			  	:locals=>
+				{
+					:days=>@user_days,
+					:matches=>@user_matches,
+					:background_color=>"#DDF5F5",
+					:page_section=>'main_calendar',
+					:periodicity=>@periodicity
+				})%>
+	</div>
+	<%end%>
+
+	<%unless @recommended_matches.nil? or @recommended_matches.empty?%>
+
+	<h1>your friends' shows</h1>
+	<div class='bod'>
+	<%=render(:partial=>'mail_calendar_narrow_2',
+			  	:locals=>
+				{
+					:days=>@recommended_days,
+					:matches=>@recommended_matches,
+					:background_color=>"#DDF5F5",
+#					:background_color=>"#eaa",
+					:recommender_ids=>@recommender_ids,
+					:page_section=>'friend_calendar',
+					:periodicity=>@periodicity
+				}
+				)%>
+	<%end%>
+	</div>
+	<%unless @related_matches.nil? or @related_matches.empty?%>
+	<h1>recommended for you</h1>
+	<div class='bod' >
+	<%=render(:partial=>'mail_calendar_narrow_2',
+			  	:locals=>
+				{
+					:days=>@related_days,
+					:matches=>@related_matches,
+					:background_color=>"#DDF5F5",
+					:page_section=>'related_calendar',
+					:periodicity=>@periodicity
+				}
+				)%>
+	</div>			
+	<%end%>
+	<%end%>
+	<h1>popular</h1>
+	<div class='bod'>
+	<%=render(:partial=>'mail_calendar_narrow_2',
+			  	:locals=>
+				{
+					:days=>@popular_days,
+					:matches=>@popular_matches,
+					:background_color=>"#DDF5F5",
+					:page_section=>'popular_calendar',
+					:periodicity=>@periodicity
+				}
+				)%>
+		</div>
+		<h1>bands you've added recently</h1>
+		<div class='bod'>
+			<div style='padding-left:4px;font-size:16px'>
+		<%=terms[0..10].collect{|term|term.text.downcase}.join(', ')%> <br>
+		<a href="http://www.tourfilter.com/<%=@metro_code%>">add more</a>
+		</div>
+		</div>
+
+		<h1>about this email</h1>
+
+<div style='padding-left:4px;font-size:16px'>
+<p>This is your personalized Tourfilter <%=@periodicity%> newsletter: your calendar, your friends' calendar and shows we think you might like, based on your tastes.</p>
+<p>You're receiving it because (probably when you signed up), you checked a little box saying you would like to do so.</p>
+<p>If you're now regretting that decision, you can <a href="http://www.tourfilter.com/<%=@metro_code%>/unsubscribe/<%=@user.id%>/<%=@auth_token%>">unsubscribe</a> anytime.</p>
+<p>You can also add bands and otherwise edit your account at <a href="http://www.tourfilter.com/<%=@metro_code%>">tourfilter.com</a>.</p>
+</div>
+</body>		
+</html>	

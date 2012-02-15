@@ -1,0 +1,4 @@
+<%show_date_header||=false%>
+<%days_to_show||=30%>
+<div style='height:1px'></div>
+<%=render(:partial=>"shared/calendar_by_place",:locals=>{:show_date_headers=>show_date_header,:days_to_show=>days_to_show,:num_columns=>2})%>

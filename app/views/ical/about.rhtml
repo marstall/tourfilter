@@ -1,0 +1,71 @@
+<div class="header1">
+Get tourfilter on your desktop
+</div>
+<div id="main-full-width">
+<p>With a single click, you can subscribe to tourfilter show calendars in OS X's iCal (pictured) and many other calendaring applications. Try it!</p>
+<ul>
+<%
+	host_and_port=request.host
+	host_and_port+=":#{request.port}" if request.port!="80"
+%>
+<li>
+	<% if @youser_known%>
+	<span style="vertical-align:-30%">
+		<a border=0 href="webcal://<%=host_and_port%>/<%=@metro_code%>/ical/<%=@youser.name%>"><img border=0 src="/images/ical.gif"></a>
+				or
+	<span style="vertical-align:-30%">
+		<a href="http://www.google.com/calendar/render?cid=http://www.tourfilter.com/<%=@metro_code%>/ical/<%=@youser.name%>"><img src="http://www.google.com/calendar/images/ext/gc_button1.gif" border=0></a>
+	</span>
+		<a href="webcal://<%=host_and_port%>/<%=@metro_code%>/ical/<%=@youser.name%>">Subscribe to just my tourfilter shows.</a>
+	</span>
+	<% else %>
+	<span style="vertical-align:-10%">
+		<a border=0 href="#" onclick="alert('You must be logged in to do that!');"><img border=0 src="/images/ical.gif"></a>
+	</span>
+	<a href="#" onclick="alert('You must be logged in to do that!');">Subscribe to just my tourfilter shows.</a>
+	<%end%>
+	</li>
+	<li>
+		<span style="vertical-align:-10%">
+				<a border=0 href="webcal://<%=host_and_port%>/<%=@metro_code%>/ical"><img border=0 src="/images/ical.gif"></a>
+				or
+		<span style="vertical-align:-30%">
+				<a href="http://www.google.com/calendar/render?cid=http://www.tourfilter.com/<%=@metro_code%>/ical"><img src="http://www.google.com/calendar/images/ext/gc_button1.gif" border=0></a>
+			</span>
+			</span>
+			<a href="webcal://<%=host_and_port%>/<%=@metro_code%>/ical">Subscribe to all <%=@metro%>	 shows tracked by tourfilter users.</a></li>
+	</ul>
+<br>
+<div class="header1">
+Screenshot
+</div>
+How iCal looks when you subscribe to the all-shows tourfilter calendar:
+<img src="/images/ical_all.png">
+<br>
+<br>
+<div class="header1">
+About iCal and iCalendar
+</div>
+<p>iCal is another name for a technology called iCalendar. iCalendar is the language that many calendars use to import and export events and appointments. There is a <a href="http://en.wikipedia.org/wiki/ICalendar">very helpful wikipedia article</a> on the subject.</p>
+
+<p>According to the article iCalendar is supported by the following calendaring applications:
+<ul>
+	<li>
+ <a href="http://en.wikipedia.org/wiki/Apple_Computer" title="Apple Computer">Apple</a> <a href="http://en.wikipedia.org/wiki/ICal" title="ICal">iCal</a></li>
+<li><a href="http://en.wikipedia.org/wiki/Chandler_%28PIM%29" title="Chandler (PIM)">Chandler</a>
+	</li><li><a href="http://en.wikipedia.org/wiki/Lotus_Notes" title="Lotus Notes">Lotus Notes</a></li><li><a href="http://en.wikipedia.org/wiki/ScheduleWorld" title="ScheduleWorld">ScheduleWorld</a></li><li><a href="http://en.wikipedia.org/wiki/Korganizer" title="Korganizer">Korganizer</a></li><li><a href="http://en.wikipedia.org/wiki/Mozilla_Calendar" title="Mozilla Calendar">Mozilla Calendar</a> (including <a href="http://en.wikipedia.org/wiki/Mozilla_Sunbird" title="Mozilla Sunbird">Mozilla Sunbird</a>)</li><li><a href="http://en.wikipedia.org/wiki/Mulberry_%28email_client%29" title="Mulberry (email client)">Mulberry</a></li><li><a href="http://en.wikipedia.org/wiki/Ximian_Evolution" title="Ximian Evolution">Ximian Evolution</a></li><li><a href="/w/index.php?title=Kronolith&amp;action=edit" class="new" title="Kronolith">Kronolith</a></li><li><a href="http://en.wikipedia.org/wiki/Simple_Groupware" title="Simple Groupware">Simple Groupware</a></li><li><a href="http://en.wikipedia.org/wiki/Windows_Calendar" title="Windows Calendar">Windows Calendar</a></li><li><a href="http://en.wikipedia.org/wiki/Nuvvo" title="Nuvvo">Nuvvo</a></li><li>to some extent, <a href="http://en.wikipedia.org/wiki/Microsoft_Outlook" title="Microsoft Outlook">Microsoft Outlook</a> 
+</ul>
+</p>
+<br>
+<div class="header1">
+Tourfilter in a widget
+</div>
+<p>
+For the widget-hearted, you can download iCalendar widgets that will give you one-key access to your tourfilter calendar.
+<ul>
+<li>For Windows (2000 and up) AND Mac (OSX 10.3 and up) users, download the free Yahoo! Widget engine <a href="http://widgets.yahoo.com/">here</a>. It comes with an iCalendar widget.</li>
+
+<li>For Mac users (OS X 10.4 and up), you just need to download Ben Kazez's <a href="http://www.benkazez.com/icalevents.php">iCal Events</a> widget.</li>
+</ul>
+</p>
+

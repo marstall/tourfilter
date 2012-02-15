@@ -1,0 +1,15 @@
+<% for column in Place.content_columns %>
+<p>
+  <b><%= column.human_name %>:</b> <%=h @place.send(column.name) %>
+</p>
+<% end %>
+<% for page in @place.pages%>
+<a href="<%=page.url%>"><%=page.url%></a>
+<%= link_to 'cached', :action => 'show_cached_page', :id => page.id %>
+<br>
+<% end %>
+
+<%= link_to 'Edit', :action => 'edit', :id => @place %> |
+<%= link_to 'Back', :action => 'list' %>
+
+

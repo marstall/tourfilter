@@ -1,0 +1,55 @@
+<%bing=Bing.new(logger)%>
+<%photos = bing.photos_for_term(term_text,1)%>
+<%web_results = bing.web_results_for_term(term_text,4)%>
+<div class='more_info_body'>
+		<%if photos and photos.first%>
+		<%photo=photos.first%>
+    <div  style='padding-right:4px;padding-bottom:4px;float:left;vertical-align:top;horizontal-align:left;margin:0px;'>
+			<a target='bing' border=0 href='http://www.bing.com/images/search?q=<%=term_text%>+filterui%3aimagesize-large+filterui%3aaspect-wide'>
+			  <img width='160px' src='<%=photo["Thumbnail"]["Url"]%>'></a>
+		</div>
+		<%end%>
+		  <div style='font-size:14px;' style='margin-top:0px'>
+    	<%
+    	result=web_results[0]
+  		title = result['Title']
+  		title.gsub! /[-|].+?$/,''
+  		description = result['Description'] rescue ''
+  		url = result['Url']
+  		domain = "n/a"
+  		begin
+  		  uri = URI.parse(url)
+        domain=uri.host
+      rescue
+      end
+    	%>
+    	<div class='more_info_body_alternating_2 gray'   style='margin-left:165px;'>
+      <a target='bing' href="<%=url%>"><%=title.strip%></a>
+      <%=description%>
+      </div>
+  		<div class='gray smaller'>
+	<%web_results[1..3].each_with_index{|result,j|%>
+	<%
+		title = result['Title']
+		title.gsub! /[-|].+?$/,''
+		description = result['Description'] rescue ''
+		url = result['Url']
+		domain = "n/a"
+		begin
+		  uri = URI.parse(url)
+      domain=uri.host
+    rescue
+    end
+	%>
+<div class='more_info_list_result_item underline more_info_body_alternating_1%>'>
+<a target='bing' href="<%=url%>"><%=title.strip%></a>
+<span class='gray smaller'><%="&nbsp;[#{domain}]" if domain%></span>
+<span class='gray' >&nbsp;<%=description%></span>
+</div>
+	<%}%>
+	<div style='width:100%;font-size:12px;text-align:right;font-family:helvetica'>
+    [&nbsp;web search results by
+    <a target='new' href='http://www.bing.com/search?q=<%=term_text%>'> <span style='vertical-align:-30%'><img height=14px src='/images/bing.png'/></span></a>]&nbsp;
+  </div>
+<div style='clear:left'></div>
+</div>

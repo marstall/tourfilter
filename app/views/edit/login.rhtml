@@ -1,0 +1,49 @@
+<div id='main-full-width' >
+<h2>
+	Login to Tourfilter <%=@metro%>
+</h2>
+<div style='background-color:#fff'>
+<%if !@youser_logged_in-%>
+<table>
+<tr><td>
+<%= form_tag :action=>'login'-%>
+<input type="hidden" name="redirect_url" value="<%=params[:redirect_url]%>"/>
+<table>
+<tr>    
+<td nowrap>username/email address</td>
+<td><%=text_field_tag(:name,"","size" => 16,
+		:value=>""
+		)%></td>
+</tr>
+<tr>
+	<td>password</td>
+<td><%=password_field_tag(:password,"","size" => 16,
+		:id=>"password"
+		)%></td>
+</tr>
+<tr><td></td><td>		
+      <%= submit_tag 'Login' -%>&nbsp;
+      <div class='small gray underline'><br>
+      &nbsp;<a href='<%=url("/lost_password")%>'>forgot password?</a>
+      </div>
+      
+      </td>
+</tr>
+</table>
+</td>
+<td valign=top style='padding:0.5em;'>
+<span style='padding:0.5em;background-color:#eee' >
+	Don't have a Tourfilter <%=@metro%> account yet? <span class='underline'><a href="<%=url signup_url(params)%>">sign up</a></span>!
+</span>
+</td></tr>		
+	</form>
+</table>
+<%else-%>
+<%end%>
+<br>
+
+</div>
+</div>
+ <script>
+ $('name').focus();
+</script>

@@ -1,0 +1,47 @@
+<h1 >
+	<div style="float:left">
+		upcoming <%=@metro.downcase%> shows
+<!--
+		<span style="vertical-align:-5%">
+			<a border=0 href='<%=url("/ical/about")%>'><img border=0 height=12px src="/images/ical.gif"></a>
+		</span>
+		<span style="vertical-align:-5%">
+			<a border=0 href='<%=url("/rss/about")%>'><img border=0 src="/images/rss.gif"></a>
+		</span>
+-->
+	</div>
+	<div class="" style="float:right" >
+	<span class="options underline">
+<!--
+		view by
+		<%if @by_venue%>
+		<span class='basic_button'><a onclick='set_cookie("venues","",365)' href='<%=url("/")%>'>date</a></span>
+		<%else%>
+		<span class='basic_button_pressed'>date</span>
+		<%end%>
+		<%if @by_date%>
+		<span class='basic_button_pressed'>venue</span>
+		<%else%>
+		<span class='basic_button'><a href='<%=url("/venues")%>'>venue</a></span>
+		<%end%>
+		<%if @by_combined%>
+		<span class='basic_button_pressed'>combined</span>
+		<%else%>
+		<span class='basic_button'><a href='<%=url("/combined")%>'>combined</a></span>
+		<%end%>
+-->
+<!--
+<%#=render(:partial => "shared/place_dropdown",:locals=>{:place_url_name=>@place_url_name})%>
+<%if false and (@metro_code=="boston"||@metro_code=="newyork")%>
+	<a title="play a selection of songs by artists with upcoming shows in <%=@metro.downcase%> (flash popup)" class="popup" onClick="window.open('xspf/xspf_popup','flash','width=420,height=210');return false;" href="xspf/xspf_popup">
+		tourfilter mixtape</a> &nbsp;|&nbsp;
+<%end%>
+
+<%if SETTINGS['date_type']=='uk'%>
+ 		today is <%=Time.now.day%> <%=Date::MONTHNAMES[Time.now.month].downcase%> 
+<%else%>
+		today is <%=Date::MONTHNAMES[Time.now.month].downcase%> <%=Time.now.day%>
+<%end%>
+-->
+	</div>
+</h1>

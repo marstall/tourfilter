@@ -1,0 +1,24 @@
+<%ticket_urls,price_low,price_high = match.ticket_urls%>
+<%if ticket_urls and not ticket_urls.empty?%>
+<span id='buy_tickets_<%=match.id%>'>
+	<a onmouseover="$('dropdown_<%=match.id%>').toggle();"
+	   href='<%=ticket_urls.first['url']%>'>tickets from $<%=price_low%> &raquo;</a></span>
+<div id='dropdown_<%=match.id%>' style='display:none' onmouseout="$('dropdown_<%=match.id%>').toggle();">
+<table>
+<%ticket_urls.each{|ticket_url|%>
+<%
+	num = ticket_url['num_tickets']
+	high = ticket_url['price_high']
+	low = ticket_url['price_low']
+#	price_string = "($#{low} - $#{high})" if high and low
+	price_string = "($#{low}+)" if low
+#	price_string = "($#{low})" if high and not low
+#	price_string = "" if not high and not low
+%>
+<tr>
+	<td><a href='<%=ticket_url['url']%>'><%=ticket_url['source']%> <%=price_string%></a></td>
+</tr>
+<%}%>
+</table>
+</div>
+<%end%>	

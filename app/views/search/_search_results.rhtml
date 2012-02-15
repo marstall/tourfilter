@@ -1,0 +1,112 @@
+<%if @term.nil? or @term.size<3 or (@term=~/search/ and @term=~/concerts/)%>
+<%return%>
+<%end%>
+<% if @shared_events and @shared_events.size>0%>
+<%unless @part%>
+<div class='search_header'>
+	<div style="float:left">results
+		<%
+			count=String(@shared_events.size)
+			count+="+" if @shared_events.size>=50
+		%>
+<span class="smaller gray">searched <%=@controller.total_shared_events%> shows in 80+ cities. found <%=count%> shows matching '<%=@term%>'.</span>
+		</div>
+<div style="float:right" class="gray">feeds &gt;
+<a href="/search/<%=@term%>">permalink</a>
+<a href="feed://www.tourfilter.com/search/rss/<%=@term%>">rss</a>
+<a href="http://www.tourfilter.com/search/json/<%=@term%>">json</a>
+<a href="webcal://www.tourfilter.com/search/ical/<%=@term%>">ical</a>
+<a href="http://www.tourfilter.com/search/badge/<%=@term%>?num=1000&hide_metro=0&show_club=0&max_width=1000&hide_date=0">
+	javascript</a>
+</div>
+<div style="clear:both"></div>
+</div>
+
+<table cellpadding=0 cellspacing=0>
+<div class="result">
+<tr class="gray smaller">
+<td class='result_header'>date</td>
+<td class='result_header'>band</td>
+<td class='result_header'>club</td>
+<td class='result_header' style="padding-left:2.3em">metro</td>
+</tr>
+</div>
+<%end%> <!-- partial -->
+<% @shared_events.each{|shared_event| -%>
+<div class="result">
+<%
+	@term=@term.sub /^\w+:/,""
+	@term.strip!
+	summary=shared_event.summary.downcase
+#	summary.sub!(/#{@term}/i,"<span class='search_highlight'>#{@term}</span>") if @term.downcase.strip!=summary
+%>
+<%
+	location=shared_event.location.downcase.strip
+#	location.sub!(/#{@term}/i,"<span class='search_highlight'>#{@term}</span>") if @term.downcase.strip!=location
+%>
+<%
+	metro_name=shared_event.metro_name.downcase.strip
+#	metro_name.sub!(/#{@term}/i,"<span class='search_highlight'>#{@term}</span>") if @term.downcase.strip!=metro_name
+	metro_name.gsub!(" ","&nbsp;")
+%>
+<tr >
+<td class="result_cell">
+<span class="result_date"><%=shared_event.date.month%>/<%=shared_event.date.day%></span>
+</td>
+
+</span>
+</td>
+<td valign=top nowrap class="result_cell">
+<div >
+<%description = shared_event.description%>
+<%#description=description.sub(/>>>/,"</span>").strip%>
+<span ><a href='http://www.tourfilter.com/<%=shared_event.metro_code%>/<%=shared_event.summary%>' title="<%=description%>">
+<%=summary%></a></span>
+</td>
+<td class="result_cell light_link">
+<a href='http://www.tourfilter.com/<%=shared_event.metro_code%>/clubs/<%=shared_event.location.downcase.strip%>'><%=location[0..40]%></a>
+</td>
+<td style="padding-right:1em;padding-left:2em" class="result_cell lighter_link" nowrap>
+<a href="http://www.tourfilter.com/<%=shared_event.metro_code%>"><%=metro_name%></a>
+</td>
+<td class='result_cell light_link' >
+<!--  <span class='buy_tickets'><a href='http://www.tourfilter.com/<%=shared_event.metro_code%>/<%=@term%>' title="<%=description%>">
+  tickets</a></span>-->
+					<i><%#=shared_event.ticket_json%></i>
+					<%ticket_urls=[]#JSON.parse(shared_event.ticket_json) rescue nil%>
+					<%if ticket_urls and not ticket_urls.empty?%>
+					<%ticket_urls.each{|ticket_url|%>
+						<%next unless ticket_url and ticket_url['url']%>
+						<span style='padding:6px;margin-right:4px' class="buy_tickets_small search_highlight">
+					<%=ticket_link(@external_click_hash,{"url"=>ticket_url['url']},ticket_url['source'],
+						{
+							:page_type=>'search',
+							:page_section=>"main_calendar",
+							:term_text=>@term,
+							:page_name=>@term,
+							:level=>ticket_url['level']
+						},{}
+					)%>
+							</span>
+					<%}%>
+					<%end%>
+				</td>
+</tr>
+</div>
+<% }-%>
+</table>
+<div class='search_similar_artists'>
+</div>
+<%else%>
+<%if @controller%>
+<div class="header2">
+	<div style="float:left">results
+<span class="smaller gray">searched <%=@controller.total_shared_events%> shows in 60 cities. found 0 shows matching '<%=@term%>'.</span>
+	</div>
+	<div style="clear:both"></div>
+</div>
+	&nbsp;no upcoming shows.
+<%else%>
+none found!
+<%end%>
+<%end%>

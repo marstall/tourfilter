@@ -1,0 +1,37 @@
+<div class="header1">
+	browse bands
+</div>
+<div class="" style="text-align:center">
+	<%@letter=params['letter']||'a'%>
+<%"a".upto("z") {|letter|%>
+	<%unless letter==@letter%>
+	<a href='<%=url("/browse_bands/#{letter}")%>'>
+	<%else%>
+	<span class="highlight">
+	<%end%>
+	<%=letter%>
+	<%unless letter==@letter%>
+	</a>
+	<%else%>
+	</span>
+	<%end%>
+	<%="&nbsp;|&nbsp;" unless letter=="z"%>
+<%}%>
+</div>
+<%
+	terms=Term.find_by_first_letter(@letter)
+	size = terms.size
+	column_height=size/4 +5
+	column_height=size if column_height<20
+%>
+<hr size=1 color=darkgrey>
+<table style="margin-left:2em">
+	<tr>
+	<td valign=top>
+	<%terms.each_with_index{|term,i|%>
+		<div class="term-text" style="line-height:1.5em"><a href="<%=term.url_text%>"><%=term.text%></a></div>
+		<%="</td><td valign=top>" if (i+1)%column_height==0%>
+	<%}%>
+	</td>
+</tr>
+</table>

@@ -1,0 +1,98 @@
+<link rel="alternate" type="application/rss+xml" title="RSS" href="/rss" />
+<div >
+<div class="box" >
+<%if !@youser_known-%>
+<div id="result" class="error"></div>
+<div id='login'>
+<div class="box_header">
+		<span style="font-size:1.15em">Enter your bands.</span>
+</div>
+<div class="smaller">one per line
+	<span style="display:none;color:green" id="loading">...</span>  
+</div>
+  <%else%>
+<div class="box_header">
+     bands you're tracking:
+</div>
+  <%end%>
+<%=form_remote_tag (:update =>"result",
+					:loading => "$(submit).value='Processing ...';$(submit).disabled=true",
+					:complete => "$(submit).value='Sign up';$(submit).disabled=false",
+					:url =>{:action => 'remote_post'})
+					-%>
+<%=text_area(:youser, :terms_as_text,:cols => "16", :rows => "12") -%>
+<%if not @youser_known%>
+<%= observe_field(:youser_terms_as_text,
+                  :frequency => 1,
+                  :update => :results,
+                  :loading => "Element.show('loading');Element.hide('explanation');",
+                  :complete => "Element.hide('loading');Element.hide('explanation');",
+                  :url => {:action => :search}
+                  )%>
+<%= observe_field(:youser_terms_as_text,
+                  :frequency => 1,
+                  :update => :related_terms,
+                  :loading => "Element.show('loading')",
+                  :complete => "Element.hide('loading')",
+                  :evalScripts => true,
+                  :url => {:action => :related_terms}
+                  )%>
+<%end%>
+<div style="padding:2px"></div>
+<%if !@youser_known%>
+<br>
+<div class="box_header">
+			<span style="font-size:1.15em">Get notified.</span>
+		<div class="smaller">
+			no spam, ever.
+		</div>
+</div>
+	<%=text_field(:youser,:name,"size" => 7,
+		:value=>"Username",
+		:class=>"signup",
+		:onfocus=>"if (this.value=='Username') this.value=''",
+		:onblur=>"if (this.value=='') this.value='Username'"
+		)%>
+	<%=text_field(:youser,:password,"size" => 7,
+		:id=>"password",
+		:class=>"signup",
+		:value=>"Password",
+		:onfocus=>"if (this.value=='Password') {this.value='';this.type='password';}",
+		:onblur=>"if (this.value=='') {this.value='Password';this.type='text';}"
+		)%>
+<div style="padding:2px"></div>
+	<%=text_field(:youser,:email_address,"size" => 16,
+		:value=>"Email address",
+		:class=>"signup",
+		:onfocus=>"if (this.value=='Email address') this.value=''",
+		:onblur=>"if (this.value=='') this.value='Email address'"
+		)%>
+<!--		<div style="padding:2px"></div>
+<%#= select 'source', 'locale', Metro.all_active_for_select%></p>-->
+		<div style="padding:2px"></div>
+		<div style="margin:0px;padding:2px;border:0	" class="term_more"><%=check_box(:youser,:wants_newsletter,{},"true","false")%>also send me a monthly newsletter about my bands (record releases, etc.)</div>
+		<div style="padding:2px"></div>
+		<div align=left>
+				<%= submit_tag "#{@metro} Sign Up",:id=>"submit" %>&nbsp;&nbsp;
+		</div>
+<%=render(:partial=>"shared/authenticate_client")%>
+
+<%else%>
+<%= submit_tag 'Save' %>
+<%end%>
+<%= end_form_tag %>
+</div>
+</div> <!-- end div box -->
+</div>
+<div id="wha"></div>
+<script>
+	url = document.location.href
+	term_text = url.split(/term_text=/)
+	if (term_text!=null&&term_text.length==2&&term_text[1]!=null)
+	{
+		text = term_text[1].replace(/(_|\%20)/g," ");
+		$("youser_terms_as_text").value=text;
+		alert("Thanks for trying out Tourfilter! Now you can add more bands, or just create an an account to track only "+text+".")
+	}
+</script>
+

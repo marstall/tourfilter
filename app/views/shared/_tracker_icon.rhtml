@@ -1,0 +1,10 @@
+<%cl='tracker_icon' if cl.nil?%>
+<div class='<%=cl%>'>
+  <div class='num_trackers <%='num_trackers_four_digits' if term.num_trackers>=1000%>' >
+  <a title='<%=term.num_trackers%> are tracking <%=term.text.downcase%>' href='<%=url("/trackers/#{term.url_text}")%>'><%=term.num_trackers%></a>
+  </div>
+  <div class='track_link underline' >
+    <a href='<%=url("/trackers/#{term.url_text}")%>'>tracking</a>
+    </div>
+</div>
+  

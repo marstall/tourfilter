@@ -1,0 +1,25 @@
+<%places=Place.find_all_active%>
+<table cellpadding=1 cellspacing=0 width=75%>
+	<tr>
+		<td ></td>
+		<%places.each{|place|%>
+			<td class="grid-header" valign=bottom align=left><%=place.name.gsub(/\s+/,"<br>")%></td>
+		<%}%>
+	</tr>
+<%0.upto(num_days||60) {|offset|%>
+<%day = DateTime.now+offset%>
+	<tr class="grid-row-<%=offset%2+1%>">
+		<td nowrap valign=top>
+			<div class='date-grid'>
+			<%=Date::MONTHNAMES[day.month]%> <%=day.day%>
+			</div>
+		</td>
+		<%places.each{|place|%>
+			<td valign=top class="grid-cell">
+				<%=render(:partial=>'place_day_grid_view',:locals=>{:place=>place,:offset=>offset})%>
+			</td>
+		<%}%>
+	</tr>
+<%}%>
+</table>
+	

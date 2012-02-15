@@ -1,0 +1,89 @@
+<title>add show</title>
+<div id="main_full_width">
+	<h2>
+		shows you've submitted
+	</h2>
+<div > 
+	<%showing_all=false%>
+	<%if params[:id]=="all"%>
+		<%showing_all=true%>
+		<%events=ImportedEvent.find(:all,:conditions=>'user_id is not null',:order=>'date asc')%>
+	<%else%>
+		<%events=ImportedEvent.find_all_by_user_id(@youser.id,:order=>'date asc')%>
+	<%end%>
+		<%if events and not events.empty?%>
+			<%events=ImportedEvent.find_all_by_user_id(@youser.id,:order=>'date asc')%>
+	<table cellpadding=0>
+<tr class="gray smaller">
+<td class='result_header'>
+		</td>
+<td class='result_header'>
+		</td>
+	</tr>
+	<%events.each_with_index{|event,i|%>
+<div class="result">
+		<tr>
+<td class="result_cell" >
+				<span class='gray smaller'><%=i+1%></span> <%=event.body%>&nbsp;<span class='gray smaller'><%=event.venue.name rescue "n/a"%>, <%=event.date.month%>/<%=event.date.day%></span>
+			</td>
+<td class="result_cell" style='font-size:smaller;font-family:terminal,monospace'>
+				<%valid_terms=event.valid_terms%>
+				<%if valid_terms.size>0%>
+					<span class='underline' style="background-color:#cfc;padding:0.5em">
+					<%if event.status=='term_found'%>
+					approved (<%=event.valid_terms.collect{|at|
+						at.term_text.downcase}.join(',')%>)
+					<%end%>
+					<%if event.status=='made_match'%>
+					approved + live (<%=event.valid_terms.collect{|at|
+						"<a href='/#{event.venue.metro_code.downcase}/#{at.term_text.downcase.gsub(' ','-')}'>#{at.term_text.downcase}</a>"}.join(',')%>)
+					<%end%>
+				</span>
+					<span style="background-color:#fcc;padding:0.5em" class='underline'>
+					<%="rejected (no recognized bands)" if event.status=='no_term_found'%>
+					<%="rejected (by <a href='mailto:chris@tourfilter.com'>editor</a>)" if event.status=='rejected'%>
+					</span>
+					<%if event.status=='no_term_found' or event.status=='rejected'%>
+					&nbsp;
+					<span class='underline'>
+						<a href='<%=url("/delete_submitted_show/#{event.id}")%>'>delete</a>
+					</span>
+					<%end%>
+				<%else%>
+					<span style="background-color:#ffc;padding:0.5em">
+					<%="new" if event.status=='new'%>
+					</span>
+					<span style="background-color:#ccf;padding:0.5em">
+					<%if event.status=='term_found'%>
+					being reviewed (<%=event.likely_terms.collect{|at|at.term_text.downcase}.join(',')%>)
+					<%end%>
+					</span>
+					<span style="background-color:#fcc;padding:0.5em" class='underline'>
+					<%="rejected (no recognized bands)" if event.status=='no_term_found'%>
+					<%="rejected (by <a href='mailto:chris@tourfilter.com'>editor</a>)" if event.status=='rejected'%>
+					</span>
+					</span>
+					&nbsp;
+					<span class='underline'>
+						<a href='<%=url("/delete_submitted_show/#{event.id}")%>'>delete</a>
+					</span>
+				<%end%>
+			</td>
+			<td>
+				<%if showing_all and event.user%>
+					<a href='<%=url("/users/#{event.user.name}")%>'><%=event.user.name%></a>
+				<%end%>
+			</td>
+		</tr></div>
+		<%}%>
+		
+	</table>
+	<%else%>
+		you haven't submitted any shows.
+	<%end%>
+</div>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class='underline'><a href="<%=url('/submit_show')%>">submit a new show</a></a>
+<br>
+<br>
+</div>

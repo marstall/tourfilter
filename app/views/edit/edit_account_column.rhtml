@@ -1,0 +1,34 @@
+<div id="all">
+
+<div class="right-column-header">
+Edit band list
+&nbsp;
+
+</div>
+<div class="box" style="min-height:31.25em">
+<%return if !@youser_known%>
+<div class="box_header">
+     bands you're tracking:
+</div>
+<%=form_remote_tag (:update =>"result",
+					:loading => "$(submit).value=' ...';$(submit).disabled=true",
+					:complete => "new Ajax.Updater('all','#{url('<%=url('/edit/right_column')%>')}');alert('Your band list was updated!')",
+					:url =>{:action => 'remote_post'})
+					-%>
+<%=text_area_tag ("terms_as_text",@terms_as_text,:size => "16x36") -%>
+<div style="padding:2px"></div>
+<%= submit_tag 'Save',:id =>"submit"%>
+<input type="submit" name="Cancel" value="Cancel"
+	onclick='document.body.style.cursor ="wait";new Ajax.Updater("all",'<%=url("/edit/right_column")%>');document.body.style.cursor ="auto";return false;'
+	>
+
+<%= end_form_tag %>
+
+</div>
+</div> <!-- end div box -->
+
+
+
+
+
+</div> <!-- all -->

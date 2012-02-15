@@ -1,0 +1,30 @@
+<div id="main-full-width">
+<h2>
+	Invite people
+</h2>
+Let people know about Tourfilter! Especially people whose taste you like. <br>
+<br>
+When people you've invited sign up, they'll be added to your list of recommenders, and vice versa.
+<div class="error" id="result"></div>
+<%=form_remote_tag (:update =>"result",
+					:url =>{:action => 'handler'})
+					-%>
+<div class="header2">
+	Email Address(es)<br>
+	<div class="subhead">
+		Enter one or more email addresses, separated by commas.
+	</div>
+</div>
+<%=text_area_tag ("email_addresses",params[:terms_as_text],:size => "96x4") -%>
+<br>
+<br>
+<div class="header2">
+	Message<br>
+	<div class="subhead">
+		Optionally, enter a message to accompany your invitation(s).
+	</div>
+</div>
+<%=text_area_tag ("message",params[:terms_as_text],:size => "96x4") -%>
+<br><br>
+	<%= submit_tag 'Invite' %>
+</form>

@@ -1,0 +1,61 @@
+<%npr=Npr.new(logger)%>
+<%stories = npr.story_results_for_term(term_text,4)%>
+<%if stories and stories.size>0%>
+<%if popup%>
+  <div class='popup_h2'>npr stories</div>
+<%else%>
+  <h2>npr stories</h2>
+<%end%>
+<div class='more_info_body'>
+	<table>
+	<%stories.each_with_index{|story,i|%>
+		<tr>
+<td class='smaller'>
+		<a target='npr' href='<%=story['link'][0]['$text']%>'><%=story['title']['$text']%></a>
+		</td>
+		<td>
+			<%
+
+				#story['audio'].each{|audio|
+				url="http://api.npr.org/m3u/114384935-c0adea.m3u?orgId=1&topicId=1104&aggIds=4465028&ft=3&f=15373040"
+					
+#					}
+			%>
+			<%#=render(:partial=>"shared/mp3_player",:locals=>{:mp3_url=>url})%>
+		</td>
+		</tr>
+		<tr>
+			<td colspan=2 class='gray smaller'>
+				<%=story['link'][0]['$teaser']%>
+				</td>
+				</tr>
+	<%
+#		title = story['Title']['$text']
+#		title.gsub! /[-|].+?$/,''
+#		description = result['Description'][0..100] rescue ''
+#		url = result['Url']
+#		uri = URI.parse(url)
+#       domain=uri.host
+	%>
+	<!--<a target='new' href="<%#=url%>"><%#=title.strip%></a>-->
+<%}%>
+</table>
+</div>
+<%end%>
+<!--
+"audio": [
+{
+"id": "99909619",
+"type": "primary",
+"title": {
+
+},
+"duration": {
+"$text": "0"
+},
+"format": {
+"mp3": {
+"type": "m3u",
+"$text": "http://api.npr.org/m3u/199909619-5122b0.m3u?orgId=1&topicId=1105&ft=3&f=15373040"
+},
+-->

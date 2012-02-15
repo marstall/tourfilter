@@ -1,0 +1,13 @@
+<div style="max-width:170px;font-size:0.75em;font-family:Verdana,Arial,Sans-serif;border-style:solid;border-width:1px;border-color:#<%=params[:border_color]||"FDF5F5"%>;background-color:#<%=params[:background_color]||"FDF5F5"%>;padding:0.25em;">
+Upcoming <%=@metro%> shows:<br>
+<%
+	@matched_terms[0..@num-1].each { |term|
+	match = term.future_matches(1)[0] # decision to just show one match
+%>
+<img border=0 src="http://www.tourfilter.com/images/star.gif"> 
+<a href="http://<%=@metro_code%>.tourfilter.com/<%=term.url_text%>"><%=match.term.text.downcase%></a><br>
+&nbsp;&nbsp;&nbsp;at <%=match.page.place.name.downcase%>
+	(<%=match.very_short_time_description%>)<br>
+<%}%>
+&nbsp;&nbsp;&nbsp;more at <a href="http://<%=@metro_code%>.tourfilter.com">tourfilter.com</a>...</a>
+</div>

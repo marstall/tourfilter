@@ -1,0 +1,107 @@
+<%page||="calendar"%>
+<%direct_club_link||=nil%>
+			<table style="line-height:1.1em" width=100%>
+<%@days.each{|day|%>
+<tr><td colspan=5><div class='hr'></div></td></tr>
+<tr><td nowrap valign=top>
+		<%has_day=true%>
+<span class="calendar_date">
+<%if @short_dates%>
+		<%=Date::DAYNAMES[day.to_date.wday]%>, <%=Date::MONTHNAMES[day.month]%> <%=day.day%>
+<%else%>
+		<%=Date::DAYNAMES[day.to_date.wday][0..2]%>, 
+		<%=Date::MONTHNAMES[day.month][0..2]%> <%=day.day%>
+<%end%>	
+</span>
+		</td>
+		
+	<%@matches[day].each{|match|%>
+		<%="<td></td>" if not has_day%>
+		<%has_day=false%>
+	<%cache(:controller => "calendar_match", :action => match.id) do%>
+		<td valign=top>
+		<span id="match_<%=match.id %>">
+		</td>
+		<td valign=top >
+		<span class="term-text"><%=link_to match.term.text,"/"+match.term.url_text%></span><%unless @viewing_self-%>
+				<span class="tracked_by" style="font-size:1em;color: #bbb;text-transform:lowercase">
+					<%if not direct_club_link%>
+					 <%=link_to match.page.place.name, 
+						:controller=>"clubs",
+						:action=>match.page.place.url_name rescue ""%>
+					<%end%>
+					</span>
+		<br>
+			<%# tracked by chris,mary, joy, 1 other-%>
+				<%
+					# show "(also tracked by user1, user2, x others)"
+				    term_users=match.term.recent_users if match.term
+					if term_users and not term_users.empty?
+				-%>
+				<span class="tracked_by">tracked by 
+				<%
+					j=0
+					term_users.each {|user|-%>
+					<% 
+				    	if j>2
+							num_others = term_users.size-3	
+							anchor_text = "#{num_others} other"
+							anchor_text+="s" if num_others>1
+							-%> & <%=anchor_text%>
+						    <%
+							break
+						end
+						j=j+1
+					-%>
+					<%=link_to user.name, "/users/#{user.name}"-%><%#="," if term_users.size>1%>
+				    <%}-%>
+			</span>
+		</span>
+			<%end%>
+<span name="track_this" class="tracked_by_inline" id="match_track_this_<%=match.id%>">
+					    <%=link_to_remote("", 
+					                        :update=>"match_#{match.id}",
+						                    :loading => "Element.show('calendar_tracking_#{match.id}')",
+#						                    :complete => "new Effect.Highlight('trackers_#{match.term.id}',{startcolor:'#b0e0e0',endcolor:'#ffffff'});update_shared_terms()",
+											:complete => "$('track_this_#{match.id}').innerHTML='tracked!';new Effect.Highlight('track_this_#{match.id}');new Effect.Fade('track_this_#{match.id}');Element.hide('calendar_tracking_#{match.id}')",
+					                        :url =>{
+					                            :controller => 'user',
+					                            :action => 'term_from_match',
+					                            :id => match.id}) 
+					                        %>&nbsp;
+		</span>					<%
+						if match.num_mp3_tracks and match.num_mp3_tracks>0
+					%>
+					<span class='tracked_by_inline' >
+			     <%= link_to_remote("mp3s/blogs&raquo;",
+			 			:update=>"term_more_#{match.term.id}",
+						:complete=>"new_term_more_window(#{match.term.id});",
+						:eval_scripts =>true,
+						:class =>'mp3s_link',
+                        :url =>{
+                            :controller => 'edit',
+                            :action => 'term_more',
+                            :term_id => match.term.id,
+							:parent_user_id => nil}) 
+                        %>
+</span>					
+					<%end%>
+			
+</td><td valign=top>
+					<span id="mp3s_link">
+					<%=render(:partial=>'shared/tickets',:locals=>{:match=>match,:mellow=>true})%>
+		</span>
+		<%end-%>			
+						<%#=" | " if match.ticket_urls and (not match.ticket_urls.empty?) and match.num_mp3_tracks and match.num_mp3_tracks>0%>
+&nbsp;&nbsp;<span style="display:none;color:green" id="calendar_tracking_<%=match.id%>">tracking ...</span>
+
+			<div id="term_more_<%=match.term.id%>"></div>
+		</td>
+	<%end%> <!-- end cache -->
+	</tr>
+	<%}%>
+<%if @break_between_days%>
+<tr><td height=4px></td></tr>
+<%end%>
+<%}%>
+</table>

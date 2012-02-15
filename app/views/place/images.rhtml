@@ -1,0 +1,16 @@
+	<table><tr>
+<%@place_images.each_with_index{|place_image,i|%>
+	<%next unless place_image.width and place_image.height%>
+		<td>
+			<a href="<%=place_image.page.url%>"><%=place_image.img_html%></a><br>
+			<a href="http://<%@metro_code%>.tourfilter.local:3000/<%=place_image.term_text%>"><%=place_image.term_text%></a>
+		</td>
+<%if i!=0 and i % 5 ==0%>
+</tr>
+</table>
+<table>
+<tr><td>
+<%end%>
+<%}%>
+</tr>
+</table>

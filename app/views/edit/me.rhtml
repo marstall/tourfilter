@@ -1,0 +1,96 @@
+<div align=center>
+<%begin%>
+<%=render(:partial =>"shared/#{@metro_code}_announcement") %>
+<%rescue
+end%>
+</div>
+<%=render(:partial=>'shared/floating_account_column')%>
+<%begin #cache(:controller => "me", :action => @youser.email_address.downcase.sub('@','_')) do%>
+
+<div id="main-full-width" >
+<div id="results"></div>
+<%=render(:partial=>'shared/search')%>
+<div style="clear:left"></div>
+	
+<div class="header1" style="height:1em;padding-top:0.25em;padding-bottom:0.5em">
+<!--	<div style="float:left">
+			your calendar
+	</div>-->
+	<div style="float:right" class="gray smaller">
+<%if false%>
+	<a href='<%=url("/user/albums/#{@youser.name}")%>'>shop for records by your bands (experimental)</a> |
+	<%url_string="/xspf/xspf_popup"%>
+	<span ><a title="play a selection of songs by artists with upcoming shows in boston (flash popup)" class="popup" onClick="window.open('<%=url(url_string)%>','flash','width=420,height=190');return false;" href="#">
+		tourfilter mixtape</a></span>
+<%end%>
+	</div>
+</div>
+
+<%=render(:partial=>'shared/floating_account_column')%>
+	<br>
+	<%=render(:partial=>'shared/calendar_header')%>
+	<%=render(:partial =>"shared/calendar_with_features",:locals=>{:show_date_headers=>true})%>
+
+
+</div>
+
+<%
+# now load the javascript that will invoke the page that 'dynamifies' the page based on who's seeing it
+%>
+<script>
+function update_shared_terms()
+{
+	// check to see if we are logged in. If not, skip the ajax and just show ALL the track this links ...
+	if (get_cookie("user_id")=='')
+	{
+		on_shared_terms_complete(null);
+		return;
+	}
+
+	var url = "<%=url_for :controller => 'data', :action => 'shared_terms', :user_id => @youser.id %>"
+	var ajax = new Ajax.Request(
+	        url, 
+	        {
+	                onComplete: on_shared_terms_complete
+	        });
+}
+
+function on_shared_terms_complete(originalRequest)
+{
+	var ids = [-1];
+	if (originalRequest!=null)
+	{
+		var ids = originalRequest.responseText.split(/,/) // tokenize the returned ids on comma
+	}
+	// go through all spans in the document and find the track_this_n spans
+	// for each _n that is _not_ in the ids returned by the shared_terms method.
+	// for each non-match, change visibility to visible and fade the element up.
+	var spans = $A(document.getElementsByTagName("span")) // get all spans in the document
+	var i=0;
+	spans.each(function(span) {
+		// see if their id is 'track_this_' followed by something
+		if (span.id.substring(0,11)=="track_this_")
+		{
+			// see if this span is for a term shared by the youser.
+			matched = ids.find(function(id) {
+				return (("track_this_"+id)==span.id);
+			});
+			// if not shared, change CSS properties.
+			if (matched==null)
+			{
+				try
+				{
+					span.getElementsByTagName("a")[0].innerHTML="track this" // add text
+				}
+				catch (e)
+				{
+					
+				}
+			}
+		}
+	})
+}
+
+update_shared_terms();
+</script>
+<%end%> <!-- full-page me cache-->

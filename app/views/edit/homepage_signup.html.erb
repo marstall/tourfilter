@@ -1,0 +1,273 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+<meta name="verify-v1" content="XkDMxOJ8KMbX5WUCSaSSZ5DwuwkjBBfcTBW50KE84+k=" />
+		<%
+			title="tourfilter, spam-free concert alerts"
+		%>
+	  <title><%=title%></title>
+	  <%= stylesheet_link_tag 'tourfilter' %>
+	  <%= javascript_include_tag "application" %>	
+</head>
+<body style='margin:4px;padding:0px;width:820px'>
+<%=render(:partial=>'shared/metro_list')%>
+<div id='inner_body' style='margin:0px;padding:0px'>
+  <div id='logo' style='background-color:#ddf5f5 !important'>
+    <div style='float:left'>
+      <div class='logo_tourfilter' style='background-color:#ddf5f5 !important'><a href='/'>Tourfilter</a></div>
+      <div class='logo_metro'><a href='<%=url("/")%>'><%=@metro%></a></div>
+      <div class='logo_title' >simple concert alerts</div>
+    </div>
+    <div style='clear:both'></div>
+  </div>
+<div class='signup_slogan' >Enter your bands. We'll email you when they come to town.</div>
+  <div id='result' class='error'></div>
+  <form method=post action='/'>
+    <%=render(:partial=>"shared/authenticate_client")%>
+    <input type="hidden" name="youser[registration_type]" value="basic"/>
+    <input type="hidden" name="youser[registration_code]" value="homepage"/>
+    <input type="hidden" name="note" value="homepage signup"/>
+    <span style='font-size:15px;background-color:#ffc;padding:4px'>Sign up</span>
+      <span class='skip_signup' >or just <a href='/locate'>go to your city</a></span>
+    </span>
+  <div class='signup' style='margin-top:0px'>
+    <div id='step_1' class='signup_step active_step' >
+      <div class='step_number' >
+        1
+      </div>
+      <div class='step_label'>
+        Your favorite<br>  bands > <br>
+        <span class='step_legend'>one per line. </span>
+      </div>
+      <div class='step_body' >
+        <%=text_area(:youser, :terms_as_text,:cols => "25", :rows => "13") -%>
+        <div class='signup_import'>
+        	    import! 
+        	    <span style='vertical-align:-3px'><img height=16px src='/images/lastfm_icon.png'></span>
+        	    <span class='underline'><a href='http://www.tourfilter.local:3000/boston/lastfm?signup=true'>last.fm</a> </span>
+        	    </span>
+        	</div>
+        <%= observe_field(:youser_terms_as_text,
+                          :frequency => 1,
+                          :update => :related_terms,
+                          :evalScripts => true,
+                          :url => {:controller=>:edit,:action => :related_terms}
+                          )%>
+      </div>
+      <div id="related_terms" class="signup_related_terms">
+      <%=render_component(:controller=>'edit',:action=>'related_terms')%>
+      </div>
+      <div class='clear_left'></div>
+    </div>
+    <div id='step_2' class='signup_step inactive_step '>
+      <div class='step_number' >
+        2
+      </div>
+      <div class='step_label ' >
+        Your city >
+      </div>
+      <div class='step_body' style='padding-top:15px'>
+			  <%metros = Metro.find_all_curated_and_active%>
+			  <%metro_hash = Hash.new%>
+        <%metros.each{|metro|metro_hash[metro.code]=metro}%>
+        <%
+          metro_pairs=Array.new
+          metros.collect{|m|
+            name=m.name
+            if m.country_code=='us'|| m.country_code=='ca'
+              #name+=", #{m.state.upcase}" if m.state
+            else
+              name+=", #{m.country_code.upcase}" 
+            end
+            metro_pairs<<[name,m.code]
+          }
+        %>
+        <%= select 'metro', 'code', metro_pairs,
+          {:id=>'metro_code',:include_blank=>'',:index=>5}%></p>
+      </div>
+      <div class='clear_left'></div>
+    </div>
+    <div id='step_3' class='signup_step inactive_step'>
+      <div class='step_number' >
+        3
+      </div>
+      <div class='step_label'>
+        Your email > 
+      </div>
+      <div class='step_body' style='padding-top:10px'>
+        	<%=text_field(:youser,:email_address,"size" => 32,"id"=>'email_address',"value"=>''
+        		)%>
+						<div style='font-size:12px;font-weight:normal;margin-top:4px;color:black;'>	
+							<%=check_box(:youser,:wants_weekly_newsletter,{},"true","false")%>send me a personalized weekly concert newsletter, too
+						</div>
+      </div>
+      <div class='clear_left'></div>
+    </div>
+    <div id='step_4' class='inactive_step' style='margin-left:300px'>
+        <input id='submit' type='submit' value='Set alerts'>
+    </div>
+    </form>
+  <div class='signup_footer'>
+    <div class='signup_blurb'>
+      <div class='blurb_logo'><a href='http://books.google.com/books?id=WCkEAAAAMBAJ&lpg=PA12&ots=O7Wwo2bDhu&dq=%22no%20more%20no-shows%22%20tourfilter&pg=PA12#v=onepage&q&f=false'><img style='width:200px' class='blurb_img' src='/images/billboard.jpg'></a></div>
+      <div class='blurb_text' >
+        <span class='blurb_quote_mark'>&ldquo;</span>Valuable service for concertgoers<span class='blurb_quote_mark'>&rdquo;</span>
+      </div>
+    </div>
+    <div class='signup_blurb'>
+      <div class='blurb_logo'><img style='width:240px' class='blurb_img' src='/images/rollingstone.gif'></div>
+      <div class='blurb_text'>
+        <span class='blurb_quote_mark'>&ldquo;</span>Lean, mean, pretty cool<span class='blurb_quote_mark'>&rdquo;</span>
+      </div>
+    </div>
+    <div class='signup_blurb'>
+      <div class='blurb_logo'><a href='http://www.boston.com/ae/music/articles/2007/01/26/show_me/'><img style='width:300px' class='blurb_img' src='/images/bostonglobe.gif'></a></div>
+      <div class='blurb_text' >
+        <span class='blurb_quote_mark'>&ldquo;</span>Easy ... more dynamic than upcoming.org<span class='blurb_quote_mark'>&rdquo;</span>
+      </div>
+    </div>
+    <div style='clear:left'></div>
+  </div>
+  </body>
+
+<script>
+  function field_empty(s)
+  {
+    s=_$(s).val();
+    if (s==null) return true
+    s=trim(s);
+    if (s.length==0) return true;
+    else return false;
+  }
+
+  function add(term_text,term_id)
+  {
+    ta = $('youser_terms_as_text')
+  	if ($('youser_terms_as_text').value==null) $('youser_terms_as_text').value="";
+  	$('youser_terms_as_text').value=trim($('youser_terms_as_text').value)
+  	if ($('youser_terms_as_text').value.match(/\n$/)==null)
+  	{
+  		$('youser_terms_as_text').value+="\n";
+  	}
+  	$('youser_terms_as_text').value+=term_text.toLowerCase();
+  	$('youser_terms_as_text').value=trim($('youser_terms_as_text').value+'\n');
+    try
+    {
+      jQuery("#image_"+term_id).attr('src','/images/check.png')
+      jQuery("#"+term_id).addClass('term_added');
+    }
+    catch(e)
+    {
+      
+    }
+  	ta.focus();
+  	ta.scrollTop = ta.scrollHeight;
+//    jQuery('#related_terms').load('/edit/related_terms');
+    lightup();
+  }
+
+  lightup = function(e){
+    _$("#step_2,#step_3,#step_4").removeClass("inactive_step").addClass("active_step")
+    //_$(".signup_footer").hide()
+  }
+  
+  function pick_metro(json)
+  {
+    s=""
+//    console.log("pick_metro called back: "+json['metros'][0]['code'])
+    //_$.each(json['metros'],function(metro){
+    metros = json['metros']
+    for (i=0;i<metros.length;++i)
+    {
+      i==0 ? selected= " selected " : selected = " "
+      metro=metros[i]
+//      console.log(metro['code'])
+      s+="<option "+selected+"value='"+metro.code+"'>"+metro.name+"</option>"
+    }
+//    s+="<option value=''></option>"
+    _$("#metro_code").prepend(s)
+//    _$("#metro_code").val(metros[0].code)
+  }
+  
+
+  jQuery(function() {
+    _$=jQuery
+    _$("#youser_terms_as_text").bind("focus",lightup)
+    
+		_$("form").submit(function(e){
+		  form = e.currentTarget;
+      _$("#submit").attr("disabled","true")
+		  errors=new Array();
+			e.preventDefault();
+			if (field_empty("#email_address"))
+			{
+			  errors.push("You must enter an email address.")
+			}
+			if (field_empty("#metro_code"))
+			{
+			  errors.push("You must select a city.")
+			}
+			if (field_empty("#youser_terms_as_text"))
+			{
+			  errors.push("You must enter at least one band.")
+			}
+			if (errors.length>0)
+			{
+			  _$("#submit").attr("disabled","")
+			  s=""
+    		_$.each(errors,function(i,error)
+    		{
+    		  s+=error+"\r\n"
+    		})
+    		alert(s);
+    		return false;
+			}
+			else
+			{
+			  // success - post to correct metro.
+			  form.action='/'+_$("#metro_code").val()+'/edit/remote_post'
+        new Ajax.Updater('result', form.action, {asynchronous:true, evalScripts:true, parameters:Form.serialize(this)}); 
+        return false;
+			}
+		})
+//		console.log("geolocating ...")
+    _$.ajax({url:"/edit/geolocate",dataType:'script'})
+  })
+  
+</script>
+
+<script>
+function adjustStyle(height) 
+{
+    height = parseInt(height);
+    if (height < 650) 
+    {
+        jQuery(".signup_footer").hide();
+    } 
+    else if (height >= 651) 
+    {
+      jQuery(".signup_footer").show();
+    }
+}
+
+jQuery(function() 
+{
+    adjustStyle(jQuery(this).height());
+    jQuery(window).resize(function() 
+    {
+        adjustStyle(jQuery(this).height());
+    })
+});
+</script>
+
+<%if ENV['RAILS_ENV']!='development'%>
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+	var pageTracker = _gat._getTracker("UA-529349-1");
+	pageTracker._initData();
+	pageTracker._trackPageview();
+</script>
+<%end%>
