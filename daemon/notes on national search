@@ -1,0 +1,16 @@
+national search/feed
+- daemon that gets all RSS or ICAL feeds, puts them into a database table with a city code field
+- url scheme: 
+	www.tourfilter.com/search/regina+spektor
+	www.tourfilter.com/search/regina+spektor.xml
+	
+nightly fetch x num of cities
+
+index: simple sql like query, perhaps with special agnosticisms for band name syntax (the, &, punctuation, etc.)
+
+bonus: free text search backing it up, may as well make that part of the initial index pull (meaning take it direct from the db?)
+
+amy: i feel guilty, i led her on. i hate this aspect of dating.
+
+
+ 	

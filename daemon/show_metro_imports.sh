@@ -1,0 +1,1 @@
+mysql -uchris -pchris tourfilter_$1 -e"select id,uid,venue_name,date_for_sorting,status,time_status from matches where uid is not null and date_for_sorting>now() and created_at>adddate(now(),interval -1 day) order by uid"

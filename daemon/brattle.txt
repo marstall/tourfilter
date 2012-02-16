@@ -1,0 +1,628 @@
+for usage: ruby daemon.rb help
+initializing daemon in  mode ...
+daemon initialized.
+****************************************************************
+****************************************************************
+***************** finding showings
+****************************************************************
+****************************************************************
+finding showings for Brattle Theatre
+http://www.brattlefilm.org
+http://www.brattlefilm.org
+BrattlefilmParser parser
+title: Triad Election
+synopsis: This sensational pair of gangster films are the latest stateside releases from one of the current masters of Hong Kong cinema. Johnnie To has churned out some of the most consistently entertaining films coming from Hong Kong in the past 10 years and yet his films aren&#146;t the usual empty action extravaganzas. Though his style is reminiscent of Martin Scorsese &#150; gritty and streetwise yet breathtakingly choreographed &#150; the ELECTION films bear a more than passing resemblance to Coppola&#146;s Godfather Trilogy. As with Coppola&#146;s films these films constitute a gangster epic &#150; except the &#145;family&#146; in To&#146;s films is not brought together by blood but rather by the bonds of friendship and loyalty. There&#146;s the same harkening back to tradition and ritual and the same struggle with changing times that the Corleones face but modernity is represented here not by the emergence of the drug trade but by shady real estate dealings on mainland China. Both films follow the recent history of Wo Sing, Hong Kong&#146;s oldest Triad Society through one of their oldest rituals &#150; the election of a new chairman. ELECTION tells the story of the rise to power of Lok (Yam) and his struggle with the impetuous Big D (Leung Ka-fai). With an almost anthropological attention to detail, To reels us in and then unleashes a wave of tense action. In TRIAD ELECTION, the time has come to appoint a new chairman and Lok&#146;s prot&#233;g&#233;e Jimmy (Koo) is the prime candidate &#150; except his only desire is to go straight. When push comes to shove, though, he proves that he can be just as ruthless as his predecessor. Overly political, witty, deep, and thrilling, ELECTION and TRIAD ELECTION are certainly not to be missed. &#147;One of the greatest action directors working in the world and one of the most excitingly prolific&#133; To has built a dazzling brilliant career out of cinematic mayhem: here he rises to the challenge of that legacy with a metaphor about capitalism, men and meat that is perfect in its simplicity and barbarism.&#148; &#150; Manohla Dargis, The New York Times&#147;Johnnie To has reinvented the gangster genre for the 21st century.&#148; &#150; Film Forum, NYC
+showtime_string: at 3:30, 7:30
+year: 2006
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070825.html
+date: 2007-08-25T00:00:00+00:00
+basic_facts: (2006) dir Johnnie To w/Simon Yam, Louis Koo, Nick Cheung [92 min]
+title: Election
+synopsis: This sensational pair of gangster films are the latest stateside releases from one of the current masters of Hong Kong cinema. Johnnie To has churned out some of the most consistently entertaining films coming from Hong Kong in the past 10 years and yet his films aren&#146;t the usual empty action extravaganzas. Though his style is reminiscent of Martin Scorsese &#150; gritty and streetwise yet breathtakingly choreographed &#150; the ELECTION films bear a more than passing resemblance to Coppola&#146;s Godfather Trilogy. As with Coppola&#146;s films these films constitute a gangster epic &#150; except the &#145;family&#146; in To&#146;s films is not brought together by blood but rather by the bonds of friendship and loyalty. There&#146;s the same harkening back to tradition and ritual and the same struggle with changing times that the Corleones face but modernity is represented here not by the emergence of the drug trade but by shady real estate dealings on mainland China. Both films follow the recent history of Wo Sing, Hong Kong&#146;s oldest Triad Society through one of their oldest rituals &#150; the election of a new chairman. ELECTION tells the story of the rise to power of Lok (Yam) and his struggle with the impetuous Big D (Leung Ka-fai). With an almost anthropological attention to detail, To reels us in and then unleashes a wave of tense action. In TRIAD ELECTION, the time has come to appoint a new chairman and Lok&#146;s prot&#233;g&#233;e Jimmy (Koo) is the prime candidate &#150; except his only desire is to go straight. When push comes to shove, though, he proves that he can be just as ruthless as his predecessor. Overly political, witty, deep, and thrilling, ELECTION and TRIAD ELECTION are certainly not to be missed. &#147;One of the greatest action directors working in the world and one of the most excitingly prolific&#133; To has built a dazzling brilliant career out of cinematic mayhem: here he rises to the challenge of that legacy with a metaphor about capitalism, men and meat that is perfect in its simplicity and barbarism.&#148; &#150; Manohla Dargis, The New York Times&#147;Johnnie To has reinvented the gangster genre for the 21st century.&#148; &#150; Film Forum, NYC
+showtime_string: at 1:30, 5:30, 9:30
+year: 2005
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070825.html
+date: 2007-08-25T00:00:00+00:00
+basic_facts: (2005) dir Johnnie To w/Simon Yam, Tony Leung Ka-fai, Louis Koo, Nick Cheung [100 min]
+title: Triad Election
+synopsis: This sensational pair of gangster films are the latest stateside releases from one of the current masters of Hong Kong cinema. Johnnie To has churned out some of the most consistently entertaining films coming from Hong Kong in the past 10 years and yet his films aren&#146;t the usual empty action extravaganzas. Though his style is reminiscent of Martin Scorsese &#150; gritty and streetwise yet breathtakingly choreographed &#150; the ELECTION films bear a more than passing resemblance to Coppola&#146;s Godfather Trilogy. As with Coppola&#146;s films these films constitute a gangster epic &#150; except the &#145;family&#146; in To&#146;s films is not brought together by blood but rather by the bonds of friendship and loyalty. There&#146;s the same harkening back to tradition and ritual and the same struggle with changing times that the Corleones face but modernity is represented here not by the emergence of the drug trade but by shady real estate dealings on mainland China. Both films follow the recent history of Wo Sing, Hong Kong&#146;s oldest Triad Society through one of their oldest rituals &#150; the election of a new chairman. ELECTION tells the story of the rise to power of Lok (Yam) and his struggle with the impetuous Big D (Leung Ka-fai). With an almost anthropological attention to detail, To reels us in and then unleashes a wave of tense action. In TRIAD ELECTION, the time has come to appoint a new chairman and Lok&#146;s prot&#233;g&#233;e Jimmy (Koo) is the prime candidate &#150; except his only desire is to go straight. When push comes to shove, though, he proves that he can be just as ruthless as his predecessor. Overly political, witty, deep, and thrilling, ELECTION and TRIAD ELECTION are certainly not to be missed. &#147;One of the greatest action directors working in the world and one of the most excitingly prolific&#133; To has built a dazzling brilliant career out of cinematic mayhem: here he rises to the challenge of that legacy with a metaphor about capitalism, men and meat that is perfect in its simplicity and barbarism.&#148; &#150; Manohla Dargis, The New York Times&#147;Johnnie To has reinvented the gangster genre for the 21st century.&#148; &#150; Film Forum, NYC
+showtime_string: at 3:30, 7:30
+year: 2006
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070826.html
+date: 2007-08-26T00:00:00+00:00
+basic_facts: (2006) dir Johnnie To w/Simon Yam, Louis Koo, Nick Cheung [92 min]
+title: Election
+synopsis: This sensational pair of gangster films are the latest stateside releases from one of the current masters of Hong Kong cinema. Johnnie To has churned out some of the most consistently entertaining films coming from Hong Kong in the past 10 years and yet his films aren&#146;t the usual empty action extravaganzas. Though his style is reminiscent of Martin Scorsese &#150; gritty and streetwise yet breathtakingly choreographed &#150; the ELECTION films bear a more than passing resemblance to Coppola&#146;s Godfather Trilogy. As with Coppola&#146;s films these films constitute a gangster epic &#150; except the &#145;family&#146; in To&#146;s films is not brought together by blood but rather by the bonds of friendship and loyalty. There&#146;s the same harkening back to tradition and ritual and the same struggle with changing times that the Corleones face but modernity is represented here not by the emergence of the drug trade but by shady real estate dealings on mainland China. Both films follow the recent history of Wo Sing, Hong Kong&#146;s oldest Triad Society through one of their oldest rituals &#150; the election of a new chairman. ELECTION tells the story of the rise to power of Lok (Yam) and his struggle with the impetuous Big D (Leung Ka-fai). With an almost anthropological attention to detail, To reels us in and then unleashes a wave of tense action. In TRIAD ELECTION, the time has come to appoint a new chairman and Lok&#146;s prot&#233;g&#233;e Jimmy (Koo) is the prime candidate &#150; except his only desire is to go straight. When push comes to shove, though, he proves that he can be just as ruthless as his predecessor. Overly political, witty, deep, and thrilling, ELECTION and TRIAD ELECTION are certainly not to be missed. &#147;One of the greatest action directors working in the world and one of the most excitingly prolific&#133; To has built a dazzling brilliant career out of cinematic mayhem: here he rises to the challenge of that legacy with a metaphor about capitalism, men and meat that is perfect in its simplicity and barbarism.&#148; &#150; Manohla Dargis, The New York Times&#147;Johnnie To has reinvented the gangster genre for the 21st century.&#148; &#150; Film Forum, NYC
+showtime_string: at 1:30, 5:30, 9:30
+year: 2005
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070826.html
+date: 2007-08-26T00:00:00+00:00
+basic_facts: (2005) dir Johnnie To w/Simon Yam, Tony Leung Ka-fai, Louis Koo, Nick Cheung [100 min]
+title: Triad Election
+synopsis: This sensational pair of gangster films are the latest stateside releases from one of the current masters of Hong Kong cinema. Johnnie To has churned out some of the most consistently entertaining films coming from Hong Kong in the past 10 years and yet his films aren&#146;t the usual empty action extravaganzas. Though his style is reminiscent of Martin Scorsese &#150; gritty and streetwise yet breathtakingly choreographed &#150; the ELECTION films bear a more than passing resemblance to Coppola&#146;s Godfather Trilogy. As with Coppola&#146;s films these films constitute a gangster epic &#150; except the &#145;family&#146; in To&#146;s films is not brought together by blood but rather by the bonds of friendship and loyalty. There&#146;s the same harkening back to tradition and ritual and the same struggle with changing times that the Corleones face but modernity is represented here not by the emergence of the drug trade but by shady real estate dealings on mainland China. Both films follow the recent history of Wo Sing, Hong Kong&#146;s oldest Triad Society through one of their oldest rituals &#150; the election of a new chairman. ELECTION tells the story of the rise to power of Lok (Yam) and his struggle with the impetuous Big D (Leung Ka-fai). With an almost anthropological attention to detail, To reels us in and then unleashes a wave of tense action. In TRIAD ELECTION, the time has come to appoint a new chairman and Lok&#146;s prot&#233;g&#233;e Jimmy (Koo) is the prime candidate &#150; except his only desire is to go straight. When push comes to shove, though, he proves that he can be just as ruthless as his predecessor. Overly political, witty, deep, and thrilling, ELECTION and TRIAD ELECTION are certainly not to be missed. &#147;One of the greatest action directors working in the world and one of the most excitingly prolific&#133; To has built a dazzling brilliant career out of cinematic mayhem: here he rises to the challenge of that legacy with a metaphor about capitalism, men and meat that is perfect in its simplicity and barbarism.&#148; &#150; Manohla Dargis, The New York Times&#147;Johnnie To has reinvented the gangster genre for the 21st century.&#148; &#150; Film Forum, NYC
+showtime_string: at 3:30, 7:30
+year: 2006
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070827.html
+date: 2007-08-27T00:00:00+00:00
+basic_facts: (2006) dir Johnnie To w/Simon Yam, Louis Koo, Nick Cheung [92 min]
+title: Election
+synopsis: This sensational pair of gangster films are the latest stateside releases from one of the current masters of Hong Kong cinema. Johnnie To has churned out some of the most consistently entertaining films coming from Hong Kong in the past 10 years and yet his films aren&#146;t the usual empty action extravaganzas. Though his style is reminiscent of Martin Scorsese &#150; gritty and streetwise yet breathtakingly choreographed &#150; the ELECTION films bear a more than passing resemblance to Coppola&#146;s Godfather Trilogy. As with Coppola&#146;s films these films constitute a gangster epic &#150; except the &#145;family&#146; in To&#146;s films is not brought together by blood but rather by the bonds of friendship and loyalty. There&#146;s the same harkening back to tradition and ritual and the same struggle with changing times that the Corleones face but modernity is represented here not by the emergence of the drug trade but by shady real estate dealings on mainland China. Both films follow the recent history of Wo Sing, Hong Kong&#146;s oldest Triad Society through one of their oldest rituals &#150; the election of a new chairman. ELECTION tells the story of the rise to power of Lok (Yam) and his struggle with the impetuous Big D (Leung Ka-fai). With an almost anthropological attention to detail, To reels us in and then unleashes a wave of tense action. In TRIAD ELECTION, the time has come to appoint a new chairman and Lok&#146;s prot&#233;g&#233;e Jimmy (Koo) is the prime candidate &#150; except his only desire is to go straight. When push comes to shove, though, he proves that he can be just as ruthless as his predecessor. Overly political, witty, deep, and thrilling, ELECTION and TRIAD ELECTION are certainly not to be missed. &#147;One of the greatest action directors working in the world and one of the most excitingly prolific&#133; To has built a dazzling brilliant career out of cinematic mayhem: here he rises to the challenge of that legacy with a metaphor about capitalism, men and meat that is perfect in its simplicity and barbarism.&#148; &#150; Manohla Dargis, The New York Times&#147;Johnnie To has reinvented the gangster genre for the 21st century.&#148; &#150; Film Forum, NYC
+showtime_string: at 5:30, 9:30
+year: 2005
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070827.html
+date: 2007-08-27T00:00:00+00:00
+basic_facts: (2005) dir Johnnie To w/Simon Yam, Tony Leung Ka-fai, Louis Koo, Nick Cheung [100 min]
+title: Walk on the Wild Side
+synopsis: Stanwyck is in a supporting role in this sexy &#145;60s melodrama but oh what a role! She plays the madam of a &#145;30s bordello in New Orleans and presides over a group of women including Jane Fonda. Things get a little rocky when a lovelorn man (Harvey) shows up trying to reunite with his long lost girl, Hallie (Capucine). The credit sequence, by the way, with Saul Bass&#146;s strutting cat and Elmer Bernstein&#146;s strutting jazz is sensational.
+showtime_string: at 2:45, 7:15
+year: 1962
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070828.html
+date: 2007-08-28T00:00:00+00:00
+basic_facts: (1962) dir Edward Dmytryk w/Stanwyck, Laurence Harvey, Capucine, Jane Fonda, Anne Baxter [114 min]
+title: The Night Walker
+synopsis: In her final film role, Stanwyck plays a woman driven to near-insanity by the death of her husband. Castle, the marketing mastermind who brought cinema such treats as The Tingler and 13 Ghosts, plays it fairly straight, creating a Hitchcockian psychological thriller with a campy sense of humor. &#150; BAM Cinematek Not available on DVD.
+showtime_string: at 5:15, 9:45
+year: 1964
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070828.html
+date: 2007-08-28T00:00:00+00:00
+basic_facts: (1964) dir William Castle w/Stanwyck, Robert Taylor; Screenplay by Robert Bloch [86 min]
+title: Clueless
+synopsis: Think the Brattle&#146;s too good to show CLUELESS? &#133; As if! It is, hands down, one of our favorite literary adaptations &#150; and teen movies for that matter. Director/writer Amy Heckerling transposes Jane Austen&#146;s classic novel Emma to Beverly Hills, keeping all of its charm, wit and passion while making it appealing to a whole new generation. Popular girl Cher (Silverstone) is the queen of her school and spends her time doing &#145;good deeds&#146; like making-over the new girl, Tai (Murphy), and playing matchmaker for her unhappy teachers. But when Tai acts as a none-too-flattering mirror for the shallow and materialistic teen, Cher finally finds that there&#146;s more to life than just shopping and being popular. Silverstone embodies the impossibly perky Cher so well that her performance alone is worth the price of admission.
+showtime_string: at 3:15, 7:30
+year: 1995
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070829.html
+date: 2007-08-29T00:00:00+00:00
+basic_facts: (1995) dir Amy Heckerling w/Alicia Silverstone, Stacey Dash, Brittany Murphy; Novel by Jane Austen [97 min]
+title: Persuasion
+synopsis: As much as I love the BBC Pride &amp; Prejudice miniseries with Colin Firth (be still my heart), this small, quiet film of Jane Austen's last novel is, by far, my favorite adaptation. Amanda Root is the perfect Anne Elliot &#150; meek and overlooked at the start, she grows steadily stronger and more luminous throughout the film. Everyone knows an Austen tale will end happily, but there&#146;s joy in feeling again and again that you&#146;re not quite sure it&#146;ll turn out the way you want. Will Anne Elliot recapture the love of Captain Wentworth? Will Louisa&#146;s youth and beauty steal his heart? Will Anne&#146;s family ever appreciate her? Will the Captain come to the card party?! I know all the answers, yet, without fail, I get goosebumps at the climatic point, in both the novel and the film. &#150; Amanda D., Harvard Book Store
+showtime_string: at 5:15, 9:30
+year: 1995
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070829.html
+date: 2007-08-29T00:00:00+00:00
+basic_facts: (1995) dir Roger Michell w/Amanda Root, Ciaran Hinds; Novel by Jane Austen [107 min]
+title: A Scanner Darkly
+synopsis: After mastering episodic comedy, raucous nostalgia trips and realtime digital video experiments, Richard Linklater has recently turned his attentions to animation. His ear for stoner-philosopher speak and affinity for Austin misfits make A SCANNER DARKLY a return to form for the director. Linklater's rotoscoping technique lends an extra level of paranoia and disassociation to Philip K. Dick's classic story of a covert drug enforcement agent whose identity is kept a secret even from his superiors. Things get really weird when he is assigned to investigate himself. A SCANNER DARKLY works as a thoughtful, elegiac statement on drug abuse, a vicious satire on the war on drugs, and as a testament to animation's endless potential for storytelling.
+showtime_string: at 3:30, 5:30, 7:30, 9:30
+year: 2006
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070830.html
+date: 2007-08-30T00:00:00+00:00
+basic_facts: (2006) dir Richard Linklater w/Keanu Reeves, Robert Downey Jr., Woody Harrelson, Winona Ryder [100 min]
+title: City Lights
+synopsis: Ranked with Chaplin&#146;s masterpieces, CITY LIGHTS tells the touching story of a tramp (Chaplin) who is mistaken for a rich man by a beautiful blind flower seller with whom he is instantly smitten. Chaplin&#146;s full balletic and comedic powers are brought to bear on showing the lengths that he goes to to maintain the illusion and keep the attention of the girl. A wonderful treat in any condition but we are ecstatic to be able to present it in a brand new 35mm print!
+showtime_string: at 3:30, 5:30, 7:30, 9:30
+year: 1931
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070831.html
+date: 2007-08-31T00:00:00+00:00
+basic_facts: (1931) dir Charlie Chaplin w/Chaplin, Virginia Cherrill [87 min]
+title: The Great Dictator
+synopsis: Chaplin&#146;s first synch-sound film was, and remains, his most controversial. It was the first time he had ever written a script in advance, and he shot on a closed set. Chaplin stars in a dual role as a Jewish barber and the dictator Adenoid Hynkel who he is mistaken for. After the reality of Germany under Hitler had been fully exposed, Chaplin wished that he had never made THE GREAT DICTATOR. Yet, almost 70 years later, the film represents a unique attempt to laugh in the face of horror, to remain on the side of civilization when barbarity reigned. &#150; adapted from notes for Film Society of Lincoln Center
+showtime_string: at 1:00, 9:30
+year: 1940
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070901.html
+date: 2007-09-01T00:00:00+00:00
+basic_facts: (1940) dir Charlie Chaplin w/Chaplin, Paulette Godard, Jack Oakie [124 min]
+title: City Lights
+synopsis: Ranked with Chaplin&#146;s masterpieces, CITY LIGHTS tells the touching story of a tramp (Chaplin) who is mistaken for a rich man by a beautiful blind flower seller with whom he is instantly smitten. Chaplin&#146;s full balletic and comedic powers are brought to bear on showing the lengths that he goes to to maintain the illusion and keep the attention of the girl. A wonderful treat in any condition but we are ecstatic to be able to present it in a brand new 35mm print!
+showtime_string: at 3:30, 5:30, 7:30
+year: 1931
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070901.html
+date: 2007-09-01T00:00:00+00:00
+basic_facts: (1931) dir Charlie Chaplin w/Chaplin, Virginia Cherrill [87 min]
+title: The Great Dictator
+synopsis: Chaplin&#146;s first synch-sound film was, and remains, his most controversial. It was the first time he had ever written a script in advance, and he shot on a closed set. Chaplin stars in a dual role as a Jewish barber and the dictator Adenoid Hynkel who he is mistaken for. After the reality of Germany under Hitler had been fully exposed, Chaplin wished that he had never made THE GREAT DICTATOR. Yet, almost 70 years later, the film represents a unique attempt to laugh in the face of horror, to remain on the side of civilization when barbarity reigned. &#150; adapted from notes for Film Society of Lincoln Center
+showtime_string: at 1:00, 9:30
+year: 1940
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070902.html
+date: 2007-09-02T00:00:00+00:00
+basic_facts: (1940) dir Charlie Chaplin w/Chaplin, Paulette Godard, Jack Oakie [124 min]
+title: City Lights
+synopsis: Ranked with Chaplin&#146;s masterpieces, CITY LIGHTS tells the touching story of a tramp (Chaplin) who is mistaken for a rich man by a beautiful blind flower seller with whom he is instantly smitten. Chaplin&#146;s full balletic and comedic powers are brought to bear on showing the lengths that he goes to to maintain the illusion and keep the attention of the girl. A wonderful treat in any condition but we are ecstatic to be able to present it in a brand new 35mm print!
+showtime_string: at 3:30, 5:30, 7:30
+year: 1931
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070902.html
+date: 2007-09-02T00:00:00+00:00
+basic_facts: (1931) dir Charlie Chaplin w/Chaplin, Virginia Cherrill [87 min]
+title: The Great Dictator
+synopsis: Chaplin&#146;s first synch-sound film was, and remains, his most controversial. It was the first time he had ever written a script in advance, and he shot on a closed set. Chaplin stars in a dual role as a Jewish barber and the dictator Adenoid Hynkel who he is mistaken for. After the reality of Germany under Hitler had been fully exposed, Chaplin wished that he had never made THE GREAT DICTATOR. Yet, almost 70 years later, the film represents a unique attempt to laugh in the face of horror, to remain on the side of civilization when barbarity reigned. &#150; adapted from notes for Film Society of Lincoln Center
+showtime_string: at 1:00, 9:30
+year: 1940
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070903.html
+date: 2007-09-03T00:00:00+00:00
+basic_facts: (1940) dir Charlie Chaplin w/Chaplin, Paulette Godard, Jack Oakie [124 min]
+title: City Lights
+synopsis: Ranked with Chaplin&#146;s masterpieces, CITY LIGHTS tells the touching story of a tramp (Chaplin) who is mistaken for a rich man by a beautiful blind flower seller with whom he is instantly smitten. Chaplin&#146;s full balletic and comedic powers are brought to bear on showing the lengths that he goes to to maintain the illusion and keep the attention of the girl. A wonderful treat in any condition but we are ecstatic to be able to present it in a brand new 35mm print!
+showtime_string: at 3:30, 5:30, 7:30
+year: 1931
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070903.html
+date: 2007-09-03T00:00:00+00:00
+basic_facts: (1931) dir Charlie Chaplin w/Chaplin, Virginia Cherrill [87 min]
+title: City Lights
+synopsis: Ranked with Chaplin&#146;s masterpieces, CITY LIGHTS tells the touching story of a tramp (Chaplin) who is mistaken for a rich man by a beautiful blind flower seller with whom he is instantly smitten. Chaplin&#146;s full balletic and comedic powers are brought to bear on showing the lengths that he goes to to maintain the illusion and keep the attention of the girl. A wonderful treat in any condition but we are ecstatic to be able to present it in a brand new 35mm print!
+showtime_string: at 3:30, 5:30, 7:30, 9:30
+year: 1931
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070904.html
+date: 2007-09-04T00:00:00+00:00
+basic_facts: (1931) dir Charlie Chaplin w/Chaplin, Virginia Cherrill [87 min]
+title: City Lights
+synopsis: Ranked with Chaplin&#146;s masterpieces, CITY LIGHTS tells the touching story of a tramp (Chaplin) who is mistaken for a rich man by a beautiful blind flower seller with whom he is instantly smitten. Chaplin&#146;s full balletic and comedic powers are brought to bear on showing the lengths that he goes to to maintain the illusion and keep the attention of the girl. A wonderful treat in any condition but we are ecstatic to be able to present it in a brand new 35mm print!
+showtime_string: at 3:30, 5:30, 7:30, 9:30
+year: 1931
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070905.html
+date: 2007-09-05T00:00:00+00:00
+basic_facts: (1931) dir Charlie Chaplin w/Chaplin, Virginia Cherrill [87 min]
+title: City Lights
+synopsis: Ranked with Chaplin&#146;s masterpieces, CITY LIGHTS tells the touching story of a tramp (Chaplin) who is mistaken for a rich man by a beautiful blind flower seller with whom he is instantly smitten. Chaplin&#146;s full balletic and comedic powers are brought to bear on showing the lengths that he goes to to maintain the illusion and keep the attention of the girl. A wonderful treat in any condition but we are ecstatic to be able to present it in a brand new 35mm print!
+showtime_string: at 8:00, 10:00
+year: 1931
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070906.html
+date: 2007-09-06T00:00:00+00:00
+basic_facts: (1931) dir Charlie Chaplin w/Chaplin, Virginia Cherrill [87 min]
+title: Metropolis
+synopsis: Certainly one of Kino&#146;s greatest achievements of the past 10 years has been bringing this fantastic resurrection of one of cinema&#146;s masterpieces to the U.S. Amid the gleaming towers of a gigantic city of the future the pampered son of the big boss himself is smitten by a young woman and follows her into the depths of the city &#150; where he discovers what really makes Metropolis run. As slavishly regimented workers with numbers instead of names toil amid smoke-belching machinery, he has a vision of slaves lining up for sacrifice. Meanwhile, his father anticipates unrest and makes plans to defuse it, inciting an eccentric inventor to fashion an agent provocateur, the &#145;robot-Maria&#148; &#150; one of the most indelible icons of science fiction film.
+showtime_string: at 4:30
+year: 1927
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070907.html
+date: 2007-09-07T00:00:00+00:00
+basic_facts: (1927) dir Fritz Lang w/Alfred Abel, Gustav Frohlich, Brigitte Helm, Rudolf Klein-Rogge [124 min]
+title: Hannah Takes The Stairs
+synopsis: The much-touted new wave of independent filmmaking continues with this outstanding, intimate romantic comedy. The alluring Greta Gerwig stars as the precocious Hannah, a fresh college graduate who falls for one, and then the other, of a pair of friends at a Chicago company where she is interning. HANNAH sports all of the hallmarks of the so-called &#147;Mumblecore&#148; movement: wry dialogue, improvised performances, a frank depiction of modern relationships and a wistful realism. Something of a romantic shaggy-dog story HANNAH is episodic, rambling and funny as it follows Hannah on her quest to end her &#145;chronic dissatisfaction&#146; and find a boyfriend worthy of her.
+showtime_string: at 7:00
+year: 2007
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070907.html
+date: 2007-09-07T00:00:00+00:00
+basic_facts: (2007) dir Joe Swanberg w/Greta Gerwig, Kent Osborne, Andrew Bujalski, Ry Russo-Young, Mark Duplass, Todd Rohal, Tipper Newton [84 min]
+title: And Now For Something Completely Different
+synopsis: This may well be the first visit to the Brattle Theatre by a member of the legendary Monty Python comedy troupe &#150; but there has been no lack of appearances by their onscreen personas here over the years. We couldn&#146;t be more ecstatic to welcome the versatile writer/actor/world-traveler Michael Palin to the Brattle stage to introduce this Python classic. Originally intended as the troupe&#146;s entr&#233;e into America&#146;s cultural stream, AND NOW&#133; stands as a wonderful compilation of some of the best sketches from the immortal Monty Python&#146;s Flying Circus TV show.Tickets for this special screening are $12 and are available now. Bring a stuffed parrot and receive a special prize!
+showtime_string: at 9:30
+year: 1971
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070907.html
+date: 2007-09-07T00:00:00+00:00
+basic_facts: (1971) dir IanMacNaughton w/Graham Chapman, John Cleese, Michael Palin, Terry Gilliam, Terry Jones, Eric Idle, Connie Booth, Carol Cleveland [89 min]
+title: The Silence
+synopsis: In tribute to the late, great Ingmar Bergman, we offer this free screening of one of his quintessential films. Part of Bergman's unofficial film trilogy, THE SILENCE explores some of the filmmaker's greatest concerns such as emotional and physical alienation, the intricacies of family relations, and sensuality. Tragic and beautifully filmed, THE SILENCE is a film experience not easily forgotten.
+showtime_string: at 11:00
+year: 1963
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070908.html
+date: 2007-09-08T00:00:00+00:00
+basic_facts: (1963) dir Ingmar Bergman w/Ingrid Thulin, Gunnel Lindblom, Jorgen Lindstrom [96 min]
+title: Metropolis
+synopsis: Certainly one of Kino&#146;s greatest achievements of the past 10 years has been bringing this fantastic resurrection of one of cinema&#146;s masterpieces to the U.S. Amid the gleaming towers of a gigantic city of the future the pampered son of the big boss himself is smitten by a young woman and follows her into the depths of the city &#150; where he discovers what really makes Metropolis run. As slavishly regimented workers with numbers instead of names toil amid smoke-belching machinery, he has a vision of slaves lining up for sacrifice. Meanwhile, his father anticipates unrest and makes plans to defuse it, inciting an eccentric inventor to fashion an agent provocateur, the &#145;robot-Maria&#148; &#150; one of the most indelible icons of science fiction film.
+showtime_string: at 2:00, 4:30, 7:00
+year: 1927
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070908.html
+date: 2007-09-08T00:00:00+00:00
+basic_facts: (1927) dir Fritz Lang w/Alfred Abel, Gustav Frohlich, Brigitte Helm, Rudolf Klein-Rogge [124 min]
+title: Hannah Takes The Stairs
+synopsis: The much-touted new wave of independent filmmaking continues with this outstanding, intimate romantic comedy. The alluring Greta Gerwig stars as the precocious Hannah, a fresh college graduate who falls for one, and then the other, of a pair of friends at a Chicago company where she is interning. HANNAH sports all of the hallmarks of the so-called &#147;Mumblecore&#148; movement: wry dialogue, improvised performances, a frank depiction of modern relationships and a wistful realism. Something of a romantic shaggy-dog story HANNAH is episodic, rambling and funny as it follows Hannah on her quest to end her &#145;chronic dissatisfaction&#146; and find a boyfriend worthy of her.
+showtime_string: at 9:30
+year: 2007
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070908.html
+date: 2007-09-08T00:00:00+00:00
+basic_facts: (2007) dir Joe Swanberg w/Greta Gerwig, Kent Osborne, Andrew Bujalski, Ry Russo-Young, Mark Duplass, Todd Rohal, Tipper Newton [84 min]
+title: Fallen Angels
+synopsis: One of Wong Kar-Wai&#146;s most purely enjoyable films, FALLEN ANGELS follows Leon Lai as a cool-as-ice hit man who receives his faxed assignments from his agent, Michelle Reis. When the agent isn&#146;t planning the killer&#146;s next hit she's cleaning his apartment or rolling around fantasizing about him even though the two never meet. The genre aspects take a back seat to Chris Doyle&#146;s fantastic camera work and the amusing subplot surrounding Takeshi Kaneshiro as a mute who breaks into closed lunch stands and forces passersby to be his patrons.
+showtime_string: at 5:30, 7:30
+year: 1995
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070909.html
+date: 2007-09-09T00:00:00+00:00
+basic_facts: (1995) dir Wong Kar Wai w/Leon Lai, Michelle Reis, Takeshi Kaneshiro, Charlie Yeung [96 min]
+title: Hannah Takes The Stairs
+synopsis: The much-touted new wave of independent filmmaking continues with this outstanding, intimate romantic comedy. The alluring Greta Gerwig stars as the precocious Hannah, a fresh college graduate who falls for one, and then the other, of a pair of friends at a Chicago company where she is interning. HANNAH sports all of the hallmarks of the so-called &#147;Mumblecore&#148; movement: wry dialogue, improvised performances, a frank depiction of modern relationships and a wistful realism. Something of a romantic shaggy-dog story HANNAH is episodic, rambling and funny as it follows Hannah on her quest to end her &#145;chronic dissatisfaction&#146; and find a boyfriend worthy of her.
+showtime_string: at 9:30
+year: 2007
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070909.html
+date: 2007-09-09T00:00:00+00:00
+basic_facts: (2007) dir Joe Swanberg w/Greta Gerwig, Kent Osborne, Andrew Bujalski, Ry Russo-Young, Mark Duplass, Todd Rohal, Tipper Newton [84 min]
+title: Hannah Takes The Stairs
+synopsis: The much-touted new wave of independent filmmaking continues with this outstanding, intimate romantic comedy. The alluring Greta Gerwig stars as the precocious Hannah, a fresh college graduate who falls for one, and then the other, of a pair of friends at a Chicago company where she is interning. HANNAH sports all of the hallmarks of the so-called &#147;Mumblecore&#148; movement: wry dialogue, improvised performances, a frank depiction of modern relationships and a wistful realism. Something of a romantic shaggy-dog story HANNAH is episodic, rambling and funny as it follows Hannah on her quest to end her &#145;chronic dissatisfaction&#146; and find a boyfriend worthy of her.
+showtime_string: at 9:30
+year: 2007
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070910.html
+date: 2007-09-10T00:00:00+00:00
+basic_facts: (2007) dir Joe Swanberg w/Greta Gerwig, Kent Osborne, Andrew Bujalski, Ry Russo-Young, Mark Duplass, Todd Rohal, Tipper Newton [84 min]
+title: Fallen Angels
+synopsis: One of Wong Kar-Wai&#146;s most purely enjoyable films, FALLEN ANGELS follows Leon Lai as a cool-as-ice hit man who receives his faxed assignments from his agent, Michelle Reis. When the agent isn&#146;t planning the killer&#146;s next hit she's cleaning his apartment or rolling around fantasizing about him even though the two never meet. The genre aspects take a back seat to Chris Doyle&#146;s fantastic camera work and the amusing subplot surrounding Takeshi Kaneshiro as a mute who breaks into closed lunch stands and forces passersby to be his patrons.
+showtime_string: at 1:30, 3:30, 5:30, 7:30
+year: 1995
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070910.html
+date: 2007-09-10T00:00:00+00:00
+basic_facts: (1995) dir Kar Wai Wong w/Leon Lai, Michelle Reis, Takeshi Kaneshiro, Charlie Yeung [96 min]
+title: Shadows Of Our Forgotten Ancestors
+synopsis: Paradjanov&#146;s gloriously colorful and kinesthetically bracing saga of Ivan and Marichka, the Romeo and Juliet of the Carpathians. Chants, folksongs, atonal music all combine with virtuoso camerawork to make this one of the most memorable films of its era. &#150; Film Society of Lincoln Center &#147;The plot is affecting, but it serves Paradjanov mainly as an armature to support the exhilarating rush of his lyrical camera movements (executed by master cinematographer Yuri Ilyenko), his innovative use of nature and interiors, his deft juggling of folklore and fancy in relation to pagan and Christian rituals, and his astonishing handling of color and music.&#148; &#150; Jonathan Rosenbaum
+showtime_string: at 3:30, 8:00
+year: 1964
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070911.html
+date: 2007-09-11T00:00:00+00:00
+basic_facts: (1964) dir Sergie Parajanov w/Ivan Mikolajchuk, Larisa Kadochnikova, tatyana Bestayeva [97 min]
+title: Hannah Takes The Stairs
+synopsis: The much-touted new wave of independent filmmaking continues with this outstanding, intimate romantic comedy. The alluring Greta Gerwig stars as the precocious Hannah, a fresh college graduate who falls for one, and then the other, of a pair of friends at a Chicago company where she is interning. HANNAH sports all of the hallmarks of the so-called &#147;Mumblecore&#148; movement: wry dialogue, improvised performances, a frank depiction of modern relationships and a wistful realism. Something of a romantic shaggy-dog story HANNAH is episodic, rambling and funny as it follows Hannah on her quest to end her &#145;chronic dissatisfaction&#146; and find a boyfriend worthy of her.
+showtime_string: at 10:00
+year: 2007
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070911.html
+date: 2007-09-11T00:00:00+00:00
+basic_facts: (2007) dir Joe Swanberg w/Greta Gerwig, Kent Osborne, Andrew Bujalski, Ry Russo-Young, Mark Duplass, Todd Rohal, Tipper Newton [84 min]
+title: Shadows Of Our Forgotten Ancestors
+synopsis: Paradjanov&#146;s gloriously colorful and kinesthetically bracing saga of Ivan and Marichka, the Romeo and Juliet of the Carpathians. Chants, folksongs, atonal music all combine with virtuoso camerawork to make this one of the most memorable films of its era. &#150; Film Society of Lincoln Center &#147;The plot is affecting, but it serves Paradjanov mainly as an armature to support the exhilarating rush of his lyrical camera movements (executed by master cinematographer Yuri Ilyenko), his innovative use of nature and interiors, his deft juggling of folklore and fancy in relation to pagan and Christian rituals, and his astonishing handling of color and music.&#148; &#150; Jonathan Rosenbaum
+showtime_string: at 3:30, 8:00
+year: 1964
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070912.html
+date: 2007-09-12T00:00:00+00:00
+basic_facts: (1964) dir Sergie Parajanov w/Ivan Mikolajchuk, Larisa Kadochnikova, tatyana Bestayeva [97 min]
+title: Hannah Takes The Stairs
+synopsis: The much-touted new wave of independent filmmaking continues with this outstanding, intimate romantic comedy. The alluring Greta Gerwig stars as the precocious Hannah, a fresh college graduate who falls for one, and then the other, of a pair of friends at a Chicago company where she is interning. HANNAH sports all of the hallmarks of the so-called &#147;Mumblecore&#148; movement: wry dialogue, improvised performances, a frank depiction of modern relationships and a wistful realism. Something of a romantic shaggy-dog story HANNAH is episodic, rambling and funny as it follows Hannah on her quest to end her &#145;chronic dissatisfaction&#146; and find a boyfriend worthy of her.
+showtime_string: at 10:00
+year: 2007
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070912.html
+date: 2007-09-12T00:00:00+00:00
+basic_facts: (2007) dir Joe Swanberg w/Greta Gerwig, Kent Osborne, Andrew Bujalski, Ry Russo-Young, Mark Duplass, Todd Rohal, Tipper Newton [84 min]
+title: Hannah Takes The Stairs
+synopsis: The much-touted new wave of independent filmmaking continues with this outstanding, intimate romantic comedy. The alluring Greta Gerwig stars as the precocious Hannah, a fresh college graduate who falls for one, and then the other, of a pair of friends at a Chicago company where she is interning. HANNAH sports all of the hallmarks of the so-called &#147;Mumblecore&#148; movement: wry dialogue, improvised performances, a frank depiction of modern relationships and a wistful realism. Something of a romantic shaggy-dog story HANNAH is episodic, rambling and funny as it follows Hannah on her quest to end her &#145;chronic dissatisfaction&#146; and find a boyfriend worthy of her.
+showtime_string: at 9:30
+year: 2007
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070913.html
+date: 2007-09-13T00:00:00+00:00
+basic_facts: (2007) dir Joe Swanberg w/Greta Gerwig, Kent Osborne, Andrew Bujalski, Ry Russo-Young, Mark Duplass, Todd Rohal, Tipper Newton [84 min]
+title: Hannah Takes The Stairs
+synopsis: The much-touted new wave of independent filmmaking continues with this outstanding, intimate romantic comedy. The alluring Greta Gerwig stars as the precocious Hannah, a fresh college graduate who falls for one, and then the other, of a pair of friends at a Chicago company where she is interning. HANNAH sports all of the hallmarks of the so-called &#147;Mumblecore&#148; movement: wry dialogue, improvised performances, a frank depiction of modern relationships and a wistful realism. Something of a romantic shaggy-dog story HANNAH is episodic, rambling and funny as it follows Hannah on her quest to end her &#145;chronic dissatisfaction&#146; and find a boyfriend worthy of her.
+showtime_string: at 9:30
+year: 2007
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070914.html
+date: 2007-09-14T00:00:00+00:00
+basic_facts: (2007) dir Joe Swanberg w/Greta Gerwig, Kent Osborne, Andrew Bujalski, Ry Russo-Young, Mark Duplass, Todd Rohal, Tipper Newton [84 min]
+title: Pierrot Le Fou
+synopsis: After abandoning his wife at a Parisian party, bored Ferdinand (Belmondo) flees his bourgeois existence with his babysitter and ex-lover, Marianne (Karina). Taking it on the lam to the south of France, the couple becomes an existential Bonnie and Clyde, battling gunrunners, gas station attendants, and American tourists as they come face to face with their own roles as characters in a pop-cultural landscape. A profound turning point in Godard&#146;s cinema, Pierrot le fou recalls the gangster cool of Breathless and Band of Outsiders while also pointing towards the increasingly essayistic, apocalyptic visions of Two or Three Things I Know About Her and Weekend. &#147;Whimsical and melancholic, playful and heavy as a heart swollen with emotion.&#146;&#148; &#150; Manohla Dargis, The New York Times&#147;Made in the middle of Godard's greatest period, it's a grand summation of everything he'd achieved since Breathless &#150; collage structure, autonomous sound, interpolated set pieces &#150; as well as his version of a location thriller. Shot in wide-screen and saturated primary colors, mainly in the south of France, Pierrot looks sensational&#133; The movie itself radiates joy of cinema.&#148; - J. Hoberman, The Village Voice
+showtime_string: at 4:45, 7:00
+year: 1965
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070914.html
+date: 2007-09-14T00:00:00+00:00
+basic_facts: (1965) dir Jean-Luc Godard w/Jean-Paul Belmondo, Anna Karina, Graziella Galvani [110 min]
+title: Hannah Takes The Stairs
+synopsis: The much-touted new wave of independent filmmaking continues with this outstanding, intimate romantic comedy. The alluring Greta Gerwig stars as the precocious Hannah, a fresh college graduate who falls for one, and then the other, of a pair of friends at a Chicago company where she is interning. HANNAH sports all of the hallmarks of the so-called &#147;Mumblecore&#148; movement: wry dialogue, improvised performances, a frank depiction of modern relationships and a wistful realism. Something of a romantic shaggy-dog story HANNAH is episodic, rambling and funny as it follows Hannah on her quest to end her &#145;chronic dissatisfaction&#146; and find a boyfriend worthy of her.
+showtime_string: at 9:30
+year: 2007
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070915.html
+date: 2007-09-15T00:00:00+00:00
+basic_facts: (2007) dir Joe Swanberg w/Greta Gerwig, Kent Osborne, Andrew Bujalski, Ry Russo-Young, Mark Duplass, Todd Rohal, Tipper Newton [84 min]
+title: Pierrot Le Fou
+synopsis: After abandoning his wife at a Parisian party, bored Ferdinand (Belmondo) flees his bourgeois existence with his babysitter and ex-lover, Marianne (Karina). Taking it on the lam to the south of France, the couple becomes an existential Bonnie and Clyde, battling gunrunners, gas station attendants, and American tourists as they come face to face with their own roles as characters in a pop-cultural landscape. A profound turning point in Godard&#146;s cinema, Pierrot le fou recalls the gangster cool of Breathless and Band of Outsiders while also pointing towards the increasingly essayistic, apocalyptic visions of Two or Three Things I Know About Her and Weekend. &#147;Whimsical and melancholic, playful and heavy as a heart swollen with emotion.&#146;&#148; &#150; Manohla Dargis, The New York Times&#147;Made in the middle of Godard's greatest period, it's a grand summation of everything he'd achieved since Breathless &#150; collage structure, autonomous sound, interpolated set pieces &#150; as well as his version of a location thriller. Shot in wide-screen and saturated primary colors, mainly in the south of France, Pierrot looks sensational&#133; The movie itself radiates joy of cinema.&#148; - J. Hoberman, The Village Voice
+showtime_string: at 2:15, 4:45, 7:00
+year: 1965
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070915.html
+date: 2007-09-15T00:00:00+00:00
+basic_facts: (1965) dir Jean-Luc Godard w/Jean-Paul Belmondo, Anna Karina, Graziella Galvani [110 min]
+title: Hannah Takes The Stairs
+synopsis: The much-touted new wave of independent filmmaking continues with this outstanding, intimate romantic comedy. The alluring Greta Gerwig stars as the precocious Hannah, a fresh college graduate who falls for one, and then the other, of a pair of friends at a Chicago company where she is interning. HANNAH sports all of the hallmarks of the so-called &#147;Mumblecore&#148; movement: wry dialogue, improvised performances, a frank depiction of modern relationships and a wistful realism. Something of a romantic shaggy-dog story HANNAH is episodic, rambling and funny as it follows Hannah on her quest to end her &#145;chronic dissatisfaction&#146; and find a boyfriend worthy of her.
+showtime_string: at 9:30
+year: 2007
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070916.html
+date: 2007-09-16T00:00:00+00:00
+basic_facts: (2007) dir Joe Swanberg w/Greta Gerwig, Kent Osborne, Andrew Bujalski, Ry Russo-Young, Mark Duplass, Todd Rohal, Tipper Newton [84 min]
+title: Pierrot Le Fou
+synopsis: After abandoning his wife at a Parisian party, bored Ferdinand (Belmondo) flees his bourgeois existence with his babysitter and ex-lover, Marianne (Karina). Taking it on the lam to the south of France, the couple becomes an existential Bonnie and Clyde, battling gunrunners, gas station attendants, and American tourists as they come face to face with their own roles as characters in a pop-cultural landscape. A profound turning point in Godard&#146;s cinema, Pierrot le fou recalls the gangster cool of Breathless and Band of Outsiders while also pointing towards the increasingly essayistic, apocalyptic visions of Two or Three Things I Know About Her and Weekend. &#147;Whimsical and melancholic, playful and heavy as a heart swollen with emotion.&#146;&#148; &#150; Manohla Dargis, The New York Times&#147;Made in the middle of Godard's greatest period, it's a grand summation of everything he'd achieved since Breathless &#150; collage structure, autonomous sound, interpolated set pieces &#150; as well as his version of a location thriller. Shot in wide-screen and saturated primary colors, mainly in the south of France, Pierrot looks sensational&#133; The movie itself radiates joy of cinema.&#148; - J. Hoberman, The Village Voice
+showtime_string: at 2:15, 4:45, 7:00
+year: 1965
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070916.html
+date: 2007-09-16T00:00:00+00:00
+basic_facts: (1965) dir Jean-Luc Godard w/Jean-Paul Belmondo, Anna Karina, Graziella Galvani [110 min]
+title: Pierrot Le Fou
+synopsis: After abandoning his wife at a Parisian party, bored Ferdinand (Belmondo) flees his bourgeois existence with his babysitter and ex-lover, Marianne (Karina). Taking it on the lam to the south of France, the couple becomes an existential Bonnie and Clyde, battling gunrunners, gas station attendants, and American tourists as they come face to face with their own roles as characters in a pop-cultural landscape. A profound turning point in Godard&#146;s cinema, Pierrot le fou recalls the gangster cool of Breathless and Band of Outsiders while also pointing towards the increasingly essayistic, apocalyptic visions of Two or Three Things I Know About Her and Weekend. &#147;Whimsical and melancholic, playful and heavy as a heart swollen with emotion.&#146;&#148; &#150; Manohla Dargis, The New York Times&#147;Made in the middle of Godard's greatest period, it's a grand summation of everything he'd achieved since Breathless &#150; collage structure, autonomous sound, interpolated set pieces &#150; as well as his version of a location thriller. Shot in wide-screen and saturated primary colors, mainly in the south of France, Pierrot looks sensational&#133; The movie itself radiates joy of cinema.&#148; - J. Hoberman, The Village Voice
+showtime_string: at 8:00
+year: 1965
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070917.html
+date: 2007-09-17T00:00:00+00:00
+basic_facts: (1965) dir Jean-Luc Godard w/Jean-Paul Belmondo, Anna Karina, Graziella Galvani [110 min]
+title: Hannah Takes The Stairs
+synopsis: The much-touted new wave of independent filmmaking continues with this outstanding, intimate romantic comedy. The alluring Greta Gerwig stars as the precocious Hannah, a fresh college graduate who falls for one, and then the other, of a pair of friends at a Chicago company where she is interning. HANNAH sports all of the hallmarks of the so-called &#147;Mumblecore&#148; movement: wry dialogue, improvised performances, a frank depiction of modern relationships and a wistful realism. Something of a romantic shaggy-dog story HANNAH is episodic, rambling and funny as it follows Hannah on her quest to end her &#145;chronic dissatisfaction&#146; and find a boyfriend worthy of her.
+showtime_string: at 10:00
+year: 2007
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070917.html
+date: 2007-09-17T00:00:00+00:00
+basic_facts: (2007) dir Joe Swanberg w/Greta Gerwig, Kent Osborne, Andrew Bujalski, Ry Russo-Young, Mark Duplass, Todd Rohal, Tipper Newton [84 min]
+title: Pierrot Le Fou
+synopsis: After abandoning his wife at a Parisian party, bored Ferdinand (Belmondo) flees his bourgeois existence with his babysitter and ex-lover, Marianne (Karina). Taking it on the lam to the south of France, the couple becomes an existential Bonnie and Clyde, battling gunrunners, gas station attendants, and American tourists as they come face to face with their own roles as characters in a pop-cultural landscape. A profound turning point in Godard&#146;s cinema, Pierrot le fou recalls the gangster cool of Breathless and Band of Outsiders while also pointing towards the increasingly essayistic, apocalyptic visions of Two or Three Things I Know About Her and Weekend. &#147;Whimsical and melancholic, playful and heavy as a heart swollen with emotion.&#146;&#148; &#150; Manohla Dargis, The New York Times&#147;Made in the middle of Godard's greatest period, it's a grand summation of everything he'd achieved since Breathless &#150; collage structure, autonomous sound, interpolated set pieces &#150; as well as his version of a location thriller. Shot in wide-screen and saturated primary colors, mainly in the south of France, Pierrot looks sensational&#133; The movie itself radiates joy of cinema.&#148; - J. Hoberman, The Village Voice
+showtime_string: at 4:45, 7:00
+year: 1965
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070918.html
+date: 2007-09-18T00:00:00+00:00
+basic_facts: (1965) dir Jean-Luc Godard w/Jean-Paul Belmondo, Anna Karina, Graziella Galvani [110 min]
+title: Hannah Takes The Stairs
+synopsis: The much-touted new wave of independent filmmaking continues with this outstanding, intimate romantic comedy. The alluring Greta Gerwig stars as the precocious Hannah, a fresh college graduate who falls for one, and then the other, of a pair of friends at a Chicago company where she is interning. HANNAH sports all of the hallmarks of the so-called &#147;Mumblecore&#148; movement: wry dialogue, improvised performances, a frank depiction of modern relationships and a wistful realism. Something of a romantic shaggy-dog story HANNAH is episodic, rambling and funny as it follows Hannah on her quest to end her &#145;chronic dissatisfaction&#146; and find a boyfriend worthy of her.
+showtime_string: at 9:30
+year: 2007
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070918.html
+date: 2007-09-18T00:00:00+00:00
+basic_facts: (2007) dir Joe Swanberg w/Greta Gerwig, Kent Osborne, Andrew Bujalski, Ry Russo-Young, Mark Duplass, Todd Rohal, Tipper Newton [84 min]
+title: Pierrot Le Fou
+synopsis: After abandoning his wife at a Parisian party, bored Ferdinand (Belmondo) flees his bourgeois existence with his babysitter and ex-lover, Marianne (Karina). Taking it on the lam to the south of France, the couple becomes an existential Bonnie and Clyde, battling gunrunners, gas station attendants, and American tourists as they come face to face with their own roles as characters in a pop-cultural landscape. A profound turning point in Godard&#146;s cinema, Pierrot le fou recalls the gangster cool of Breathless and Band of Outsiders while also pointing towards the increasingly essayistic, apocalyptic visions of Two or Three Things I Know About Her and Weekend. &#147;Whimsical and melancholic, playful and heavy as a heart swollen with emotion.&#146;&#148; &#150; Manohla Dargis, The New York Times&#147;Made in the middle of Godard's greatest period, it's a grand summation of everything he'd achieved since Breathless &#150; collage structure, autonomous sound, interpolated set pieces &#150; as well as his version of a location thriller. Shot in wide-screen and saturated primary colors, mainly in the south of France, Pierrot looks sensational&#133; The movie itself radiates joy of cinema.&#148; - J. Hoberman, The Village Voice
+showtime_string: at 4:45
+year: 1965
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070919.html
+date: 2007-09-19T00:00:00+00:00
+basic_facts: (1965) dir Jean-Luc Godard w/Jean-Paul Belmondo, Anna Karina, Graziella Galvani [110 min]
+title: Swashbuckler
+synopsis: Avast, me hearties! It&#146;s time once again for International Talk Like A Pirate Day! This little known gem features Jaws&#146; Robert Shaw as a (you guessed it) swashbuckling pirate in the Carribbean who, along with his compatriot (Jones), attempts to defend the residents of Jamaica from a despotic ruler (Boyle) &#150; and win the heart of the more-than-capable ing&#233;nue (Bujold). Properly garbed pirates and/or wenches get in for half price!
+showtime_string: at 9:30
+year: 1976
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070919.html
+date: 2007-09-19T00:00:00+00:00
+basic_facts: (1976) dir James Goldstone w/Robert Shaw, James Earl Jones, Peter Boyle, Genevieve Bujold, Beau Bridges [101 min]
+title: Pierrot Le Fou
+synopsis: After abandoning his wife at a Parisian party, bored Ferdinand (Belmondo) flees his bourgeois existence with his babysitter and ex-lover, Marianne (Karina). Taking it on the lam to the south of France, the couple becomes an existential Bonnie and Clyde, battling gunrunners, gas station attendants, and American tourists as they come face to face with their own roles as characters in a pop-cultural landscape. A profound turning point in Godard&#146;s cinema, Pierrot le fou recalls the gangster cool of Breathless and Band of Outsiders while also pointing towards the increasingly essayistic, apocalyptic visions of Two or Three Things I Know About Her and Weekend. &#147;Whimsical and melancholic, playful and heavy as a heart swollen with emotion.&#146;&#148; &#150; Manohla Dargis, The New York Times&#147;Made in the middle of Godard's greatest period, it's a grand summation of everything he'd achieved since Breathless &#150; collage structure, autonomous sound, interpolated set pieces &#150; as well as his version of a location thriller. Shot in wide-screen and saturated primary colors, mainly in the south of France, Pierrot looks sensational&#133; The movie itself radiates joy of cinema.&#148; - J. Hoberman, The Village Voice
+showtime_string: at 8:00
+year: 1965
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070920.html
+date: 2007-09-20T00:00:00+00:00
+basic_facts: (1965) dir Jean-Luc Godard w/Jean-Paul Belmondo, Anna Karina, Graziella Galvani [110 min]
+title: Hannah Takes The Stairs
+synopsis: The much-touted new wave of independent filmmaking continues with this outstanding, intimate romantic comedy. The alluring Greta Gerwig stars as the precocious Hannah, a fresh college graduate who falls for one, and then the other, of a pair of friends at a Chicago company where she is interning. HANNAH sports all of the hallmarks of the so-called &#147;Mumblecore&#148; movement: wry dialogue, improvised performances, a frank depiction of modern relationships and a wistful realism. Something of a romantic shaggy-dog story HANNAH is episodic, rambling and funny as it follows Hannah on her quest to end her &#145;chronic dissatisfaction&#146; and find a boyfriend worthy of her.
+showtime_string: at 10:00
+year: 2007
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070920.html
+date: 2007-09-20T00:00:00+00:00
+basic_facts: (2007) dir Joe Swanberg w/Greta Gerwig, Kent Osborne, Andrew Bujalski, Ry Russo-Young, Mark Duplass, Todd Rohal, Tipper Newton [84 min]
+title: Sunshine
+synopsis: Fifty years into the future our earth is frozen and the sun is slowly dying. The earth's last hope, a crew of eight, has been sent on the ominously named Icarus II to reignite the sun. The second crew to attempt this mission, they are haunted by the unknown fates of their predecessors. As they approach their destination they are both awestruck and terrified by the gravity of their mission and the utter brilliance of the sun. Director Danny Boyle has reinvented space travel just as he reinvigorated the zombie film with his hit 28 DAYS LATER. Completely embracing the exquisite abyss that has enthralled science-fiction fans for years he also manages to do something completely new. Boyle brings a fresh, self-aware perspective to the genre that is undeniably exciting.
+showtime_string: at 7:30
+year: 2007
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070921.html
+date: 2007-09-21T00:00:00+00:00
+basic_facts: (2007) dir Danny Boyle w/Cillian Murphy, Chris Evans, Michelle Yeoh, Rose Byrne, Cliff Curtis, Hiroyuki Sanada, Benedict Wong, Troy Garity [108 min]
+title: Paprika
+synopsis: Fasten your seatbelts for a phantasmogoric animated ride! A nerdy engineer invents the DC-mini, a device that enables access to people's dreams, and it isn't long before some of the prototypes are stolen. When the DC-mini falls into the wrong hands, it's up to a prim psychotherapist and her sprightly alter-ego, the titular PAPRIKA, to find the culprit before the dream-state and reality irrevocably collide! Satoshi Kon's films are smart and challenging and PAPRIKA's artistry and unexpectedly sweet emotional payoff make it one of the most delightful films of 2007.
+showtime_string: at 5:30, 9:45
+year: 2006
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070921.html
+date: 2007-09-21T00:00:00+00:00
+basic_facts: (2006) dir Satoshi Kon w/Megumi Hayashibara, Toru Furuya [90 min]
+title: Grindhouse
+synopsis: When GRINDHOUSE failed to meet box office expectations upon its release this spring, it was dismissed as an overlong snooze from two self-indulgent filmmakers. It also happens to be one of our favorite films of the year. Robert Rodriguez and Quentin Tarantino&#146;s big-budget homage to exploitation cinema is a gross, sleazy, smart and hilarious tribute to going to the movies for the sheer fun of it. Rodriguez&#146;s PLANET TERROR casts Rose MacGowan as a plucky go-go dancer who must save the world from a zombie apocalypse. In DEATH PROOF, Tarantino gives Kurt Russell his best role in years as a psycho bent on offing a band of girlfriends with his souped-up Dodge Charger. Both feature-length movies (Tarantino&#146;s in particular) have a smart and fresh take on the genre, and there&#146;s even trailers for phoney upcoming films like Eli Roth&#146;s holiday slasher Thanksgiving (&#147;White meat! Dark meat! All will be carved!&#148;) and Rob Zombie&#146;s Werewolf Women Of The S.S. Explosively entertaining.
+showtime_string: at 1:00, 4:30, 8:00
+year: 2007
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070922.html
+date: 2007-09-22T00:00:00+00:00
+basic_facts: (2007) dir Robert Rodriguez, Quentin Tarantino w/Rose McGowan, Freddy Rodriguez, Marley Shelton, Naveen Andrews, Josh Brolin, Jeff Fahey, Michael Parks, Kurt Russell, Sydney Tamiia Poitier, Vanessa Ferlito, Jordan Ladd, Tracie Thoms, Rosario Dawson, Zo&#235; Bell, Mary Elizabeth Winstead [191 min]
+title: My Best Friend
+synopsis: Fran&#231;ois (Auteuil) is a successful antique dealer who is shocked to find that those who he considers his close friends don&#146;t actually like him. In fact, they don&#146;t believe that he even knows the meaning of friendship. Fran&#231;ois&#146; business partner, Catherine, wagers that he can&#146;t produce his best friend and challenges him to introduce them. Determined to win the bet, Fran&#231;ois enlists a friendly cabbie, Bruno, to pose as his friend and help him learn how to be a likeable person. This witty, erudite comedy is a wonderful film from one of France&#146;s leading filmmakers and one of its most beloved stars.
+showtime_string: at 3:30, 7:30
+year: 2006
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070923.html
+date: 2007-09-23T00:00:00+00:00
+basic_facts: (2006) dir Patrice Leconte w/Daniel Auteuil, Dany Boon, Julie Gayet [94 min]
+title: The Boss Of It All
+synopsis: An entirely unexpected office comedy from Danish director Lars von Trier, THE BOSS OF IT ALL marks von Trier's first Danish film since 1998's The Idiots. Ravn (Gantzler), the owner of an I.T. company, attributes all of his company's executive decisions to a fictional &#147;Boss Of It All.&#148; Conveniently the fictional boss lives in the United States and communicates solely via e-mail. However, when a potential buyer demands to meet the company's boss he must hire Kristoffer (Albinus), an out-of-work actor to masquerade as the loathed CEO. What follows is a hilarious comedy of errors as Kristoffer is confronted with the chaos and confusion of meeting the company's staff; all of whom have been given contrasting information about their fabled boss.
+showtime_string: at 5:30, 9:30
+year: 2006
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070923.html
+date: 2007-09-23T00:00:00+00:00
+basic_facts: (2006) dir Lars Von Trier w/Jens Albinus, Fridrik Thor Fridriksson, Peter Gantzler, Benedikt Erlingsson, Iben Hjejle [99 min]
+title: Bug
+synopsis: Legendary 70s director William Friedkin (The French Connection, The Excorcist) returns with this taught, claustrophobic thriller adapted from the play by Tracy Letts. Ashley Judd and Michael Shannon (who originated the role on stage) give fearless performances as a damaged waitress and a paranoid Gulf War veteran holed up in an Oklahoma motel room who imagine themselves under siege by a swarm of bugs.
+showtime_string: at 7:30
+year: 2007
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070924.html
+date: 2007-09-24T00:00:00+00:00
+basic_facts: (2007) dir William Friedkin w/Ashley Judd, Michael Shannon, Harry Connick Jr. [102 min]
+title: Joshua
+synopsis: George Ratliff&#146;s (Hell House) narrative feature debut suffered from a truncated run in Boston this summer, but this thriller is not just another creepy-little-kid movie, and deserves a second look. Joshua (Kogan) is an exceptionally gifted, albeit taciturn and morbid 9-year old who lives in an immaculate Manhattan apartment with his parents. Joshua&#146;s mother (Farmiga) slides into an increasingly bleak and violent despair when Joshua&#146;s newborn sister goes on an interminable crying jag. Is Farmiga suffering from a seriously bad case of post-partum depression &#150; or does it have more to do with her offbeat son&#146;s increasingly unusual behavior? Ratliff does a superb job establishing a menacing, off-kilter tone as the family implodes, and Farmiga delivers a fearless performance as a young mother in the throes of a total nervous breakdown, making JOSHUA an effective and disquieting examination of the fears of parenthood.
+showtime_string: at 5:15, 9:45
+year: 2007
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070924.html
+date: 2007-09-24T00:00:00+00:00
+basic_facts: (2007) dir George Ratliff w/Sam Rockwell, Vera Farmiga, Jacob Kogan [105 min]
+title: 12:08 East Of Bucharest
+synopsis: This wry, funny farce took the award for best first film at the 2006 Cannes Film Festival. On the eve of the 16th anniversary of the Romanian Revolution, a pretentious, small-town TV host strains to produce a show to commemorate the event but the only people he can find to interview are an alcoholic history teacher and a lonely retiree, who moonlights as Santa. As these two struggle to defend their self-professed positions as vanguards of the revolution, the TV producer sees his show disintegrating before his eyes.
+showtime_string: at 5:30, 7:30, 9:30
+year: 2006
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070925.html
+date: 2007-09-25T00:00:00+00:00
+basic_facts: (2006) dir Corneliu Porumboiu w/Mircea Andreescu, Teodor Corban, Ion Sapdaru [89 min]
+title: Lady Chatterley
+synopsis: A keenly perceptive, frankly sensual adaptation of D.H. Lawrence's classic novel about the turbulent love affair between an aristocratic woman and her husband&#146;s gamekeeper. It&#146;s 1921 and Constance Chatterley, a young bride frustrated by her marriage to a wheelchair-bound veteran, has moved to one of her husband&#146;s rural estates. Lonely and isolated in a rural environment that bores her, Lady Chatterley nonetheless finds her desire awakened by her taciturn gamekeeper Oliver Parkin. LADY CHATTERLEY tells the story of a passion that is both innocent and subversive &#150; one that transcends, without ever ignoring, class and social conventions. As Constance and Parkin nourish their mutual love, both enter into a radical realm where nature, sex and romance merge into one powerful experience. Winner of 5 Cesar Awards (the French 'Oscar'), including Best Picture and Best Director.
+showtime_string: at 5:15, 8:30
+year: 2006
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070926.html
+date: 2007-09-26T00:00:00+00:00
+basic_facts: (2006) dir Pascale Ferran w/Marina Hands, Jean-Louis Coullo'ch, Hippolyte Giradot [168 min]
+title: The Ten
+synopsis: Kieslowski&#146;s Decalogue this ain&#146;t. Ten vignettes, each inspired by one of the Ten Commandments and rendered with the bad taste and immense humor that only former members of MTV&#146;s late, lamented &#147;The State&#148; and an all-star cast can provide. Some of the highlights include Winona Ryder falling in love with a ventriloquist&#146;s dummy, Liev Schreiber as a man who covets his neighbor&#146;s CAT scan machine, and Paul Rudd as our tasteless host.
+showtime_string: at 10:00
+year: 2007
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070928.html
+date: 2007-09-28T00:00:00+00:00
+basic_facts: (2007) dir David Wain w/Jessica Alba, Adam Brody, Bobby Carnavale, Rob Corddry, Famke Janssen, Kerri Kenney, Ken Marino, A.D. Miles, Gretchen Mol, Oliver Platt, Paul Rudd, Winona Ryder, Liev Schreiber, and many more [98 min]
+title: The Ten
+synopsis: Kieslowski&#146;s Decalogue this ain&#146;t. Ten vignettes, each inspired by one of the Ten Commandments and rendered with the bad taste and immense humor that only former members of MTV&#146;s late, lamented &#147;The State&#148; and an all-star cast can provide. Some of the highlights include Winona Ryder falling in love with a ventriloquist&#146;s dummy, Liev Schreiber as a man who covets his neighbor&#146;s CAT scan machine, and Paul Rudd as our tasteless host.
+showtime_string: at 10:00
+year: 2007
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/070929.html
+date: 2007-09-29T00:00:00+00:00
+basic_facts: (2007) dir David Wain w/Jessica Alba, Adam Brody, Bobby Carnavale, Rob Corddry, Famke Janssen, Kerri Kenney, Ken Marino, A.D. Miles, Gretchen Mol, Oliver Platt, Paul Rudd, Winona Ryder, Liev Schreiber, and many more [98 min]
+title: Hot Fuzz
+synopsis: The comedic masterminds behind SHAUN OF THE DEAD strike again with this relentlessly funny parody of/homage to American buddy cop movies. Wright, Pegg and Frost bring us the story of Nicholas Angel, a London cop who is so good he makes the rest of the force look bad. In retribution, he is transferred to a backwater town with the lowest crime rate in the country. Paired with an absolutely witless partner, Angel soon uncovers a number of suspicious deaths and embarks on a crusade to uncover the dark secret behind the peaceful berg of Sandford.
+showtime_string: at 2:45, 7:30
+year: 2007
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/071001.html
+date: 2007-10-01T00:00:00+00:00
+basic_facts: (2007) dir Edgar Wright w/Simon Pegg, Nick Frost [121 min]
+title: Shaun Of The Dead
+synopsis: Before HOT FUZZ, there was SHAUN, another loving genre parody. Shaun is an almost-thirty-year-old slacker with a dead-end job and a girlfriend who&#146;s fed up with his affection for his shiftless friend Ed and the local pub. However, when the dead begin to rise from their graves and zombies threaten to take over London, Shaun finds himself in his element and, with Ed at his side, sets off on a quest to rescue his girl and his beloved mum.
+showtime_string: at 5:15, 10:00
+year: 2004
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/071001.html
+date: 2007-10-01T00:00:00+00:00
+basic_facts: (2004) dir Edgar Wright w/Simon Pegg, Nick Frost [99 min]
+title: Night Watch
+synopsis: This pair of Russian fantasy films uses over-the-top special effects and frenetic action scenes to tell the tale of the unseen magical cold-war that goes on under the unsuspecting noses of the residents of modern-day Moscow. An uneasy truce has existed for centuries between the forces of good and evil. The Night Watch is a sort of ad-hoc police force that keeps its eye on the evildoers (vampires, witches and other nasties) while the Day Watch makes sure that the good guys don&#146;t tip the balance of power too far in their favor. When a once-in-a-lifetime chosen one appears on both sides of the conflict, the action comes to a head in a conflict that threatens to destroy the balance and throw the entire world into chaos.
+showtime_string: at 2:45, 7:30
+year: 2004
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/071002.html
+date: 2007-10-02T00:00:00+00:00
+basic_facts: (2004) dir Timur Bekmambetov w/Konstantin Khabensky, Mariya Proshina [114 min]
+title: Day Watch
+synopsis: This pair of Russian fantasy films uses over-the-top special effects and frenetic action scenes to tell the tale of the unseen magical cold-war that goes on under the unsuspecting noses of the residents of modern-day Moscow. An uneasy truce has existed for centuries between the forces of good and evil. The Night Watch is a sort of ad-hoc police force that keeps its eye on the evildoers (vampires, witches and other nasties) while the Day Watch makes sure that the good guys don&#146;t tip the balance of power too far in their favor. When a once-in-a-lifetime chosen one appears on both sides of the conflict, the action comes to a head in a conflict that threatens to destroy the balance and throw the entire world into chaos.
+showtime_string: at 5:00, 9:45
+year: 2006
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/071002.html
+date: 2007-10-02T00:00:00+00:00
+basic_facts: (2006) dir Timur Bekmambetov w/Konstantin Khabensky, Mariya Proshina [132 min]
+title: 28 Days Later
+synopsis: This visceral and brutal thriller helped usher in a new wave of exciting horror films from Britain. A bike messenger named Jim (Murphy) wakes up in a London hospital and finds that a plague has rendered the city a wasteland. The only inhabitants left are a smattering of survivors and the hordes of vicious and infected victims of the mysterious virus. Shot on video for added realism, the film&#146;s first half is a terrifying new spin on the zombie genre, and when Jim and his friends finally make their way to a military outpost, 28 DAYS LATER becomes an arch commentary on the idea that hell is, in fact, other people. The sight of Murphy walking through an utterly deserted London remains one of the most memorable scenes from the last decade.
+showtime_string: at 3:00, 7:30
+year: 2002
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/071003.html
+date: 2007-10-03T00:00:00+00:00
+basic_facts: (2002) dir Danny Boyle w/Cillian Murphy, Naomie Harris, Brendan Gleeson, Megan Burns [113 min]
+title: 28 Weeks Later
+synopsis: Seven months after the plague devastated the country, London has become a fortified city and refugees begin their repatriation ushered in by the US army. A survivor (Carlyle) is reunited with his two children in this fortified &#147;green zone,&#148; but he carries a terrible secret and naturally, it will set off a disastrous chain of events. Director Juan Carlos Fresnadillo (Intacto) stays true to the spirit of the original by sticking to handheld cameras to document the infected&#146;s rampages. Like its predecessor, 28 WEEKS LATER beautifully illustrates that the monsters in our worst nightmares are no match for the casual destruction brought on by human foibles.
+showtime_string: at 5:30, 9:50
+year: 2007
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/071003.html
+date: 2007-10-03T00:00:00+00:00
+basic_facts: (2007) dir Juan Carlos Fresnadillo w/Robert Carlyle, Rose Byrne, Jeremy Renner [99 min]
+title: The Wizard Of Oz
+synopsis: A road movie of the imagination, THE WIZARD OF OZ tells the immortal story of Dorothy and Toto&#146;s trip &#145;somewhere over the rainbow&#146; to the magical land of Oz. Joined by the Scarecrow, the Cowardly Lion and the Tin Man, Dorothy travels down the Yellow Brick Road in search of a way home in this Technicolor dream of a film.
+showtime_string: at 5:15, 7:30, 9:45
+year: 1939
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/071005.html
+date: 2007-10-05T00:00:00+00:00
+basic_facts: (1939) dir Victor Fleming w/Judy Garland, Ray Bolger, Jack Haley, Bert Lahr, Margaret Hamilton, Frank Morgan [101]
+title: The Wizard Of Oz
+synopsis: 
+showtime_string: at 12:00
+year: 1939
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/071006.html
+date: 2007-10-06T00:00:00+00:00
+basic_facts: (1939) dir Victor Fleming w/Judy Garland, Frank Morgan, Ray Bolger [101]
+title: It's A Mad Mad Mad Mad World
+synopsis: Quite simply one of the most madcap of madcap comedies, MAD WORLD pits teams of comedic geniuses against each other in a search for hidden treasure&#133; and the biggest laughs. When a group of drivers stop to help an accident victim, they are incited into a riotous, cross-state race to find the $350,000 in stolen cash that he describes to them. Caustic wit and slapstick comedy careen headlong into each other and this cavalcade of comedy stars.
+showtime_string: at 2:00, 5:00, 8:00
+year: 1963
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/071007.html
+date: 2007-10-07T00:00:00+00:00
+basic_facts: (1963) dir Stanley Kramer w/Spencer Tracy, Milton Berle, Sid Caesar, Buddy Hackett, Ethel Merman, Mickey Rooney, Dick Shawn, Phil Silvers, Terry-Thomas, Jonathan Winters [161]
+title: It Happened One Night
+synopsis: A harbinger of the contemporary romantic comedy, IT HAPPENED ONE NIGHT is as hilarious now as it was when it won Best Picture in 1934. A spoiled, sheltered heiress (Colbert) flees her controlling father and hits the road. It isn't long before she needs the help of a down-on-his luck reporter played by the roguishly charming Clark Gable. They immediately drive each other completely crazy, trading barbs with a comedic chemistry that is rarely replicated. In fact, Colbert and Gable find each other so infuriating that they can't help but fall madly in love. IT HAPPENED ONE NIGHT is a romantic, hilarious, Hollywood classic that is not to be missed.
+showtime_string: at 3:15, 7:15
+year: 1934
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/071008.html
+date: 2007-10-08T00:00:00+00:00
+basic_facts: (1934) dir Frank Capra w/Clark Gable, Claudette Colbert [105]
+title: Love On The Run
+synopsis: When IT HAPPENED ONE NIGHT struck it rich at the box office, Hollywood churned out a number of imitators to capitalize on it, and LOVE ON THE RUN is one of the best. Gable is recast as a reporter chasing an escaping heiress, but this time, instead of Colbert, we get Joan Crawford. Crawford is fleeing her wedding and Gable is more than happy to assist but the pair wind up being chased by spies&#133; and another reporter.
+showtime_string: at 5:30, 9:30
+year: 1936
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/071008.html
+date: 2007-10-08T00:00:00+00:00
+basic_facts: (1936) dir W.S. Van Dyke w/Joan Crawford, Clark Gable, Franchot Tone [80]
+title: Palm Beach Story
+synopsis: Preston Sturges was a comedic genius and this railway road movie is one of his best films. Nutty wife Colbert up and leaves her inventor husband and heads to Palm Beach by train to get a divorce with jilted hubby hot on her trail. Mistaken identity, a loopy millionaire, the meddling of the boisterous &#145;Ale and Quail Club&#146; and an inexplicable pair of twins follow as well.
+showtime_string: at 7:15
+year: 1942
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/071009.html
+date: 2007-10-09T00:00:00+00:00
+basic_facts: (1942) dir Preston Sturges w/Claudette Colbert, Joel McCrea, Mary Astor, Rudy Vallee [88]
+title: The General
+synopsis: Silent comedy legend Buster Keaton plays a love-sick train conductor during the Civil War. When his train is hijacked with his lady-love onboard Keaton must subvert the spies, rescue his love and retrieve his train! The film soon erupts into a high-speed locomotive chase as Keaton and his love rush to warn the confederate army about a union plot. Keaton, a skilled physical comedian, performs his own stunts and jumps along the top of the train without missing a beat. A masterpiece of silent comedy THE GENERAL is the great stone face at his delightful best.
+showtime_string: at 5:30, 9:15
+year: 1927
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/071009.html
+date: 2007-10-09T00:00:00+00:00
+basic_facts: (1927) dir Clyde Bruckman, Buster Keaton w/Buster Keaton, Marion Mack [75]
+title: The Long Long Trailer
+synopsis: Ah, the Fifties, a time when a suburban starter home became the aspiration of millions&#133; but what if you could get that suburban home on wheels!?! At least that&#146;s the dream of one half of the newlyweds at the center of this classic comedy. And, when Lucille Ball and Desi Arnaz play the married couple, we&#146;ll give you one guess which half wants the mobile home. Outrageous comedic set-pieces follow as the couple tries to simultaneously live the opposing dreams of the Fifties: the call of the open road and the bliss of domestic partnership.
+showtime_string: at 8:00, 10:00
+year: 1954
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/071010.html
+date: 2007-10-10T00:00:00+00:00
+basic_facts: (1954) dir Vincente Minnelli w/Lucille Ball, Desi Arnaz [103]
+title: Bride of Frankenstein
+synopsis: One of the most enduring of the Universal Horror films of the 1930s, BRIDE OF FRANKENSTEIN features the iconic mad doctor as he tries to create a female companion for his lonely monster. A masterpiece of deep atmosphere and high camp.
+showtime_string: at 11:00
+year: 1935
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/071013.html
+date: 2007-10-13T00:00:00+00:00
+basic_facts: (1935) dir James Whale w/Boris Karloff, Elsa Lanchester, Colin Clive, Ernest Thesiger [75 min]
+title: The King Of Marvin Gardens
+synopsis: Robinson, Scatman Crothers; Cinematography by Laszlo Kovacs [103 min]Another of Bob Rafelson&#146;s terrific tales of free-spirits pitted against a society that refuses to understand them. The underrated Bruce Dern stars as David, a wheeler-dealer who has fallen on hard times while living on the Boardwalk at Atlantic City. He convinces his brother Jason (Nicholson), a radio talk show host, to buy into a scheme to build a resort on a Pacific island but the machinations of interpersonal relationships and David&#146;s overconfidence doom it almost from the beginning. The startling and unexpected conclusion is worth the price of admission alone.
+showtime_string: at 5:15, 9:30
+year: 1972
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/071016.html
+date: 2007-10-16T00:00:00+00:00
+basic_facts: (1972) dir Bob Rafelson w/Jack Nicholson, Bruce Dern, Ellen Burstyn, Julia Anne Robinson, Scatman Crothers; Cinematography by Laszlo Kovacs [103 min]
+title: Five Easy Pieces
+synopsis: Nicholson&#146;s tour-de-force performance as a talented pianist who doesn&#146;t want to be tied down includes one of his most infamous scenes, when he tries to get plain toast in a diner by ordering a chicken salad sandwich and asking the waitress to hold the chicken&#133; between her knees. Classic Nicholson and a classic 70s road movie.
+showtime_string: at 7:30
+year: 1970
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/071016.html
+date: 2007-10-16T00:00:00+00:00
+basic_facts: (1970) dir Bob Rafelson w/Jack Nicholson, Karen Black, Billy Green Bush, Susan Anspach, Lois Smith; Cinematography by Laszlo Kovacs [96 min]
+title: The King Of Marvin Gardens
+synopsis: Robinson, Scatman Crothers; Cinematography by Laszlo Kovacs [103 min]Another of Bob Rafelson&#146;s terrific tales of free-spirits pitted against a society that refuses to understand them. The underrated Bruce Dern stars as David, a wheeler-dealer who has fallen on hard times while living on the Boardwalk at Atlantic City. He convinces his brother Jason (Nicholson), a radio talk show host, to buy into a scheme to build a resort on a Pacific island but the machinations of interpersonal relationships and David&#146;s overconfidence doom it almost from the beginning. The startling and unexpected conclusion is worth the price of admission alone.
+showtime_string: at 5:15, 9:30
+year: 1972
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/071017.html
+date: 2007-10-17T00:00:00+00:00
+basic_facts: (1972) dir Bob Rafelson w/Jack Nicholson, Bruce Dern, Ellen Burstyn, Julia Anne Robinson, Scatman Crothers; Cinematography by Laszlo Kovacs [103 min]
+title: Five Easy Pieces
+synopsis: Nicholson&#146;s tour-de-force performance as a talented pianist who doesn&#146;t want to be tied down includes one of his most infamous scenes, when he tries to get plain toast in a diner by ordering a chicken salad sandwich and asking the waitress to hold the chicken&#133; between her knees. Classic Nicholson and a classic 70s road movie.
+showtime_string: at 7:30
+year: 1970
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/071017.html
+date: 2007-10-17T00:00:00+00:00
+basic_facts: (1970) dir Bob Rafelson w/Jack Nicholson, Karen Black, Billy Green Bush, Susan Anspach, Lois Smith; Cinematography by Laszlo Kovacs [96 min]
+title: Donnie Darko
+synopsis: On the eve of the A.R.T.&#146;s Boston premiere of the stage production of this cult classic, we offer a special screening of the original version of Richard Kelly&#146;s trippy, time-traveling feature debut. The titular Donnie is a typical American teenager who just happens to start seeing visions of a giant, monster bunny named Frank who provides him with a countdown to the apocalypse in this strange, sci-fi/noir. Definitely worth revisiting on the big screen. Expect special guests and surprises for these special screenings!Discount tickets are available for A.R.T. subscribers and ticket-holders. More information will be available in October.
+showtime_string: at 5:00, 7:15, 10:00
+year: 2001
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/071018.html
+date: 2007-10-18T00:00:00+00:00
+basic_facts: (2001) dir Richard Kelley w/Jake Gylenhaal, Jena Malone, Drew Barrymore, Maggie Gylenhaal [113 min]
+title: Pee Wee's Big Adventure
+synopsis: As an added bonus to this weekend&#146;s BOSTON BIKE FILM FESTIVAL we invite you to come along on a wild and surreal road-trip as perpetual man-child Pee Wee searches for his stolen love&#133; his customized, cherry red bicycle.
+showtime_string: at 1:30, 3:30
+year: 1985
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/071020.html
+date: 2007-10-20T00:00:00+00:00
+basic_facts: (1985) dir Tim Burton w/Paul Reubens, Elizabeth Daily [90 min]
+title: Paper Moon
+synopsis: Mose, A Depression era &#145;Bible salesman&#146; finds himself the ward of Addie, a recently orphaned little girl who becomes a willing participant in his increasingly illegal cons. Peter Bogdanovich&#146;s love of classic cinema is evident in every frame of this gorgeous, poignant black-and-white comedy and Ryan O&#146;Neal and real-life daughter Tatum turn in wonderfully charming performances as the oddball team of swindlers. The third of Bogdanovich&#146;s many collaborations with Kovacs, this remains a highpoint for both.
+showtime_string: at 3:00, 7:15
+year: 1973
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/071021.html
+date: 2007-10-21T00:00:00+00:00
+basic_facts: (1973) dir Peter Bogdanovich w/Ryan O'Neal, Tatum O'Neal, Madeline Kahn, John Hillerman; Cinematography by Laszlo Kovacs [102 min]
+title: What's Up Doc?
+synopsis: Peter Bogdanovich's hit screwball comedy pairs a free-spirited Barbara Streisand with an uptight, bespeckled Ryan O'Neal. A tense musicologist (O'Neal) travels to San Francisco in order to compete for a research grant. Unfortunately he has packed the same plaid suitcase as three other people and chaos immediately ensues as his igneous rocks are confused with government documents and jewels. In the tradition of Howard Hawk's Bringing Up Baby, Streisand is desperately smitten with O'Neal only to bring utterly hilarious havoc to his life. Not to be missed by any fans of screwball comedies.
+showtime_string: at 5:15, 9:30
+year: 1972
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/071021.html
+date: 2007-10-21T00:00:00+00:00
+basic_facts: (1972) dir Peter Bogdanovich w/Ryan O'Neal, Barbara Streisand, Madeline Kahn, Kenneth Mars, Austin Pendleton, Michael Murphy; Cinematography by Laszlo Kovacs [94 min]
+title: Freebie and the Bean
+synopsis: We&#146;ll warn you, this movie is ruthlessly un-PC. It&#146;s filled with bigoted, macho dialogue between its tough-as-nails cop protagonists&#133; It is also extremely funny and a great entry into the annals of slapstick action &#150; a peculiarly 70s genre. James Caan and Alan Arkin are Freebie and Bean, two San Francisco cops hot on the trail of the crime boss, &#147;Red&#148; Meyers and they will let no car remain uncrashed in their single-minded pursuit. Caan handles the comedic repartee with ease and Arkin is surprisingly good in a role that lets him be aggressive for once.
+showtime_string: at 5:00, 7:30, 10:00
+year: 1974
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/071022.html
+date: 2007-10-22T00:00:00+00:00
+basic_facts: (1974) dir Richard Rush w/Alan Arkin, James Caan, Loretta Swit, Jack Kruschen; Cinematography by Laszlo Kovacs [113 min]
+title: Shampoo
+synopsis: As with many films of the period, SHAMPOO is a remarkable confluence of talent not only with the great Kovacs on camera but helmed by Hal Ashby (Harold &amp; Maude) and written by Robert Towne (Chinatown), not to mention Beatty in his legendary, hilarious performance as a frantic hairdresser/Cassanova juggling girlfriends and clients (and girlfriends&#146; husbands). Few other 70s films simultaneously capture the poignant death of 60s idealisim, the joy of excess and the anxiety and ennui that accompany both as well as SHAMPOO.
+showtime_string: at 5:15, 7:30, 9:45
+year: 1975
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/071023.html
+date: 2007-10-23T00:00:00+00:00
+basic_facts: (1975) dir Hal Ashby w/Warren Beatty, Julie Christie, Goldie Hawn, Lee Grant; Cinematography by Laszlo Kovacs [109 min]
+title: Easy Rider
+synopsis: Legendary cinematographer Laszlo Kovacs is largely credited (alongside friend and collaborator Vilmos Zsigmond) as having created the &#145;look&#146; of 70s film and nowhere is this more apparent than in the muted colors and sunset landscapes of EASY RIDER. Though this psychedelic motorcycle movie about two counterculture outsiders driving cross-country &#147;looking for America&#148; spawned countless imitators, nothing can compare to the image of lawyer George (Nicholson) riding on a motorcycle behind Captain America (Fonda) while wearing a football helmet. EASY RIDER, won Hopper &#145;Best New Director&#146; at Cannes and ushered in a new era in Hollywood cinema.
+showtime_string: at 5:30, 7:30, 9:30
+year: 1969
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/071024.html
+date: 2007-10-24T00:00:00+00:00
+basic_facts: (1969) dir Dennis Hopper w/Hopper, Peter Fonda, Jack Nicholson; Cinematography by Laszlo Kovacs [95 min]
+title: Close Encounters Of The Third Kind
+synopsis: It is telling that Kovacs, who helped to create independent-minded studio films at the dawn of the 70s, was also involved in this film that helped to destroy it. CLOSE ENCOUNTERS is a great film, there&#146;s no denying, but its blockbuster status (paired with the success of Jaws) renewed the studio heads faith in big budget spectacles at the expense of the more intimate character driven films that had been the lifeblood of prior 70s filmmaking. Kovacs partnered with his friend Vilmos Zsigmond on the photography for Spielberg&#146;s fascinating, beautiful film about the appearance of aliens in our midst &#150; not for invasion but for inter-species learning and betterment.
+showtime_string: at 8:00
+year: 1977
+detail_link: http://www.brattlefilm.org/brattlefilm/movie_detail/071025.html
+date: 2007-10-25T00:00:00+00:00
+basic_facts: (1977) dir Steven Spielberg w/Richard Dreyfuss, Teri Garr, Francois Truffaut; additional photography by Laszlo Kovacs [132 min]

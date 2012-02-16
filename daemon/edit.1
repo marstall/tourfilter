@@ -1,0 +1,247 @@
+<html>
+
+<head>
+  <title>tourfilter</title>
+  <link href="/stylesheets/tourfilter.css" media="screen" rel="Stylesheet" type="text/css" />
+  <script src="/javascripts/prototype.js" type="text/javascript"></script>
+<script src="/javascripts/effects.js" type="text/javascript"></script>
+<script src="/javascripts/dragdrop.js" type="text/javascript"></script>
+<script src="/javascripts/controls.js" type="text/javascript"></script>
+<script src="/javascripts/application.js" type="text/javascript"></script>
+  <script src="/javascripts/tourfilter.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="header">
+<div id="left-header">
+<span class="logo">
+<a href="/">tourfilter</a>
+</span>
+
+<br>
+<span class="slogan">
+	get an email when bands you like come to boston!
+</span>
+
+</div>
+<div id="right-header">
+<span id="login"></span>
+	<script>
+	new Ajax.Updater(
+	         'login',
+	 		 "/login/login_header"
+	         );
+	</script>
+<!--<span style="text-align:right" id="working"><img border=0 src="/images/indicator.gif"></span>-->
+</div>
+</div>
+<div style="clear:both">
+
+
+
+<div id="right-column">
+<div id="right-column-header">
+clubs searched in Boston:
+</div>
+<div id="right-column-body">
+
+	<a href="http://www.mideastclub.com">The Middle East</a>
+    <br>
+	
+	<a href="http://www.ttthebears.com/">TT the Bear's Place</a>
+    <br>
+	
+	<a href="http://www.paslounge.com">PAs Lounge</a>
+    <br>
+	
+	<a href="http://www.abbeylounge.com">Abbey Lounge</a>
+    <br>
+	
+	<a href="http://www.somervilletheatreonline.com/">Somerville Theatre</a>
+    <br>
+	
+	<a href="http://www.avalonboston.com">Avalon</a>
+    <br>
+	
+	<a href="http://www.thedise.com">Paradise Rock Club</a>
+    <br>
+	
+	<a href="http://www.milkywayjp.com/">The Milky Way</a>
+    <br>
+	
+	<a href="http://www.clubpassim.org/">Club Passim</a>
+    <br>
+	
+	<a href="http://www.ticketmaster.com/venue/8318">Orpheum Theatre</a>
+    <br>
+	
+	<a href="http://www.zeitgeist-gallery.org/">Zeitgeist Gallery</a>
+    <br>
+	
+	<a href="http://www.mfa.com">Museum of Fine Arts</a>
+    <br>
+	
+	<a href="http://www.regattabarjazz.com/">Regattabar</a>
+    <br>
+	
+	<a href="http://www.johnnyds.com/">Johnny D's</a>
+    <br>
+	
+	<a href="http://www.allasiabar.com/">All Asia</a>
+    <br>
+	
+	<a href="http://www.greatscottboston.com/">Great Scott</a>
+    <br>
+	
+	<a href="http://www.thegreenstreetgrill.com/">Green Street Grill</a>
+    <br>
+	
+	<a href="http://www.jacquescabaret.com/JacquesUnderground.htm">Jacques Underground</a>
+    <br>
+	
+	<a href="http://www.burren.com/">The Burren</a>
+    <br>
+	
+	<a href="http://www.ploughandstars.com">The Plough & Stars</a>
+    <br>
+	
+	<a href="http://www.kirklandcafe.com/">Kirkland Cafe</a>
+    <br>
+	
+	<a href="http://www.winebar.com">Les Zygomates</a>
+    <br>
+	
+	<a href="http://www.lizardloungeclub.com/">Lizard Lounge</a>
+    <br>
+	
+	<a href="http://www.luckyslounge.com/">Lucky's Lounge</a>
+    <br>
+	
+	<a href="http://www.midwaycafe.com/">Midway Cafe</a>
+    <br>
+	
+	<a href="http://obriens.purp.org/">O'Brien's Pub</a>
+    <br>
+	
+	<a href="http://www.toadcambridge.com/">Toad</a>
+    <br>
+	
+	<a href="http://www.thenog.com/">Tir na Nog</a>
+    <br>
+	
+	<a href="http://www.roxyplex.com/v2roxy/">The Roxy</a>
+    <br>
+	
+	<a href="http://www.paultsongasarena.com/">Tsongas Arena</a>
+    <br>
+	
+	<a href="http://www.ryles.com/">Ryles Jazz Club</a>
+    <br>
+	
+	<a href="http://www.scullersjazz.com/">Scullers Jazz Club</a>
+    <br>
+	
+	<a href="http://www.berkleebpc.com/">The Berklee Performance Center</a>
+    <br>
+	
+	<a href="http://www.tdbanknorthgarden.com/">TD Banknorth Garden</a>
+    <br>
+	
+	<a href="http://www.tweetercenter.com/boston/">Tweeter Center</a>
+    <br>
+	
+	<a href="http://www.centrumcentre.com/">DCU Center</a>
+    <br>
+	
+	<a href="http://www.bankofamericapavilion.com/">BofA Pavilion</a>
+    <br>
+	
+</div>
+</div>
+
+	<div class="header2">
+		<!--
+	1. Enter the names of bands you want to track (one per line).<br>
+	2. Local listings will be searched as you type, with results shown on the right.<br>
+	3. Sign up to be notified whenever any of these bands come to Boston<br>
+	-->
+	
+	</div>
+<div id="main">
+<div id="search-pane">
+<form action="/edit" enctype="multipart/form-data" method="post">
+  
+  1. enter band names (one per line):
+  
+<span style="display:none;color:green" id="loading">...</span>  
+<textarea cols="31" id="terms_as_text" name="terms_as_text" rows="20"></textarea>
+<script type="text/javascript">
+//<![CDATA[
+new Form.Element.Observer('terms_as_text', 1, function(element, value) {new Ajax.Updater('results', '/edit/search', {asynchronous:true, evalScripts:true, onComplete:function(request){Element.hide('loading')}, onLoading:function(request){Element.show('loading');Element.hide('search_intro')}, parameters:value})})
+//]]>
+</script>
+
+<br>
+
+		3. To track via email, create an account:<br>
+	<input class="signup" id="user_name" name="user[name]" onblur="if (this.value=='') this.value='Username'" onfocus="if (this.value=='Username') this.value=''" size="15" type="text" value="Username" />
+	<input class="signup" id="password" name="user[password]" onblur="if (this.value=='') {this.value='Password';this.type='text';}" onfocus="if (this.value=='Password') {this.value='';this.type='password';}" size="15" type="text" value="Password" />
+	<input class="signup" id="user_email_address" name="user[email_address]" onblur="if (this.value=='') this.value='Email address'" onfocus="if (this.value=='Email address') this.value=''" size="21" type="text" value="Email address" />
+				<input name="commit" type="submit" value="Sign up" />
+
+</form>
+</div> <!-- end div search-pane-->
+<div id="results-pane">
+<div id="results">
+
+<div id="search_intro" class="smaller">
+2. As you type, <strong>current local club listings</strong> will be searched and any matches displayed here ... 
+</div>  <!--  end search_into -->
+
+</div> <!-- end results div-->
+</div> <!-- end results-pane div-->
+<div id="upcoming">
+<br>
+<div class="header1">upcoming shows recommended by tourfilter users</div>
+<ul>
+
+	<li>
+		<a href="/bands/index/JoshRitter">Josh Ritter</a>
+		<a href="http://www.ticketmaster.com/venue/8193?start=1&rpp=100">at Avalon on April 29</a> by 
+			<a href="/users/chris">chris</a></li>
+
+	<li>
+		<a href="/bands/index/Edan">Edan</a>
+		<a href="http://www.thedise.com/rockclub/listings.html">at Paradise Rock Club on May 4</a> by 
+			<a href="/users/chris">chris</a></li>
+
+	<li>
+		<a href="/bands/index/MandarinMovie">Mandarin Movie</a>
+		<a href="http://www.paslounge.com/pas_cal.cgi?cvm=5&cvy=2006">at PAs Lounge on May 17</a> by 
+			<a href="/users/chris">chris</a></li>
+
+</ul>
+</div>
+
+</div> <!-- end main div -->
+
+<script>
+
+if (trim($('terms_as_text').value).length>0)
+{
+	// add a couple characters to force the refresh of matches on page reload ...
+	$('terms_as_text').value+=" \n\n";
+}
+
+</script>
+
+
+	
+	<div id="footer">
+	<a href="/about">about tourfilter</a>
+	
+	</div>
+
+
+</body>
+</html>
+

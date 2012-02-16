@@ -1,0 +1,22 @@
+
+
+#00 1 * * * daemon_all westernmass
+#20 1 * * * daemon_all dallas
+#40 1 * * * daemon_all chicago
+#00 2 * * * daemon_all providence
+#20 2 * * * daemon_all sf
+#40 2 * * * daemon_all portland
+#00 3 * * * daemon_all losangeles
+#20 3 * * * daemon_all philadelphia
+#40 3 * * * daemon_all dc
+#00 4 * * * daemon_all austin
+#20 4 * * * daemon_all toronto
+#40 4 * * * daemon_all seattle
+#00 5 * * * daemon_all twincities
+#20 5 * * * daemon_all nashville
+#40 5 * * * daemon_all neworleans
+#00 6 * * * daemon_all atlanta
+#20 6 * * * daemon_all houston
+#40 6 * * * daemon_all detroit
+#00 7 * * * daemon_all vancouver
+#20 7 * * * daemon_all montreal

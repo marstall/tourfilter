@@ -1,0 +1,26 @@
+ CREATE TABLE `shared_events` (
+  `id` int(11) NOT NULL auto_increment,
+  `uid` int(11),
+  `date` datetime default NULL,
+  `location` char(255),
+  `url` char(255),
+  `source` char(255),
+  `summary` char(255),
+  `description` text,
+  `created_at` datetime default NULL,
+  `updated_at` datetime default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `summary` (`summary`),
+  KEY `date` (`date`)
+) 
+
+BEGIN:VEVENT
+DTEND:20070201T200000
+DTSTART:20070201T190000
+DTSTAMP:20070131T145916
+LOCATION:PAs Lounge
+URL:http://www.tourfilter.com/martin_finke
+UID:10288
+SUMMARY:Martin Finke
+DESCRIPTION:            The Critique of Pure Reason Presents       MV+EE with the Bummer Road  Ecstatic Peace    <<<Martin Finke>>>    Geoff Farina      DETAILS                    2                    Bluebird    Rotary Club  w Tom \n
+END:VEVENT

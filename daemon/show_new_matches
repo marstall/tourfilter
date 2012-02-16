@@ -1,0 +1,2 @@
+mysql $DB_NAME -u$DB_USERNAME -p$DB_PASSWORD -e"select matches.id,matches.created_at,terms.text,places.name,users.name,pages.url,matches.month,matches.day from matches,terms,pages,places,terms_users,users where matches.term_id=terms_users.term_id and terms_users.user_id=users.id and matches.term_id=terms.id and matches.page_id=pages.id and pages.place_id=places.id and matches.time_status='future' and matches.status='new' order by created_at desc;"
+
