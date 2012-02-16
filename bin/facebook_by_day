@@ -1,0 +1,1 @@
+mysql -uchris -pchris tourfilter_all -e"select date_format(created_at,'%Y/%m/%d') date, count(*) from facebook_settings where has_added_app='1' group by date order by date asc; "

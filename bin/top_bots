@@ -1,0 +1,4 @@
+mysql $DB_NAME -u$DB_USERNAME -p$DB_PASSWORD -e'select left(user_agent,120),count(*) cnt from page_views where user_agent like "%bot%" or user_agent like "%slurp%" or user_agent like "%ask%" group by user_agent order by cnt asc;'
+
+
+

@@ -1,0 +1,2 @@
+cd ~/tourfilter
+scp $1 chris@tourfilter.com:/home/chris/tourfilter/$1

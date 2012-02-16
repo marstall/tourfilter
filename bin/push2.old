@@ -1,0 +1,35 @@
+cd /home/chris/tourfilter
+#rm -rf push.tar
+gunzip -q push.tar.gz
+tar -xvf push.tar
+echo "taking screenshots of www.tourfilter.com/ ..."
+cd screenshots
+wget http://www.tourfilter.com/
+wget http://www.tourfilter.com/stylesheets/tourfilter.css
+wget http://www.tourfilter.com/javascripts/application.js
+cd ..
+
+for name in $(mysql tourfilter_boston -uchris -pchris -e "select code from metros")
+do
+ if [ $name != "code" ]; 
+ then 
+  if [ $name != "boston" ]; 	
+  then
+	push2_for_city $name
+  fi 
+ fi
+done
+
+cp /home/chris/tourfilter/config/database.yml.tmpl /home/chris/tourfilter/config/database.yml
+
+su -c "lswsctrl restart"
+
+for name in $(mysql tourfilter_boston -uchris -pchris -e "select code from metros")
+do
+ if [ $name != "code" ]; then 
+	echo "backing up database for $name ..."
+	dumpfilter $name 
+ fi
+done
+
+

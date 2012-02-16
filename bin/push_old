@@ -1,0 +1,7 @@
+decache
+cd /Users/chris/dev/tourfilter
+rm -rf push.tar.gz
+tar -cf push.tar app/ components/ config/ daemon/ db/ public/ bin/ scripts/
+gzip push.tar 
+scp push.tar.gz marstall@psychoastronomy.org:/home/marstall/dev/tourfilter
+ssh marstall@psychoastronomy.org

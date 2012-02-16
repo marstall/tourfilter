@@ -1,0 +1,6 @@
+mkdir /backups
+mkdir /backups/tourfilter-backups
+mkdir /backups/tourfilter-backups/data_`date +%Y-%m-%d`
+scp chris@tourfilter.com:/home/chris/tourfilter/dumps/tourfilter_*_latest.dump.sql.gz /backups/tourfilter-backups/data_`date +%Y-%m-%d`/
+rm -rf /backups/tourfilter-backups/latest
+ln -s /backups/tourfilter-backups/data_`date +%Y-%m-%d`/ /backups/tourfilter-backups/latest

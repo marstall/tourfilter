@@ -1,0 +1,5 @@
+mkdir /home/chris/antiplex/dumps
+mysqldump --add-drop-table -u$DB_USERNAME -p$DB_PASSWORD antiplex>/home/chris/antiplex/dumps/antiplex_`date +%Y-%m-%d`.dump.sql
+gzip -fq /home/chris/antiplex/dumps/antiplex_`date +%Y-%m-%d`.dump.sql
+cp /home/chris/antiplex/dumps/antiplex_`date +%Y-%m-%d`.dump.sql.gz /home/chris/antiplex/dumps/antiplex_latest.dump.sql.gz
+

@@ -1,0 +1,4 @@
+mysqldump --add-drop-table -u$DB_USERNAME -p$DB_PASSWORD tourfilter_shared artist_terms features external_clicks images imported_events metros_venues shared_events shared_terms sources venue_name_link venues venues_located >/home/chris/tourfilter/dumps/tourfilter_shared_`date +%Y-%m-%d`.dump.sql
+gzip -fq /home/chris/tourfilter/dumps/tourfilter_shared_`date +%Y-%m-%d`.dump.sql
+cp /home/chris/tourfilter/dumps/tourfilter_shared_`date +%Y-%m-%d`.dump.sql.gz /home/chris/tourfilter/dumps/tourfilter_shared_latest.dump.sql.gz
+

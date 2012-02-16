@@ -1,0 +1,3 @@
+cd /home/chris/tourfilter/daemon
+ruby daemon.rb $1 generate_urls crawl search send_email expire_caches
+

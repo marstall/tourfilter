@@ -1,0 +1,3 @@
+mysql $DB_NAME -u$DB_USERNAME -p$DB_PASSWORD -e'select date_format(created_at,"%Y/%m/%d") date,count(*) terms_users_rows from terms_users group by date;'
+
+

@@ -1,0 +1,15 @@
+cd /home/chris/antiplex
+#rm -rf push.tar
+gunzip -q push.tar.gz
+tar -xvf push.tar
+echo "taking screenshots of www.tourfilter.com/ ..."
+cd screenshots
+wget http://www.antiplex.org/
+wget http://www.antiplex.org/stylesheets/antiplex.css
+wget http://www.antiplex.org/javascripts/application.js
+cd ..
+
+cp /home/chris/antiplex/config/database.yml.tmpl /home/chris/antiplex/config/database.yml
+
+#su -c "lswsctrl restart"
+

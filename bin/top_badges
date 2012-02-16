@@ -1,0 +1,4 @@
+mysql $DB_NAME -u$DB_USERNAME -p$DB_PASSWORD -e'select referer_domain,count(*) cnt from page_views where source="js" and referer_domain is not null group by referer_domain order by cnt asc;'
+
+
+

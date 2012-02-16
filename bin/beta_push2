@@ -1,0 +1,6 @@
+cd /home/chris/beta_tourfilter
+#rm -rf push.tar
+gunzip -q ../tourfilter/push.tar.gz 
+mv ~/tourfilter/push.tar .
+tar -xvf push.tar
+

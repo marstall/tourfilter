@@ -1,0 +1,1 @@
+mysql tourfilter_boston -uchris -pchris -e "select terms.text,count(*) cnt from terms_users,terms where terms_users.term_id=terms.id and user_id in (select user_id from terms_users,terms where term_id=terms.id and terms.text='$1') group by terms.text order by cnt desc limit 10;"

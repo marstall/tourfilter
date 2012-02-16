@@ -1,0 +1,6 @@
+mkdir /backups
+mkdir /backups/antiplex-backups
+mkdir /backups/antiplex-backups/data_`date +%Y-%m-%d`
+scp chris@tourfilter.com:/home/chris/antiplex/dumps/antiplex_latest.dump.sql.gz /backups/antiplex-backups/data_`date +%Y-%m-%d`/
+rm -rf /backups/antiplex-backups/latest
+ln -s /backups/antiplex-backups/data_`date +%Y-%m-%d`/ /backups/antiplex-backups/latest

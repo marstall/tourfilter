@@ -1,0 +1,3 @@
+mysql $DB_NAME -u$DB_USERNAME -p$DB_PASSWORD -e'select terms.text,count(*) cnt from terms,terms_users where term_id=terms.id group by term_id order by cnt desc limit 50;'
+
+

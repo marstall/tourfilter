@@ -1,0 +1,1 @@
+mysql --skip-column-names tourfilter_$1 -u$DB_USERNAME -p$DB_PASSWORD -e"select count(*) from users where registration_code is null and date_format(registered_on,'%Y/%m/%d')=date_format(adddate(now(),interval -$2 day),'%Y/%m/%d')"

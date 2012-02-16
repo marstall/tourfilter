@@ -1,0 +1,3 @@
+mysql $DB_NAME -u$DB_USERNAME -p$DB_PASSWORD -e'select id,left(name,16) n,count(*) bands,registered_on,last_logged_in_on,last_visited_on,left(email_address,24) e,left(referer_domain,24) referer,wants_weekly_newsletter wkly,registration_type typ,registration_code code  from users,terms_users where users.id=terms_users.user_id and last_visited_on is null group by user_id;'
+mysql $DB_NAME -u$DB_USERNAME -p$DB_PASSWORD -e'select count(*) from users;'
+

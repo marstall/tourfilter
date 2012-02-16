@@ -1,0 +1,5 @@
+mkdir /backups
+mkdir /backups/antiplex-backups
+mkdir /backups/antiplex-backups/source
+tar -cf /backups/antiplex-backups/source/antiplex-source-`date +%Y-%m-%d`.tar /Users/chris/antiplex/app/ /Users/chris/antiplex/daemon /Users/chris/antiplex/public/javascripts /Users/chris/antiplex/public/stylesheets /Users/chris/antiplex/config /Users/chris/antiplex/bin /Users/chris/antiplex/script
+gzip /backups/antiplex-backups/source/antiplex-source-`date +%Y-%m-%d`.tar

@@ -1,0 +1,3 @@
+mysql $DB_NAME -u$DB_USERNAME -p$DB_PASSWORD -e'select date_format(created_at,"%Y/%m/%d") date,count(*) from page_views where url="/login/login_header" group by date;'
+
+

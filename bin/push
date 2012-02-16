@@ -1,0 +1,7 @@
+decache
+cd /Users/chris/tourfilter
+rm -rf push.tar.gz
+tar -cf push.tar app/ config/ daemon/ public/javascripts public/stylesheets bin/ script/
+gzip push.tar 
+scp push.tar.gz chris@tourfilter.com:/home/chris/tourfilter
+ssh chris@tourfilter.com

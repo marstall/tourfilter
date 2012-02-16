@@ -1,0 +1,1 @@
+mysql -uchris -pchris tourfilter_shared -e"select metro_code,youser_id,created_at,left(user_agent,30),ip_address,left(url,50) from external_clicks where link_source='mail' and left(created_at,10)=left(now(),10) order by created_at;"

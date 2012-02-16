@@ -1,0 +1,1 @@
+query_all_metros.sh "select (select count(*) from users where last_visited_on is not null ) users,(select count(*) from terms) bands,(select count(*) from matches where status='notified') all_shows,(select count(*) from matches where status='notified' and time_status='future') upcoming_shows;"

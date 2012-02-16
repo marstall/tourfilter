@@ -1,0 +1,12 @@
+echo "hits    sess    ret    signups">ds.tmp
+for name in $(mysql tourfilter_boston -uchris -pchris -e "select code from metros where status='active'")
+do
+ if [ $name != "code" ]; then 
+	echo $name:
+	yesterdays_stats $name  
+	echo
+fi
+done>>~/ds.tmp
+cat ~/ds.tmp | sed -r 's/[ \t$]0//g'>~/ds
+rm ~/ds.tmp
+cat ~/ds

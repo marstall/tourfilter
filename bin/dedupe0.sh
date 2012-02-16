@@ -1,0 +1,1 @@
+mysql $DB_NAME -u$DB_USERNAME -p$DB_PASSWORD -e'select terms2.id,terms2.text from terms terms2 where terms2.text in (select terms.text as numoccurrences from terms group by text having (count(text)>1)) order by terms2.text'

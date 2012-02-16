@@ -1,0 +1,4 @@
+mysql $DB_NAME -u$DB_USERNAME -p$DB_PASSWORD -e'select domain,count(*) cnt from page_views where domain is not null group by domain order by cnt asc;'
+
+
+

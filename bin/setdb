@@ -1,0 +1,4 @@
+#!/bin/sh
+echo "export DB_NAME=tourfilter_$1">tmp
+source tmp
+echo "DB_NAME is $DB_NAME"

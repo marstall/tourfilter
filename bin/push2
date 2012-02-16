@@ -1,0 +1,15 @@
+cd /home/chris/tourfilter
+#rm -rf push.tar
+gunzip -q push.tar.gz
+tar -xvf push.tar
+echo "taking screenshots of www.tourfilter.com/ ..."
+cd screenshots
+wget http://www.tourfilter.com/
+wget http://www.tourfilter.com/stylesheets/tourfilter.css
+wget http://www.tourfilter.com/javascripts/application.js
+cd ..
+
+cp /home/chris/tourfilter/config/database.yml.tmpl /home/chris/tourfilter/config/database.yml
+
+su -c "lswsctrl restart"
+

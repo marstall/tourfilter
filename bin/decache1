@@ -1,0 +1,16 @@
+rm -rf ~/tourfilter/cache/*/edit/homepage2_calendar 
+
+rm -rf ~/tourfilter/public/boston
+rm -rf ~/tourfilter/public/newyork
+rm -rf ~/tourfilter/public/losangeles
+rm ~/tourfilter/public/homepage.html
+rm ~/tourfilter/public/calendar.html
+rm ~/tourfilter/public/index.html
+rm ~/tourfilter/public/rss.html
+rm ~/tourfilter/public/ical.html
+rm -rf ~/tourfilter/public/rss
+rm -rf ~/tourfilter/public/mp3s
+rm ~/tourfilter/cache/*/me/*
+rm ~/tourfilter/cache/*/edit/ 
+rm ~/tourfilter/cache/*/edit/terms_by_place.cache 
+rm ~/tourfilter/cache/*/bands/tracker_section/*

@@ -1,0 +1,2 @@
+page_views '(source="js" or url like "%search" or url like "%add" or  url="/edit/term_more" or url="/user/term") and date_format(created_at,"%Y/%m/%d")=date_format(now(),"%Y/%m/%d")'
+

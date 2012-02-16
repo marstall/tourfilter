@@ -1,0 +1,2 @@
+page_views '(source="js" or url like "%search" or url like "%add" or url="/edit/term_more") and  ip_address<>" 24.61.46.34" and user_agent not like "%bot%" and url not like "/data/%" and user_agent not like "%Bot" and user_agent not like "%eeves%" and url not like "/rss%" and date_format(created_at,"%Y/%m/%d")=date_format(adddate(now(),INTERVAL -1 DAY),"%Y/%m/%d")'
+

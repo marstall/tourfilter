@@ -1,0 +1,9 @@
+echo "pushing to $1 ..."
+tar -xvf push.tar -C /home/chris/tourfilter_$1
+cp /home/chris/tourfilter_$1/config/database.yml.tmpl /home/chris/tourfilter_$1/config/database.yml
+cp /home/chris/tourfilter_$1/config/settings.yml.tmpl /home/chris/tourfilter_$1/config/settings.yml
+
+
+
+
+

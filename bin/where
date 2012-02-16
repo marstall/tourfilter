@@ -1,0 +1,1 @@
+echo $DB_NAME

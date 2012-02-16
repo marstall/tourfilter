@@ -1,0 +1,4 @@
+mysql $DB_NAME -u$DB_USERNAME -p$DB_PASSWORD -e'select date_format(created_at,"%Y/%m/%d") date,count(*) full_rss from page_views where url = "/rss" group by date;'
+mysql $DB_NAME -u$DB_USERNAME -p$DB_PASSWORD -e'select date_format(created_at,"%Y/%m/%d") date,count(distinct url) individual_rss from page_views where url like "/rss/%" group by date;'
+
+

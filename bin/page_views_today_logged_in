@@ -1,0 +1,4 @@
+mysql $DB_NAME -u$DB_USERNAME -p$DB_PASSWORD -e'select created_at,youser_id,name,ip_address,left(url,50),left(referer,75),referer_domain,time_to_render,session_id,left(user_agent,25) from page_views,users where youser_id=users.id and ip_address<>"24.61.44.167" and user_agent not like "%bot%" and url not like "/rss%" and date_format(created_at,"%Y/%m/%d")=date_format(now(),"%Y/%m/%d")'
+
+
+

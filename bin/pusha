@@ -1,0 +1,6 @@
+cd /Users/chris/antiplex
+rm -rf push.tar.gz
+tar -cf push.tar app/ config/ daemon/ public/404.html public/javascripts public/stylesheets bin/ script/
+gzip push.tar 
+scp push.tar.gz chris@tourfilter.com:/home/chris/antiplex
+ssh chris@tourfilter.com

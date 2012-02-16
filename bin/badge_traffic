@@ -1,0 +1,2 @@
+cat /opt/lsws/logs/access.log | grep "/badge"
+cat /opt/lsws/logs/access.log | grep -c "/badge"

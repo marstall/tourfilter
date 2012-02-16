@@ -1,0 +1,2 @@
+page_views '(source="js" or url like "%search" or url like "%add") and ip_address<>"24.61.46.34" and user_agent not like "%bot%" and url not like "/data/%" and user_agent not like "%Bot" and user_agent not like "%eeves%" and url not like "/rss%" and date_format(created_at,"%Y/%m/%d")=date_format(now(),"%Y/%m/%d") order by session_id asc, id asc'
+

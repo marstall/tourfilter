@@ -1,0 +1,4 @@
+let end=$2+1
+echo end: $end
+mysql -uchris -pchris tourfilter_$1 -e "select terms.text,count(*) cnt from terms,terms_users where term_id=terms.id and terms_users.created_at<adddate(now(),interval -$2 week) and terms_users.created_at>=adddate(now(),interval -$end week) group by term_id order by cnt desc limit 20;"
+

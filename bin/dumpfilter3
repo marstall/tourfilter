@@ -1,0 +1,6 @@
+scp chris@tourfilter.com:/home/chris/tourfilter/dumps/tourfilter_$1_latest.dump.sql.gz /Users/chris/dev/tourfilter/dumps
+cp /Users/chris/dev/tourfilter/dumps/tourfilter_$1_latest.dump.sql.gz /Users/chris/dev/tourfilter/dumps/tourfilter_$1_`date +%Y-%m-%d`.dump.sql.gz
+cp /Users/chris/dev/tourfilter/dumps/tourfilter_$1_latest.dump.sql.gz /tourfilter-backups/tourfilter_$1_`date +%Y-%m-%d`.dump.sql.gz
+gunzip /Users/chris/dev/tourfilter/dumps/tourfilter_$1_latest.dump.sql.gz
+backup_source
+my</Users/chris/dev/tourfilter/dumps/tourfilter_$1_latest.dump.sql

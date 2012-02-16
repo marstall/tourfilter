@@ -1,0 +1,4 @@
+mysql $DB_NAME -u$DB_USERNAME -p$DB_PASSWORD -e'select left(referer,120),count(*) cnt from page_views where referer not like "%tourfilter%" group by referer order by cnt asc;'
+
+
+

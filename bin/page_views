@@ -1,0 +1,4 @@
+mysql $DB_NAME -u$DB_USERNAME -p$DB_PASSWORD -e"select created_at,youser_id id,ip_address,domain,left(url,30),left(form_contents,25) f, left(concat(referer_domain,referer),50),time_to_render ttr,left(original_referer_domain,24) origref from page_views where $1"
+
+
+

@@ -1,0 +1,4 @@
+mysql $DB_NAME -u$DB_USERNAME -p$DB_PASSWORD -e'select date_format(created_at,"%x/%v") date,count(*) pageviews,count(distinct session_id) sessions,count(distinct perm_session_id) perm_sessions from page_views where youser_id<>2 and (source="js" or url="/edit/add" or url="/user/term") group by date;'
+users_by_week
+
+

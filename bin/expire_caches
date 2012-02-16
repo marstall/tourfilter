@@ -1,0 +1,3 @@
+cd ~/tourfilter/daemon
+ruby daemon.rb $1 no_crawl no_searches no_url_generation no_email
+

@@ -1,0 +1,4 @@
+gunzip /backups/tourfilter-backups/latest/tourfilter_boston_latest.dump.sql.gz
+gunzip /backups/tourfilter-backups/latest/tourfilter_shared_latest.dump.sql.gz
+mysql -uchris -pchris tourfilter_boston< /backups/tourfilter-backups/latest/tourfilter_boston_latest.dump.sql
+mysql -uchris -pchris tourfilter_shared< /backups/tourfilter-backups/latest/tourfilter_shared_latest.dump.sql

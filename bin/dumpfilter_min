@@ -1,0 +1,4 @@
+mysqldump -d -u$DB_USERNAME -p$DB_PASSWORD tourfilter_$1 >/home/chris/tourfilter/dumps/tourfilter_$1_`date +%Y-%m-%d`.dump.sql
+mysqldump --add-drop-table -u$DB_USERNAME -p$DB_PASSWORD tourfilter_$1 comments invitations matches metros pages places recommendations recommendees_recommenders terms terms_users users>>/home/chris/tourfilter/dumps/tourfilter_$1_`date +%Y-%m-%d`.dump.sql
+gzip -fq /home/chris/tourfilter/dumps/tourfilter_$1_`date +%Y-%m-%d`.dump.sql
+cp /home/chris/tourfilter/dumps/tourfilter_$1_`date +%Y-%m-%d`.dump.sql.gz /home/chris/tourfilter/dumps/tourfilter_$1_latest.dump.sql.gz

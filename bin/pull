@@ -1,0 +1,4 @@
+cd /home/chris/tourfilter
+rm -rf pull.tar.gz
+tar -cf pull.tar app/ config/ daemon/*.rb public/javascripts public/stylesheets bin/ script/
+gzip pull.tar 

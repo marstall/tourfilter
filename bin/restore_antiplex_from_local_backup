@@ -1,0 +1,3 @@
+gunzip /backups/antiplex-backups/latest/antiplex_latest.dump.sql.gz 
+mysql -uchris -pchris antiplex< /backups/antiplex-backups/latest/antiplex_latest.dump.sql
+

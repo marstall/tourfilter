@@ -1,0 +1,8 @@
+cp ~/tourfilter/config/database.yml.production_debug ~/tourfilter/database.yml
+~/lsws/bin/lswsctrl stop
+cd ~/tourfilter
+kill -9 `ps -auxwww | grep ruby | grep -v grep | cut -f3 -d" "`
+ruby script/server --environment=development &
+
+
+

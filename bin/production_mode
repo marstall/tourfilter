@@ -1,0 +1,4 @@
+cp ~/tourfilter/config/database.yml.production ~/tourfilter/database.yml
+kill -9 `ps -auxwww | grep ruby | grep -v grep | cut -f3 -d" "`
+~/lsws/bin/lswsctrl start
+
