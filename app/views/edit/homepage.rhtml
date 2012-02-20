@@ -32,7 +32,7 @@
             <%#=render_component(:controller=>'edit',:action=>'your_shows_partial',:params=>params+{:metro_code=>@metro_code})%>
 	           <%=render("your_shows_partial",:params=>params+{:metro_code=>@metro_code})%>
     			<%elsif cookies['calndar_view']=='_feed'&&@view!=:calendar%>
-              <%=render_component(:controller=>'edit',:action=>'feed_partial',:params=>params+{:metro_code=>@metro_code})%>
+              <%#=render_component(:controller=>'edit',:action=>'feed_partial',:params=>params+{:metro_code=>@metro_code})%>
           <%else%>
             <%cookies['calndar_view']='full_SP_calendar'%>
             <%#=render_component(:controller=>'edit',:action=>'calendar_partial',
