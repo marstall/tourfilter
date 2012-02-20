@@ -2387,7 +2387,7 @@ th
 
 .inactive_step
 {
-		opacity: 0.20;
+		opacity: 0.05;
 	filter: alpha(opacity=20);
 }
 

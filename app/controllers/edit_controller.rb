@@ -332,84 +332,9 @@ c = GeoIP.new("/Users/chris/maxmind/GeoLiteCity.dat").city("76.24.220.14")
     headers["Content-Type"] = "text/xml"
     render(:layout=>false)
   end
-
-  def homepage_signup
-    @not_in_a_city=true
-    @header_title='Spam-free concert alerts.'
-    render(:layout=>false)
-  end
   
   def footsy
     render(:inline=>'footsy')
-  end
-
-  def related_terms
-    num=params[:num].to_i||num_related
-    num=7 if num==0
-    terms_as_text=request.raw_post        
-    term_text_array=Array.new
-#    line_end = true if terms_as_text~=/\n/
-    terms_as_text.chomp.split(/([\n,]|%0A|%0D)+/).each { |term_text|
-      term_text.strip!
-      next if term_text=~ /&_=/
-      next if term_text== "%0A"
-      next if term_text.size<3
-      term_text.gsub!("%20"," ")
-      term_text_array<<term_text
-      logger.info("+++"+term_text)
-    } if terms_as_text
-    @term_texts=term_text_array
-    if term_text_array.empty?
-      @popular_terms = RelatedTerm.random_set(500,6,term_text_array)
-    end
-    render(:layout=>false)
-  end
-
-  def _related_terms(ren=true,num_related=7)
-    num=params[:num].to_i||num_related
-    num=7 if num==0
-      terms_as_text=request.raw_post        
-      term_text_array=Array.new
-      terms_as_text.chomp.split(/([\n,]|%0A)+/).each { |term_text|
-        term_text.strip!
-        next if term_text=~ /&_=/
-        next if term_text.size<3
-        term_text.gsub!("%20"," ")
-        term_text_array<<term_text
-      } if terms_as_text
-    num+=(term_text_array.size*3) if term_text_array
-    term_text_array+=@youser.terms if @youser
-    logger.info("+++ num:"+num.to_s)
-    setup_related_terms(term_text_array,num)  
-    @related_terms||=[]
-    if (not @youser and @related_terms.size<=0)
-      random_related_terms=RelatedTerm.random_set(500,6,term_text_array)
-      @related_terms=random_related_terms+@related_terms
-    end
-    if params[:random]
-      @related_terms=RelatedTerm.random_set(500,num,term_text_array)
-    end
-    if @related_terms.length>20
-      max_same=3
-    else
-      max_same=5
-    end
-    rts = @related_terms
-    @related_terms=[]
-    same_index=0
-    last_term_text=""
-    logger.info("+++#{@related_terms.length}")
-    rts.each{|related_term|
-      logger.info("+++"+related_term.term_text+":"+last_term_text+":"+same_index.to_s)
-      if related_term.term_text==last_term_text
-        same_index+=1 
-      else
-        same_index=0
-      end
-      last_term_text=related_term.term_text
-      @related_terms<<related_term if same_index<max_same or related_term.default?
-    }
-    render(:layout=>false) if ren 
   end
 
   def my_shows
@@ -420,26 +345,6 @@ c = GeoIP.new("/Users/chris/maxmind/GeoLiteCity.dat").city("76.24.220.14")
     render(:partial=>'my_terms',:layout=>false)
   end
 
-  def setup_related_terms(terms,num)
-    return if not terms or terms.empty?
-      terms_hash=Hash.new
-      terms.each{|term|
-        if terms.is_a? String
-          terms_hash[term]=true
-        else
-          terms_hash[term.id]=true
-        end
-      }
-      _related_terms=Term.find_related_terms(terms)
-      @related_terms=Array.new
-      _related_terms.each{|related_term|
-        break if @related_terms.length>50
-        @related_terms<<related_term if not terms_hash[related_term.related_term_text] and not terms_hash[related_term.related_term_id]
-        break if @related_terms.size>num
-      }
-      return @related_terms
-  end
-  
   def search
     @user=@youser
     @fragment=true
@@ -533,6 +438,7 @@ c = GeoIP.new("/Users/chris/maxmind/GeoLiteCity.dat").city("76.24.220.14")
         {'your_SP_shows'=>'your_shows_partial'},
         {'friends'=>'friends_partial'}
       ]
+    return @options_label,@nav_array
   end
 
   def use_list_nav_array
@@ -697,6 +603,7 @@ c = GeoIP.new("/Users/chris/maxmind/GeoLiteCity.dat").city("76.24.220.14")
   end
 
   def homepage
+    puts "+++ RENDERING EDIT#HOMEPAGE"
     @jquery=true
     @days_to_show = params[:id]||60
     @offset = params[:offset].to_i 
@@ -923,7 +830,7 @@ c = GeoIP.new("/Users/chris/maxmind/GeoLiteCity.dat").city("76.24.220.14")
           end
           return
         rescue =>e
-          logger.info (e.message+"\n"+e.backtrace.join("\n"))
+          logger.info(e.message+"\n"+e.backtrace.join("\n"))
           errors = @youser.render_errors
           if errors
             error_string=errors.gsub('_',' ') 

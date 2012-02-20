@@ -17,7 +17,6 @@
 <%if false and @youser and not @youser.normal?%>
 <div class='nag'>Next: to make it easier to log in, you should <a href='<%=url("/settings")%>'>choose a username and password</a>.</div>
 <%end%>
-
 <div id="main-full-width">
 <div >
 <%#=render(:partial=>'shared/search')%>
@@ -25,18 +24,22 @@
     			<%if cookies['calndar_view']=='venues'&&@view!=:calendar%>
             <%=render_component(:controller=>'edit',:action=>'venues_partial',:params=>params+{:metro_code=>@metro_code})%>
     			<%elsif cookies['calndar_view']=='friends'&&@view!=:calendar%>
-            <%=render_component(:controller=>'edit',:action=>'friends_partial',:params=>params+{:metro_code=>@metro_code})%>
+            <%#=render_component(:controller=>'edit',:action=>'friends_partial',:params=>params+{:metro_code=>@metro_code})%>
+            <%=render('friends_partial',:params=>params+{:metro_code=>@metro_code})%>
     			<%elsif cookies['calndar_view']=='add_SP_bands'&&@view!=:calendar%>
             <%=render_component(:controller=>'edit',:action=>'add_bands_partial',:params=>params+{:metro_code=>@metro_code})%>
     			<%elsif cookies['calndar_view']=='your_SP_shows'&&@view!=:calendar%>
-            <%=render_component(:controller=>'edit',:action=>'your_shows_partial',:params=>params+{:metro_code=>@metro_code})%>
+            <%#=render_component(:controller=>'edit',:action=>'your_shows_partial',:params=>params+{:metro_code=>@metro_code})%>
+	           <%=render("your_shows_partial",:params=>params+{:metro_code=>@metro_code})%>
     			<%elsif cookies['calndar_view']=='_feed'&&@view!=:calendar%>
               <%=render_component(:controller=>'edit',:action=>'feed_partial',:params=>params+{:metro_code=>@metro_code})%>
           <%else%>
             <%cookies['calndar_view']='full_SP_calendar'%>
-            <%=render_component(:controller=>'edit',:action=>'calendar_partial',
+            <%#=render_component(:controller=>'edit',:action=>'calendar_partial',
               :params=>params+{:metro_code=>@metro_code,:offset=>@offset,:days_to_show=>@days_to_show})%>
-    			<%end%>
+	           <%=render("calendar_partial",
+							:params=>params+{:metro_code=>@metro_code,:offset=>@offset,:days_to_show=>@days_to_show})%>
+			    <%end%>
     		</div>
         <div id='list_view' >
         	<%some_featured=false%>
@@ -64,6 +67,7 @@
           <div style='clear:left'></div>
 	<%#=render(:partial =>"shared/calendar")%>
 	<%#=render(:partial =>"shared/recently_added_shows")%>
+	HEEEEERE
 	<div align="right">
 	<%if false #@metro_code=="boston"%>
 	<span style="vertical-align:super">
@@ -88,7 +92,6 @@
           <input type="hidden" name="note_entity" value=""/>
   <%=render(:partial=>"shared/authenticate_client")%>
 </form>
-
 <script>
   
   function add(term_text,term_id)

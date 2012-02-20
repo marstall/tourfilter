@@ -1,12 +1,6 @@
 <div id="suggested_terms" >
-<%if @term_texts.empty?%>
-<div id='popular_terms' style='float:left'>
-<%#=render(:partial=>'related_terms',:locals=>{:related_terms=>@popular_terms,:label=>'some random bands<br>to jog your memory',:refresh=>true})%>
-</div>
-<%else%>
 <div id='related_terms' style='float:left;margin-left:6px;position:absolute'>
 <%#=render(:partial=>'related_terms',:locals=>{:related_terms=>@related_terms,:label=>'recommended based on<br>what you\'ve entered'})%>
 <%=render(:partial=>'homepage_related_grid',:locals=>{:terms=>@term_texts,:num_related=>5})%>
 </div>
-<%end%>
 </div>

@@ -10,7 +10,7 @@
 	  <%= javascript_include_tag "application" %>	
 </head>
 <body style='margin:4px;padding:0px;width:820px'>
-<%=render(:partial=>'shared/metro_list')%>
+<%#=render(:partial=>'shared/metro_list')%>
 <div id='inner_body' style='margin:0px;padding:0px'>
   <div id='logo' style='background-color:#ddf5f5 !important'>
     <div style='float:left'>
@@ -55,7 +55,8 @@
                           )%>
       </div>
       <div id="related_terms" class="signup_related_terms">
-      <%=render_component(:controller=>'edit',:action=>'related_terms')%>
+      <%#=render_component(:controller=>'edit',:action=>'related_terms')%>
+			<%=render("related_terms")%>
       </div>
       <div class='clear_left'></div>
     </div>

@@ -9,7 +9,7 @@ require File.join(File.dirname(__FILE__), 'boot')
 
 
 Rails::Initializer.run do |config|
-  config.action_controller.session = { :session_key => "_myapp_session", :secret => "the name of this band is talking heads is this 30 characters?" }
+  config.action_controller.session = { :key => "_myapp_session", :secret => "the name of this band is talking heads is this 30 characters?" }
   config.logger=nil if ENV['LOGGING']=='no'
   # Skip frameworks you're not going to use
   # config.frameworks -= [ :action_web_service, :action_mailer ]
@@ -27,7 +27,7 @@ Rails::Initializer.run do |config|
 
   # Enable page/fragment caching by setting a file-based store
   # (remember to create the caching directory and make it readable to the application)
-  config.action_controller.fragment_cache_store = :file_store, "#{RAILS_ROOT}/cache"
+  config.cache_store = :file_store, "#{RAILS_ROOT}/cache"
 
   # Activate observers that should always be running
   # config.active_record.observers = :cacher, :garbage_collector
