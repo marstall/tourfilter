@@ -24,19 +24,13 @@
     			<%if cookies['calndar_view']=='venues'&&@view!=:calendar%>
             <%=render_component(:controller=>'edit',:action=>'venues_partial',:params=>params+{:metro_code=>@metro_code})%>
     			<%elsif cookies['calndar_view']=='friends'&&@view!=:calendar%>
-            <%#=render_component(:controller=>'edit',:action=>'friends_partial',:params=>params+{:metro_code=>@metro_code})%>
             <%=render('friends_partial',:params=>params+{:metro_code=>@metro_code})%>
     			<%elsif cookies['calndar_view']=='add_SP_bands'&&@view!=:calendar%>
-            <%=render_component(:controller=>'edit',:action=>'add_bands_partial',:params=>params+{:metro_code=>@metro_code})%>
+          	<%=render("add_bands_partial",:params=>params+{:metro_code=>@metro_code})%>
     			<%elsif cookies['calndar_view']=='your_SP_shows'&&@view!=:calendar%>
-            <%#=render_component(:controller=>'edit',:action=>'your_shows_partial',:params=>params+{:metro_code=>@metro_code})%>
 	           <%=render("your_shows_partial",:params=>params+{:metro_code=>@metro_code})%>
-    			<%elsif cookies['calndar_view']=='_feed'&&@view!=:calendar%>
-              <%#=render_component(:controller=>'edit',:action=>'feed_partial',:params=>params+{:metro_code=>@metro_code})%>
           <%else%>
             <%cookies['calndar_view']='full_SP_calendar'%>
-            <%#=render_component(:controller=>'edit',:action=>'calendar_partial',
-              :params=>params+{:metro_code=>@metro_code,:offset=>@offset,:days_to_show=>@days_to_show})%>
 	           <%=render("calendar_partial",
 							:params=>params+{:metro_code=>@metro_code,:offset=>@offset,:days_to_show=>@days_to_show})%>
 			    <%end%>
@@ -47,14 +41,13 @@
         	<%some_featured=true if features and not features.empty?%>
     			<%if cookies['list_view']=='popular' or 
     			    ((cookies['list_view'].nil? or cookies['list_view'].strip.empty? or cookies['list_view']!='edit') and not some_featured)%>
-            <%=render_component(:controller=>'edit',:action=>'popular_partial',
+            <%#=render_component(:controller=>'edit',:action=>'popular_partial',
               :params=>params+{:metro_code=>@metro_code,:some_featured=>some_featured})%>
+	          <%=render('popular_partial',:params=>params+{:metro_code=>@metro_code,:some_featured=>some_featured})%>
     			<%elsif cookies['list_view']=='new'%>
-            <%=render_component(:controller=>'edit',:action=>'new_partial',
-              :params=>params+{:metro_code=>@metro_code,:some_featured=>some_featured})%>
+          <%=render('new_partial',:params=>params+{:metro_code=>@metro_code,:some_featured=>some_featured})%>
           <%else%>
-            <%=render_component(:controller=>'edit',:action=>'featured_partial',
-              :params=>params+{:metro_code=>@metro_code,:some_featured=>some_featured})%>
+          <%=render('featured_partial',:params=>params+{:metro_code=>@metro_code,:some_featured=>some_featured})%>
           <%end%>
         </div>
           <%if not params[:bare]%>

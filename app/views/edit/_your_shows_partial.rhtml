@@ -1,3 +1,4 @@
+<%@options_label,@nav_array = controller.use_calendar_nav_array%>
 <%=render(:partial=>'shared/calendar_options',:locals=>{:options_label=>@options_label,:nav_array=>@nav_array})%>
 <h2>your shows
   <a href='<%=url("/ical/about")%>'><img class='faded_80' height=12px src='/images/ical.gif'></a>

@@ -458,7 +458,7 @@ c = GeoIP.new("/Users/chris/maxmind/GeoLiteCity.dat").city("76.24.220.14")
           {'new'=>'new_partial'}
         ]
     end
-    
+    return @options_label,@nav_array,@featured_matches
   end
 
   def use_list_nav_array_no_editors_picks
@@ -468,6 +468,8 @@ c = GeoIP.new("/Users/chris/maxmind/GeoLiteCity.dat").city("76.24.220.14")
         {'popular'=>'popular_partial'},
         {'new'=>'new_partial'}
       ]
+    return @options_label,@nav_array
+      
   end
 
 
@@ -497,30 +499,23 @@ c = GeoIP.new("/Users/chris/maxmind/GeoLiteCity.dat").city("76.24.220.14")
 
 
   def add_bands_partial
-#    _related_terms(false,10) 
-    use_calendar_nav_array
-    render(:layout=>false)
+    render(:partial=>'add_bands_partial')
   end
 
   def your_shows_partial
-#    _related_terms(false,10) 
-    use_calendar_nav_array
-    render(:layout=>false)
+    render(:partial=>'your_shows_partial')
   end
 
   def new_partial
-    use_list_nav_array
-    render(:layout=>false)
+    render(:partial=>'new_partial')
   end
 
   def popular_partial
-    use_list_nav_array
-    render(:layout=>false)
+    render(:partial=>'popular_partial')
   end
 
   def featured_partial
-    use_list_nav_array
-    render(:layout=>false)
+    render(:partial=>'featured_partial')
   end
 
   def beta_signup
