@@ -1,5 +1,6 @@
 source "http://rubygems.org"
 gem "rails", "2.3.9"
+gem "mysql", "2.8.1"
 gem "geoip", "1.0.0"
 gem "geokit", "1.5.0"
 gem "hpricot", "0.8.6"
