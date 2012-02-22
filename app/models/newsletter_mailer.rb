@@ -1,8 +1,8 @@
-require "../app/models/page.rb"
-require "../app/models/place.rb"
-require "../app/models/match.rb"
-require "../app/models/term.rb"
-require "../app/models/user.rb"
+#require "../app/models/page.rb" 
+#require "../app/models/place.rb"
+#require "../app/models/match.rb"
+#require "../app/models/term.rb"
+#require "../app/models/user.rb"
 
 class NewsletterMailer < ActionMailer::Base
   include CalendarModule
