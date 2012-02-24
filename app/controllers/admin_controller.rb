@@ -2,7 +2,7 @@ require "net/http"
 require 'open-uri'
 
 class AdminController < ApplicationController  
-  include Parser
+ # include Parser
   
   before_filter :must_be_admin
     

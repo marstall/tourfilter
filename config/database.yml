@@ -16,9 +16,9 @@ development:
 test:
   adapter: mysql
   database: tourfilter_boston
-  username: test
-  password: test
-  host: test.cbeerawtyv8a.us-east-1.rds.amazonaws.com
+  username: chris 
+  password: chris
+  host: 127.0.0.1
   port: 3306
 
 
