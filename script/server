@@ -1,6 +1,2 @@
-<<<<<<< HEAD
-#!/usr/bin/ruby
-=======
->>>>>>> 8149868e19e999d5a8f231dd47a1eef60ce76e79
 require File.dirname(__FILE__) + '/../config/boot'
 require 'commands/server'
