@@ -1,4 +1,4 @@
-require "../app/models/page.rb"
+require "../app/models/page.rb" 
 require "../app/models/place.rb"
 require "../app/models/match.rb"
 require "../app/models/term.rb"
