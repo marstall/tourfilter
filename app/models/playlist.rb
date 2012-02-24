@@ -1,4 +1,4 @@
-require "../app/models/track.rb"
+#require "../app/models/track.rb"
 
 class Playlist < ActiveRecord::Base
   
