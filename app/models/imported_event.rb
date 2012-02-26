@@ -3,7 +3,7 @@ require "../app/models/acts_as_indexable.rb" if $mode=="import_daemon"
 class ImportedEvent < ActiveRecord::Base
    unless $mode=="import_daemon"
      require "../config/environment.rb" if $mode=="daemon"
-     establish_connection "shared" 
+     establish_connection "shared_#{ENV['RAILS_ENV']}" 
    end
 
   include ActsAsIndexable

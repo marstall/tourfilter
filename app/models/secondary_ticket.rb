@@ -2,7 +2,7 @@ require "acts_as_indexable.rb"
 
 class SecondaryTicket < ActiveRecord::Base
   include ActsAsIndexable
-  establish_connection "shared" unless $mode=="import_daemon"
+  establish_connection "shared_#{ENV['RAILS_ENV']}" unless $mode=="daemon"
   
   def self.find_tickets(id)
     ret=Hash.new
