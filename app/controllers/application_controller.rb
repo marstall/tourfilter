@@ -169,9 +169,9 @@ class ApplicationController < ActionController::Base
       logger.info("database_code: #{database_code}")
       ActiveRecord::Base.establish_connection(
         :adapter  => "mysql",
-        :host     => "127.0.0.1",
-        :username => "chris",
-        :password => "chris",
+        :host     => ActiveRecord::Base.configurations[ENV['RAILS_ENV']]['host'],
+        :username => ActiveRecord::Base.configurations[ENV['RAILS_ENV']]['username'],
+        :password => ActiveRecord::Base.configurations[ENV['RAILS_ENV']]['password'],
         :database => "tourfilter_#{database_code}"
         )
     rescue => e
