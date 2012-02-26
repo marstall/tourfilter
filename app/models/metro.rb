@@ -2,7 +2,7 @@ include GeoKit::Geocoders
 
 class Metro < ActiveRecord::Base
 
-  establish_connection "shared" unless $mode=="daemon"
+  establish_connection "shared_#{ENV['RAILS_ENV']}" unless $mode=="daemon"
 
   acts_as_mappable
 

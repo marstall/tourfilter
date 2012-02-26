@@ -1,3 +1,3 @@
 class Venues < ActiveRecord::Base
-   establish_connection "shared_#{RAILS_ENV}" 
+  establish_connection "shared_#{ENV['RAILS_ENV']}" 
 end

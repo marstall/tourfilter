@@ -5,7 +5,7 @@ class SharedEvent < ActiveRecord::Base
   acts_as_mappable :lat_column_name=>:metro_lat,
                    :lng_column_name=>:metro_lng
   belongs_to :venue
-  establish_connection "shared" unless $mode=="daemon"
+  establish_connection "shared_#{ENV['RAILS_ENV']}" unless $mode=="daemon"
 
   # if there is a space
 =begin

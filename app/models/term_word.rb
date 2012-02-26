@@ -1,3 +1,3 @@
 class TermWord < ActiveRecord::Base
-  establish_connection "shared" unless $mode=="daemon"
+  establish_connection "shared_#{ENV['RAILS_ENV']}" unless $mode=="daemon"
 end
