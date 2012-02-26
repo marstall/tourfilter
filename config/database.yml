@@ -24,7 +24,7 @@ test:
 
 production:
   adapter: mysql
-  database: test
+  database: tourfilter_boston
   username: test
   password: test
   host: test.cbeerawtyv8a.us-east-1.rds.amazonaws.com
