@@ -169,7 +169,7 @@ class ApplicationController < ActionController::Base
       logger.info("database_code: #{database_code}")
       ActiveRecord::Base.establish_connection(
         :adapter  => "mysql",
-        :host     => ActiveRecord::Base.configurations[ENV['RAILS_ENV']]['host'],
+        :host     => ActiveRecord::Base.configurations[ENV['RAILS_ENV']]['host']
         :username => ActiveRecord::Base.configurations[ENV['RAILS_ENV']]['username'],
         :password => ActiveRecord::Base.configurations[ENV['RAILS_ENV']]['password'],
         :database => "tourfilter_#{database_code}"
@@ -433,7 +433,7 @@ class ApplicationController < ActionController::Base
       redirect_to "http://www.tourfilter.com#{request.path}"
       return false     
     end
-    return true if request.host=~/localhost|tourfilter\.(com|local)|^192.168/
+    return true if request.host=~/antiplex|amazon|localhost|tourfilter\.(com|local)|^192.168/
     redirect_to "http://www.tourfilter.com#{request.path}"
     return false     
   end
