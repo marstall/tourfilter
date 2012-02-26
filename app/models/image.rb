@@ -10,7 +10,7 @@ class Image < ActiveRecord::Base
 
   has_many :features
 
-  establish_connection "shared" unless $mode=="daemon"
+  establish_connection "shared_#{ENV['RAILS_ENV']}" unless $mode=="daemon"
 
   def self.random
     sql = <<-SQL

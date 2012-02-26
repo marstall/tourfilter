@@ -1,6 +1,6 @@
 class Article < ActiveRecord::Base
 
-  establish_connection "shared"
+  establish_connection "shared_#{ENV['RAILS_ENV']}" 
   
   def already_exists?
     Article.find_by_term_text_and_url(term_text,url)
