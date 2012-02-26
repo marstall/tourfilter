@@ -39,28 +39,6 @@ shared_test:
   port: 3306
 
 
-development_boston:
-  adapter: mysql
-  database: tourfilter_boston
-  username: chris
-  password: chris
-  host: 127.0.0.1
-  port: 3306
-
-production_boston:
-  adapter: mysql
-  database: tourfilter_boston
-  username: chris
-  password: chris
-  host: 127.0.0.1
-  port: 3306
-
-development_westernmass:
-  adapter: mysql
-  database: tourfilter_westernmass
-  username: chris
-  password: chris
-  host: 127.0.0.1
   port: 3306
 
 production_westernmass:
@@ -83,8 +61,8 @@ shared:
 shared_production:
   adapter: mysql
   database: tourfilter_shared
-  username: chris
-  password: chris
-  host: 127.0.0.1
+  username: test
+  password: test
+  host: test.cbeerawtyv8a.us-east-1.rds.amazonaws.com
   port: 3306
   
