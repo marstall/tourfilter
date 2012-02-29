@@ -105,7 +105,7 @@ else
     :port =>  465,
     :enable_starttls_auto => true,
 #    :domain => "tourfilter.com",
-    :authentication =>  :login,
+    :authentication =>  :plain,
     :user_name => amazon_creds['smtp_username'],
     :password =>  amazon_creds['smtp_password']
   }
