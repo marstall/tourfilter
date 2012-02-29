@@ -67,6 +67,16 @@ if ENV['RAILS_ENV']=='development'
 #        :domain => "ruby"
     }
 else
+  config.action_mailer.default_url_options = { host: "tourfilter.com"}
+  config.action_mailer.raise_delivery_errors = true
+  ActionMailer::Base.smtp_settings = {
+    address: "email-smtp.us-east-1.amazonaws.com",
+    port: 465,
+    domain: "tourfilter.com",
+    authentication: :login,
+    user_name:"AKIAI3UFAWI62VS5PQ6A",
+    password: "Al9Fd+jc8esCYEf5rwNp5IxKUejsQH/ZuHbL5W5qqiUf"
+  }
 ActionMailer::Base.smtp_settings = {
   :address => "tourfilter.com",
   :domain => "rails"
@@ -123,3 +133,11 @@ GeoKit::Geocoders::geocoder_ca = false
 # geocoder you are going to use.
 GeoKit::Geocoders::provider_order = [:google,:yahoo]
 
+# monkey patch to support TLS-based AWS SES SMTP sending
+module Net
+  class SMTP
+    def tls?
+      true
+    end
+  end
+end
