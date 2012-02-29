@@ -9,7 +9,7 @@ require File.join(File.dirname(__FILE__), 'boot')
 
 #require 'aws/ses'
 
-require 'tlsmail'
+#require 'tlsmail'
 
 amazon_creds = YAML::load(open("#{RAILS_ROOT}/config/amazon.yml"))
 
@@ -21,6 +21,15 @@ amazon_creds = YAML::load(open("#{RAILS_ROOT}/config/amazon.yml"))
 #  :secret_access_key => amazon_creds['secret_access_key']
 #})
 
+#require 'net/smtp'
+
+#module Net
+#  class SMTP
+#    def tls?
+#      true
+#    end
+#  end
+#end
 
 Rails::Initializer.run do |config|
   config.action_controller.session = { :key => "_myapp_session", :secret => "the name of this band is talking heads is this 30 characters?" }
@@ -83,17 +92,19 @@ if ENV['RAILS_ENV']=='development'
     }
 else
   puts "setup production mode mail"
-  Net::SMTP.enable_tls(OpenSSL::SSL::VERIFY_NONE)
+  puts "smtp username:"+amazon_creds['smtp_username']
+#  Net::SMTP.enable_tls(OpenSSL::SSL::VERIFY_NONE)
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.perform_deliveries = true
   ActionMailer::Base.default_charset = "utf-8"
   ActionMailer::Base.default_url_options = { :host => "tourfilter.com"}
   ActionMailer::Base.raise_delivery_errors = true
+  ActionMailer::Base.logger = Logger.new("mailer.log")
   ActionMailer::Base.smtp_settings = {
     :address => "email-smtp.us-east-1.amazonaws.com",
     :port =>  465,
-    :tls => true,
-    :domain => "tourfilter.com",
+    :enable_starttls_auto => true,
+#    :domain => "tourfilter.com",
     :authentication =>  :login,
     :user_name => amazon_creds['smtp_username'],
     :password =>  amazon_creds['smtp_password']
