@@ -21,15 +21,6 @@ amazon_creds = YAML::load(open("#{RAILS_ROOT}/config/amazon.yml"))
 #  :secret_access_key => amazon_creds['secret_access_key']
 #})
 
-require 'net/smtp'
-
-module Net
-  class SMTP
-    def tls?
-      true
-    end
-  end
-end
 
 Rails::Initializer.run do |config|
   config.action_controller.session = { :key => "_myapp_session", :secret => "the name of this band is talking heads is this 30 characters?" }
