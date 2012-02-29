@@ -9,9 +9,12 @@ require File.join(File.dirname(__FILE__), 'boot')
 
 #require 'aws/ses'
 
+require 'tlsmail'
+
+amazon_creds = YAML::load(open("#{RAILS_ROOT}/config/amazon.yml"))
+
 # extend ActionMailer
 #puts "extending ActionMailer for AWS ..."
-#amazon_creds = YAML::load(open("#{RAILS_ROOT}/config/amazon.yml"))
 
 #ActionMailer::Base.custom_amazon_ses_mailer = AWS::SES::Base.new({
 #  :access_key_id => amazon_creds['access_key_id'],
@@ -22,9 +25,9 @@ require 'net/smtp'
 
 module Net
   class SMTP
-	def tls?
-		true
-	end
+    def tls?
+      true
+    end
   end
 end
 
@@ -89,16 +92,20 @@ if ENV['RAILS_ENV']=='development'
     }
 else
   puts "setup production mode mail"
-#  ActionMailer::Base.delivery_method = :amazon_ses
+  Net::SMTP.enable_tls(OpenSSL::SSL::VERIFY_NONE)
+  ActionMailer::Base.delivery_method = :smtp
+  ActionMailer::Base.perform_deliveries = true
+  ActionMailer::Base.default_charset = "utf-8"
   ActionMailer::Base.default_url_options = { :host => "tourfilter.com"}
   ActionMailer::Base.raise_delivery_errors = true
   ActionMailer::Base.smtp_settings = {
     :address => "email-smtp.us-east-1.amazonaws.com",
     :port =>  465,
+    :tls => true,
     :domain => "tourfilter.com",
     :authentication =>  :login,
-    :user_name => "AKIAI3UFAWI62VS5PQ6A",
-    :password =>  "Al9Fd+jc8esCYEf5rwNp5IxKUejsQH/ZuHbL5W5qqiUf"
+    :user_name => amazon_creds['smtp_username'],
+    :password =>  amazon_creds['smtp_password']
   }
   ActionMailer::Base.smtp_settings = {
     :address => "tourfilter.com",
