@@ -79,6 +79,27 @@ SETTINGS = YAML.load(File.open("#{RAILS_ROOT}/config/settings.yml"))
 
 # Include your application configuration below
 
+#sample SMTP session with amazon
+=begin
+EHLO ec2-23-20-115-55.compute-1.amazonaws.com
+AUTH LOGIN
+
+QUtJQUlGNlhJUEpTVVM1TFBZNFE=
+
+QXRhby93U3RDd0NzbGo1aEJzdERWLzVyZ2xKK3UxOUxPUVBHaGxLL2pUSk4=
+
+MAIL FROM: chris@psychoastronomy.org
+RCPT TO: chris@psychoastronomy.org
+DATA
+
+test
+.
+
+QUIT
+
+
+=end
+
 # setup mail-server configuration params
 if ENV['RAILS_ENV']=='development'
   puts "setup dev mode mail"
