@@ -7,6 +7,23 @@
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 
+#require 'aws/ses'
+
+# extend ActionMailer
+#puts "extending ActionMailer for AWS ..."
+#amazon_creds = YAML::load(open("#{RAILS_ROOT}/config/amazon.yml"))
+
+#ActionMailer::Base.custom_amazon_ses_mailer = AWS::SES::Base.new({
+#  :access_key_id => amazon_creds['access_key_id'],
+#  :secret_access_key => amazon_creds['secret_access_key']
+#})
+
+require 'net/smtp'
+
+module Net
+  class SMTP
+  end
+end
 
 Rails::Initializer.run do |config|
   config.action_controller.session = { :key => "_myapp_session", :secret => "the name of this band is talking heads is this 30 characters?" }
@@ -58,6 +75,7 @@ SETTINGS = YAML.load(File.open("#{RAILS_ROOT}/config/settings.yml"))
 
 # setup mail-server configuration params
 if ENV['RAILS_ENV']=='development'
+  puts "setup dev mode mail"
     ActionMailer::Base.smtp_settings = {
       :address => "secure.seremeth.com",
       :authentication => :plain,
@@ -67,21 +85,24 @@ if ENV['RAILS_ENV']=='development'
 #        :domain => "ruby"
     }
 else
-  config.action_mailer.default_url_options = { host: "tourfilter.com"}
-  config.action_mailer.raise_delivery_errors = true
+  puts "setup production mode mail"
+#  ActionMailer::Base.delivery_method = :amazon_ses
+  ActionMailer::Base.default_url_options = { :host => "tourfilter.com"}
+  ActionMailer::Base.raise_delivery_errors = true
   ActionMailer::Base.smtp_settings = {
-    address: "email-smtp.us-east-1.amazonaws.com",
-    port: 465,
-    domain: "tourfilter.com",
-    authentication: :login,
-    user_name:"AKIAI3UFAWI62VS5PQ6A",
-    password: "Al9Fd+jc8esCYEf5rwNp5IxKUejsQH/ZuHbL5W5qqiUf"
+    :address => "email-smtp.us-east-1.amazonaws.com",
+    :port =>  465,
+    :domain => "tourfilter.com",
+    :authentication =>  :login,
+    :user_name => "AKIAI3UFAWI62VS5PQ6A",
+    :password =>  "Al9Fd+jc8esCYEf5rwNp5IxKUejsQH/ZuHbL5W5qqiUf"
   }
-ActionMailer::Base.smtp_settings = {
-  :address => "tourfilter.com",
-  :domain => "rails"
-}
+  ActionMailer::Base.smtp_settings = {
+    :address => "tourfilter.com",
+    :domain => "rails"
+  }
 end
+
 # These defaults are used in GeoKit::Mappable.distance_to and in acts_as_mappable
 GeoKit::default_units = :miles
 GeoKit::default_formula = :sphere
@@ -133,11 +154,4 @@ GeoKit::Geocoders::geocoder_ca = false
 # geocoder you are going to use.
 GeoKit::Geocoders::provider_order = [:google,:yahoo]
 
-# monkey patch to support TLS-based AWS SES SMTP sending
-module Net
-  class SMTP
-    def tls?
-      true
-    end
-  end
-end
+ 
