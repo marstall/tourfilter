@@ -1,3 +1,4 @@
+=begin
 LOREM_IPSUM_TEXT = <<-LOREM_IPSUM
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas pellentesque ligula ut felis. Vivamus quis erat. Aenean auctor. Integer sapien. Cras nec nibh non lorem gravida malesuada. Nunc non augue varius ligula pellentesque laoreet. Donec convallis laoreet sapien. Sed id augue et ligula ornare pretium. Donec nec elit. Sed at purus sed justo mollis consequat. Sed bibendum nisl sed erat. In libero. Maecenas convallis. Nunc euismod orci non lorem.
 
@@ -123,3 +124,4 @@ def lorem_ipsum(l=500,randomize_length=true)
   start = 0 if start<0
   LOREM_IPSUM_TEXT[start..start+l]
 end
+=end

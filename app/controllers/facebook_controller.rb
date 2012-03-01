@@ -155,7 +155,7 @@ def get_users_music(uids=nil)
     terms = (user/:music).inner_html.scan(/[^\r\n,]+/)
     terms.each{|term|
       next unless @term_texts[term] # skip if there is not an upcoming show for this band
-      term=term.strip.downcase.gsub ("'","")
+      term=term.strip.downcase.gsub("'","")
       @term2uids[term]="#{(@term2uids[term]||'')},#{uid}" unless @term2uids[term] and @term2uids[term][uid]
       #puts term
       ret_terms<<term

@@ -125,14 +125,11 @@ else
     :address => "email-smtp.us-east-1.amazonaws.com",
     :port =>  465,
     :enable_starttls_auto => true,
-#    :domain => "tourfilter.com",
+#    :openssl_verify_mode => 'none', 
+    :domain => "tourfilter.com",
     :authentication =>  :plain,
     :user_name => amazon_creds['smtp_username'],
     :password =>  amazon_creds['smtp_password']
-  }
-  ActionMailer::Base.smtp_settings = {
-    :address => "tourfilter.com",
-    :domain => "rails"
   }
 end
 
@@ -187,4 +184,15 @@ GeoKit::Geocoders::geocoder_ca = false
 # geocoder you are going to use.
 GeoKit::Geocoders::provider_order = [:google,:yahoo]
 
- 
+# hack because there seems to be a bug in the Net::SMTP class on line 553:
+# @socket = new_internet_message_io(tls? ? tlsconnect(s) : s)
+# i think it should be 
+# @socket = new_internet_message_io(tls?||starttls? ? tlsconnect(s) : s)
+# but this is an easier way to make sure tlsconnect (which does SMTP AUTH) gets called
+module Net
+  class SMTP
+    def tls?
+      true
+    end
+  end
+end
