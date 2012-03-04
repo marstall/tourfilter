@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
 #  before_filter :perform_hostname_corrections
   before_filter :signup_intercept, :only=>[:homepage]
 #  before_filter :convert_to_new_url_structure_2
-  before_filter :initialize_metro, :except=>[:locate,:redirect,:related_terms]
+  before_filter :initialize_metro, :except=>[:locate,:geolocate,:redirect,:related_terms]
   before_filter :connect_to_the_correct_database
   before_filter :initialize_user, :except => :login
   before_filter :mark_time
