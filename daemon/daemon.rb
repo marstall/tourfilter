@@ -52,6 +52,7 @@ def initialize_daemon(metro_code)
   SETTINGS['date_type']='uk' if metro_code=="london" or metro_code=="melbourne" or metro_code=="dublin"
   # setup mail-server configuration params
   rails_env = ENV['RAILS_ENV']
+=begin
   puts "initializing daemon in #{rails_env} mode ..."
   if (rails_env!='production')
     @tourfilter_base="http://www.tourfilter.local:3000/#{metro_code}"
@@ -83,6 +84,7 @@ def initialize_daemon(metro_code)
       :domain => "ruby"
     }
   end
+=end
   puts "daemon initialized."
 end
 

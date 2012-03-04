@@ -39,9 +39,11 @@ end
     @body["match"] = match
     @body["metro_code"] = metro_code
     @bcc=""
-    match.term.users.each { |user| 
+	users = match.term.users.uniq{|user|user.email_address }  
+       users.each { |user| 
       @bcc+=(user.email_address+",")
       }
+    
     @bcc=@bcc.chomp(",") # remove trailing comma
     puts "bcc: #{@bcc}"
     @from       = "#{metro_code}.tourfilter <#{metro_code}@tourfilter.com>"
@@ -57,8 +59,9 @@ end
       @bcc=""
       users = match.term.users
       return if users.empty?
-      users.each { |user| 
-        @bcc+=(user.email_address+",")
+        users = match.term.users.uniq{|user|user.email_address}
+       users.each { |user|          
+       @bcc+=(user.email_address+",")
         }
       @bcc=@bcc.chomp(",") # remove trailing comma
       puts "bcc: #{@bcc}"
