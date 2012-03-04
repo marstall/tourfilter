@@ -61,7 +61,7 @@ class SearchController < ApplicationController
       cal.add(shared_event.to_ical_event(i))
     }
     @ical_data=cal.to_ical
-    render (:action=>"ical",:layout=>false)
+    render(:action=>"ical",:layout=>false)
   end
 
   def fetch_url(url_text)
@@ -145,11 +145,11 @@ class SearchController < ApplicationController
     @format = params[:format]||"html"
     if @format=="rss"
       @shared_events = SharedEvent.search(@shared_event_hash,10000)
-      render (:action=>"rss",:layout=>false)
+      render(:action=>"rss",:layout=>false)
       return
     elsif @format=="json"
       @shared_events = SharedEvent.search(@shared_event_hash,10000)
-      render (:action=>"json",:layout=>false)
+      render(:action=>"json",:layout=>false)
       return
     elsif @format=="ical"
       @shared_events = SharedEvent.search(@shared_event_hash,10000)

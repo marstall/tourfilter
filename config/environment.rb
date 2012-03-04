@@ -7,6 +7,29 @@
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 
+#require 'aws/ses'
+
+#require 'tlsmail'
+
+amazon_creds = YAML::load(open("#{RAILS_ROOT}/config/amazon.yml"))
+
+# extend ActionMailer
+#puts "extending ActionMailer for AWS ..."
+
+#ActionMailer::Base.custom_amazon_ses_mailer = AWS::SES::Base.new({
+#  :access_key_id => amazon_creds['access_key_id'],
+#  :secret_access_key => amazon_creds['secret_access_key']
+#})
+
+#require 'net/smtp'
+
+#module Net
+#  class SMTP
+#    def tls?
+#      true
+#    end
+#  end
+#end
 
 Rails::Initializer.run do |config|
   config.action_controller.session = { :key => "_myapp_session", :secret => "the name of this band is talking heads is this 30 characters?" }
@@ -56,8 +79,30 @@ SETTINGS = YAML.load(File.open("#{RAILS_ROOT}/config/settings.yml"))
 
 # Include your application configuration below
 
+#sample SMTP session with amazon
+=begin
+EHLO ec2-23-20-115-55.compute-1.amazonaws.com
+AUTH LOGIN
+
+QUtJQUlGNlhJUEpTVVM1TFBZNFE=
+
+QXRhby93U3RDd0NzbGo1aEJzdERWLzVyZ2xKK3UxOUxPUVBHaGxLL2pUSk4=
+
+MAIL FROM: chris@psychoastronomy.org
+RCPT TO: chris@psychoastronomy.org
+DATA
+
+test
+.
+
+QUIT
+
+
+=end
+
 # setup mail-server configuration params
 if ENV['RAILS_ENV']=='development'
+  puts "setup dev mode mail"
     ActionMailer::Base.smtp_settings = {
       :address => "secure.seremeth.com",
       :authentication => :plain,
@@ -67,11 +112,27 @@ if ENV['RAILS_ENV']=='development'
 #        :domain => "ruby"
     }
 else
-ActionMailer::Base.smtp_settings = {
-  :address => "tourfilter.com",
-  :domain => "rails"
-}
+  puts "setup production mode mail"
+  puts "smtp username:"+amazon_creds['smtp_username']
+#  Net::SMTP.enable_tls(OpenSSL::SSL::VERIFY_NONE)
+  ActionMailer::Base.delivery_method = :smtp
+  ActionMailer::Base.perform_deliveries = true
+  ActionMailer::Base.default_charset = "utf-8"
+  ActionMailer::Base.default_url_options = { :host => "tourfilter.com"}
+  ActionMailer::Base.raise_delivery_errors = true
+  ActionMailer::Base.logger = Logger.new("mailer.log")
+  ActionMailer::Base.smtp_settings = {
+    :address => "email-smtp.us-east-1.amazonaws.com",
+    :port =>  465,
+    :enable_starttls_auto => true,
+#    :openssl_verify_mode => 'none', 
+    :domain => "tourfilter.com",
+    :authentication =>  :plain,
+    :user_name => amazon_creds['smtp_username'],
+    :password =>  amazon_creds['smtp_password']
+  }
 end
+
 # These defaults are used in GeoKit::Mappable.distance_to and in acts_as_mappable
 GeoKit::default_units = :miles
 GeoKit::default_formula = :sphere
@@ -123,3 +184,15 @@ GeoKit::Geocoders::geocoder_ca = false
 # geocoder you are going to use.
 GeoKit::Geocoders::provider_order = [:google,:yahoo]
 
+# hack because there seems to be a bug in the Net::SMTP class on line 553:
+# @socket = new_internet_message_io(tls? ? tlsconnect(s) : s)
+# i think it should be 
+# @socket = new_internet_message_io(tls?||starttls? ? tlsconnect(s) : s)
+# but this is an easier way to make sure tlsconnect (which does SMTP AUTH) gets called
+module Net
+  class SMTP
+    def tls?
+      true
+    end
+  end
+end
