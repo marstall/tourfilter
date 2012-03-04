@@ -23,7 +23,7 @@ echo -e "#! \ngit checkout $1">$TOURFILTER_HOME/ec2/user_data_file.sh
 echo "committing and pushing new production_tag file and git tag $1"
 git commit -am "new production tag: $1"
 git tag -a $1 -m 'tagging release $1'
-git push origin master
+git push origin master --tags
 
 i=0
 for instance_id in $(as-describe-auto-scaling-groups asg_tourfilter_$2 | grep INSTANCE | cut -d " " -f 3)

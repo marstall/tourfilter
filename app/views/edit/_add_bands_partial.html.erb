@@ -1,5 +1,5 @@
 <%@options_label,@nav_array = controller.use_calendar_nav_array%>
-<%if not params[:no_calendar_options]%>  
+<%if not params[:no_calendar_options]%>   
 <%=render(:partial=>'shared/calendar_options',:locals=>{:options_label=>@options_label,:nav_array=>@nav_array})%>
 <%end%>
 <%if @youser%>
