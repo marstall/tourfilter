@@ -25,12 +25,11 @@ git tag -a $1 -m 'tagging release $1'
 git push origin master
 
 i=0
-for instance_id in $(as-describe-auto-scaling-groups asg_tourfilter_$1 | grep INSTANCE | cut -d " " -f 3)
+for instance_id in $(as-describe-auto-scaling-groups asg_tourfilter_$2 | grep INSTANCE | cut -d " " -f 3)
 do
 	ip_address=`ec2-describe-instances $instance_id | grep INSTANCE | cut -f17`
 	let i+=1
 	echo "$i: deploying to $ip_address ($instance_id) ..."
-	commands_to_execute= 
 	ssh -t ec2-user@$ip_address "cd /tourfilter;git checkout $1;sudo apachectl restart"
 	echo
 done
