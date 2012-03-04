@@ -1,6 +1,7 @@
 # loops through running instances
 echo ""
 echo "DEPLOY TOURFILTER"
+echo "ex: deploy.sh r1 1"
 echo "Pressing enter will do a full deploy, which consists of the following:"
 echo "1. tag HEAD as $1"
 echo "2. write out tag name '$1' to $TOURFILTER_HOME/public/production_tag"
@@ -17,7 +18,7 @@ echo "writing tag $1 to $TOURFILTER_HOME/public/production_tag ..."
 echo $1>$TOURFILTER_HOME/public/production_tag
 
 echo "creating $TOURFILTER_HOME/ec2/user_data_file.sh ..."
-echo "git checkout $1">$TOURFILTER_HOME/ec2/user_data_file.sh
+echo -e "#! \ngit checkout $1">$TOURFILTER_HOME/ec2/user_data_file.sh
 
 echo "committing and pushing new production_tag file and git tag $1"
 git commit -am "new production tag: $1"
