@@ -20,7 +20,7 @@ echo "writing tag $1 to $TOURFILTER_HOME/public/production_tag ..."
 echo $1>$TOURFILTER_HOME/public/production_tag
 
 echo "creating $TOURFILTER_HOME/ec2/user_data_file.sh ..."
-echo -e "#! \ngit checkout $1">$TOURFILTER_HOME/ec2/user_data_file.sh
+echo -e "#! \ncd /tourfilter;git pull;git checkout $1;bundle pack;sudo apachectl restart">$TOURFILTER_HOME/ec2/user_data_file.sh
 
 echo "committing and pushing new production_tag file and git tag $1"
 git commit -am "new production tag: $1"
