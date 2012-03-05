@@ -7,8 +7,8 @@ echo "1. tag HEAD as $1"
 echo "2. write out tag name '$1' to $TOURFILTER_HOME/public/production_tag"
 echo "3. run <bundle> locally"
 echo "4. run <git commit -am>, <git push origin master --tags> locally"
-echo "5. remotely perfom <git pull;git checkout $1> on all instances of autoscaling group asg_tourfilter_$2"
-echo "6. run <bundle> on all remote instances"
+echo "5. remotely perform <git pull;git checkout $1> on all instances of autoscaling group asg_tourfilter_$2"
+echo "6. run <bundle pack> on all remote instances"
 echo "7. restart all group apaches"
 echo ""
 echo "press <enter> to continue."
@@ -33,7 +33,7 @@ do
 	ip_address=`ec2-describe-instances $instance_id | grep INSTANCE | cut -f17`
 	let i+=1
 	echo "$i: deploying to $ip_address ($instance_id) ..."
-	ssh -t ec2-user@$ip_address "cd /tourfilter;git pull;git checkout $1;bundle;sudo apachectl restart"
+	ssh -t ec2-user@$ip_address "cd /tourfilter;git pull;git checkout $1;bundle pack;sudo apachectl restart"
 	echo
 done
 
