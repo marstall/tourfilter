@@ -47,7 +47,6 @@ DEPENDENCIES
   Text (= 1.1.2)
   geoip (= 1.0.0)
   geokit (= 1.5.0)
-  hoe (~> 2.15.0)
   hpricot (= 0.8.6)
   icalendar (= 1.0.2)
   json (= 1.5.1)
