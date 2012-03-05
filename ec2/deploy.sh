@@ -19,8 +19,7 @@ read line
 echo "writing tag $1 to $TOURFILTER_HOME/public/production_tag ..."
 echo $1>$TOURFILTER_HOME/public/production_tag
 
-echo "creating $TOURFILTER_HOME/ec2/user_data_file.sh ..."
-echo -e "#! \nsource ~/.bash_profile;git pull;git checkout $1;bundle pack;sudo apachectl restart">$TOURFILTER_HOME/ec2/user_data_file.sh
+create_user_data_file.sh $1
 
 echo "committing and pushing new production_tag file and git tag $1"
 git commit -am "new production tag: $1"
@@ -33,7 +32,7 @@ do
 	ip_address=`ec2-describe-instances $instance_id | grep INSTANCE | cut -f17`
 	let i+=1
 	echo "$i: deploying to $ip_address ($instance_id) ..."
-	ssh -t ec2-user@$ip_address "cd /tourfilter;git pull;git checkout $1;bundle pack;sudo apachectl restart"
+	ssh -t ec2-user@$ip_address "source ~/.bash_profile;cd /tourfilter;git pull;git checkout $1;bundle pack;sudo apachectl restart;rm public/index.html"
 	echo
 done
 
