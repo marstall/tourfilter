@@ -31,7 +31,7 @@ do
 	ip_address=`ec2-describe-instances $instance_id | grep INSTANCE | cut -f17`
 	let i+=1
 	echo "$i: deploying to $ip_address ($instance_id) ..."
-	ssh -t ec2-user@$ip_address "cd /tourfilter;git checkout $1;sudo apachectl restart"
+	ssh -t ec2-user@$ip_address "cd /tourfilter;git pull;git checkout $1;sudo apachectl restart"
 	echo
 done
 
