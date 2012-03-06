@@ -38,7 +38,7 @@ do
 	echo "checking remote production_tag"
 	remote_tag=`curl http://$ip_address/production_tag`
 	if [ "$remote_tag" = "$1" ]; then
-		echo "success"
+		echo "success. remote tag was $remote_tag"
 		let success+=1
 	else
 		echo "FAIL"
