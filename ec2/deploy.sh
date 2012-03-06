@@ -48,6 +48,7 @@ done
 
 echo ""
 echo "---------------------------------------------"
+echo ""
 echo "successful deploys: $success"
 echo "failed deploys: $fail"
 
