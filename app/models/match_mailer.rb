@@ -46,7 +46,7 @@ end
     
     @bcc=@bcc.chomp(",") # remove trailing comma
     puts "bcc: #{@bcc}"
-    @from       = "#{metro_code}.tourfilter <#{metro_code}@tourfilter.com>"
+    @from       = "#{metro_code}.tourfilter <info@tourfilter.com>"
     @sent_on    = sent_at
     #      body["related_matches"],body["featured_matches"] = Match.featured_matches(match.term.text,20)
     @headers    = {}

@@ -4,7 +4,7 @@ class ListingRequestMailer < ActionMailer::Base
     @subject    = "New Listing Request"
     @body       = info
     @recipients = "listings@psychoastronomy.org"
-    @from       = 'nevermissashow@tourfilter.com'
+    @from       = 'info@tourfilter.com'
     @sent_on    = DateTime.now
     @headers    = {}
   end

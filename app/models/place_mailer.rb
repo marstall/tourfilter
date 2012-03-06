@@ -39,7 +39,7 @@ class PlaceMailer < ActionMailer::Base
     @body["metro"]                = metro
     @body["metro_code"]                = metro_code
     @recipients = admin_emails
-    @from       = "tourfilter #{metro.downcase} admin <admin@tourfilter.com>"
+    @from       = "tourfilter #{metro.downcase} admin <info@tourfilter.com>"
     @sent_on    = sent_at
     @headers    = {}
   end

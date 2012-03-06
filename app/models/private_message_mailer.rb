@@ -6,7 +6,7 @@ class PrivateMessageMailer < ActionMailer::Base
     @body["message"]  = message
     @body["controller"]       = controller
     @recipients = user.email_address
-    @from       = "tourfilter private message <bounce@tourfilter.com>"
+    @from       = "tourfilter private message <info@tourfilter.com>"
     @sent_on    = Time.now
     @headers    = {}
   end

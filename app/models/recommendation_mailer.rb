@@ -13,7 +13,7 @@ class RecommendationMailer < ActionMailer::Base
       }
     @bcc=@bcc.chomp(",")    
     logger.info("bcc: #{bcc}")
-    @from       = "Tourfilter User Recommendation <recommendations@tourfilter.com>"
+    @from       = "Tourfilter User Recommendation <info@tourfilter.com>"
     @sent_on    = sent_at
     @headers    = {}
   end

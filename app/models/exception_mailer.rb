@@ -14,7 +14,7 @@ class ExceptionMailer < ActionMailer::Base
     @body["params"]     = params
     @body["env"]        = env    
     @recipients = 'chris@psychoastronomy.org'
-    @from       = "tourfilter exception <exceptions@tourfilter.com>"
+    @from       = "tourfilter exception <info@tourfilter.com>"
     @sent_on    = sent_at
     @headers    = {}
   end
