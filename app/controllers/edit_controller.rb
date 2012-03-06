@@ -801,7 +801,8 @@ c = GeoIP.new("/Users/chris/maxmind/GeoLiteCity.dat").city("76.24.220.14")
           @youser.update_terms(note)
           begin
             WelcomeMailer::deliver_welcome(self,@youser)  unless ENV['RAILS_ENV']=='development'
-          rescue
+          rescue =>e
+            logger.info("+++ error sending email:"+e.message+"\n"+e.backtrace.join("\n"))
           end
           login_user(@youser,false)
           if params[:redirect_url]
