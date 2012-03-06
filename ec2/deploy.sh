@@ -51,6 +51,7 @@ echo "---------------------------------------------"
 echo ""
 echo "successful deploys: $success"
 echo "failed deploys: $fail"
+echo ""
 
 
 
