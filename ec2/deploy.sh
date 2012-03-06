@@ -27,6 +27,8 @@ git tag -a $1 -m 'tagging release $1'
 git push origin master --tags
 
 i=0
+success=0
+fail=0
 for instance_id in $(as-describe-auto-scaling-groups asg_tourfilter_$2 | grep INSTANCE | cut -d " " -f 3)
 do
 	ip_address=`ec2-describe-instances $instance_id | grep INSTANCE | cut -f17`
@@ -35,15 +37,18 @@ do
 	ssh -t ec2-user@$ip_address "source ~/.bash_profile;cd /tourfilter;git pull;git checkout $1;bundle pack;sudo apachectl restart;rm public/index.html"
 	echo "checking remote production_tag"
 	remote_tag=`curl http://$instance_id/production_tag`
-	if [$remote_tag = $1]; then
+	if [ $remote_tag = $1 ]; then
 		echo "success"
+		let success+=1
 	else
 		echo "FAIL"
+		let fail+=1
 	fi
 done
 
 
-echo "deployed to $i instances."
+echo "successful deploys: $success"
+echo "failed deploys: $fail"
 
 
 
