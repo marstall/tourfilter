@@ -36,7 +36,7 @@ do
 	echo "$i: deploying to $ip_address ($instance_id) ..."
 	ssh -t ec2-user@$ip_address "source ~/.bash_profile;cd /tourfilter;git pull;git checkout $1;bundle pack;sudo apachectl restart;rm public/index.html"
 	echo "checking remote production_tag"
-	remote_tag=`curl http://$instance_id/production_tag`
+	remote_tag=`curl http://$ip_address/production_tag`
 	if [ "$remote_tag" = "$1" ]; then
 		echo "success"
 		let success+=1
