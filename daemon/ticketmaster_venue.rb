@@ -54,7 +54,7 @@ include FileUtils
   end
 
   def fetch
-    agent = WWW::Mechanize.new { |a| a.log = Logger.new("mech.log") }
+    agent = Mechanize.new { |a| a.log = Logger.new("mech.log") }
     agent.user_agent = "Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en-us) AppleWebKit/XX (KHTML, like Gecko) Safari/YY"
     puts "fetching #{url} ... "
     agent.get('http://www.ticketmaster.com') # tkmstr checks this now - you must request a real url first.

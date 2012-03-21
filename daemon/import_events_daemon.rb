@@ -41,9 +41,17 @@ require "ticketmaster_parser.rb"
 $KCODE='u' 
 require 'jcode' 
 
+def connect_to_database(metro_code)
+  ActiveRecord::Base.establish_connection(
+    :adapter  => "mysql",
+    :host     => ActiveRecord::Base.configurations[ENV['RAILS_ENV']]['host'],
+    :username => ActiveRecord::Base.configurations[ENV['RAILS_ENV']]['username'],
+    :password => ActiveRecord::Base.configurations[ENV['RAILS_ENV']]['password'],
+    :database => "tourfilter_#{metro_code}"
+    )
+end
 
-
-def initialize_daemon(metro_code=nil)
+def initialize_daemon_(metro_code=nil)
   # setup mail-server configuration params
   rails_env = ENV['RAILS_ENV']
 #  puts "initializing daemon in #{rails_env} mode ..."
@@ -428,16 +436,16 @@ match=Match.new
 end    
 
 def finalize_imported_event(event)
-  initialize_daemon (nil) 
+  connect_to_database("shared")
   ImportedEvent.update_all("status='made_match'","id=#{event.id}")
-  initialize_daemon @metro_code
+  connect_to_database @metro_code
 end
 
 def mark_remaining_events_as_rejected
-  initialize_daemon nil
+  connect_to_database("shared")
   ImportedEvent.update_all("status='rejected'","status='term_found'")
-  initialize_daemon @metro_code
-end
+  connect_to_database @metro_code
+  end
 
 def make_matches_from_imported_events_old
   raise Exception.new("must specify metro_code") unless @metro_code
@@ -620,7 +628,7 @@ def main(args)
     @source=args[args.index("source")+1] if args.index("source")
     @country_code=args[args.index("country_code")+1] if args.index("country_code")
     @metro_code=args[args.index("metro")+1] if args.index("metro")
-    initialize_daemon(@metro_code)
+    connect_to_database(@metro_code)
     if (_import_ticketmaster_us_venues_from_file) 
       header "importing ticketmaster US venues from file"
       TicketmasterParser.new.import_venues_from_file("US",file_name)
