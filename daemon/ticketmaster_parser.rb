@@ -4,8 +4,8 @@
 require 'rubygems'
 require 'mechanize'
 require "../app/models/venue.rb"
-require "../app/models/ticketmaster_venue.rb"
-require "../app/models/import_parser.rb"
+require "ticketmaster_venue.rb"
+require "import_parser.rb"
 
 class TicketmasterParser < ImportParser
   

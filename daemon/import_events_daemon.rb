@@ -36,8 +36,8 @@ require "../app/models/imported_event.rb"
 require "../app/models/shared_term.rb"
 require "../app/models/metro.rb"
 require "../app/models/artist_term.rb"
-require "../app/models/ticketmaster_parser.rb"
-require "../app/models/stubhub_parser.rb"
+require "ticketmaster_parser.rb"
+#require "stubhub_parser.rb"
 $KCODE='u' 
 require 'jcode' 
 

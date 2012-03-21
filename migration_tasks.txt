@@ -1,6 +1,6 @@
-- email/sns
+- email/ses
 - daemon tasks
+- nightly decache
 - db migrate
 - dns transfer
 - miscellaneous bugs/glitches
-- nightly decache

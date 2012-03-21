@@ -3,7 +3,7 @@ require 'json'
 require 'mechanize'
 require "../app/models/venue.rb"
 require "../app/models/imported_event.rb"
-require "../app/models/import_parser.rb"
+require "import_parser.rb"
 require 'digest/md5'
 
 class TicketmasterVenue < Venue
