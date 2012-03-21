@@ -628,6 +628,7 @@ def main(args)
     @source=args[args.index("source")+1] if args.index("source")
     @country_code=args[args.index("country_code")+1] if args.index("country_code")
     @metro_code=args[args.index("metro")+1] if args.index("metro")
+    @metro_code||='shared'
     connect_to_database(@metro_code)
     if (_import_ticketmaster_us_venues_from_file) 
       header "importing ticketmaster US venues from file"
