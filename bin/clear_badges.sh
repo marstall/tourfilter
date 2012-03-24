@@ -1,2 +1,2 @@
-rm -rf /home/chris/*/public/badge/*
+rm -rf /home/chris/tourfilter/public/*/badge/*
 
