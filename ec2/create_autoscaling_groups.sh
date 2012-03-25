@@ -17,5 +17,3 @@ as-create-auto-scaling-group asg_tourfilter_daemon --launch-configuration lc_tou
 as-put-notification-configuration asg_tourfilter_daemon --topic-arn arn:aws:sns:us-east-1:122872249816:tourfilter-topic --notification-types autoscaling:EC2_INSTANCE_LAUNCH, autoscaling:EC2_INSTANCE_LAUNCH_ERROR, autoscaling:EC2_INSTANCE_TERMINATE, autoscaling:EC2_INSTANCE_TERMINATE_ERROR
 as-describe-notification-configurations --auto-scaling-groups asg_tourfilter_daemon
 as-describe-auto-scaling-groups asg_tourfilter_daemon
-
-$TOURFILTER_HOME/ec2/setup_instance_scripts.sh

@@ -5,7 +5,7 @@ do
 	ip_address=`ec2-describe-instances $instance_id | grep INSTANCE | cut -f17`
 	if [ $i = 1 ]; then
 		echo "ssh -t ec2-user@$ip_address \$1">~/tourfilter/ec2/wec
-		echo "ec: $ip_address"
+		echo "wec: $ip_address"
 		chmod a+x ~/tourfilter/ec2/wec
 	fi
 	echo "ssh -t ec2-user@$ip_address \$1">~/tourfilter/ec2/instance_connect_$i.sh
