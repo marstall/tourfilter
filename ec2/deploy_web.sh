@@ -8,7 +8,6 @@ do
 	let i+=1
 	echo "$i: deploying to $ip_address ($instance_id) ..."
 	ssh -t ec2-user@$ip_address "source ~/.bash_profile;cd /tourfilter;git pull;git checkout $1;bundle pack;crontab config/crontab.web;sudo apachectl restart;rm public/index.html"
-	if 
 	echo "checking remote production_tag"
 	remote_tag=`curl http://$ip_address/production_tag`
 	if [ "$remote_tag" = "$1" ]; then
