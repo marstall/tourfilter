@@ -24,8 +24,8 @@ git commit -am "new production tag: $1"
 git tag -a $1 -m 'tagging release $1'
 git push origin master --tags
 
-let web_failures=`$TOUFILTER_HOME/config/deploy_web.sh $1`
-let daemon_success=`$TOUFILTER_HOME/config/deploy_daemon.sh $1`
+let web_failures=`$TOUFILTER_HOME/ec2/deploy_web.sh $1`
+let daemon_success=`$TOUFILTER_HOME/ec2/deploy_daemon.sh $1`
 
 if [ "$web_failures" = "0" ]; then
 	echo "web deploy OK"
