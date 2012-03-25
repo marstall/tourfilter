@@ -1,47 +1,8 @@
-PATH=/usr/local/bin:/bin:/usr/bin:/home/chris/bin:/home/chris/tourfilter/bin:
 RAILS_ENV=production
 DB_USERNAME=test
 DB_PASSWORD=test
 
+0 0 * * * rm -rf /tourfilter/cache
 
-0 0 * * * rm -rf /home/chris/tourfilter/cache/www.tourfilter.com/*/nightly
+0 0 * * * rm -rf /tourfilter/public/*/badge/*
 
-0 0 * * * /home/chris/tourfilter/bin/clear_badges.sh
-
-0 0 * * 3 send_newsletters_all_metros.sh
-
-10 * * * * rm -rf /home/chris/tourfilter/public/core*
-
-0 0 * * * rm -rf /home/chris/tourfilter/cache/*/nightly
-
-20 0 * * * backup_all
-0 5 * * * rm -rf `find /home/chris/*/dumps/* -atime +2`
-
-#0 12 * * * import_tickets.sh stubhub
-#0 12 * * * import_tickets.sh ticketmaster
-#0 12 * * * import_tickets.sh ticketsnow
-#0 12 * * * import_tickets.sh ticketnetwork
-
-#* * * * * rm -rf /home/chris/tourfilter/public*html
-
-0 23 * * * merge_terms.sh
-
-0 4 * * * import_events_1.sh
-#0 4 * * * import_events_thread_2.sh
-#0 23 * * * antiplex_daemon.sh
-#0 0 * * * clear_antiplex_caches.sh
-#* * 1 * * lastfm_sync_all_metros.sh
-0 3 * * * daemon_all_metros.sh
-0 4 * * * rm -rf /home/chris/tourfilter*/log/*
-30 4 * * * generate_all_cities_index.sh
-0 5 * * * rm -rf /home/chris/tourfilter/cache/www.tourfilter.com/*/edit/homepage_calendar.cache
-
-10 2 * * * query_all_metros.sh 'delete from terms where text like "%http%";'
-11 2 * * * query_all_metros.sh 'delete from comments where text like "%href%";'
-12 2 * * * query_all_metros.sh 'delete from comments where text like "%http%";'
-
-#20 6 * * * remixed_daemon.sh boston
-#20 7 * * * remixed_daemon.sh technology
-
-10 13 * * * rm -rf /home/chris/tourfilter/tmp/sessions
-0 * * * * rm -rf /tmp/ruby*
