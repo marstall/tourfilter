@@ -1,6 +1,7 @@
 RAILS_ENV=production
 DB_USERNAME=test
 DB_PASSWORD=test
+MAILTO=marstall@gmail.com
 
 0 0 * * * rm -rf /tourfilter/cache
 
