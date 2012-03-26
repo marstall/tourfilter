@@ -30,7 +30,7 @@ git push origin master --tags
 $TOURFILTER_HOME/ec2/deploy_daemon.sh $1
 daemon_success=$? #return value
 
-puts "return value of deploy_daemon was $daemon_success"
+echo "return value of deploy_daemon was $daemon_success"
 
 if [ "$web_failures" = "0" ]; then
 	echo "web deploy OK"
