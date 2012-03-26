@@ -25,8 +25,8 @@ git commit -am "new production tag: $1"
 git tag -a $1 -m 'tagging release $1'
 git push origin master --tags
 
-#$TOURFILTER_HOME/ec2/deploy_web.sh $1
-#web_failures=$? # return value
+$TOURFILTER_HOME/ec2/deploy_web.sh $1
+web_failures=$? # return value
 $TOURFILTER_HOME/ec2/deploy_daemon.sh $1
 daemon_success=$? #return value
 
