@@ -13,7 +13,7 @@ if [ "$remote_tag" = "$1" ]; then
 else
 	echo "FAIL"
 fi
-exit daemon_success
+exit "$daemon_success"
 
 
 
