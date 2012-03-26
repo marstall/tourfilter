@@ -30,8 +30,6 @@ web_failures=$? # return value
 $TOURFILTER_HOME/ec2/deploy_daemon.sh $1
 daemon_success=$? #return value
 
-echo "return value of deploy_daemon was $daemon_success"
-
 if [ "$web_failures" = "0" ]; then
 	echo "web deploy OK"
 else
