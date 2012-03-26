@@ -35,7 +35,7 @@ echo "return value of deploy_daemon was $daemon_success"
 if [ "$web_failures" = "0" ]; then
 	echo "web deploy OK"
 else
-	echo "!!! web failed to deploy to $1 instances."
+	echo "!!! web failed to deploy to $web_failures instances."
 fi
 
 if [ "$daemon_success" = "1" ]; then

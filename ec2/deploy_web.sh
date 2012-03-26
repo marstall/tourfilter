@@ -26,6 +26,6 @@ echo "successful web deploys: $web_successes"
 echo "failed web deploys: $web_failures"
 echo ""
 
-exit $web_failures
+exit "$web_failures"
 
 
