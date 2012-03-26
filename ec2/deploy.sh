@@ -25,8 +25,10 @@ git commit -am "new production tag: $1"
 git tag -a $1 -m 'tagging release $1'
 git push origin master --tags
 
-web_failures=`$TOURFILTER_HOME/ec2/deploy_web.sh $1`
-daemon_success=`$TOURFILTER_HOME/ec2/deploy_daemon.sh $1`
+$TOURFILTER_HOME/ec2/deploy_web.sh $1
+web_failures=$? # return value
+$TOURFILTER_HOME/ec2/deploy_daemon.sh $1
+daemon_success=$? #return value
 
 if [ "$web_failures" = "0" ]; then
 	echo "web deploy OK"
