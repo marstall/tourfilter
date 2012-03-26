@@ -484,12 +484,12 @@ c = GeoIP.new("/Users/chris/maxmind/GeoLiteCity.dat").city("76.24.220.14")
 
   def calendar_partial
     use_calendar_nav_array
-    render(:layout=>false)
+    render(:partial=>'calendar_partial',:layout=>false)
   end
   
   def friends_partial
     use_calendar_nav_array
-    render(:layout=>false)
+    render(:partial=>'friends_partial',:layout=>false)
   end
 
   def feed_partial

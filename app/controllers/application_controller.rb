@@ -270,10 +270,13 @@ class ApplicationController < ActionController::Base
   end
 
   def homepage_signup
-    puts "homepage_signup action method"
+    _metro_code = get_cookie("metro_code")
+    if _metro_code && _metro_code.size>0
+      redirect_to "/#{get_cookie('metro_code')}"
+      return false
+    end
     @not_in_a_city=true
     @header_title='Spam-free concert alerts.'
-    puts "here1"
     render('edit/homepage_signup',:layout=>false)
   end
 
