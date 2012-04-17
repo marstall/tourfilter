@@ -60,10 +60,6 @@ def initialize_daemon(metro_code)
       :password => ActiveRecord::Base.configurations[ENV['RAILS_ENV']]['password'],
       :database => "tourfilter_#{metro_code}"
       )
-  rescue => e
-    log_error(e)
-    puts "error!"
-  end
 
 =begin
   puts "initializing daemon in #{rails_env} mode ..."
