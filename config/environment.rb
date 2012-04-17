@@ -11,7 +11,7 @@ require File.join(File.dirname(__FILE__), 'boot')
 
 #require 'tlsmail'
 
-amazon_creds = YAML::load(open("#{RAILS_ROOT}/config/amazon.yml"))
+$AMAZON_CREDS = amazon_creds = YAML::load(open("#{RAILS_ROOT}/config/amazon.yml"))
 
 # extend ActionMailer
 #puts "extending ActionMailer for AWS ..."
@@ -102,7 +102,7 @@ QUIT
 
 # setup mail-server configuration params
 if ENV['RAILS_ENV']=='development'
-  puts "setup dev mode mail"
+#  puts "setup dev mode mail"
     ActionMailer::Base.smtp_settings = {
       :address => "secure.seremeth.com",
       :authentication => :plain,

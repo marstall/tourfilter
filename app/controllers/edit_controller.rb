@@ -472,7 +472,6 @@ c = GeoIP.new("/Users/chris/maxmind/GeoLiteCity.dat").city("76.24.220.14")
       
   end
 
-
   def venues_partial
     use_calendar_nav_array
     render(:layout=>false)

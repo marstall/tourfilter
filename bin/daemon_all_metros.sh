@@ -1,5 +1,5 @@
 date 
-for name in $(mysql tourfilter_boston -uchris -pchris -e "select code from metros where code<>'all' order by code asc")
+for name in $(mysql tourfilter_shared -utest -ptest -e "select code from metros where code<>'all' order by code asc")
 do
  if [ $name != "code" ]; then 
 	cd ~/tourfilter_new/daemon
@@ -14,11 +14,11 @@ do
 	ruby daemon.rb $name send_email>>~/tourfilter/log/daemon-$name-`date +%Y-%m-%d`.log
         echo `date` expiring caches  ...                
         ruby daemon.rb $name expire_caches>>~/tourfilter/log/daemon-$name-`date +%Y-%m-%d`.log
-        echo `date` precaching  ...                
+#        echo `date` precaching  ...                
         #ruby daemon.rb $name precache
         echo `date` updating num_trackers  ...                
         ruby daemon.rb $name update_num_trackers >>~/tourfilter/log/daemon-$name-`date +%Y-%m-%d`.log
-        echo `date` finding term_urls  ...                
+#        echo `date` finding term_urls  ...                
         #ruby daemon.rb $name find_term_urls>>~/tourfilter/log/daemon-$name-`date +%Y-%m-%d`.log
 fi
 done

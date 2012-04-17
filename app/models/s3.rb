@@ -1,6 +1,6 @@
 require "rubygems"
 require "net/http"
-require "s3"
+require "aws/s3"
 
 class S3
 
@@ -11,8 +11,8 @@ class S3
   def self.init
     if not @initialized
       AWS::S3::Base.establish_connection!(
-        :access_key_id     => '1CXR6M1N827JKZRCNE82',
-        :secret_access_key => 'R0+lmeQGJMUf6c5ko+TkMDDzgLL+XW9/tXEuaxyy',
+        :access_key_id     => $AMAZON_CREDS['access_key_id'],
+        :secret_access_key => $AMAZON_CREDS['secret_access_key'],
         :use_ssl=>true
       )  
       @initialized=true
@@ -28,12 +28,14 @@ class S3
 
   def self.copy_to_s3(filename,bucket=nil,access=:public_read)
     init
-    AWS::S3::S3Object.store(filename, open(filename), bucket||@default_bucket, {:access => access})
-    
+    name = File.basename(filename)
+    AWS::S3::S3Object.store(name, open(filename), bucket||@default_bucket, {:access => access})
+    return "http://s3.amazonaws.com/tourfilter.com/#{name}"
   end
 
   def self.delete(filename,bucket=nil)
-    AWS::S3::S3Object.delete(filename,bucket||@default_bucket)
+    name = File.basename(filename)
+    AWS::S3::S3Object.delete(name,bucket||@default_bucket)
   end
 
   def self.test
