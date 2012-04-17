@@ -1,23 +1,23 @@
 date 
-for name in $(mysql tourfilter_shared -utest -ptest -e "select code from metros where code<>'all' order by code asc")
+for name in $(my shared "select code from metros where code<>'all' order by code asc")
 do
  if [ $name != "code" ]; then 
-	cd ~/tourfilter_new/daemon
+	cd $TOURFILTER_HOME/daemon
 	echo `date` $name :
 	echo `date` generating urls ...		
-	ruby daemon.rb $name generate_urls>~/tourfilter/log/daemon-$name-`date +%Y-%m-%d`.log 
+	ruby daemon.rb $name generate_urls>$TOURFILTER_HOME/log/daemon-$name-`date +%Y-%m-%d`.log 
         echo `date` crawling ...                
-        ruby daemon.rb $name crawl>>~/tourfilter/log/daemon-$name-`date +%Y-%m-%d`.log
+        ruby daemon.rb $name crawl>>$TOURFILTER_HOME/log/daemon-$name-`date +%Y-%m-%d`.log
         echo `date` searching ...                
-        ruby daemon.rb $name search>>~/tourfilter/log/daemon-$name-`date +%Y-%m-%d`.log        
+        ruby daemon.rb $name search>>$TOURFILTER_HOME/log/daemon-$name-`date +%Y-%m-%d`.log        
 	echo `date` sending email ...                
-	ruby daemon.rb $name send_email>>~/tourfilter/log/daemon-$name-`date +%Y-%m-%d`.log
+	ruby daemon.rb $name send_email>>$TOURFILTER_HOME/log/daemon-$name-`date +%Y-%m-%d`.log
         echo `date` expiring caches  ...                
-        ruby daemon.rb $name expire_caches>>~/tourfilter/log/daemon-$name-`date +%Y-%m-%d`.log
+        ruby daemon.rb $name expire_caches>>$TOURFILTER_HOME/log/daemon-$name-`date +%Y-%m-%d`.log
 #        echo `date` precaching  ...                
         #ruby daemon.rb $name precache
         echo `date` updating num_trackers  ...                
-        ruby daemon.rb $name update_num_trackers >>~/tourfilter/log/daemon-$name-`date +%Y-%m-%d`.log
+        ruby daemon.rb $name update_num_trackers >>$TOURFILTER_HOME/log/daemon-$name-`date +%Y-%m-%d`.log
 #        echo `date` finding term_urls  ...                
         #ruby daemon.rb $name find_term_urls>>~/tourfilter/log/daemon-$name-`date +%Y-%m-%d`.log
 fi

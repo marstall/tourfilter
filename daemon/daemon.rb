@@ -51,7 +51,20 @@ def initialize_daemon(metro_code)
   SETTINGS['date_type']='us'
   SETTINGS['date_type']='uk' if metro_code=="london" or metro_code=="melbourne" or metro_code=="dublin"
   # setup mail-server configuration params
+
   rails_env = ENV['RAILS_ENV']
+    ActiveRecord::Base.establish_connection(
+      :adapter  => "mysql",
+      :host     => ActiveRecord::Base.configurations[ENV['RAILS_ENV']]['host'],
+      :username => ActiveRecord::Base.configurations[ENV['RAILS_ENV']]['username'],
+      :password => ActiveRecord::Base.configurations[ENV['RAILS_ENV']]['password'],
+      :database => "tourfilter_#{metro_code}"
+      )
+  rescue => e
+    log_error(e)
+    puts "error!"
+  end
+
 =begin
   puts "initializing daemon in #{rails_env} mode ..."
   if (rails_env!='production')

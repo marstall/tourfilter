@@ -3,23 +3,22 @@ DB_USERNAME=test
 DB_PASSWORD=test
 MAILTO=marstall@gmail.com
 
-0 0 * * 7 /bin/bash - lc "send_newsletters_all_metros.sh"
+0 0 * * 7 /bin/bash -lc "send_newsletters_all_metros.sh"
 
-#0 16 * * * /bin/bash - lc "import_tickets.sh stubhub"
-#0 16 * * * /bin/bash - lc "import_tickets.sh ticketmaster"
-#0 16 * * * /bin/bash - lc "import_tickets.sh ticketsnow"
-#0 16 * * * /bin/bash - lc "import_tickets.sh ticketnetwork"
+#0 16 * * * /bin/bash -lc "import_tickets.sh stubhub"
+#0 16 * * * /bin/bash -lc "import_tickets.sh ticketmaster"
+#0 16 * * * /bin/bash -lc "import_tickets.sh ticketsnow"
+#0 16 * * * /bin/bash -lc "import_tickets.sh ticketnetwork"
 
-0 3 * * * /bin/bash - lc "merge_terms.sh"
+0 3 * * * /bin/bash -lc "merge_terms.sh"
 
-0 8 * * * /bin/bash - lc "import_events_1.sh"
-#0 8 * * * /bin/bash - lc "import_events_thread_2.sh"
-#* * 1 * * /bin/bash - lc "lastfm_sync_all_metros.sh"
-0 7 * * * /bin/bash - lc "daemon_all_metros.sh"
+0 8 * * * /bin/bash -lc "import_events_1.sh"
+#0 8 * * * /bin/bash -lc "import_events_thread_2.sh"
+#* * 1 * * /bin/bash -lc "lastfm_sync_all_metros.sh"
+0 7 * * * /bin/bash -lc "daemon_all_metros.sh"
 0 8 * * * rm -rf /tourfilter/log/*
-30 8 * * * /bin/bash - lc "generate_all_cities_index.sh"
+30 8 * * * /bin/bash -lc "generate_all_cities_index.sh"
 
 10 6 * * * query_all_metros.sh 'delete from terms where text like "%http%";'
 11 6 * * * query_all_metros.sh 'delete from comments where text like "%href%";'
 12 6 * * * query_all_metros.sh 'delete from comments where text like "%http%";'
-
