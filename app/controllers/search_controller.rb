@@ -80,7 +80,7 @@ class SearchController < ApplicationController
   def process_url_for_terms(url)
 #    logger.info ("processing #{url}")
     body =fetch_url(url)
-    logger.info ("body #{body[0..100]}")
+    logger.info("body #{body[0..100]}")
     return "" unless !body.strip.empty?
     unless @@all_terms
       @@all_terms=Hash.new
@@ -88,7 +88,7 @@ class SearchController < ApplicationController
         @@all_terms[shared_event.summary.strip]=true
       }
     end
-    logger.info ("@@all_terms.size #{@@all_terms.size}")
+    logger.info("@@all_terms.size #{@@all_terms.size}")
     num_found=0
     all_found=Array.new
     body.scan(/[^,]+/).each{|token|
