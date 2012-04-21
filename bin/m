@@ -1,0 +1,1 @@
+mysql -utest -ptest -htest.cbeerawtyv8a.us-east-1.rds.amazonaws.com tourfilter_$1 -e"$2"

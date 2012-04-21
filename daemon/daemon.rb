@@ -8,7 +8,7 @@ $mode="daemon"
 #       and send the report in an email to the user's on-file email address
 require "rubygems"
 ENV['LOGGING']='no'
-ENV['RAILS_ENV']='production'
+#ENV['RAILS_ENV']='production'
 require "../config/environment.rb"
 require 'rss/1.0'
 require 'rss/2.0'
@@ -291,26 +291,31 @@ def perform_deliveries
   MatchMailer.template_root="../app/views"
   MatchMailer.logger=@logger
   new_matches.each_with_index { |match,i|
-puts "beginninginging" 
-puts i
-puts new_matches.size   
+#puts i
+#puts new_matches.size   
 break if @num and i>=@num
     begin
-      puts("Sending bcc notification email for match #{match.term.text}/#{match.page.place.name}")
       begin
         mail_sent=false  
         no_users_but_valid=false
-        if (match.term.users.size>0)
+        users = match.term.users
+        puts("Sending individual notification emails for match #{match.term.text}/#{match.page.place.name} to #{users.size} recipients.")
+        if (users.size>0)
           if match.onsale_date and is_today(match.onsale_date)
-            mail_sent=true
-            email = MatchMailer::deliver_onsale_match(@metro_code,match) 
-            puts("                          ... onsale message sent!")
+            users.each{|user|
+              puts "sending to #{user.email_address} ... "
+              MatchMailer::deliver_onsale_match(@metro_code,match,user) 
+            }
+            puts("                          ... onsale message sent to #{users.size} individual recipients!")
           else
             puts "normal match"
-            email = MatchMailer::deliver_match(@metro_code,match) 
-            puts("                          ... normal message sent!")
-            mail_sent=true
+            users.each{|user|
+              puts "sending to #{user.email_address} ... "
+              email = MatchMailer::deliver_match(@metro_code,match,user) 
+            }
+            puts("                          ... normal message sent to #{users.size} individual recipients!")
           end
+          mail_sent=true
           #expire_match_caches(match) unless @dry_run
         else
           no_users_but_valid=true
@@ -331,12 +336,9 @@ break if @num and i>=@num
       #puts email
   
     rescue => e
-puts "e here"    
   handle_exception e
     end
-	puts "e eher"
   } 
- puts "fooog" 
   #expire the terms by place list again, to account for matches that may have been invalidated
   #url="#{@tourfilter_base}/data/expire_terms_by_place_cache"
   #puts "expiring terms by place cache"
@@ -798,6 +800,7 @@ end
 #  ActiveRecord::Base.logger = Logger.new(STDOUT) if ENV['RAILS_ENV']!="production"
 
 # program entry point
+puts "#{ENV[RAILS_ENV]} mode"
 if (!ARGV.index("help").nil? or ARGV.empty?)
   puts " Daemon: generates template-based urls, crawls, searches, sends emails and expires caches"
   puts "Usage: ruby daemon.rb metro_code [generate_urls] [search] [expire_caches] [send_email] [crawl] [lastfm_sync]"

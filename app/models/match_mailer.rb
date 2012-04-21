@@ -24,7 +24,7 @@ else
 end
 =end
 
-  def onsale_match(metro_code,match,sent_at = Time.now)
+  def onsale_match(metro_code,match,user,sent_at = Time.now)
     time=""
     begin
       hour=DateTime.new(match.onsale_date).hour.to_i
@@ -38,36 +38,22 @@ end
     @subject    = "#{match.term.text.downcase} tickets go on sale TODAY #{time}!"
     @body["match"] = match
     @body["metro_code"] = metro_code
-    @bcc=""
-	users = match.term.users.uniq{|user|user.email_address }  
-       users.each { |user| 
-      @bcc+=(user.email_address+",")
-      }
-    
-    @bcc=@bcc.chomp(",") # remove trailing comma
-    puts "bcc: #{@bcc}"
+    @body["user"] = user
+    @recipients=user.email_address
     @from       = "#{metro_code}.tourfilter <info@tourfilter.com>"
     @sent_on    = sent_at
     #      body["related_matches"],body["featured_matches"] = Match.featured_matches(match.term.text,20)
     @headers    = {}
   end
 
-  def match(metro_code,match,sent_at = Time.now)
+  def match(metro_code,match,user,sent_at = Time.now)
       @subject    = "#{match.term.text.downcase.strip} show"
       @body["match"] = match
       @body["metro_code"] = metro_code
-      @bcc=""
-      users = match.term.users
-      return if users.empty?
-        users = match.term.users.uniq{|user|user.email_address}
-       users.each { |user|          
-       @bcc+=(user.email_address+",")
-        }
-      @bcc=@bcc.chomp(",") # remove trailing comma
-      puts "bcc: #{@bcc}"
-      @from       = "#{metro_code}.tourfilter <#{metro_code}@tourfilter.com>"
+      @body["user"] = user
+      @recipients=user.email_address
+      @from       = "tourfilter #{metro_code} <info@tourfilter.com>"
       @sent_on    = sent_at
-#      body["related_matches"],body["featured_matches"] = Match.featured_matches(match.term.text,20)
       @headers    = {}
   end
 end

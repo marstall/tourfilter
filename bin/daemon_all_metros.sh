@@ -1,5 +1,5 @@
 date 
-for name in $(my shared "select code from metros where code<>'all' order by code asc")
+for name in $(m shared "select code from metros where code<>'all' order by code asc")
 do
  if [ $name != "code" ]; then 
 	cd $TOURFILTER_HOME/daemon

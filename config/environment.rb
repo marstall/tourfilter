@@ -101,18 +101,18 @@ QUIT
 =end
 
 # setup mail-server configuration params
-if ENV['RAILS_ENV']=='development'
+#if false # ENV['RAILS_ENV']=='development'
 #  puts "setup dev mode mail"
-    ActionMailer::Base.smtp_settings = {
-      :address => "secure.seremeth.com",
-      :authentication => :plain,
-      :user_name => "chris@psychoastronomy.org",
-      :password => "montgomery"
-#        :address => "tourfilter.com",
-#        :domain => "ruby"
-    }
-else
-  puts "setup production mode mail"
+#    ActionMailer::Base.delivery_method = :smtp
+#    ActionMailer::Base.smtp_settings = {
+#      :address => "smtp.gmail.com",
+#      :port => 25,
+#      :authentication => 'plain',
+#      :user_name => "marstall",
+#      :password => "sup3rw0lf-" 
+#    }
+#else
+  puts "mail will be sent via AWS."
   puts "smtp username:"+amazon_creds['smtp_username']
 #  Net::SMTP.enable_tls(OpenSSL::SSL::VERIFY_NONE)
   ActionMailer::Base.delivery_method = :smtp
@@ -131,7 +131,7 @@ else
     :user_name => amazon_creds['smtp_username'],
     :password =>  amazon_creds['smtp_password']
   }
-end
+#end
 
 # These defaults are used in GeoKit::Mappable.distance_to and in acts_as_mappable
 GeoKit::default_units = :miles

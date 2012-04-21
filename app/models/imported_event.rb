@@ -84,10 +84,13 @@ class ImportedEvent < ActiveRecord::Base
 
   def place
     place = PlaceStub.new
-    place.name= venue.name
-    place.url= venue.affiliate_url_1
+    if venue
+      place.name= venue.name
+      place.url= venue.affiliate_url_1
+    end
     place
   end
+
   
   def precis(foo=nil,boo=nil,moo=nil)
     body
