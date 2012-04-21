@@ -299,22 +299,27 @@ break if @num and i>=@num
         mail_sent=false  
         no_users_but_valid=false
         users = match.term.users
+        puts "match_id: #{match.id}"
         puts("Sending individual notification emails for match #{match.term.text}/#{match.page.place.name} to #{users.size} recipients.")
         if (users.size>0)
-          if match.onsale_date and is_today(match.onsale_date)
-            users.each{|user|
-              puts "sending to #{user.email_address} ... "
-              MatchMailer::deliver_onsale_match(@metro_code,match,user) 
-            }
-            puts("                          ... onsale message sent to #{users.size} individual recipients!")
-          else
-            puts "normal match"
-            users.each{|user|
-              puts "sending to #{user.email_address} ... "
-              email = MatchMailer::deliver_match(@metro_code,match,user) 
-            }
-            puts("                          ... normal message sent to #{users.size} individual recipients!")
-          end
+          failures=0
+          successes=0
+          users.each{|user|
+            begin
+              onsale = (match.onsale_date and is_today(match.onsale_date)) ? true : false
+              puts "sending #{onsale ? 'onsale' : 'normal'} to #{user.email_address} ... "
+              if onsale 
+                MatchMailer::deliver_onsale_match(@metro_code,match,user) 
+              else 
+                MatchMailer::deliver_match(@metro_code,match,user) 
+              end
+              successes+=1
+            rescue
+              puts "error mailing - message not sent, continuing with other recipients!: #{$!}"
+              failures+=1
+            end
+          }
+            puts("                          ... #{users.size} attempted: #{successes} successes, #{failures} failures. continuing ...")
           mail_sent=true
           #expire_match_caches(match) unless @dry_run
         else

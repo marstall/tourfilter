@@ -7,7 +7,9 @@ end
 
 class Venue < ActiveRecord::Base
 
-  establish_connection "shared_#{ENV['RAILS_ENV']}" unless $mode=="daemon"
+#  unless $mode=="daemon"
+    establish_connection "shared_#{ENV['RAILS_ENV']}" 
+#  end
 
   has_many :imported_events
 

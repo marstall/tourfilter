@@ -1,11 +1,13 @@
 require "../app/models/acts_as_indexable.rb" if $mode=="import_daemon"
 
 class ImportedEvent < ActiveRecord::Base
+   @cnn='unshared'
    unless $mode=="import_daemon"
      require "../config/environment.rb" if $mode=="daemon"
      establish_connection "shared_#{ENV['RAILS_ENV']}" 
+     @cnn='shared'
    end
-
+   
   include ActsAsIndexable
 
   belongs_to :venue
@@ -83,8 +85,10 @@ class ImportedEvent < ActiveRecord::Base
 #      and left(ie.date,10)=left(?,10)
 
   def place
+#    puts "imported_event.place has self.connection.current_database: #{self.connection.current_database}"
+#    puts "imported_event.place has self.connection.execute('select database()'): #{self.connection.execute('select database()').fetch_row.first}"
     place = PlaceStub.new
-    if venue
+    if venue_id
       place.name= venue.name
       place.url= venue.affiliate_url_1
     end

@@ -278,6 +278,7 @@ end
     end
     if imported_event_id 
       @object=ImportedEvent.find(imported_event_id)
+      puts "match.page has @object.connection.current_database: #{@object.connection.current_database}"
     else
       @object=Page.find(page_id)
     end
