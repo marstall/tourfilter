@@ -13,8 +13,8 @@
 		<a href='<%=url("/"+term.url_text)%>'><%=term.text_with_the%></a>
     <%=render(:partial=>'shared/echonest_stories',:locals=>{:multiple=>false,:height=>12,:term_text=>term.text,:cl=>'faded_50'})%>      	      
 	</div>
-      <div class='rounded_image_container_container'>
-        <div class='rounded_image_container'>
+      <div>
+        <div>
           <a border=0 href='<%=url("/"+term.url_text)%>'>
   			<img border=0  width=100% src='<%=feature.image.large_url%>' ></a>
 			</div>
