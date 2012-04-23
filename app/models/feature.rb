@@ -30,6 +30,8 @@ class Feature < ActiveRecord::Base
 #  where feature_id=features.id
 #  and left(date_for_sorting,10)=left(makedate(2011,20),10)
   
+  def self.recent(num,sort)
+  end
   def self.on_this_day(dt)
     sql = <<-SQL
       select features.* from tourfilter_shared.features features,matches

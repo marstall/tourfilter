@@ -112,7 +112,7 @@ matches.each{|match|
 			<%=match.id%>
 		</td>
 		<td valign="top" class="track_name_<%=i%2+1%>">
-			<strong><%=match.match_term_text.downcase rescue '#error'%></strong>
+			<strong><%=match.match_term_text.downcase if match and match.match_term_text%></strong>
 		</td>
 		<td valign="top" class="track_name_<%=i%2+1%>">
 			<div class="subhead">

@@ -278,7 +278,6 @@ end
     end
     if imported_event_id 
       @object=ImportedEvent.find(imported_event_id)
-      puts "match.page has @object.connection.current_database: #{@object.connection.current_database}"
     else
       @object=Page.find(page_id)
     end
@@ -780,6 +779,20 @@ and matches.status='notified' and time_status='future'
 and date_for_sorting> adddate(now(), interval -1 day)
 group by matches.feature_id   
 =end
+
+  def Match.recent_with_feature(num=-1,order_by="features.created_at desc")
+    #where feature_id=features.id
+    sql = <<-SQL
+      select distinct(matches.id),matches.* from matches,tourfilter_shared.features features,terms
+      where matches.term_id=terms.id
+      and terms.text=features.term_text
+      and matches.status='notified' 
+      group by terms.text
+      order by #{order_by}
+    SQL
+    sql+=" limit #{num}" if num>=0
+    Match.find_by_sql([sql,DateTime.now])
+  end         
 
   def Match.current_with_feature(num=-1,order_by="features.created_at desc")
     #where feature_id=features.id

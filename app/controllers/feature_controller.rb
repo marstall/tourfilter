@@ -9,4 +9,8 @@ class FeatureController < ApplicationController
     end
   end
 
+  def flyers
+    @featured_matches=Match.current_with_feature(-1,"rand()")
+  end
+
 end

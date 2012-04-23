@@ -299,7 +299,6 @@ break if @num and i>=@num
         mail_sent=false  
         no_users_but_valid=false
         users = match.term.users
-        puts "match_id: #{match.id}"
         puts("Sending individual notification emails for match #{match.term.text}/#{match.page.place.name} to #{users.size} recipients.")
         if (users.size>0)
           failures=0

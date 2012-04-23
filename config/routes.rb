@@ -65,6 +65,9 @@ ActionController::Routing::Routes.draw do |map|
                                 :id => /.*/,
                                 :offset => /.*/
                                 }              
+  map_connect map, '/flyers',
+              :controller   => "feature",
+              :action       => "flyers"
   map_connect map, '/features/:match_id/:term_text/:place_name',
               :controller   => "feature",
               :action       => "feature",
