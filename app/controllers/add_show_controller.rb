@@ -83,7 +83,7 @@ class AddShowController < ApplicationController
     match.imported_event_id=event.id
     match.save    
     @youser.add_term(term)
-    email = MatchMailer::deliver_match(@metro_code,match) 
+    #email = MatchMailer::deliver_match(@metro_code,match) 
 
     event.status='made_match' #effectively this process has been done, like it's done in the daemon
     event.save
