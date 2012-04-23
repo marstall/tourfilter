@@ -172,7 +172,7 @@ matches.each{|match|
 <%
 rescue => e
 	%>
-	</td></tr><tr><td><%=match.id%></td><td colspan=7><%=e%></td></tr>
+	</td></tr><tr><td><%=match.id%></td><td colspan=7><%="#{e} #{e.backtrace.join('<br>')}"%></td></tr>
 	<%
 end
 } if matches.size>0%>

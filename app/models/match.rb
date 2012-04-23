@@ -419,8 +419,13 @@ group by terms.id order by num_trackers desc
   end
 
 	def page_precis_for_admin(body,query)
-	body.downcase.sub(query.downcase,"<b>"+query+"</b>")
-end
+	  if body
+	    return body.downcase.sub(query.downcase,"<b>"+query+"</b>")
+    else
+      return ""
+    end
+  end
+  
   def _page_precis_for_admin(body,query,highlight_left="<strong>",highlight_right="</strong>")
     begin
       body.downcase!

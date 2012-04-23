@@ -1,0 +1,41 @@
+<%term=match.term%>
+<%page=match.page%>
+<%place=match.page.place%>
+<%feature=match.feature%>
+<%calendar_view||=false%>
+<%no_title_line||=false%>
+<%return unless feature and feature.image%>	
+<div class='flyer'
+	onmouseover='mouseover("<%=match.id.to_s%>");' 
+	onmouseout='mouseout("<%=match.id.to_s%>");'
+	>
+	<div class='rounded_image_container'>
+         <a border=0 href='<%=url("/"+term.url_text)%>'>
+ 			<img border=0  width=320px src='<%=feature.image.large_url%>' ></a>
+	</div>
+		<div class='flyer_title'>
+			<a href='<%=url("/"+term.url_text)%>'><%=term.text_with_the%></a>
+	    <%=render(:partial=>'shared/echonest_stories',:locals=>{:multiple=>false,:height=>12,:term_text=>term.text,:cl=>'faded_50'})%>      	      
+      	<div class='flyer_where_when' >
+            <span class='flyer_where'><%=place.name%></span>
+          	<span class='flyer_when'><%=match.very_short_time_description%></span>
+      	</div>
+			</div>
+				<div class='flyer_text'>
+          <%if feature.description and not feature.description.empty? %>  
+					<%=feature.description%>
+					<%end%>
+        <div class='flyer_footer' >
+          posted by
+      	<a href='/<%=feature.editor_metro_code%>/users/<%=feature.username%>'> <%=feature.username%></a> <%=time_ago_in_words feature.created_at%> ago
+        <%#=render(:partial=>'shared/more_less_info_link',
+      	  :locals=>
+      	  {
+      	    :featured=>true,:calendar_view=>true,
+      	    :show_initially=>true,:match=>match,
+      	    :cl=>'calendar_listen'
+      	  }
+      	)%>
+    	  </div>
+	</div>
+</div>
