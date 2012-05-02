@@ -12,6 +12,7 @@ MAILTO=marstall@gmail.com
 
 0 3 * * * /bin/bash -lc "merge_terms.sh"
 
+0 8 * * * /bin/bash -lc "ssh -t marstall@psychoastronomy.org \"bash -c '~/node/out/Release/node ~/proxy/proxy.js' \""
 0 8 * * * /bin/bash -lc "import_events_1.sh"
 #0 8 * * * /bin/bash -lc "import_events_thread_2.sh"
 #* * 1 * * /bin/bash -lc "lastfm_sync_all_metros.sh"

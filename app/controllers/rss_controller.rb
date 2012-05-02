@@ -29,6 +29,7 @@ class RssController < ApplicationController
     @matches = nil
     user_name=params[:user_name]
     sort=params[:sort]
+    @metro='boston' if not @metro
     @rss_title="tourfilter #{@metro.downcase} shows"
     if user_name
       begin
