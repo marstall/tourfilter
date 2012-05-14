@@ -4,7 +4,7 @@
 require 'rubygems'
 require 'mechanize'
 require "../app/models/venue.rb"
-require "../app/models/import_parser.rb"
+require "import_parser.rb"
 
 VENUES_FEED_URL="http://feeds.perfb.com/index.php/download?OEMAIL=chris@tourfilter.com&PX=867521b04f541373ef384d7a5f7a1cc6&DISPLAYFORMAT=PIPE&REVERSEMAPXML=yes&PRODUCTDB_ID=307"
 EVENTS_FEED_URL="http://feeds.perfb.com/index.php/download?OEMAIL=chris@tourfilter.com&PX=867521b04f541373ef384d7a5f7a1cc6&DISPLAYFORMAT=PIPE&REVERSEMAPXML=yes&PRODUCTDB_ID=306"
