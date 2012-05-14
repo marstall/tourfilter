@@ -4,11 +4,11 @@ do=`cat do`
 if [ $do = "Y" ] 
 then
  echo "OK You said yes, we're going to $action"
-for name in $(mysql tourfilter_boston -uchris -pchris -e "select code from metros")
+for name in $(m shared "select code from metros")
 do
  if [ $name != "code" ]; then
- echo mysql -uchris -pchris tourfilter_$name -e"update matches set status='invalid' where status='new'"
- mysql -uchris -pchris tourfilter_$name -e"update matches set status='invalid' where status='new'"
+ echo m $name -e"update matches set status='invalid' where status='new'"
+ m $name "update matches set status='invalid' where status='new'"
 fi
 done
 echo "done."
