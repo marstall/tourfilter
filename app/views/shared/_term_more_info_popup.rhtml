@@ -6,6 +6,7 @@
 <%term=Term.find(term_id)%>
 <%id=term.id%>
 <%end%>
+<%return unless term%>
 <%term_text=term.text%>
 <%i=0%>
 <div class='more_info_wrapper more_info_wrapper_redbox' >
