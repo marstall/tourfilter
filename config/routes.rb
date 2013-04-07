@@ -65,9 +65,50 @@ ActionController::Routing::Routes.draw do |map|
                                 :id => /.*/,
                                 :offset => /.*/
                                 }              
+  map_connect map, '/flyer/:id',
+              :controller   => "flyer",
+              :action       => "flyer",
+              :requirements => {
+                                :id => /[0-9]+/
+                                }              
+  map_connect map, '/:id',
+              :controller   => "flyer",
+              :action       => "flyer",
+              :requirements => {
+                                :id => /[0-9]+/
+                                }              
+
+  map_connect map, '/promote/:id',
+              :controller   => "flyer",
+              :action       => "promote",
+              :requirements => {
+                                :id => /[0-9]+/
+                                }              
+              
   map_connect map, '/flyers',
-              :controller   => "feature",
+              :controller   => "flyer",
               :action       => "flyers"
+
+  map_connect map, '/flyers/:tags',
+              :controller   => "edit",
+              :action       => "homepage",
+              :requirements => {
+                                :tags => /.*/
+                               }              
+              
+  map_connect map,"/reflyer/:id/:auth_token",
+              :controller   => "flyer",
+              :action       => "reflyer",
+              :requirements => {:id => /.*/,
+                                :auth_token => /.*/}
+  map_connect map,"/unflyer/:id/:auth_token",
+              :controller   => "flyer",
+              :action       => "unflyer",
+              :requirements => {:id => /.*/,
+                                :auth_token => /.*/}
+  map_connect map, '/post',
+              :controller   => "flyer",
+              :action       => "post_flyer"
   map_connect map, '/features/:match_id/:term_text/:place_name',
               :controller   => "feature",
               :action       => "feature",

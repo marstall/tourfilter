@@ -1,4 +1,7 @@
 class UserController < ApplicationController  
+
+  include QuickAuthModule
+
 #  caches_page :index
   caches_page :badge
   #cache_sweeper :terms_users_sweeper
@@ -76,7 +79,13 @@ class UserController < ApplicationController
 
     @is_recommendee = false
     @is_recommendee = @user.is_recommendee(@youser) if @youser_known    
+    
+    @imported_events = ImportedEvent.all_flyers({:metro_code=>@metro_code,:user_id=>@user.id,:order=>'ieu.id desc'},nil)
+    
+    
     render(:action => :unknown) if @user==nil 
+    render(:layout=>'new_layout')
+    
   end
   
   def mini_register

@@ -6,6 +6,7 @@ class EditController < ApplicationController
 #  caches_page :homepage
   #cache_sweeper :terms_users_sweeper
   #@redirect_if_not_youser=true
+  include QuickAuthModule
   caches_page :term_more_info
 
   def find_users
@@ -42,19 +43,17 @@ class EditController < ApplicationController
         @added_terms=Array.new
         @not_added_terms=Array.new
         term_texts.each{|term_text|
-            logger.info("evaluating " + term_text) 
             x = false
             begin
               x = @youser.add_term_as_text(term_text,"itunes") 
             rescue
-              logger.info("+++ error " + term_text) 
             end
 #            term_text
             if x
-              logger.info("added " + term_text) 
+#              #logger.info("added " + term_text) 
               @added_terms<<term_text
             else
-              logger.info("didn't add " + term_text) 
+              #logger.info("didn't add " + term_text) 
               @not_added_terms<<term_text
             end
           }
@@ -433,10 +432,12 @@ c = GeoIP.new("/Users/chris/maxmind/GeoLiteCity.dat").city("76.24.220.14")
     @options_label='calndar_view'
     @nav_array=
       [
-        {'add_SP_bands'=>'add_bands_partial'},
-        {'full_SP_calendar'=>'calendar_partial'},
-        {'your_SP_shows'=>'your_shows_partial'},
-        {'friends'=>'friends_partial'}
+        {'new'=>'flyers_partial'},
+        {'following'=>'friends_partial'},
+        {'alerts'=>'alerts_partial'}
+        
+#        {'full_SP_calendar'=>'calendar_partial'},
+#        {'your_SP_calendar'=>'your_shows_partial'}
       ]
     return @options_label,@nav_array
   end
@@ -491,14 +492,21 @@ c = GeoIP.new("/Users/chris/maxmind/GeoLiteCity.dat").city("76.24.220.14")
     render(:partial=>'friends_partial',:layout=>false)
   end
 
+  def flyers_partial
+    use_calendar_nav_array
+    
+
+    render(:partial=>'flyers_partial',:layout=>false)
+  end
+
   def feed_partial
     use_calendar_nav_array
     render(:layout=>false)
   end
 
 
-  def add_bands_partial
-    render(:partial=>'add_bands_partial')
+  def alerts_partial
+    render(:partial=>'alerts_partial')
   end
 
   def your_shows_partial
@@ -606,6 +614,8 @@ c = GeoIP.new("/Users/chris/maxmind/GeoLiteCity.dat").city("76.24.220.14")
     @full_width_footer=true
     @source = Source.new
     @source.locale=@metro_code
+    @tags = params[:tags]
+#    render(:layout=>'new_layout')
   end  
 
   def just_calendar
@@ -718,17 +728,17 @@ c = GeoIP.new("/Users/chris/maxmind/GeoLiteCity.dat").city("76.24.220.14")
           # send inviter an email saying he has a new recommendee ...
           NewRecommendeeMailer::deliver_new_recommendee(rr)      
       rescue Exception
-        logger.info $!
+        #logger.info $!
         return
       end
       @is_recommendee=true    
   end
   
   def authenticate_client
-#    logger.info("session[:auth]: #{session[:auth]}")
-#    logger.info("params[:n1]: #{session[:n1]}")
-#    logger.info("params[:n2]: #{session[:n2]}")
-    logger.info("params[:auth]: #{params[:auth]}")
+#    #logger.info("session[:auth]: #{session[:auth]}")
+#    #logger.info("params[:n1]: #{session[:n1]}")
+#    #logger.info("params[:n2]: #{session[:n2]}")
+    #logger.info("params[:auth]: #{params[:auth]}")
 #    Integer(session[:auth])==Integer(params[:auth])
     params[:auth]=="auth2"
   end
@@ -795,13 +805,13 @@ c = GeoIP.new("/Users/chris/maxmind/GeoLiteCity.dat").city("76.24.220.14")
             
           terms_as_text = params[:youser][:terms_as_text]||""
           params[:more_terms_as_text].each_key{|key| terms_as_text+="\r\n#{key}"} if params[:more_terms_as_text]
-          logger.info "terms_as_text:#{terms_as_text}"
+          #logger.info "terms_as_text:#{terms_as_text}"
           @youser.terms_as_text=terms_as_text
           @youser.update_terms(note)
           begin
             WelcomeMailer::deliver_welcome(self,@youser)  unless ENV['RAILS_ENV']=='development'
           rescue =>e
-            logger.info("+++ error sending email:"+e.message+"\n"+e.backtrace.join("\n"))
+            #logger.info("+++ error sending email:"+e.message+"\n"+e.backtrace.join("\n"))
           end
           login_user(@youser,false)
           if params[:redirect_url]
@@ -815,7 +825,7 @@ c = GeoIP.new("/Users/chris/maxmind/GeoLiteCity.dat").city("76.24.220.14")
 #           flash[:notice]="Thanks for signing up. Invite some friends to share shows with!"
 #           flash[:notice]="Thanks for signing up. Vote for us in the Webbys!"
 #          render(:inline=>"<script>location.href='/#{@metro_code}/welcome/#{@youser.registration_code}';</script>",:layout=>false)
-          cookies['calndar_view']='add_SP_bands'
+          cookies['calndar_view']='alerts'
           if params[:redirect_url]
             render(:inline=>"<script>location.href='<%=params[:redirect_url]%>';</script>",:layout=>false)
             return
@@ -825,7 +835,7 @@ c = GeoIP.new("/Users/chris/maxmind/GeoLiteCity.dat").city("76.24.220.14")
           end
           return
         rescue =>e
-          logger.info(e.message+"\n"+e.backtrace.join("\n"))
+          #logger.info(e.message+"\n"+e.backtrace.join("\n"))
           errors = @youser.render_errors
           if errors
             error_string=errors.gsub('_',' ') 
@@ -838,10 +848,10 @@ c = GeoIP.new("/Users/chris/maxmind/GeoLiteCity.dat").city("76.24.220.14")
           render(:inline=>error_string)  
         end
       else #user is logged in, just save the terms
-        #logger.info("terms_as_text"+params[:user][:terms_as_text])
+        ##logger.info("terms_as_text"+params[:user][:terms_as_text])
         terms_as_text=params[:terms_as_text]
         terms_as_text+="\r\n"+params[:more_terms_as_text].each_key{|key|key}.join(',') if params[:more_terms_as_text]
-        logger.info terms_as_text
+        #logger.info terms_as_text
         @youser.terms_as_text=terms_as_text
         @youser.do_save
         expire_user_page(@youser)

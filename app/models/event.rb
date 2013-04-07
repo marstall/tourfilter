@@ -3,7 +3,8 @@ class Event < ActiveRecord::Base
   
   # Event.created(@youser,match,"email")
   
-  
+  attr_accessor :post_as
+
   def self.created(user,object,info=nil)
    Event.add(user,object,"create",info)
   end

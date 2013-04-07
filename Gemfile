@@ -15,4 +15,6 @@ gem "proxies", "0.2.1"
 gem "xml-simple", "1.0.11"
 gem "tidy", "1.1.2"
 gem "rmagick","2.13.1"
+gem "aws-sdk"
+gem "fb_graph"
 

@@ -13,4 +13,11 @@ module QuickAuthModule
     logger.info "qat: #{quick_auth_token(user)}"
     auth_token==quick_auth_token(user)
   end
+
+  def quick_authenticate_with_user(user,params)
+    auth_token=params[:auth_token]
+    logger.info "at: #{auth_token}"
+    logger.info "qat: #{quick_auth_token(user)}"
+    auth_token==quick_auth_token(user)
+  end
 end

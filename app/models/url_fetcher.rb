@@ -86,14 +86,14 @@ module UrlFetcher
   def download_jpg(uri_str,timeout_value=60)
       @file_root||="/tmp/"
       uri_str.gsub!(" ","%20")
-#      uri_str = get_final_url(uri_str)
-#      puts "downloading #{uri_str} ... "
+      uri_str = get_final_url(uri_str)
+      puts "downloading #{uri_str} ... "
       uri = URI.parse(uri_str)
       filename=String.new
       base_filename=String.new
       completed=false
       timeout(timeout_value) do
-          Net::HTTP.start(uri.host,uri.port) {|http|
+          Net::HTTP.start(uri.host,80) {|http|
           @before=Time.new
           base_filename=uri_str.gsub(/[?:\/&%]/,"_")
           base_filename=base_filename.gsub(/%../,"_")
@@ -102,6 +102,7 @@ module UrlFetcher
             puts "file already exists, skipping."
             return filename 
           end
+          puts "+++ getting #{uri.host} #{uri.path}"
           http.request_get(uri.path) {|response|
             content_type = response['content-type']
             raise "wrong type: #{content_type}" if content_type !~ /image/
@@ -109,7 +110,9 @@ module UrlFetcher
             body=String.new
             File.delete("tmp.jpg") if File.exists?("tmp.jpg")
             tmp_file = open("tmp.jpg","w")
+            puts " +++ here"
             response.read_body do |str|   # read body now
+              puts str.size
               num_bytes+=str.size
               tmp_file.print(str)
             end

@@ -1,5 +1,7 @@
 class FeatureController < ApplicationController
   
+  include QuickAuthModule
+
   def feature
     @full_width_footer=true
     begin
@@ -11,6 +13,10 @@ class FeatureController < ApplicationController
 
   def flyers
     @featured_matches=Match.current_with_feature(-1,"rand()")
+    render :layout=>'new_layout'
   end
+  
+
+  
 
 end

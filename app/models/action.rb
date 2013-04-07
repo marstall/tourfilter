@@ -4,11 +4,15 @@ class Action < ActiveRecord::Base
   
   OBJECT_TYPE_TERM = "term"
   OBJECT_TYPE_USER = "user"
+  OBJECT_TYPE_IMPORTED_EVENT = "flyer"
   OBJECT_TYPE_WEEKLY_NEWSLETTER = "weekly_newsletter"
   OBJECT_TYPE_MONTHLY_NEWSLETTER = "monthly_newsletter"
 
   ACTION_TYPE_REGISTERED = "registered"
   ACTION_TYPE_ADDED = "added"
+  ACTION_TYPE_APPROVED = "approved"
+  ACTION_TYPE_REFLYERED = "reflyered"
+  ACTION_TYPE_UNFLYERED = "reflyered"
   ACTION_TYPE_REMOVED = "removed"
   ACTION_TYPE_SENT = "sent"
   
@@ -21,6 +25,23 @@ class Action < ActiveRecord::Base
 
   def self.user_added_term(metro_code,user,term,note=nil,note_entity=nil)
     self.create(metro_code,user,ACTION_TYPE_ADDED,OBJECT_TYPE_TERM,term.id,term.text,note,note_entity)
+  end
+
+  def self.user_reflyered(metro_code,user,imported_event)
+    self.create(metro_code,user,ACTION_TYPE_REFLYERED,OBJECT_TYPE_IMPORTED_EVENT,imported_event.id,"posted by #{imported_event.user.name}",imported_event.body)
+  end
+
+  def self.user_unflyered(metro_code,user,imported_event)
+    self.create(metro_code,user,ACTION_TYPE_UNFLYERED,OBJECT_TYPE_IMPORTED_EVENT,imported_event.id,"posted by #{imported_event.user.name}",imported_event.body)
+  end
+
+  def self.user_added_flyer(metro_code,user,imported_event)
+    self.create(metro_code,user,ACTION_TYPE_ADDED,OBJECT_TYPE_IMPORTED_EVENT,imported_event.id,imported_event.body)
+    Notifier.send_message(Notifier.topics['added_flyer'],user,"posted flyer","http://www.tourfilter.com/#@metro_code/users/#{user.name}")
+  end
+
+  def self.admin_approved_flyer(metro_code,user,imported_event,body,terms)
+    self.create(metro_code,user,ACTION_TYPE_APPROVED,OBJECT_TYPE_IMPORTED_EVENT,imported_event.id,body,terms)
   end
 
   def self.user_followed_user(metro_code,user1,user2)

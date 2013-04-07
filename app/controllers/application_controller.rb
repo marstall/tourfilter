@@ -10,14 +10,32 @@ require 'geoip'
 
 class ApplicationController < ActionController::Base
 
+  
   include CalendarModule
   include RefererModule
   
 #  caches_page :bands_wrapper
-  HTML_REGEXP=/[<>;]|(update|delete|insert)\s/
+
+=begin
+	["choose one - required",""],
+	["rock","rock"], 
+	["jazz","jazz"],
+	["classical","classical"],
+	["rap","rap"],
+	["dj","dj"],
+	["comedy","comedy"],
+	["movie","movie"],
+	["theatre","theatre"],
+	["dance","dance"],
+	["art","art"],
+	["reading","reading"],
+	["other","other"]]
+=end
+
+  HTML_REGEXP=/[<>]|(update|delete|insert)\s/
   SALT="BRUN TAXMAN"
 #  before_filter :perform_hostname_corrections
-  before_filter :signup_intercept, :only=>[:homepage]
+#  before_filter :signup_intercept, :only=>[:homepage]
 #  before_filter :convert_to_new_url_structure_2
   before_filter :initialize_metro, :except=>[:locate,:geolocate,:redirect,:related_terms]
   before_filter :connect_to_the_correct_database
@@ -32,10 +50,22 @@ class ApplicationController < ActionController::Base
 #  after_filter :log_page_view, :except => :track_click
   
 #  def fragment_cache_key(name)
-#    puts "name: #{name.inspect}"
+#    #puts "name: #{name.inspect}"
 #    name.is_a?(Hash) ? url_for(name).split("://").last : name
 #  end
 
+  def auto_complete_for_tag_text
+    query = request.raw_post.downcase.split(/[=?&]/)[1]
+    puts query
+    tags = Tag.find_by_prefix(query)
+    s="<ul style='text-align:left'>"
+    tags.each{|tag|
+      s+="<li class='foo'>##{tag.text} (#{tag.cnt})</li>"
+      }
+    s+="</ul>"
+    render(:inline=>s)
+    
+  end
 
   def geoip
     @@geoip||=GeoIP.new("#{RAILS_ROOT}/maxmind/GeoLiteCity.dat")
@@ -112,7 +142,7 @@ class ApplicationController < ActionController::Base
   @@us_metros = nil
   @@international_metros = nil
   def make_metro_map
-#    logger.info("make_metro_map")
+#    #logger.info("make_metro_map")
     if @@uk_metros
       @uk_metros=@@uk_metros
     else
@@ -160,13 +190,13 @@ class ApplicationController < ActionController::Base
 
   def connect_to_the_correct_database
     begin
-      logger.info("metro_code in connect: #{@metro_code}")
+      #logger.info("metro_code in connect: #{@metro_code}")
       @metro_code||="shared"
       database_code=@metro_code
       if database_code=="facebook" or database_code=="search"
         database_code="shared"
       end
-      logger.info("database_code: #{database_code}")
+      #logger.info("database_code: #{database_code}")
       ActiveRecord::Base.establish_connection(
         :adapter  => "mysql",
         :host     => ActiveRecord::Base.configurations[ENV['RAILS_ENV']]['host'],
@@ -176,7 +206,7 @@ class ApplicationController < ActionController::Base
         )
     rescue => e
       log_error(e)
-      puts "error!"
+      #puts "error!"
     end
   end
   
@@ -193,7 +223,7 @@ class ApplicationController < ActionController::Base
       next if term_text.size<3
       term_text.gsub!("%20"," ")
       term_text_array<<term_text
-      logger.info("+++"+term_text)
+      #logger.info("+++"+term_text)
     } if terms_as_text
     @term_texts=term_text_array
     if term_text_array.empty?
@@ -216,7 +246,7 @@ class ApplicationController < ActionController::Base
       } if terms_as_text
     num+=(term_text_array.size*3) if term_text_array
     term_text_array+=@youser.terms if @youser
-    logger.info("+++ num:"+num.to_s)
+    #logger.info("+++ num:"+num.to_s)
     setup_related_terms(term_text_array,num)  
     @related_terms||=[]
     if (not @youser and @related_terms.size<=0)
@@ -235,9 +265,9 @@ class ApplicationController < ActionController::Base
     @related_terms=[]
     same_index=0
     last_term_text=""
-    logger.info("+++#{@related_terms.length}")
+    #logger.info("+++#{@related_terms.length}")
     rts.each{|related_term|
-      logger.info("+++"+related_term.term_text+":"+last_term_text+":"+same_index.to_s)
+      #logger.info("+++"+related_term.term_text+":"+last_term_text+":"+same_index.to_s)
       if related_term.term_text==last_term_text
         same_index+=1 
       else
@@ -272,7 +302,7 @@ class ApplicationController < ActionController::Base
   def homepage_signup
     _metro_code = get_cookie("metro_code")
     if _metro_code && _metro_code.size>0
-      redirect_to "/#{get_cookie('metro_code')}"
+      redirect_to "#{get_cookie('metro_code')}"
       return false
     end
     @not_in_a_city=true
@@ -281,78 +311,58 @@ class ApplicationController < ActionController::Base
   end
 
   def signup_intercept
-    puts "signup_intercept"
+    #puts "+++ signup_intercept"
     if not params[:metro_code]
+      #puts "+++ here -a: #{params[:metro_code]}"
       #render_component(:controller=>'edit',:action=>'homepage_signup') 
-      homepage_signup
-      return false
+      return homepage_signup
     else
+      #puts "+++ here -b: #{params[:metro_code]}"
       return true
     end
   end
 
   def set_metro_code(metro_code)
-    return if metro_code=='search'
     set_cookie("metro_code",metro_code)
     @metro_code=metro_code
   end
 
   def initialize_metro
+    puts "+++ initialize_metro"
     SETTINGS['date_type']='us'
     @metro_map = Hash.new
     @metro_map=make_metro_map
     request.host =~ /(\w+)\.(tourfilter\.(?:org|com|net|local))/
     @domain_stub=$2
     subdomain=$1
-    url_metro_code=params[:metro_code]
-    if not @metro_map[params[:metro_code]]
-      url_metro_code=subdomain
-    end
-    logger.info("params[:metro_code]: #{params[:metro_code]}")
-    logger.info("subdomain: #{subdomain}")
-    logger.info("url_metro_code: #{url_metro_code}")
-    if /^\/search/=~request.request_uri
-      @not_in_a_city=true
-      set_metro_code("search")
-      @metro_name="all-cities search"
-      return
-    end
-    if /^\/facebook/=~request.request_uri
-      @not_in_a_city=true
-      set_metro_code("facebook")
-      @metro_name="facebook"
-      return
-    end
-
-    if @metro_map[url_metro_code] and not @metro_map[url_metro_code].name.empty?
-      @metro = @metro_map[url_metro_code].name
-#      logger.info("@metro: #{@metro}")
-      @num_places = @metro_map[url_metro_code].num_places 
-#      logger.info("num_places: #{@num_places}")
-      @metro_active = @metro_map[url_metro_code].active?
-      set_metro_code(url_metro_code)
-#      logger.info("@metro_code: #{@metro_code}")
-    else
-#      logger.info("request.host: #{request.host}")
-      if !@metro_code
-        set_metro_code(get_cookie("metro_code"))
-        if @metro_code # if it was in the cookie
-          redirect_to "/#{@metro_code}#{request.path}"
-          return false
-        end
+    
+    # if the path contains a metro_code, set the metro_code to that.
+    # if not, check in the cookie. if there is a metro_code there, set it to that and redirect
+    # if not, redirect to /locate
+    
+    redirected=false
+    @metro_code=params[:metro_code]
+    if not @metro_map[@metro_code]
+      @metro_code = get_cookie("metro_code") 
+      if @metro_map[@metro_code]
+        redirect_to "/#{@metro_code}#{request.path}"
+        redirected=true
+      else
+        redirect_to "/locate"
+        redirected=true
       end
     end
-
-#    if url_metro_code=="boston"
-#      new_domain = request.host.gsub(/boston/,"www")
-#      redirect_to "http://#{new_domain}#{request.path}"
-#      return false    
-#    end
+    if @metro_map[@metro_code] and not @metro_map[@metro_code].name.empty?
+      @metro = @metro_map[@metro_code].name
+      @num_places = @metro_map[@metro_code].num_places 
+      @metro_active = @metro_map[@metro_code].active?
+      set_metro_code(@metro_code)
+    end
 
     if @metro_code=="london" or @metro_code=="melbourne" or @metro_code=="dublin"
       SETTINGS['date_type']='uk'
     end
-    return true
+    return !redirected
   end
   
   def error(text)
@@ -370,23 +380,23 @@ class ApplicationController < ActionController::Base
     subdomain=$1
     path = request.path
    original_path=path 
-#	 logger.info("request.request_uri in convert_1: #{request.request_uri}")
-#    logger.info("request.path in convert_1: #{request.path}")
-#    puts("subdomain in convert_1: #{subdomain}")
+#	 #logger.info("request.request_uri in convert_1: #{request.request_uri}")
+#    #logger.info("request.path in convert_1: #{request.path}")
+#    #puts("subdomain in convert_1: #{subdomain}")
     path_code = (request.path.scan(/[^\/]+/)||[""]).first
     metro_map = make_metro_map
     metro_map["facebook"]=true
     metro_map["search"]=true
     metro_map["b0ston"]=true
-#    logger.info("subdomain in convert_1: #{subdomain}")
-#    logger.info("path_code in convert_1: #{path_code}")
-#    puts("subdomain in convert_1: #{subdomain}")
-#    puts("path_code in convert_1: #{path_code}")
+#    #logger.info("subdomain in convert_1: #{subdomain}")
+#    #logger.info("path_code in convert_1: #{path_code}")
+#    #puts("subdomain in convert_1: #{subdomain}")
+#    #puts("path_code in convert_1: #{path_code}")
     original_path="/#{original_path}" unless original_path=~/^\// 
     # e.g. if the url is "www" and the path doesn't start with "/boston" or "/newyork" etc.
     if not metro_map[subdomain] and not metro_map[path_code]
-#      logger.info "http://#{domain}/boston#{original_path}"
-#      puts "http://#{domain}/b0ston#{original_path}"
+#      #logger.info "http://#{domain}/boston#{original_path}"
+#      #puts "http://#{domain}/b0ston#{original_path}"
       redirect_to("http://#{domain}/b0ston#{original_path}",false)
       return false
     end
@@ -399,15 +409,15 @@ class ApplicationController < ActionController::Base
     domain_stub=$2
     subdomain=$1
     path = request.path
-    logger.info("request.path in convert_2: #{request.path}")
+    #logger.info("request.path in convert_2: #{request.path}")
     path_code = (request.path.scan(/[^\/]+/)||[""]).first
     metro_map = make_metro_map
     metro_map["facebook"]=true
     metro_map["search"]=true
-#    logger.info("subdomain in convert_2: #{subdomain}")
-#    logger.info("path_code in convert_2: #{path_code}")
-#    puts("subdomain in convert_2: #{subdomain}")
-#    puts("path_code in convert_2: #{path_code}")
+#    #logger.info("subdomain in convert_2: #{subdomain}")
+#    #logger.info("path_code in convert_2: #{path_code}")
+#    #puts("subdomain in convert_2: #{subdomain}")
+#    #puts("path_code in convert_2: #{path_code}")
     if subdomain!="www" and subdomain!="beta"
       if request.path=~/^\/facebook/ or request.path=~/^\/search/
         _url = "http://#{domain}#{request.path}"
@@ -416,10 +426,10 @@ class ApplicationController < ActionController::Base
         _url = "http://#{domain}"
         _url += "/#{subdomain}" if subdomain and not subdomain.strip.empty?
         _url += "#{request.path}"
-#        logger.info "redirecting to #{_url}"
-#        logger.info "domain: #{domain}"
-#        logger.info "subdomain: #{subdomain}"
-#        logger.info "request.path: #{request.path}"
+#        #logger.info "redirecting to #{_url}"
+#        #logger.info "domain: #{domain}"
+#        #logger.info "subdomain: #{subdomain}"
+#        #logger.info "request.path: #{request.path}"
         redirect_to(_url)
       end
       return false
@@ -489,19 +499,24 @@ class ApplicationController < ActionController::Base
     return true if session[:is_admin]
     if !@youser_known
       flash[:error]=msg
-      redirect_to login_url
+      redirect_to signup_url
       return false
     end
     return true
   end
   
   def login_url(redirect_url=nil)
-    redirect_url||=request.path
+    redirect_url||=request.path+URI::escape("?#{request.query_string}")
     "/login?redirect_url=#{redirect_url}"
   end
 
-  def signup_url(params)
-    redirect_url=params[:redirect_url]||"/"
+  def signup_url(redirect_url=nil)
+    redirect_url||=request.path+URI::escape("?#{request.query_string}")
+    "/basic_signup?redirect_url=#{redirect_url}"
+  end
+
+  def _signup_url(params)
+    redirect_url||=request.path+URI::escape("?#{request.query_string}")
     "/signup?redirect_url=#{redirect_url}"
   end
 
@@ -521,7 +536,7 @@ class ApplicationController < ActionController::Base
   
   def log_interval(label='')
     interval = Time.new-@timer
-    logger.info("+++ TIME #{label}: #{interval}")
+    #logger.info("+++ TIME #{label}: #{interval}")
   end
   
   def get_cookie(name)
@@ -550,7 +565,7 @@ class ApplicationController < ActionController::Base
     # extract referer_domain and put that in the cookie if the user is not logged in
     referer = request.env['HTTP_REFERER']
     return true if not referer or referer.empty?
-#    logger.info("SETTING REFERER COOKIE TO #{referer}")
+#    #logger.info("SETTING REFERER COOKIE TO #{referer}")
     cookies[:ref] = {
                           :value => String(referer),
                           :expires => 10.years.from_now,
@@ -705,10 +720,10 @@ class ApplicationController < ActionController::Base
   end
   
  def generate_cookie_hash(youser_id)
-#    logger.info("youser_id: #{youser_id}")
-#    logger.info("request.remote_ip: #{request.remote_ip}")
+#    #logger.info("youser_id: #{youser_id}")
+#    #logger.info("request.remote_ip: #{request.remote_ip}")
     hash = Digest::MD5.hexdigest("#{youser_id}|#{request.remote_ip}|#{@metro_code}|#{SALT}")
-#    logger.info("hash: #{hash}")
+#    #logger.info("hash: #{hash}")
     hash
   end
   
@@ -750,9 +765,9 @@ class ApplicationController < ActionController::Base
       return true
     end
     if @youser
-      logger.info("@youser: #{@youser.name}") 
+      #logger.info("@youser: #{@youser.name}") 
     else
-      logger.info("not logged in") 
+      #logger.info("not logged in") 
     end
     return true
   end
@@ -787,17 +802,17 @@ class ApplicationController < ActionController::Base
       else
         @youser.last_logged_in_on=DateTime.now
         @youser.metro_code=@metro_code
-        logger.info( "+++ #{metro_code}: #{@youser.metro_code}")
+        #logger.info( "+++ #{metro_code}: #{@youser.metro_code}")
         @youser.save 
-        cookies['calndar_view']='add_SP_bands'
+#        cookies['calndar_view']='add_SP_bands'
         
 #       domain="#{@metro_code}.#{@domain_stub}" 
 #       domain=@domain_stub if @youser.privs=='admin' 
-        cookies[:calendar_view] = {
-                      :value => "my",
-                      :expires => 360.days.from_now,
-                      :path => "/#{@metro_code}"
-                    }
+#        cookies[:calendar_view] = {
+#                      :value => "my",
+#                      :expires => 360.days.from_now,
+#                      :path => "/#{@metro_code}"
+#                    }
         session[:"#{@metro_code}_user_id"] = @youser.id
         session[:is_admin] = true if @youser.privs=~/admin/ # for all cities, note!!
         cookies[:"#{@metro_code}_user_id"] = {
@@ -833,7 +848,7 @@ class ApplicationController < ActionController::Base
   end
   
   def logout
-    cookies['calndar_view']='full_SP_calendar'
+    cookies['calndar_view']='flyers'
     session[:"#{@metro_code}_user_id"] = nil
     session[:is_admin]= nil
     cookies[:calendar_view] = {
@@ -879,7 +894,7 @@ class ApplicationController < ActionController::Base
     elsif options.is_a? String and options =~/^\//
       options="/#{@metro_code}#{options}" 
     end
-    logger.info "+++ expiring #{options.inspect}"
+    #logger.info "+++ expiring #{options.inspect}"
     super(options)
   end
 
@@ -934,7 +949,7 @@ class ApplicationController < ActionController::Base
   # expire_term_page - invalidate the l1-cache for this term ... (eg "/bands/Sparklehorse")
   def expire_term_page(term)
     return if !term
-    puts("+++ term.to_s: #{term.inspect}")
+    #puts("+++ term.to_s: #{term.inspect}")
     expire_page(:controller=>"bands",:action=>term.url_text)
     expire_page(:controller=>"bands",:action=>term.url_text_old)
   end
@@ -982,7 +997,7 @@ class ApplicationController < ActionController::Base
       expire_action({:controller=>"image_calendar_match",:action=>"#{match.id}"})
     }
     term.users.each{|user|
-      logger.info("expire_user_page")
+      #logger.info("expire_user_page")
       expire_user_page(user)
       # also expire user's calendar
       }
@@ -1042,6 +1057,6 @@ class ApplicationController < ActionController::Base
   protected  
   
   def log_time(label)
-    logger.info("#{label} => #{Time.now.to_f}")
+    #logger.info("#{label} => #{Time.now.to_f}")
   end
 end

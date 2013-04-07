@@ -1,4 +1,3 @@
-include GeoKit::Geocoders
 
 class Metro < ActiveRecord::Base
 

@@ -5,7 +5,7 @@ line-height:1.5em	;
 
 body {
 	background-color: #fff;
-	margin:4px;
+	margin:0px;
  	color: #333;
 }
 
@@ -168,13 +168,8 @@ a[class ="popup"] {
 	font-size:14px;
 	font-family:helvetica;
  	color: black;
-	padding:4px;
 	-webkit-border-radius:4px;
 	-moz-border-radius:4px;
-	background-color:#ffc;
-	margin-left:4px;
-	border: 2px solid #eee;
-	
 }
 
 .header_menu_item a:link { text-decoration: none; color: #369; }
@@ -560,13 +555,14 @@ h2
 	-moz-border-radius:6px;
 	text-transform:none;
 	font-size:16px;
-	padding:4px;
+	padding:6px;
 	margin-top:0px;
 	font-weight:bold;
 	font-size:24px;
-	margin-bottom:4px;
+	margin-bottom:12px;
 	background-color:#ddf5f5;
  	color:#333;
+	width:100%;
 }
 
 h2.secondary_column
@@ -577,6 +573,7 @@ h2.secondary_column
 
 h3
 {
+	width:100%;
 	padding:0px;
 	margin:0px;
 	margin-bottom:4px;
@@ -642,17 +639,62 @@ h3
 	
 .rounded_image_container_container
 {
-	background-color:black;
 	padding:4px;
 	-webkit-border-radius:12px;
 	-moz-border-radius:12px;
 }
 
+.small_form_header
+{
+	font-size:12px;
+	color: #777;
+}
+
+.change_image_button:hover
+{
+	opacity:1;
+}
+
+.change_image_button
+{
+	opacity:0.30;
+	position:relative;
+	top:-10px;
+	right:100px;
+}
+.flyer_preview
+{
+	margin:2px;
+	border:4px dotted #eee;
+}
+
+.hashtag a:link { text-decoration: underline; color: #333; }
+.hashtag a:visited { text-decoration: underline; color: #333; }
+.hashtag a:hover { text-decoration: underline; }
+.hashtag a:active { text-decoration: underline; }
+
+.flyer_url a:link { text-decoration: underline; color: #333; }
+.flyer_url a:visited { text-decoration: underline; color: #333; }
+.flyer_url a:hover { text-decoration: underline; }
+.flyer_url a:active { text-decoration: underline; }
+
 .rounded_image_container
 {
-	-webkit-border-radius:10px;
-	-moz-border-radius:10px;
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
 	overflow:hidden;
+}
+
+
+
+#flyer_control
+{
+	background-color:#f7f7f7;
+	padding:5px;
+	margin-bottom:4px;
+	font-size:12px;
+	color:#777;
+	width:100%;
 }
 
 .flyer_board
@@ -680,27 +722,34 @@ h3
 	margin-top:0px;
 	font-size:24px;
 	border-bottom:0px;
-  color:#335;
+  	color:#335;
 
 }
 
 
 .flyer_footer
 {
+	padding:8px;
+	font-size:16px;
+	line-height:20px;
+}
+
+.flyer_posted_by
+{
 	text-transform:lowercase;
-	font-size:13px;
-	margin-bottom:0px;
-	border-bottom:0px;
-  color:#777;
+	font-size:14px;
+  	color:#777;
 }
 
 .flyer_text
 {
-	border: 0px solid #ddf5f5;
-	border-top:0px;
-	font-size:12px;
-	line-height:16px;
-	padding:0px;
+	margin-left:text;
+}
+
+.flyer_text:first-line
+{
+	font-weight:bold;
+	text-transform:uppercase;
 }
 
 .flyer_where
@@ -710,24 +759,174 @@ h3
 
 .flyer_when
 {
-	color:#777;
 }
+
+.flyer_header
+{
+	font-family:helvetica;
+	text-transform:lowercase;
+	font-size:16px;
+	text-align:right;
+	padding:8px;
+}
+
+.flyer_category
+{
+	color:#369;
+	padding:2px;
+}
+
+.flyer_category a:link { text-decoration: none; color: #369; }
+.flyer_category a:visited { text-decoration: underline; color: #369; }
+.flyer_category a:hover { text-decoration: underline; }
+.flyer_category a:active { text-decoration: underline; }
+
+.active_admin
+{
+	background-color:blue;
+}
+
+.artist_term
+{
+	padding:4px;
+	margin:1px;
+	background-color:#eee;
+}
+
+
+.flyer_hud a:link { text-decoration: underline; ; color: #333; }
+.flyer_hud a:visited { text-decoration: underline; color: #333; }
+.flyer_hud a:hover { text-decoration: underline; }
+.flyer_hud a:active { text-decoration: underline; }
+
+.flyer_hud
+{
+	-webkit-border-radius: 3px 0px 0px 0px;
+	-moz-border-radius: 3px;
+	text-align:right;
+	padding:6px;
+	border-bottom:2px solid #ddd;
+	visibility:hidden;
+	background-color:white;
+	opacity:0.8;
+	font-size:28px;
+	width: 97%;
+	position: absolute;
+	top: 38px;
+	right:0;
+	z-index: 1000;	
+}
+
+.fullpage_flyer_hud
+{
+	-webkit-border-radius: 3px 0px 0px 0px;
+	-moz-border-radius: 3px;
+
+	text-align:right;
+	padding:6px;
+	border-bottom:2px solid #ddd;
+	visibility:hidden;
+	background-color:white;
+	opacity:0.8;
+	font-size:28px;
+	width: 97%;
+	position: absolute;
+	top: 0px;
+	right:0;
+	z-index: 1000;	
+}
+
+
+.flyer_admin
+{
+	-webkit-border-radius: 3px 0px 0px 0px;
+	-moz-border-radius: 3px;
+	margin-top:44px;
+	padding:6px;
+	border-bottom:2px solid #ddd;
+	visibility:hidden;
+	background-color:white;
+	opacity:0.95;
+	font-size:14px;
+	width: 390px;
+	position: absolute;
+	top: 38px;
+	left: 0;
+	z-index: 1000;		
+}
+
 
 .flyer
 {
-	width: 320px;
-	margin-right: 60px;
+	margin-right: 20px;
+	width:400px;
 	text-transform:none;
-	font-size:16px;
 	padding:0px;
 	margin-top:0px;
-	font-size:24px;
-	margin-bottom:60px;
+	margin-bottom:20px;
 	background-color:white;
-	border:0px solid #ddf5f5;
-	-webkit-border-radius:6px 6px 6px 6px;
-	-moz-border-radius:6px 6px 6px 6px;
+	border:6px solid #eee;
+	padding:4px;
 	float: left;
+	-webkit-border-radius: 10px 10px 10px 10px;
+	-moz-border-radius: 10px 10px 10px 10px;
+	-webkit-box-shadow: 10px 10px 10px #bbb;
+	-moz-box-shadow: 5px 5px 5px #bbb;
+}
+
+/*
+responsive design for flyer view
+
+breakpoint >1200: everything is 400 wide
+breakpoint 800-1200: everything is 33%
+breakpoint 400-800: everything is 50%
+breakpoint<400: everything is 100%
+*/
+
+/*
+@media screen and (min-width:1100px) and (max-width:1400px) {
+	.flyer
+	{
+		width:29%;
+	}
+}
+
+@media screen and (min-width:0px) and (max-width:740px) {
+	.flyer
+	{
+		width:400px;
+	}
+}
+*/
+
+.fullpage_flyer
+{
+	margin-right: 20px;
+	width:600px;
+	text-transform:none;
+	padding:0px;
+	margin-bottom:20px;
+	background-color:white;
+}
+
+
+.unprocessed_flyer
+{
+/*	border: 6px solid #fdd; */
+}
+
+
+.manage_recommendations a:link { text-decoration: underline; color: #777; }
+.manage_recommendations a:visited { text-decoration: underline; color: #777; }
+.manage_recommendations a:hover { text-decoration: underline; }
+.manage_recommendations a:active { text-decoration: underline; }
+
+.manage_recommendations
+{
+	display:inline;
+	color:#777;
+	background-color:#ffc;
+	padding:2px;
 }
 
 .featured_match_mini
@@ -855,12 +1054,11 @@ h3
 	margin-top:0px;
 	padding-top:0px;
 	margin-left:6px;
-	width:560px;
-	float:left;
 }
 
 #list_view
 {
+	display:none;
 	-webkit-border-radius: 0px;
 	-moz-border-radius: 0px;
 	padding:0px !important;
@@ -2578,6 +2776,22 @@ th
 	text-transform:lowercase;
 }
 
+#new_logo
+{
+	margin-left:0px;
+	margin-top:10px;
+	margin-bottom:10px;
+	font-size:36px;
+	font-family:Helvetica;
+	font-weight:bold;
+	width:100%;
+	-webkit-border-radius:10px;
+	-moz-border-radius:10px;
+	background-color:#ddf5f5;
+	text-transform:lowercase;
+}
+
+
 
 .xsignup
 {
@@ -2654,31 +2868,41 @@ th
 	color:#369;
 	padding:6px;
 	background-color:#ddf5f5;
-	text-transform:lowercase;
+	text-transform:none;
 }
 
-.logo_tourfilter a:link { text-decoration: none; color: #369; }
-.logo_tourfilter a:visited { text-decoration: none; color: #369; }
+.logo_tourfilter a:link { text-decoration: none; color: #333; }
+.logo_tourfilter a:visited { text-decoration: none; color: #333; }
 .logo_tourfilter a:hover { text-decoration: none; border-bottom:6px solid #369;padding-bottom:0px; }
 .logo_tourfilter a:active { text-decoration: non; }
 
-.logo_metro a:link { text-decoration: none; color: #369; }
-.logo_metro a:visited { text-decoration: none; color: #369; }
+.logo_metro a:link { text-decoration: none; color: #b7dfdf; }
+.logo_metro a:visited { text-decoration: none; color: #b7dfdf; }
 .logo_metro a:hover { text-decoration: none; border-bottom:6px solid #369;padding-bottom:0px; }
 .logo_metro a:active { text-decoration: underline; }
 
 .logo_metro
 {
+	visibility:hidden;
+	font-weight:normal;
 	float:left;
- color:#369;
-	padding:6px;
+ 	color:#b7dfdf;
+	padding-top:9px;
+	padding-left:0px;
+	margin-bottom-left:0px;
+	vertical-align:-14px;
 }
 
 .logo_title
 {
-	color:#333;
+	font-weight:normal;
+	margin-left:10px;
 	float:left;
-	padding:6px;
+ 	color:#b7dfdf;
+	padding-top:9px;
+	padding-left:0px;
+	margin-bottom-left:0px;
+	vertical-align:-14px;
 }
 
 
@@ -2733,7 +2957,9 @@ th
 #right-header 
 { 
 	background-color: inherit;
-	float:right
+	float:right;
+	padding-right:6px;
+	padding-top:4px;
 }
 .box {background-color: #DDF5F5;padding-left:0.25em;text-align:left;
 		  margin-bottom:0.25em;margin-left:0em;border-top:1px;border-bottom:1px}
@@ -3157,7 +3383,7 @@ h1x {
 .result_cell {padding:0.25em;padding-left:1em}
 .result_header {padding:0.25em;padding-left:1.1em;color:#555}
 .result_description {margin-left:.25em;color:#aaa;font-size:0.9em;}
-.search_highlight{background-color:#FfC;}
+.search_highlight{background-color:#FfC;padding:2px;font-weight:bold}
 .search_description_highlight{color:#a88;}
 
 .search_result_1 {background-color:#fff;margin-bottom:0em;margin-left:0.25em;padding:0.25em}
@@ -3272,15 +3498,31 @@ h1x {
 	background-color:#cec;
 }
 
+.minimal_layout_container
+{
+}
+
+.minimal_above_header
+{
+	background-color:#EDF5F5;
+	font-family:helvetica;
+	text-align:left;
+	font-size:14px;
+ 	color:#369;
+	padding:4px;
+	margin-bottom:0px;
+	width:600px;
+}
 
 .above_header
 {
+	background-color:white;
 	font-family:helvetica;
 	text-align:right;
-	width:834px;
 	font-size:20px;
- color:black;
-	margin-bottom:10px;
+ 	color:black;
+	padding-top:8px;
+	width:100%;
 }
 
 .above_header_item
@@ -3968,9 +4210,18 @@ p
 	line-height:1.5em	;	
 }
 
+.homepage_tabs_container
+{
+}
+
+.calendar_options_right
+{
+	border-bottom:1px solid #ccc;
+}
 
 .calendar_options
 {
+	width:100%;
 	font-size:16px;
 	border-bottom:1px solid #ccc;
 	margin-bottom:6px;
@@ -4000,62 +4251,3 @@ p
 	margin-bottom:0px;
 }
 
-/*
-    colorBox Core Style
-    The following rules are the styles that are consistant between themes.
-    Avoid changing this area to maintain compatability with future versions of colorBox.
-*/
-#colorbox, #cboverlay, #cboxWrapper{position:absolute; top:0; left:0; z-index:9999; overflow:hidden;}
-#cboverlay{position:fixed; width:100%; height:100%;}
-#cboxMiddleLeft, #cboxBottomLeft{clear:left;}
-#cboxContent{position:relative; overflow:hidden;}
-#cboxLoadedContent{overflow:auto;}
-#cboxLoadedContent iframe{display:block; width:100%; height:100%; border:0;}
-#cboxTitle{margin:0;}
-#cboxLoadingOverlay, #cboxLoadingGraphic{position:absolute; top:0; left:0; width:100%;}
-#cboxPrevious, #cboxNext, #cboxClose, #cboxSlideshow{cursor:pointer;}
-
-/* 
-    colorBox example user style
-    The following rules are ordered and tabbed in a way that represents the
-    order/nesting of the generated HTML, so that the structure easier to understand.
-*/
-#cboverlay{background:#fee;}
-
-#colorBox{}
-    #cboxTopLeft{width:25px; height:25px; background:url(/images/border1.png) 0 0 no-repeat;}
-    #cboxTopCenter{height:25px; background:url(/images/border1.png) 0 -50px repeat-x;}
-    #cboxTopRight{width:25px; height:25px; background:url(/images/border1.png) -25px 0 no-repeat;}
-    #cboxBottomLeft{width:25px; height:25px; background:url(/images/border1.png) 0 -25px no-repeat;}
-    #cboxBottomCenter{height:25px; background:url(/images/border1.png) 0 -75px repeat-x;}
-    #cboxBottomRight{width:25px; height:25px; background:url(/images/border1.png) -25px -25px no-repeat;}
-    #cboxMiddleLeft{width:25px; background:url(/images/border2.png) 0 0 repeat-y;}
-    #cboxMiddleRight{width:25px; background:url(/images/border2.png) -25px 0 repeat-y;}
-    #cboxContent{background:#fff;}
-        #cboxLoadedContent{margin-bottom:20px;}
-        #cboxTitle{position:absolute; bottom:0px; left:0; text-align:center; width:100%; color:#999;}
-        #cboxCurrent{position:absolute; bottom:0px; left:100px; color:#999;}
-        #cboxSlideshow{position:absolute; bottom:0px; right:42px; color:#444;}
-        #cboxPrevious{position:absolute; bottom:0px; left:0; color:#444;}
-        #cboxNext{position:absolute; bottom:0px; left:63px; color:#444;}
-        #cboxLoadingOverlay{background:url(/images/loading.gif) 5px 5px no-repeat #fff;}
-        #cboxClose{position:absolute; bottom:0; right:0; display:block; color:#444;}
-
-/*
-    The following fixes png-transparency for IE6.  
-    It is also necessary for png-transparency in IE7 & IE8 to avoid 'black halos' with the fade transition
-    
-    Since this method does not support CSS background-positioning, it is incompatible with CSS sprites.
-    colorbox preloads navigation hover classes to account for this.
-    
-    !! Important Note: AlphaImageLoader src paths are relative to the HTML document,
-    while regular CSS background images are relative to the CSS document.
-*/
-.cboxIE #cboxTopLeft{background:transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=/images/internet_explorer/borderTopLeft.png, sizingMethod='scale');}
-.cboxIE #cboxTopCenter{background:transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=/images/internet_explorer/borderTopCenter.png, sizingMethod='scale');}
-.cboxIE #cboxTopRight{background:transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=/images/internet_explorer/borderTopRight.png, sizingMethod='scale');}
-.cboxIE #cboxBottomLeft{background:transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=/images/internet_explorer/borderBottomLeft.png, sizingMethod='scale');}
-.cboxIE #cboxBottomCenter{background:transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=/images/internet_explorer/borderBottomCenter.png, sizingMethod='scale');}
-.cboxIE #cboxBottomRight{background:transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=/images/internet_explorer/borderBottomRight.png, sizingMethod='scale');}
-.cboxIE #cboxMiddleLeft{background:transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=/images/internet_explorer/borderMiddleLeft.png, sizingMethod='scale');}
-.cboxIE #cboxMiddleRight{background:transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=/images/internet_explorer/borderMiddleRight.png, sizingMethod='scale');}

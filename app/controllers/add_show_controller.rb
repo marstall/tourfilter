@@ -1,10 +1,6 @@
 class AddShowController < ApplicationController  
 
-  def auto_complete_for_venue_name
-    @places = Place.find_in_metro_like_name(@metro_code,params[:venue][:name])
-    render :inline => '<%= content_tag(:ul, @places.map { |place| content_tag(:li, h("#{place.name.downcase}")) }) %>'
-  end
-
+  auto_complete_for :venue,:name
   def submit_show
     return if not must_be_known_user
     @num_shows = ImportedEvent.count_by_sql("select count(*) from imported_events where user_id=#{@youser.id}") if @youser
@@ -56,8 +52,7 @@ class AddShowController < ApplicationController
     rescue
       @errors<<"invalid date" 
     end
-    @errors<<"must enter a (longer) description" unless params[:body] and params[:body].strip.size>1
-    @errors<<"must enter a (longer) venue name" unless params[:venue][:name] and params[:venue][:name].strip.size>3
+    @errors<<"must enter an event_type" unless params[:event_type]
     @errors<<"invalid character" if params[:venue][:name]+params[:body]+params[:address]+params[:user_event][:url]=~HTML_REGEXP
 #    @errors<<"must select a metro" unless params[:object][:metro_code] and params[:object][:metro_code].strip.size>3
     return @errors.empty?
@@ -66,7 +61,6 @@ class AddShowController < ApplicationController
 
   def handle_direct_submit(event)
     url=params[:url]
-
     term = find_or_create_term(params[:body])
     match=Match.new
     match.venue_id=event.venue.id
@@ -87,10 +81,8 @@ class AddShowController < ApplicationController
 
     event.status='made_match' #effectively this process has been done, like it's done in the daemon
     event.save
-    
-    
   end
-
+  
   def find_or_create_term(text)
     term = Term.find_by_text(text)
     return term if term
@@ -142,8 +134,10 @@ class AddShowController < ApplicationController
     event.source='user'
     event.level='primary'
     event.status='new'
-    event.user_id=@youser.id
-    event.username=@youser.name
+    if @youser
+      event.user_id=@youser.id
+      event.username=@youser.name
+    end
     event.user_metro=@metro_code
     event.date=Date.new(Integer(params[:year]),Integer(params[:month]),Integer(params[:day]))
     event.url=params[:url]
@@ -167,6 +161,7 @@ class AddShowController < ApplicationController
     end
     
   end
+  
 
   def handler_
     if params[:button]=~/Done/

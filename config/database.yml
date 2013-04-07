@@ -13,6 +13,7 @@ development:
   host: 127.0.0.1
   port: 3306
 
+
 #development:
 #  adapter: mysql
 #  database: tourfilter_boston
@@ -55,6 +56,8 @@ shared_development:
   password: chris
   host: 127.0.0.1
   port: 3306
+
+
 
 shared_production:
   adapter: mysql

@@ -1,7 +1,7 @@
 if $mode=='import_daemon'
   require 'mechanize'
   require "../config/environment.rb" 
-
+  require 'GeoKit'
   include GeoKit::Geocoders
 end
 
@@ -44,7 +44,7 @@ class Venue < ActiveRecord::Base
   def fetch_parse_and_save
   end  
 
-  if $mode=='import_daemon'
+  if $mode=='import_daemon' 
     acts_as_mappable
 
     def initialize_cache

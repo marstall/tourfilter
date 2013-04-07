@@ -42,10 +42,20 @@ class User < ActiveRecord::Base
             :order=>'id desc'
   has_many :recommendations
   
+  has_many :imported_events
   
   @metro_code = nil
   attr_accessor :metro_code 
    
+   
+  def short_registered_on
+    "#{registered_on.day}/#{registered_on.month}/#{registered_on.year}"
+  end
+  
+  def num_imported_events
+    ImportedEvent.count_by_sql(["select count(*) from imported_events where user_id=?",user.id])
+  end
+
   def email_address
     super.gsub(/\s+/,"").strip
   end

@@ -30,7 +30,8 @@ module ApplicationHelper
     end
 
   def is_admin?
-    session[:is_admin]
+    @youser and @youser.is_admin
+    #session[:is_admin]
   end
   
   def homepage_by_venue?

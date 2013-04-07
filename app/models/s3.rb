@@ -1,6 +1,6 @@
 require "rubygems"
 require "net/http"
-require "aws/s3"
+require "aws"
 
 class S3
 
@@ -10,11 +10,12 @@ class S3
 
   def self.init
     if not @initialized
-      AWS::S3::Base.establish_connection!(
-        :access_key_id     => $AMAZON_CREDS['access_key_id'],
-        :secret_access_key => $AMAZON_CREDS['secret_access_key'],
-        :use_ssl=>true
-      )  
+      @s3 = AWS::S3.new
+#      Base.establish_connection!(
+#        :access_key_id     => $AMAZON_CREDS['access_key_id'],
+#        :secret_access_key => $AMAZON_CREDS['secret_access_key'],
+#        :use_ssl=>true
+#      )  
       @initialized=true
     end
   end
@@ -29,27 +30,30 @@ class S3
   def self.copy_to_s3(filename,bucket=nil,access=:public_read)
     init
     name = File.basename(filename)
-    AWS::S3::S3Object.store(name, open(filename), bucket||@default_bucket, {:access => access})
+    @s3.buckets[bucket||@default_bucket].objects[name].write(:file=>filename,:acl => :public_read)
+#    AWS::S3::S3Object.store(name, open(filename), bucket||@default_bucket, {:access => access})
     return "http://s3.amazonaws.com/tourfilter.com/#{name}"
   end
 
   def self.delete(filename,bucket=nil)
     name = File.basename(filename)
-    AWS::S3::S3Object.delete(name,bucket||@default_bucket)
+    @s3.buckets[bucket||@default_bucket].objects[name].delete
+#    AWS::S3::S3Object.delete(name,bucket||@default_bucket)
   end
 
   def self.test
+    require "../../config/environment.rb"
     puts "testing s3 file write/read/delete ..."
     puts "creating file ..."
-    filename = "tmp.txt"
+    filename = "tmp3.txt"
     file = File.new(filename,"w")
     data = "test data"
     file.write(data)
     file.close
     puts "uploading file to s3, default bucket ..."
-    move_to_s3("tmp.txt")
+    move_to_s3("tmp3.txt")
     puts "SUCCESS."
-    url = "http://s3.amazonaws.com/tourfilter.com/#{filename}"
+    url = "https://s3.amazonaws.com/tourfilter.com/#{filename}"
     puts "accessing uploaded file via web @ #{url} ..."
     read_data = open(url).read
     success=true
