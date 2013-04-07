@@ -17,4 +17,6 @@ gem "tidy", "1.1.2"
 gem "rmagick","2.13.1"
 gem "aws-sdk"
 gem "fb_graph"
+gem "attr_required", "~> 0.0.5"
+
 

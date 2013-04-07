@@ -2,7 +2,7 @@ echo "deploying to web farm ..."
 i=0
 web_successes=0
 web_failures=0
-for instance_id in $(as-describe-auto-scaling-groups asg_tourfilter_web | grep INSTANCE | cut -d " " -f 3)
+for instance_id in $(as-describe-auto-scaling-groups $2 | grep INSTANCE | cut -d " " -f 3)
 do
 	ip_address=`ec2-describe-instances $instance_id | grep INSTANCE | cut -f17`
 	let i+=1
