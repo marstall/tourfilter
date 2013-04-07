@@ -1,0 +1,1 @@
+mysql -uchris -pchris tourfilter_$1

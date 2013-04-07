@@ -1,0 +1,87 @@
+<%if @query%>
+	<div style='margin:1em;margin-left:2px'>
+	<%if @imported_events.size>0%>
+	<div class='message'><%=@imported_events.size%> result<%="s" if @imported_events.size>1%> for search query  '<%=@query%>': </div>
+	<%else%>
+		<div class='error'>no results for '<%=@query%>'</div>
+	<%end%>
+	</div>
+<%end%>
+<%highlight_reflyer_by||=nil%>
+
+<%
+@reflyered_ids_hash= Hash.new
+if @youser
+	@imported_events_users = ImportedEventsUser.find_future_by_user(@youser) 
+	@imported_events_users.each{|ieu|
+		@reflyered_ids_hash[ieu.imported_event_id]=true
+	}
+end
+%>
+
+<div id='result' class='error'></div>
+<div id='flyer_board'>
+<%if @imported_events and not @imported_events.empty?%>
+	<%@imported_events.each{|imported_event|%>
+		  <%already_reflyered = @reflyered_ids_hash[imported_event.id] ? true : false%>
+		  <%=render(:partial=>'shared/flyer',:locals=>{:highlight_reflyer_by=>highlight_reflyer_by,:query=>@query,:imported_event=>imported_event,:already_reflyered=>already_reflyered})%>
+	<%}%>
+<%else%>
+	<!--no flyers found in this category.-->
+<%end%>
+</div>
+<script>
+
+jQuery(document).ready(function() {
+	var $container = jQuery('#flyer_board');
+	$container.imagesLoaded(function(){
+	  $container.masonry({
+	    itemSelector : '.flyer',
+	  });
+	});
+	prep_huds();
+})
+
+function prep_huds()
+{
+	if (console) console.log("prep_huds")
+	jQuery(".flyer").hover(
+	  function (eventObject) {
+		jQuery(this).children(".flyer_hud").css("visibility","visible")
+	  },
+	  function () {
+		jQuery(this).children(".flyer_hud").css("visibility","hidden")
+	  }
+	)
+	jQuery(".reflyer_button").on("click",
+		function (eventObject)
+		{
+			jQuery(".reflyer_button").off("click");
+			imported_event_id = jQuery(this).attr("id");
+			jQuery.ajax({
+			  url: '/<%=@metro_code%>/reflyer/'+imported_event_id+"/<%=@controller.quick_auth_token(@youser)%>",
+			  success: function(){
+				jQuery('#'+imported_event_id).removeClass('reflyer_button').addClass('unflyer_button').html('+ unflyer');prep_huds()
+			}
+			});
+/*			new Ajax.Updater(
+			         'flyer_hud_feedback'+imported_event_id,
+			 		 
+			         );*/
+		})
+	jQuery(".unflyer_button").on("click",
+		function (eventObject)
+		{
+			jQuery(".unflyer_button").off("click");
+			imported_event_id = jQuery(this).attr("id");
+			jQuery.ajax({
+			  url: '/<%=@metro_code%>/unflyer/'+imported_event_id+"/<%=@controller.quick_auth_token(@youser)%>",
+			  success: function(){
+				jQuery('#'+imported_event_id).removeClass('unflyer_button').addClass('reflyer_button').html('+ reflyer');prep_huds()
+			}
+			});
+
+		})
+}
+
+</script>

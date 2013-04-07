@@ -1,6 +1,12 @@
 <link rel="alternate" type="application/rss+xml" title="RSS" href='<%=url("/rss/#{@user.name}")%>' />
 <%@page_title = @user.name%>
-<div id="main_column" >
+<div>
+<h2 style='text-transform:none'>Flyers posted by <%=@user.name%>
+	<div id='manage_recommendations' class="manage_recommendations"></div>
+	
+	</h2>
+<%=render(:partial=>'shared/flyers',:locals=>{:highlight_reflyer_by=>@user})%>
+
 <%if @matches.size>0%>
 <h2 style='text-transform:none'>Upcoming shows for <%=@user.name%></h2>
 	<%=render(:partial =>"shared/trim_calendar_container",
@@ -17,9 +23,11 @@
 		})%>
 <br>
 <%end%>
+<% if @user.terms_alpha and @user.terms_alpha.size>0%>
 <h2 style='text-transform:none'>
 			<%=@user.name%>'s bands
 </h2>
+<%end%>
 <script>
 new Ajax.Updater(
          'manage_recommendations',
@@ -41,7 +49,6 @@ new Ajax.Updater(
 </div>
 </div>
 <div id="wide_secondary_column" class='blue_secondary_column'>
-<div id='manage_recommendations' class="secondary_column_header"></div>
 <%if @user.about and not @user.about.strip.empty?%>
 <h3 style='text-transform:none'>
 About <%=@user.name%>

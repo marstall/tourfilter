@@ -1,0 +1,177 @@
+<script src="https://api.filepicker.io/v0/filepicker.js"></script>
+<script type="text/javascript">
+    //Seting up Filepicker.io with your api key
+    filepicker.setKey('AQDd2oorkRRC9frEzvT5Kz');
+		
+		function change(ev)
+		{
+			alert(ev.files[0].url)
+		}
+		function on_upload()
+		{
+			filepicker.getFile('image/*', function(url, data)
+			{
+				console.log("uploaded file to "+url)
+				$("flyer_image").src=url
+				$("hidden_image_url").value=url
+			});
+		}
+</script>
+
+<title></title>
+<div class='underline' id='main-full-width'>
+<h2>
+	<%if params[:id]%>
+		edit
+	<%else%>
+		post 
+	<%end%>
+	flyer
+</h2>
+<div style='float:right;'>
+	
+		<div class="club_heading" style="padding:0.5em;margin:1em;width:20em;"><span class="subhead">
+		<span style="background-color:white;font-family:terminal,monospace;padding:0.25em;text-transform:lowercase;line-height:15px">
+		Tell <%=@metro%> about a unique, open-to-the-public event coming up in the area.<br><br>
+		Your flyer will be posted immediately - though an editor will shortly take a look to make sure it's not wildly out of place here. <br><br>
+		Examples of that might be: constantly-repeated events (like blue man group, though it is awesome), classes, meetups, invite-only events.<br><br>
+		<span style="background-color:white;font-family:terminal,monospace;color:red">
+			Note! If you name performers/groups in your description, we'll email your flyer to all users who are tracking them!<br><br>
+		</span>
+			</span>
+		</div>
+</div>
+<div class="error" id="result"></div>
+<%=form_remote_tag (:update =>"result",
+          					:loading => "$(submit).value='Processing ...';$(submit).disabled=true",
+          					:complete => "$(submit).value='submit';$(submit).disabled=false",
+          					:url =>{:action => 'flyer_handler'})
+					-%>
+<div class='flyer_preview'>
+<table cellpadding=0>
+	<tr>
+		<td colspan=2>
+			<%if @image_url%>
+			<div class='rounded_image_container_container' >
+				<div class='rounded_image_container' >
+					<img id='flyer_image' width='400px' src='<%=@image_url%>'/>
+					<span id='change' class='change_image_button'>
+					<button style="margin-top: 10px" class="btn btn-primary" data-name="simple get" data-fp-option-persist="true" onClick="on_upload()">
+						change image
+					</button>
+					</span>
+				</div>
+			</div>
+			<%end%>
+
+
+		</td>
+		</tr>
+	<tr>
+	<td >
+		<div class='small_form_header'>type of event</div>
+	</td><td>
+		<%= select( "imported_event", "category", @tags_array) %>
+		</td>
+		</tr>
+		<%
+			start_date_string="date"
+			visibility='hidden';
+			if @imported_event and @imported_event.multiple_days
+				start_date_string='start date'
+				visibility='visible'
+			end
+		%>
+		<tr>
+			<td>
+				<div id='start_date_text' class='small_form_header'>
+					<%=start_date_string%>
+				</div>
+				</td><td style='white-space:nowrap'>
+				<%=date_select "imported_event","date",:order=>[:month,:day,:year]%>
+				<span style='font-size:10px;white-space:nowrap;color:#777'>
+					<%=check_box("imported_event","multiple_days",{:id=>'multiple_days_toggle'},"1","0")%>multiple days</span>
+			</td>
+		</tr>
+		<tr id='end_date_div' style='visibility:<%=visibility%>'>
+			<td>
+				<div class='small_form_header'>
+					end date
+				</div>
+				</td><td style='white-space:nowrap'>
+				<%=date_select "imported_event","end_date",:order=>[:month,:day,:year]%>
+				<span style='font-size:10px;white-space:nowrap;color:#777'>
+			</td>
+		</tr>
+		</table>
+
+<div>
+	<div class='small_form_header'>description (optional)</div>
+	
+</div>
+	
+</td><td>
+  <%=text_area :imported_event, :body, :rows => 7, :columns=>40, :width=>'400px'%>
+	<div class='small_form_header' style='margin-top:4px'>use hashtags! ex:
+		<span style='font-weight:bold;color:#f55'>
+		#jazz #hiphop #kids #free 
+		</span> etc.
+	</div>
+
+
+	</td>
+	</tr>
+
+<%if @youser.is_admin %>
+		flag for
+		<%=text_field :imported_event,:flagged%>
+		(admin only)<br>
+		post as
+		<%=text_field :imported_event,:post_as%>
+		(admin only)
+<%end%>
+<div>
+<input type=submit name='submit' value='submit'>
+</div>
+<%if @imported_event && ( @youser.is_admin || (@imported_event and @imported_event.is_owner(@youser,@metro_code)))%>
+		<%if @imported_event%>
+<br>
+<span style='font-size:smaller;margin:4px;padding:4px;background-color:#eee'>
+		<a onclick="return confirm('permanently delete this flyer?')" href='/<%=@metro_code%>/flyer/delete?id=<%=@imported_event.id%>'>delete</a>
+</span>
+		<%end%>
+<%end%>
+<%if @num_shows and @num_shows>0%>
+		<span class='underline'><a class='pop' href=<%=url("/user_submitted_shows")%>>view the shows you've submitted (<%=@num_shows%>)</a></span>
+<%end%>
+<input type='hidden' id='hidden_image_url' name='imported_event[image_url]' value="<%=@image_url%>"/>
+<%if @imported_event%>
+<input type='hidden' name='id' value="<%=@imported_event.id%>"/>
+<%end%>
+</div>
+</div>
+</div>
+</form>
+<div style="clear:right"></div>
+</div>
+<script>
+jQuery("#multiple_days_toggle").change(function ()
+{
+    if(!jQuery(this).attr("checked"))
+    {
+        //do stuff if the checkbox isn't checked
+		if (console) console.log(" checked ")
+		jQuery("#end_date_div").css("visibility","hidden");jQuery("#start_date_text").html("date"); 
+        jQuery(this).addClass("checked");
+        return;
+    }
+
+    //do stuff if the checkbox isn't checked
+	if (console) console.log(" not checked ")
+	jQuery("#end_date_div").css("visibility","visible");jQuery("#start_date_text").html("start date");	
+    jQuery(this).removeClass('checked');
+
+});
+
+</script>
+

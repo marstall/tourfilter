@@ -1,2 +1,4 @@
-tar -cf /tourfilter-backups/source/tourfilter-source-`date +%Y-%m-%d`.tar /Users/chris/tourfilter/app/ /Users/chris/tourfilter/daemon /Users/chris/tourfilter/public/images /Users/chris/tourfilter/public/javascripts /Users/chris/tourfilter/public/stylesheets /Users/chris/tourfilter/config /Users/chris/tourfilter/bin /Users/chris/tourfilter/script
+tar -cf ~/Dropbox/backups/tourfilter-backups/source/tourfilter-source-`date +%Y-%m-%d`.tar ~/tourfilter/app/ ~/tourfilter/daemon ~/tourfilter/public/images ~/tourfilter/public/javascripts ~/tourfilter/public/stylesheets ~/tourfilter/config ~/tourfilter/bin ~/tourfilter/script
+gzip ~/Dropbox/backups/tourfilter-backups/source/tourfilter-source-`date +%Y-%m-%d`.tar
+
 

@@ -1,0 +1,7 @@
+- reflyer unflyer fix
+- search
+- admin_flyers page
+- get rid of CL stage of admin
+- logo
+- start talking to people
+

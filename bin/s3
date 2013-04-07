@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+require "#{ENV['TOURFILTER_HOME']}/config/environment.rb"
+
+if ARGV and ARGV[0]
+  puts S3.copy_to_s3 ARGV[0] 
+end

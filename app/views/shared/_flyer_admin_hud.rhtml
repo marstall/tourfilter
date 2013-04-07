@@ -1,0 +1,55 @@
+<%ie=imported_event%>
+<%user = ie.user%>
+<%width||=400%>
+<div class='flyer_admin' id="flyer_admin_<%=ie.id%>" style='width:<%=width%>px '>
+	<b><%=ie.id%> posted <%=user.name%>, member since <%=user.short_registered_on%>.</b>
+	<%=form_remote_tag (:html=>{:id => "form_#{ie.id}"},
+						:update =>"result_#{ie.id}",
+						:loading => "jQuery('#status_#{ie.id}').html('Processing ...')",
+						:complete => "jQuery('#status_#{ie.id}').html('')",
+						:url =>{:controller=>'flyer',:action => 'admin_handler'}) 
+						-%>
+						<input id='intent' type='hidden' name='intent' value="">
+						
+<input type='hidden' id='button_value_<%=ie.id%>' name='button_value_<%=ie.id%>' value=''/>
+<input type='hidden' name='imported_event_id' value='<%=ie.id%>'/>
+<%ie.artist_terms.each{|at|%>
+	<div class="artist_term" onMouseDown="jQuery('#radio_<%=at.id%>').trigger('click');console.log('click');jQuery(this).css('background-color','#dfd');return true;">
+		<%checked_string= at.status=='valid' ? "checked" : ""%>
+		<input type='checkbox' id='radio_<%=at.id%>' name='artist_term_<%=at.id%>' value='1' <%=checked_string%>><%=at.term_text%><br>
+	</div>
+<%}%>
+<div style='padding:3px'>
+description<br><textarea name='body' id='body_<%=ie.id%>' cols=50 rows=3><%=ie.body%></textarea>
+<br>
+note to user<br><textarea name= 'flagged' id='note_<%=ie.id%>' cols=35 rows=2><%=ie.flagged%></textarea>
+<br>
+<input type='submit' id='commit' name='commit' value='flag' onclick="jQuery('#button_value_<%=ie.id%>').attr('value','flag');return true;">
+<input type='submit' id='commit' name='commit' value='approve + send mail' onclick="jQuery('#button_value_<%=ie.id%>').attr('value','approve');return true;">
+<a href='/<%=ie.user_metro%>/flyer/post_flyer?id=<%=ie.id%>'>edit</a>
+<a onclick="return confirm('permanently delete this flyer?')" href='/<%=@metro_code%>/flyer/delete?id=<%=ie.id%>'>delete</a>
+<span id='status_<%=ie.id%>' style='color:#777'><span>
+</div>
+<span id='result_<%=ie.id%>' style='padding:4px;'><span>
+</form>
+</div>
+<script>
+
+	jQuery("#ie_<%=ie.id%>").hover(
+	  function () {
+		if (console) console.log("toggle #flyer_admin_<%=ie.id%> window.hud:"+window.hud)
+		if (window.hud==true)
+		{
+			jQuery("#flyer_admin_<%=ie.id%>").css("visibility","visible")
+		}
+	  },
+	  function () {
+		if (console) console.log("toggle")
+		if (window.hud==true)
+		{
+			jQuery("#flyer_admin_<%=ie.id%>").css("visibility","hidden")
+		}
+	  }
+	
+	)
+</script>

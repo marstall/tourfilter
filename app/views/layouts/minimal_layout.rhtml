@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:fb="http://www.facebook.com/2008/fbml">
+<%if !@fragment%>
+	<head>
+		<title><%=@page_title%></title>
+		<%= stylesheet_link_tag 'tourfilter' %>
+		<%unless @no_javascript%>
+		<%= javascript_include_tag "application" %>	
+		<%end%>	
+	</head>
+	<body >
+		<div class='minimal_layout_container'>
+	  	  <div class='minimal_above_header'>
+			<a href='/'>tourfilter</a> <a href='/<%=@metro_code%>'><%=@metro_code%></a>
+	  	  </div>
+    <div id='inner_body' >
+<%end%> <!-- if ! fragment -->
+
+<%= @content_for_layout %>
+
+<%if !@fragment and not @hide_footer%>
+	<%if ENV['RAILS_ENV']!='development'%>
+	<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+	var pageTracker = _gat._getTracker("UA-529349-1");
+	pageTracker._initData();
+	pageTracker._trackPageview();
+	</script>
+
+<%end%>
+</div>
+</div>
+</body>
+<script type="text/javascript">
+var _sf_async_config={uid:21126,domain:"tourfilter.com"};
+(function(){
+  function loadChartbeat() {
+    window._sf_endpt=(new Date()).getTime();
+    var e = document.createElement('script');
+    e.setAttribute('language', 'javascript');
+    e.setAttribute('type', 'text/javascript');
+    e.setAttribute('src',
+       (("https:" == document.location.protocol) ? "https://a248.e.akamai.net/chartbeat.download.akamai.com/102508/" : "http://static.chartbeat.com/") +
+       "js/chartbeat.js");
+    document.body.appendChild(e);
+  }
+  var oldonload = window.onload;
+  window.onload = (typeof window.onload != 'function') ?
+     loadChartbeat : function() { oldonload(); loadChartbeat(); };
+})();
+
+</script>
+	</html>
+<%end%> <!-- if ! fragment -->
+<script>
+// test
+
+//pageTracker._trackEvent('1test3', '21test', '1tes2t', 3);
+</script>
+
+<%if false #ENV['RAILS_ENV']!='development'%>
+<script>
+track_page_view()
+</script>
+<%end%>
+
+

@@ -17,7 +17,7 @@
                             :user_id => user.id
                             })-%><%else-%><%= link_to_remote("follow #{user.name.downcase} &raquo;", 
                         :update=>"manage_recommendations",
-                        :confirm=>"You will see #{user.name}'s calendar under your 'friends' tab! You can unfollow anytime.",
+                        :confirm=>"You will see #{user.name}'s flyers under your 'friends' tab! You can unfollow anytime.",
 			          	      :loading => "start_working_mode()",
 	                      :complete => "end_working_mode()",
                         :url => {

@@ -1,0 +1,21 @@
+<span id='post_button'>
+<!-- Adds the Filepicker.io javascript library to the page -->
+<script src="https://api.filepicker.io/v0/filepicker.js"></script>
+<script type="text/javascript">
+    //Seting up Filepicker.io with your api key
+    filepicker.setKey('AQDd2oorkRRC9frEzvT5Kz');
+		
+		function on_upload()
+		{
+			filepicker.getFile('image/*', function(url, data)
+			{
+				console.log("uploaded file to "+url)
+				document.location.href='/<%=@metro_code%>/post?url='+url
+			});
+		}
+</script>
+
+<button style="font-size:24px;" class="btn btn-primary" data-name="simple get" onClick="on_upload()">+ post flyer</button>
+
+<!-- end upload button -->
+</span>

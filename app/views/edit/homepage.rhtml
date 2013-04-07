@@ -17,23 +17,26 @@
 <%if false and @youser and not @youser.normal?%>
 <div class='nag'>Next: to make it easier to log in, you should <a href='<%=url("/settings")%>'>choose a username and password</a>.</div>
 <%end%>
-<div id="main-full-width">
+<div >
 <div >
 <%#=render(:partial=>'shared/search')%>
         	<div id='calndar_view'>  
     			<%if cookies['calndar_view']=='venues'&&@view!=:calendar%>
-            <%=render_component(:controller=>'edit',:action=>'venues_partial',:params=>params+{:metro_code=>@metro_code})%>
+            		<%=render_component(:controller=>'edit',:action=>'venues_partial',:params=>params+{:metro_code=>@metro_code})%>
     			<%elsif cookies['calndar_view']=='friends'&&@view!=:calendar%>
-            <%=render('friends_partial',:params=>params+{:metro_code=>@metro_code})%>
-    			<%elsif cookies['calndar_view']=='add_SP_bands'&&@view!=:calendar%>
-          	<%=render("add_bands_partial",:params=>params+{:metro_code=>@metro_code})%>
+            		<%=render('friends_partial',:params=>params+{:metro_code=>@metro_code})%>
+    			<%elsif cookies['calndar_view']=='alerts'&&@view!=:calendar%>
+          			<%=render("alerts_partial",:params=>params+{:metro_code=>@metro_code})%>
     			<%elsif cookies['calndar_view']=='your_SP_shows'&&@view!=:calendar%>
-	           <%=render("your_shows_partial",:params=>params+{:metro_code=>@metro_code})%>
-          <%else%>
-            <%cookies['calndar_view']='full_SP_calendar'%>
-	           <%=render("calendar_partial",
+	        		<%=render("your_shows_partial",:params=>params+{:metro_code=>@metro_code})%>
+				<%elsif cookies['calndar_view']=='full_SP_calendar'&&@view!=:calendar%>
+	           		<%=render("calendar_partial",
 							:params=>params+{:metro_code=>@metro_code,:offset=>@offset,:days_to_show=>@days_to_show})%>
-			    <%end%>
+          <%else%>
+            <%cookies['calndar_view']=='flyers'%>
+	           <%=render("flyers_partial",
+							:params=>params+{:metro_code=>@metro_code,:offset=>@offset,:days_to_show=>@days_to_show,:tags=>@tags})%>
+		  <%end%>
     		</div>
         <div id='list_view' >
         	<%some_featured=false%>
@@ -43,16 +46,16 @@
     			    ((cookies['list_view'].nil? or cookies['list_view'].strip.empty? or cookies['list_view']!='edit') and not some_featured)%>
             <%#=render_component(:controller=>'edit',:action=>'popular_partial',
               :params=>params+{:metro_code=>@metro_code,:some_featured=>some_featured})%>
-	          <%=render('popular_partial',:params=>params+{:metro_code=>@metro_code,:some_featured=>some_featured})%>
+	          <%#=render('popular_partial',:params=>params+{:metro_code=>@metro_code,:some_featured=>some_featured})%>
     			<%elsif cookies['list_view']=='new'%>
-          <%=render('new_partial',:params=>params+{:metro_code=>@metro_code,:some_featured=>some_featured})%>
+          <%#=render('new_partial',:params=>params+{:metro_code=>@metro_code,:some_featured=>some_featured})%>
           <%else%>
-          <%=render('featured_partial',:params=>params+{:metro_code=>@metro_code,:some_featured=>some_featured})%>
+          <%#=render('featured_partial',:params=>params+{:metro_code=>@metro_code,:some_featured=>some_featured})%>
           <%end%>
         </div>
           <%if not params[:bare]%>
             <%if @youser%>
-            <%=render(:partial=>'shared/floating_account_column')%>
+            <%#=render(:partial=>'shared/floating_account_column')%>
             <%else%>
             <%#=render(:partial=>'shared/floating_column_logged_out')%>
             <%end%>

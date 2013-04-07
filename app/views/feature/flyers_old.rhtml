@@ -1,0 +1,14 @@
+<%=render(:partial=>'shared/flyer_control')%>
+<div id='flyer_board'>
+<%@featured_matches.each{|match|%>
+	  <%=render(:partial=>'shared/flyer',:locals=>{:match=>match})%>
+<%}%>
+</div>
+<script>
+var $container = jQuery('#flyer_board');
+$container.imagesLoaded(function(){
+  $container.masonry({
+    itemSelector : '.flyer'
+  });
+});
+</script>

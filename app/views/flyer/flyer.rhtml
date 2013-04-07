@@ -1,0 +1,124 @@
+<%ie=@imported_event%>
+<%
+@reflyered_ids_hash= Hash.new
+if @youser
+	@imported_events_users = ImportedEventsUser.find_future_by_user(@youser) 
+	@imported_events_users.each{|ieu|
+		@reflyered_ids_hash[ieu.imported_event_id]=true
+	}
+end
+already_reflyered = @reflyered_ids_hash[ie.id] ? true : false
+%>
+
+<%return unless ie and ie.image%>	
+<%status_class = "unprocessed_flyer" if ie.status=='new'%>
+<div id="ie_<%=ie.id%>" imported_event_id="<%=ie.id%>" class='fullpage_flyer <%=status_class%>'
+	onmouseover='mouseover("<%=ie.id.to_s%>");' 
+	onmouseout='mouseout("<%=ie.id.to_s%>");'
+	>
+	<div class='_rounded_image_container_container'>
+		<div class='_rounded_image_container'>
+	 		<img border=0  width=100% src='<%=ie.image.large_url%>' >
+		</div>
+	</div>
+	<div class='flyer_footer' >
+		<div style='float:right;text-align:right;position:absolute;left:480px'>
+			<a href="http://pinterest.com/pin/create/button/" class="pin-it-button" count-layout="none"><img src="//assets.pinterest.com/images/PinExt.png" alt="Pin it" / ></a> <script type="text/javascript" src="http://assets.pinterest.com/js/pinit.js"></script>
+			<span id="fb-root"></span>
+			<a href="https://twitter.com/share" class="twitter-share-button" data-via="tourfilter">Tweet</a>
+			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+			<script>(function(d, s, id) {
+			  var js, fjs = d.getElementsByTagName(s)[0];
+			  if (d.getElementById(id)) return;
+			  js = d.createElement(s); js.id = id;
+			  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=251525421581783";
+			  fjs.parentNode.insertBefore(js, fjs);
+			}(document, 'script', 'facebook-jssdk'));</script>	
+			<div id='reflyer_button_container' style='margin-right:28px'>
+			<%unless @youser and @youser.id==ie.user_id%>
+				<%if already_reflyered%>
+					<button id="<%=ie.id%>" style="font-size:24px;" class="btn btn-primary unflyer_button" data-name="simple get">- unflyer</button>
+				<%else%>
+					<button id="<%=ie.id%>" style="font-size:24px;" class="btn btn-primary reflyer_button" data-name="simple get">+ reflyer</button>
+				<%end%>
+			<%end%>
+			</div>
+			</div>
+		<div style='float:left'>
+			<div class='flyer_text' style='width:440px'>
+				<%if ie.venue_name%>
+					<span class='flyer_where'><%=ie.venue_name%></span>
+				<%end%>
+				<%if ie.body and not ie.body.empty? %>  
+					<%=ie.formatted_body(@metro_code)%>
+				<%end%>
+			</div>
+			<div class='flyer_posted_by'>
+				posted by
+				<a href='/<%=ie.user_metro%>/users/<%=ie.username%>'> <%=ie.username%></a> 
+				<%=time_ago_in_words ie.created_at%> ago
+				to <%=ie.category%>
+				<%if ie.is_owner(@youser,@metro_code)|| is_admin?%>
+					<a href='/<%=ie.user_metro%>/flyer/post_flyer?id=<%=ie.id%>'>edit</a>
+					<a onclick="return confirm('permanently delete this flyer?')" href='/<%=@metro_code%>/flyer/delete?id=<%=ie.id%>'>delete</a>
+				
+				<%end%>
+				<%users = ImportedEventsUser.users_for(ie,false)%>
+
+				<%if users.size>0%>
+					<br>reflyered by 
+					<%users.each_with_index{|user,i|%>
+						<%return if i>20%>
+					<a href='/<%=ie.user_metro%>/users/<%=user.name%>'> <%=user.name%></a> 
+					<%}%>
+					<%if users.size>20-%>
+					   + <%=users.size-20%> others
+					<%end%>
+				<%end%>
+
+				<%if is_admin?%>
+					<%=render(:partial=>'shared/flyer_admin_hud',:locals=>{:width=>'784',:imported_event=>ie})%>
+				<%end%>
+			</div>
+		</div>
+		<div style='clear:both'></div>
+	</div>
+	<div id="flyer_hud_<%=ie.id%>" class='flyer_hud'>
+	</div>
+</div>
+
+<script>
+/*jQuery(".flyer,.fullpage_flyer").hover(
+  function (eventObject) {
+	jQuery(this).children(".flyer_hud").css("visibility","visible")
+  },
+  function () {
+	jQuery(this).children(".flyer_hud").css("visibility","hidden")
+  }
+)*/
+
+jQuery(".reflyer_button").click(
+	function (eventObject)
+	{
+		imported_event_id = jQuery(this).attr("id");
+		jQuery(this).html("processing ...");
+		new Ajax.Updater(
+		         'reflyer_button_container',
+		 		 '/<%=@metro_code%>/reflyer/'+imported_event_id+"/<%=@controller.quick_auth_token(@youser)%>"
+		         );
+	})
+jQuery(".unflyer_button").click(
+	function (eventObject)
+	{
+		imported_event_id = jQuery(this).attr("id");
+		jQuery(this).html("processing ...")
+		new Ajax.Updater(
+		         'reflyer_button_container',
+		 		 '/<%=@metro_code%>/unflyer/'+imported_event_id+"/<%=@controller.quick_auth_token(@youser)%>"
+		         );
+	})
+
+
+</script>
+
+

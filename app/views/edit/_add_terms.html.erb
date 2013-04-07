@@ -1,8 +1,16 @@
 <%cl||=''%>
 <div class='add_more_bands <%=cl%>'>
 <h2 >
-  Add more bands <span class='small underline gray' style='font-weight:normal'>1 per line, we'll suggest more as you type </span>
+Add alerts	<span class='small underline gray'>one per line
+	  <a href='<%=url("/edit")%>'>edit</a>
+	  <br>
+ <div style='clear:left'></div>
+
+  <div class='small underline gray' style=''>
+	<!--You can get alerts for people, groups and things (including hashtags) that might be mentioned in descriptions of movies, comedians, plays, dance performances or readings that come to boston.-->
+	</div>
 </h2>
+
 <div style='float:left'>
 <%=form_remote_tag (:update =>"result",
 					:loading => "$(submit).value=' ...';$(submit).disabled=true",
@@ -26,6 +34,19 @@
                       <div id="result"></div>
 </div>
 <div id="related_terms" class="signedin_related_terms" ></div>
+<div style='margin-left:0px;float:left'>
+		<div class="club_heading" style="padding:0.5em;width:20em;"><span class="subhead">
+		<span style="background-color:white;font-family:terminal,monospace;padding:0.25em;text-transform:lowercase;line-height:20px">
+			Add alerts for artists, writers, musical groups, movie titles, composers,  comedians, etc. that might make an appearance in <%=@metro_code%>.<br><br> for example: <br><span style='font-style:italic'> Louis CK, James Tate, My&nbsp;Bloody&nbsp;Valentine, The Big Sleep, Bach <br><br></span>
+		</span	>
+		<span style="background-color:white;font-family:terminal,monospace;padding:0.25em;text-transform:lowercase;line-height:20px">
+			As you type, we'll recommend similar  things to track. <br><br>
+		</span	>
+		<span style="background-color:white;font-family:terminal,monospace;padding:0.25em;text-transform:lowercase;line-height:20px;color:red">
+			You will be emailed when someone posts a flyer mentioning one of these things! 
+		</span>
+		</div>
+</div>
 <div style='clear:left'></div>
 </div>
 

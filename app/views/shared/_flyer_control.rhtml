@@ -1,0 +1,59 @@
+<div id='flyer_control'>
+	<form method=get action="/<%=@metro_code%>/flyers">
+<!--
+	this should have:
+		- genre dropdown - rock, classical, jazz, dance, rap, other music, comedy, performance art, dance, etc.
+		- view style: flyer, list, etc.
+		- sort by: date, popularity, date added (the default)
+		- upload button
+-->
+
+<!-- genre/tag dropdown -->
+<!-- end genre/tag dropdown -->
+
+<!-- view style -->
+<!-- end view style -->
+
+<!-- sort by -->
+<!--sort by 
+<select name='order' onchange='forms[0].submit()'>
+	<option value='date' <%="selected" if @order=='date'%>>date of show</option>
+	<option value='created' <%="selected" if @order=='created'%>>recent</option>
+	<option value='popular' <%="selected" if @order=='popular'%>>popular</option>
+</select>
+&nbsp;&nbsp;show-->
+<script>
+	function onChange(e)
+	{
+		tag = $("tags").value
+		document.location.href="/<%=@metro_code%>/flyers/"+tag.replace("#","")
+		jQuery("body").styles("opacity","0.5")
+	}
+</script>
+<select name='tags' id='tags' onchange="onChange(this);">
+	<option value='all' <%="selected" if params[:tags]=='all'%>>all flyers</option>
+	<%@tags_array=Tag.super_and_popular%>
+	<%@tags_array[0..@tags_array.size].each{|tag|%>
+		<option value='<%=tag[0]%>' <%="selected" if params[:tags]==tag[0]%>><%=tag[1]%></option>
+	<%}%>
+</select>
+
+<!-- end sort by -->
+<%
+	if @youser and @youser.is_admin
+		metro_code = params[:mc]||@metro_code%>
+		<select name='mc' onchange='forms[0].submit()'>
+			<option name='all' <%='selected' if params[:mc]=='all'%>>all</option>
+		<%Metro.find_all_active.each{|metro|
+			selected= (metro.code==metro_code ? " selected " : "")
+		%>
+			<option <%=selected%> value="<%=metro.code%>" ><%=metro.name%></option>
+			<%}%>
+		</select>
+		<select name='show_flagged' onchange='forms[0].submit()'>
+			<option value='unflagged_only' <%="selected" if params[:show_flagged]=='unflagged_only'%>>unflagged</option>
+			<option value='flagged_only' <%="selected" if params[:show_flagged]=='flagged_only'%>>flagged</option>
+		</select>
+<%end%>
+</form>
+</div>

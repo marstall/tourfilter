@@ -1,41 +1,79 @@
-<%term=match.term%>
-<%page=match.page%>
-<%place=match.page.place%>
-<%feature=match.feature%>
-<%calendar_view||=false%>
-<%no_title_line||=false%>
-<%return unless feature and feature.image%>	
-<div class='flyer'
-	onmouseover='mouseover("<%=match.id.to_s%>");' 
-	onmouseout='mouseout("<%=match.id.to_s%>");'
+<%highlight_reflyer_by||=nil%>
+<%ie=imported_event%>
+<%return unless ie and ie.image%>	
+<%status_class = "unprocessed_flyer" if ie.status=='new'%>
+<div id="ie_<%=ie.id%>" imported_event_id="<%=ie.id%>" class='flyer <%=status_class%>'
 	>
-	<div class='rounded_image_container'>
-         <a border=0 href='<%=url("/"+term.url_text)%>'>
- 			<img border=0  width=320px src='<%=feature.image.large_url%>' ></a>
-	</div>
-		<div class='flyer_title'>
-			<a href='<%=url("/"+term.url_text)%>'><%=term.text_with_the%></a>
-	    <%=render(:partial=>'shared/echonest_stories',:locals=>{:multiple=>false,:height=>12,:term_text=>term.text,:cl=>'faded_50'})%>      	      
-      	<div class='flyer_where_when' >
-            <span class='flyer_where'><%=place.name%></span>
-          	<span class='flyer_when'><%=match.very_short_time_description%></span>
-      	</div>
+	<div class='rounded_image_container_container'>
+		<div class='rounded_image_container'>
+			<div class='flyer_header'>
+		    	<span class='flyer_category'>
+					<%highlight_class= @query.sub("#","")==ie.category ? "search_highlight" : "" if @query%>
+					<span class='<%=highlight_class%>'>
+					<a href='<%=url("/flyers?tags=#{ie.category}")%>'><%=ie.category%></a> 
+					</span>
+					<%ie.tags.each{|tag|%>
+						<%highlight_class= "#{@query}"=="##{tag.text}" ? "search_highlight" : ""%>
+						<span class='<%=highlight_class%>'>
+						<a href='<%=url("/flyers?tags=#{tag.text}")%>'>#<%=tag.text%></a> 
+						</span>
+					<%}%>
+				</span>
+	      		<span class='flyer_when'><%=ie.short_time_description%></span>
 			</div>
-				<div class='flyer_text'>
-          <%if feature.description and not feature.description.empty? %>  
-					<%=feature.description%>
-					<%end%>
-        <div class='flyer_footer' >
-          posted by
-      	<a href='/<%=feature.editor_metro_code%>/users/<%=feature.username%>'> <%=feature.username%></a> <%=time_ago_in_words feature.created_at%> ago
-        <%#=render(:partial=>'shared/more_less_info_link',
-      	  :locals=>
-      	  {
-      	    :featured=>true,:calendar_view=>true,
-      	    :show_initially=>true,:match=>match,
-      	    :cl=>'calendar_listen'
-      	  }
-      	)%>
-    	  </div>
+	 		<a href='<%=ie.oneup_url(@metro_code)%>'><img style='display:none' onload='jQuery(this).show()' border=0  width='400px'  src='<%=ie.image.medium_url%>' ></a>
+		</div>
+	</div>
+	<div class='flyer_footer' >
+		<div class='flyer_text'>
+			<%if ie.venue_name%>
+				<span class='flyer_where'><%=ie.venue_name%></span>
+			<%end%>
+			<%if ie.body and not ie.body.empty? %>  
+				<%=ie.formatted_body(@metro_code,@query)%>
+			<%end%>
+		</div>
+		<div class='flyer_posted_by'>
+			posted by
+			<%highlight_class= (@query==ie.username) ? "search_highlight" : ""%>
+			<span class='<%=highlight_class%>'>
+				<a href='/<%=ie.user_metro%>/users/<%=ie.username%>'> <%=ie.username%></a> 
+			</span>
+			<%=time_ago_in_words ie.created_at%> ago
+			<%if ie.is_owner(@youser,@metro_code)%>
+				<a href='/<%=ie.user_metro%>/flyer/post_flyer?id=<%=ie.id%>'>edit</a>
+				<a onclick="return confirm('permanently delete this flyer?')" href='/<%=@metro_code%>/flyer/delete?id=<%=ie.id%>'>delete</a>
+			<%end%>
+			<%if is_admin?%>
+				<%=render(:partial=>'shared/flyer_admin_hud',:locals=>{:imported_event=>ie})%>
+			<%end%>
+			<%users = ImportedEventsUser.users_for(ie,false)%>
+
+			<%if users.size>0%>
+				<%if highlight_reflyer_by%>
+					<%users.sort! {|x,y| 
+						(x.id==highlight_reflyer_by.id ? 0 : 1)<=>(y.id==highlight_reflyer_by.id ? 0 : 1)
+						}%>
+				<%end%>
+				<br>reflyered by 
+				<a href='/<%=ie.user_metro%>/users/<%=users[0].name%>'> <%=users[0].name%></a> 
+				<%if users.size==2-%>
+					+ 1 other
+				<%elsif users.size>2-%>
+				   + <%=users.size-1%> others
+				<%end%>
+			<%end%>
+		</div>
+	</div>
+	
+	<div id="flyer_hud_<%=ie.id%>" class='flyer_hud'>
+		<%unless @youser and @youser.id==ie.user_id%>
+		<div id='flyer_hud_feedback_<%=ie.id%>'></div>
+			<%if already_reflyered%>
+				<button id="<%=ie.id%>" style="font-size:24px;" class="btn btn-primary unflyer_button" data-name="simple get">- unflyer</button>
+			<%else%>
+				<button id="<%=ie.id%>" style="font-size:24px;" class="btn btn-primary reflyer_button" data-name="simple get">+ reflyer</button>
+			<%end%>
+		<%end%>
 	</div>
 </div>

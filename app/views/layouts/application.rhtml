@@ -4,107 +4,90 @@
 	<head>
 <meta name="verify-v1" content="XkDMxOJ8KMbX5WUCSaSSZ5DwuwkjBBfcTBW50KE84+k=" />
 		<%
-		  if @not_in_a_city
-  			title="search - tourfilter | concert search engine, concert tickets, live music notifications, calendar of upcoming concerts" 
-			else
+#		  if @not_in_a_city
+#  			title="search - tourfilter | concert search engine, concert tickets, live music notifications, calendar of upcoming concerts" 
+#			else
   			title="tourfilter: spam-free concert alerts" 
-  			title="tourfilter #{@metro.downcase}: spam-free concert alerts" if @metro
+  			title="tourfilter, a free flyerboard for  #{@metro.downcase} events " if @metro
   			title="#{@page_title}" if @page_title
 #  			title="#{@page_title} - tourfilter: #{@metro||''.downcase} concert alerts" if @page_title and @append_minimal_title
   			title=@page_title if @page_title and @no_append_title
-			end
+#			end
 		%>
 	  <title><%=title%></title>
 	  <%= stylesheet_link_tag 'tourfilter' %>
 <%unless @no_javascript%>
 	<%= javascript_include_tag "application" %>	
+	<%= javascript_include_tag "effects" %>	
+	<%= javascript_include_tag "controls" %>	
+  
+	
 <%end%>	
 </head>
-<script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
 <script>
-jQuery(document).ready(function(){
-	jQuery(".pop").colorbox({
-		width:800,scrolling:false,opacity:0.5,transition:'none',speed	:0,
-		onComplete:function(){jQuery.fn.colorbox.resize()}});
-});
+window.hud=false
 </script>
-	<body>
-	  <!--
-	  <div class='above_header'>
-	    <span class='above_header_span'>
-          <%prompt="search for concerts"%>
-          <%=text_field_tag(:summary,"","size" => 32, :id=>'search_input',
-          	:value=>prompt,
-          	:onfocus=>"if (this.value=='#{prompt}') this.value='';$('clear').style.visibility='visible'",
-          	:onblur=>"if (this.value=='') this.value='#{prompt}';if (this.value.length()>0) {$('clear').style.visibility='hidden'}"
-          	)%>
-  			&nbsp;
-	      </span>
-	    </div>
-	  -->
-	  <%if  @show_imports #!@youser%>
-	  <div class='above_header'>
-	    <span class='above_header_span'>
-	    import! 
-<!--	    <span class='above_header_icon'><img height=20px src='/images/itunes_icon.png'></span>
-	    <a href='http://www.tourfilter.local:3000/boston/itunes?signup=true'>iTunes</a> 
-      or-->
-	    <span class='above_header_icon'><img height=20px src='/images/lastfm_icon.png'></span>
-	    <span class='underline'><a href='http://www.tourfilter.local:3000/boston/lastfm?signup=true'>last.fm</a> </span>
-	    </span>
-	  </div>
-	  <%end%>
-    	<%unless @hide_login or @not_in_a_city%>
-  	  <div class='above_header'>
-          <div id="right-header">
-          <%unless @youser%>
-    			<%end%>
-    			<%if is_admin?%>
-    			<span class='header_menu_item ' >
-    				<a href="<%=url('/feed')%>">feed</a>
-    			</span>
-    			<%end%>
-    			<span class='header_menu_item '>
-    				<a href="/search">search</a>
-    			</span>
-    			<span class='header_menu_item '>
-    				<a href="<%=url('/metros')%>">other metros</a>
-    			</span>
-    			<span >
-    			  <%unless @hide_login%>
-              <%if !@youser_logged_in-%>
-        			<span class='header_menu_item' >
-        				<a href="<%=url('/edit/homepage_signup_link')%>">sign up</a>
-        			</span>
-                <span class='header_menu_item '>
-                <a href="<%=url('/login')%>">log in</a>
-                </span>
-              <%else-%>
-        			<span class='header_menu_item'>
-        				<a href="<%=url('/submit_show')%>">submit a show</a>
-        			</span>
-                <span class='header_menu_item '>
-                <%= link_to 'logout', :action => :logout%>
-                <%="<span style='color:#e77'>a</span>" if is_admin?%>
-                </span>
-            <%end%>
+<script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
+
+	<body >
+	    <%unless @hide_login or @not_in_a_city%>
+		<form method='get' action='/<%=@metro_code%>/flyers'>
+	  	  <div class='above_header' >
+	          <div id="right-header" >
+					<%= text_field_with_auto_complete :tag, :text, {:class=>'search_field',:value=>@query,:autocomplete => "off",:style=>'',:placeholder=>'search boston'},
+						{:after_update_element=> 'function(elem,value) {jQuery(elem).val(jQuery(value).html().substring(0).split(" ")[0])}'}%>
+						</form>
+	  			<span class='header_menu_item '>
+	  				metro: <%=@metro.downcase%> (<a href="<%=url('/metros')%>">switch</a>) &bull;
+	  			</span>
+	  			<%if is_admin?%>
+		  			<span class='header_menu_item ' >
+		  				<input onclick='window.hud=!window.hud'  type='checkbox'/>hud&nbsp;&bull;
+		  			</span>
+		  			<span class='header_menu_item ' >
+		  				<a href="<%=url('/feed')%>">feed</a>&nbsp;&bull;
+		  			</span>
+	  			<%end%>
+	  			<span >
+		    		<%unless @hide_login%>
+		              <%if !@youser_logged_in-%>
+		       			<span class='header_menu_item'>
+		       				<a href="<%=url('/edit/homepage_signup_link')%>">sign up</a>&nbsp;&bull;
+		       			</span>
+		                <span class='header_menu_item '>
+		                	<a href="<%=url('/login')%>">log in</a>
+		                </span>
+		              <%else-%>
+		       			<!--span class='header_menu_item'>
+		       				<a href="<%=url('/submit_show')%>">submit a show</a>
+		       			</span-->
+		                <span class='header_menu_item '>
+		                <%= link_to 'logout', :action => :logout%>
+	       				(<a href='<%=url("/users/#{@youser.name}")%>'><%=@youser.name%></a>)
+		                <%="<span style='color:#e77'>a</span>" if is_admin?%>
+		                </span>
+		            <%end%>
+	            	<%end%>
             </span>
-            <%end%>
     		</div>
-  	  </div>
-  	  <br>
-    	<%end%>	  
+			<br>
+	  	  </div>
+		<%end%>
     <div id='inner_body'>
 			<%unless @hide_header%>
-      <div id='logo' >
+      <div id='new_logo' >
         <div style='float:right;padding:12px'>
           <%#=render(:partial=>'shared/instant_search')%>
         </div>
         <div style='float:left'>
-          <div class='logo_tourfilter'><a href='/'>Tourfilter</a></div>
+          <div class='logo_tourfilter'><a href='/'><img style='height:46px' src='/images/tourfilter_logo_4.png'/></a></div>
           <div class='logo_metro'><a href='<%=url("/")%>'><%=@metro%></a></div>
           <div class='logo_title'><%=@header_title%></div>
         </div>
+				<div style='float:right;margin-top:7px'>
+				<%=render(:partial=>'shared/post_button')%>
+				</div>
+
         <div style='clear:both'></div>
       </div>
       <div class='signup ' style='display:none'>
@@ -222,3 +205,12 @@ var _sf_async_config={uid:21126,domain:"tourfilter.com"};
 track_page_view()
 </script>
 <%end%>
+</script>
+<script>
+jQuery(document).ready(function() {
+	if (console) console.log("loaded "+document.location.href)
+})
+</script>
+
+
+

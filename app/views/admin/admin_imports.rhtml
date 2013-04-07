@@ -19,11 +19,11 @@ Make sure all these imports are really shows that people would want to know abou
 </div>
 <table>
 	<tr>
-	<th align="left">id</th>
+	<th align="left"></th>
 	<th align="left">term_text</th>
 	<th align="left">source</th>
 	<th align="left">artist name</th>
-	<th align="left">club</th>
+	<th align="left">tags</th>
 	<th align="left">date</th>
 </tr>
 <%=params[:id]%>
@@ -44,29 +44,37 @@ ats.each{|at|
 	i=i+1
 	begin
 	%>
+	<%event=ImportedEvent.find(at.imported_event_id)%>
 	<tr id="row_<%=at.id%>" >
-		<td valign="top" class="track_name_<%=i%2+1%>" onClick="validate_import(<%=at.id%>)">
-			<%=at.id%>
+ 		<td valign="top" style='color:#777' class="track_name_<%=i%2+1%>" >
+	<%if event.source=='user' and event.image and event.image.small_url%>
+			<a target='_' href='<%=event.oneup_url(@metro_code)%>'><img style='height:72px' title='<%=at.id%>' src='<%=event.image.small_url%>'/></a>
+	<%else%>
+		<div style='height:24px'></div>
+	<%end%>
 		</td>
 		<td valign="top" class="track_name_<%=i%2+1%>" onClick="validate_import(<%=at.id%>)">
 			<%=term_text=at.term_text.downcase%>
 		</td>
 		<td valign="top" class="track_name_<%=i%2+1%>" onClick="validate_import(<%=at.id%>)">
-			<%event=ImportedEvent.find(at.imported_event_id)%>
-			<%=event.source%>
 			<%if event.source=='user'%>
-			<br><span style='font-size:smaller;color:gray'><%=event.username%>&nbsp;<%=event.user_metro%></span>
+			<a href='<%=url("/users/#{event.username}")%>'><%=event.username%></a><div style='font-size:smaller;color:gray'><%=event.user_metro%></div>
+			<%else%>
+			<%=event.source%>
 			<%end%>
+			
 		</td>
 		<td valign="top" class="track_name_<%=i%2+1%>" onClick="invalidate_import(<%=at.id%>)">
 			<%=at.artist_name.downcase.gsub(term_text,"<strong>#{term_text}</strong>")%>
 		</td>
 		<td onClick="invalidate_import(<%=at.id%>)">
-		<a target="0" href="<%=at.url%>"><%=at.name%></a><br>
-		<%=at.city%>, <%=at.state%> 
+		<a target="0" href="<%=url('/flyers/#{event.category}')%>"><%=event.category%></a>
+		<%event.tags.each{|tag|%>
+			<a target="0" href="<%=url('/flyers/#{tag.text}')%>">#<%=tag.text%></a>
+		<%}%>
 		</td>
 		<td nowrap onClick="invalidate_import(<%=at.id%>)">
-		<%=at.date%>
+		<%=event.short_time_description%>
 		</td>
 	</tr>
 <%

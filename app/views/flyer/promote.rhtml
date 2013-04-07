@@ -1,0 +1,14 @@
+<h1>promote flyer</h1>
+<%text = @imported_event.body[0,100]%>
+<ul>
+	<li>- promote on tourfilter ($5 and up)</li>
+	<a href="https://twitter.com/share?size=large&count=none" data-via="tourfilter" data-url="http://www.tourfilter.com/flyer/<%=@imported_event.id%>" data-text="<%=text%>" class="twitter-share-button" data-lang="en">Tweet</a>
+	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+	<li>- post image to facebook feed</li>
+	<li>- create facebook event</li>
+	<li>- post to twitter</li>
+	<li>- post to pinterest</li>
+	<li>- email blast</li>
+	<li><a class='basic_button' href='/<%=@metro_code%>'>no thanks, just return home.</a></li>
+</ul>
+	
