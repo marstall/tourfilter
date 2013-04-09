@@ -38,7 +38,7 @@ window.hud=false
 						{:after_update_element=> 'function(elem,value) {jQuery(elem).val(jQuery(value).html().substring(0).split(" ")[0])}'}%>
 						</form>
 	  			<span class='header_menu_item '>
-	  				metro: <%=@metro.downcase%> (<a href="<%=url('/metros')%>">switch</a>) &bull;
+	  				metro <%=@metro.downcase%> (<a href="<%=url('/metros')%>">switch</a>) &bull;
 	  			</span>
 	  			<%if is_admin?%>
 		  			<span class='header_menu_item ' >
