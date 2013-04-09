@@ -1,4 +1,4 @@
-echo "deploying to web farm ..."
+echo "deploying to web autoscaling group <$2> ..."
 i=0
 web_successes=0
 web_failures=0
@@ -7,7 +7,7 @@ do
 	ip_address=`ec2-describe-instances $instance_id | grep INSTANCE | cut -f17`
 	let i+=1
 	echo "$i: deploying to $ip_address ($instance_id) ..."
-	ssh -t ec2-user@$ip_address "source ~/.bash_profile;cd /tourfilter;git pull;git checkout $1;bundle pack;crontab config/crontab.web;sudo apachectl restart;rm public/index.html"
+	ssh -t ec2-user@$ip_address "source ~/.bash_profile;cd /tourfilter;git pull;git checkout $1;sudo bundle pack;crontab config/crontab.web;sudo apachectl restart;rm public/index.html"
 	echo "checking remote production_tag"
 	remote_tag=`curl http://$ip_address/production_tag`
 	if [ "$remote_tag" = "$1" ]; then

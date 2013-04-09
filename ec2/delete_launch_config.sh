@@ -1,2 +1,2 @@
-as-delete-launch-config lc_tourfilter_$1 --force 
+as-delete-launch-config $1 --force 
 
