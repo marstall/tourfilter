@@ -2,7 +2,7 @@
 <%user = ie.user%>
 <%width||=400%>
 <div class='flyer_admin' id="flyer_admin_<%=ie.id%>" style='width:<%=width%>px '>
-	<b><%=ie.id%> posted <%=user.name%>, member since <%=user.short_registered_on%>.</b>
+	<b><%=ie.id%> posted <%=user.name%>, <!--member since <%#=user.short_registered_on%>-->.</b>
 	<%=form_remote_tag (:html=>{:id => "form_#{ie.id}"},
 						:update =>"result_#{ie.id}",
 						:loading => "jQuery('#status_#{ie.id}').html('Processing ...')",
