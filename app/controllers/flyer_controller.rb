@@ -35,9 +35,7 @@ class FlyerController < ApplicationController
         @image_url = @imported_event.image_url
       end
     else
-      if @image_url
-        render :layout=>'new_layout'
-      else
+      if not @image_url
         render :inline=>'no image uploaded'
       end
     end
@@ -135,7 +133,7 @@ class FlyerController < ApplicationController
 
 
     @imported_events = ImportedEvent.all_flyers(params,options)
-    render(:action=>'flyers',:layout=>'new_layout')
+    render(:action=>'flyers')
   end
   
   def flyer_validate(event)
