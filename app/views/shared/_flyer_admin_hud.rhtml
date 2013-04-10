@@ -15,7 +15,7 @@
 <input type='hidden' name='imported_event_id' value='<%=ie.id%>'/>
 <%ie.artist_terms.each{|at|%>
 	<div class="artist_term" onMouseDown="jQuery('#radio_<%=at.id%>').trigger('click');console.log('click');jQuery(this).css('background-color','#dfd');return true;">
-		<%checked_string= at.status=='valid' ? "checked" : ""%>
+		<%checked_string=""# at.status=='valid' ? "checked" : ""%>
 		<input type='checkbox' id='radio_<%=at.id%>' name='artist_term_<%=at.id%>' value='1' <%=checked_string%>><%=at.term_text%><br>
 	</div>
 <%}%>
