@@ -31,6 +31,7 @@ if [ "$web_failures" = "0" ]; then
 else
 	echo "FAILED"
 fi
+echo ""
 exit "$web_failures"
 
 
