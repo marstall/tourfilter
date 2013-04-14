@@ -433,6 +433,7 @@ c = GeoIP.new("/Users/chris/maxmind/GeoLiteCity.dat").city("76.24.220.14")
     @nav_array=
       [
         {'new!'=>'flyers_partial'},
+        {'popular'=>'popular_partial'},
         {'following'=>'friends_partial'},
         {'alerts'=>'alerts_partial'}
         

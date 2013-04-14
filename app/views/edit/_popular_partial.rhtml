@@ -1,12 +1,33 @@
-<%@options_label,@nav_array=controller.use_list_nav_array%>
+<%
+#	@tags=params[:tags] 
+	@tags=nil if @tags=='all'
+
+	@order=params[:order] || @controller.get_cookie(:order)
+	@order = "popularity"
+	@controller.set_cookie(:order,@order)
+	order_hash=
+	{
+	  "created"=>"created_at desc",
+	  "popular"=>"created_at desc",
+	  "date"=>"date desc"
+	}
+	_order = order_hash[@order]
+
+	metro_code=params[:mc]||@metro_code
+	metro_code=nil if metro_code=='all'
+
+	options = {
+	          :show_flagged=>params[:show_flagged]
+	          }
+	params = {
+	          :metro_code=>metro_code,
+	          :order=>_order,
+	          :tags=>@tags
+	         }
+
+	@imported_events = ImportedEvent.popular_flyers(params,options)
+%>
+<%@options_label,@nav_array = controller.use_calendar_nav_array%>
 <%=render(:partial=>'shared/calendar_options',:locals=>{:options_label=>@options_label,:nav_array=>@nav_array})%>
-<div class='editors_pick_header'>
-  <div style='vertical-align:bottom;float:right;font-size:12px'>
-  ... experimental: <a href='<%=url("/edit/rich_matches?num=50&order_by=term_num_trackers+desc")%>'>reviewers view</a>
-  </div>
-  <div style='float:left'>
-  popular
-  </div>
-  <div style='clear:both'></div>
-  </div>
-<%=render(:partial =>"shared/uncollated_calendar_narrowest",:locals=>{:show_created_at=>false,:order_by=>"term_num_trackers desc",:narrower=>true,:show_date_headers=>true,:num=>150})%>
+<%=render(:partial=>'shared/flyer_control')%>
+<%=render(:partial=>"shared/flyers")%>

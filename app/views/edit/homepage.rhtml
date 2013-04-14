@@ -32,6 +32,9 @@
 				<%elsif cookies['calndar_view']=='full_SP_calendar'&&@view!=:calendar%>
 	           		<%=render("calendar_partial",
 							:params=>params+{:metro_code=>@metro_code,:offset=>@offset,:days_to_show=>@days_to_show})%>
+				<%elsif cookies['calndar_view']=='popular'&&@view!=:calendar%>
+	           		<%=render("popular_partial",
+							:params=>params+{:metro_code=>@metro_code,:offset=>@offset,:days_to_show=>@days_to_show})%>
           <%else%>
             <%cookies['calndar_view']=='flyers'%>
 	           <%=render("flyers_partial",

@@ -84,8 +84,6 @@ class UserController < ApplicationController
     
     
     render(:action => :unknown) if @user==nil 
-    render(:layout=>'new_layout')
-    
   end
   
   def mini_register

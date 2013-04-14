@@ -262,7 +262,14 @@ class ImportedEvent < ActiveRecord::Base
 #    end
 #  end
   
+  def ImportedEvent.popular_flyers(params={},options={})
+    return []
+  end
+  
   def ImportedEvent.all_flyers(params={},options={})
+     if params[:order]=='popularity'
+       return popular_flyers(params,option)
+     end
      options||={}
      tags=params[:tags]
      query=params[:query]
