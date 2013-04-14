@@ -26,6 +26,9 @@ echo "successful web deploys: $web_successes"
 echo "failed web deploys: $web_failures"
 echo ""
 
+if ["$web_failures"=="0"]; then
+	echo "SUCCESS!"
+fi
 exit "$web_failures"
 
 
