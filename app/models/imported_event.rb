@@ -263,13 +263,40 @@ class ImportedEvent < ActiveRecord::Base
 #  end
   
   def ImportedEvent.popular_flyers(params={},options={})
-    return []
+    limit = options[:limit]||50
+    tags=params[:tags]
+    select_sql=""
+    if tags
+      if Tag.is_supertag(tags)
+        tags_sql = " and category=?"
+      else
+       select_sql +=",taggings,tags"
+       tags_sql = "and taggings.imported_event_id=imported_events.id and taggings.tag_id=tags.id and tags.text=?"
+      end
+    else
+      tags_sql = ""
+    end
+    
+    sql = <<-SQL
+      select imported_events.*,count(*) cnt
+      from imported_events,imported_events_users 
+      #{select_sql}
+      where imported_events_users.imported_event_id=imported_events.id
+      and imported_events.date>now()
+      and imported_events_users.created_at>adddate(now(),interval -180 day)
+      and imported_events_users.deleted_flag=false
+      #{tags_sql}
+      group by imported_events.id
+      order by cnt desc limit ?
+    SQL
+    args=[sql]
+    args<<tags if tags
+    args<<limit
+    
+    return ImportedEvent.find_by_sql(args)
   end
   
   def ImportedEvent.all_flyers(params={},options={})
-     if params[:order]=='popularity'
-       return popular_flyers(params,option)
-     end
      options||={}
      tags=params[:tags]
      query=params[:query]

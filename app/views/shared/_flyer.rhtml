@@ -1,6 +1,7 @@
 <%highlight_reflyer_by||=nil%>
 <%ie=imported_event%>
 <%return unless ie and ie.image%>	
+<%users = ImportedEventsUser.users_for(ie,false)%>
 <%status_class = "unprocessed_flyer" if ie.status=='new'%>
 <div id="ie_<%=ie.id%>" imported_event_id="<%=ie.id%>" class='flyer <%=status_class%>'
 	>
@@ -47,7 +48,6 @@
 			<%if is_admin?%>
 				<%=render(:partial=>'shared/flyer_admin_hud',:locals=>{:imported_event=>ie})%>
 			<%end%>
-			<%users = ImportedEventsUser.users_for(ie,false)%>
 
 			<%if users.size>0%>
 				<%if highlight_reflyer_by%>
