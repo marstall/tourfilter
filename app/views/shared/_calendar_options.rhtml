@@ -30,7 +30,11 @@
 		      ONCLICK
 		    -%>
 		    <span >
-				<span  id='<%=code%>_pressed' class='calendar_option_pressed' style='display:<%=pressed_display%>'><%=display_code%></span>
+				<span  id='<%=code%>_pressed' class='calendar_option_pressed' style='display:<%=pressed_display%>'>
+					<span style='background-color:#b7dfdf;margin-top:4px'>&nbsp;&nbsp;&nbsp;</span>
+				    
+					<%=display_code%>
+				</span>
 				<span id='<%=code%>_unpressed' class='calendar_option_unpressed' style='display:<%=unpressed_display%>'>
 		      <%= link_to_remote(display_code, 
 		          :update=>"#{options_label}",

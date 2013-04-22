@@ -744,12 +744,14 @@ h3
 .flyer_text
 {
 	margin-left:text;
+	font-family:Helvetica;
+	font-size:13px;
+	
 }
 
 .flyer_text:first-line
 {
-	font-weight:bold;
-	text-transform:uppercase;
+font-size:20px;
 }
 
 .flyer_where

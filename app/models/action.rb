@@ -10,6 +10,7 @@ class Action < ActiveRecord::Base
 
   ACTION_TYPE_REGISTERED = "registered"
   ACTION_TYPE_ADDED = "added"
+  ACTION_TYPE_EDITED = "edited"
   ACTION_TYPE_APPROVED = "approved"
   ACTION_TYPE_REFLYERED = "reflyered"
   ACTION_TYPE_UNFLYERED = "reflyered"
@@ -37,7 +38,12 @@ class Action < ActiveRecord::Base
 
   def self.user_added_flyer(metro_code,user,imported_event)
     self.create(metro_code,user,ACTION_TYPE_ADDED,OBJECT_TYPE_IMPORTED_EVENT,imported_event.id,imported_event.body)
-    Notifier.send_message(Notifier.topics['added_flyer'],user,"posted flyer","http://www.tourfilter.com/#@metro_code/users/#{user.name}")
+#    Notifier.send_message(Notifier.topics['added_flyer'],user,"posted flyer","http://www.tourfilter.com/#@metro_code/users/#{user.name}")
+  end
+
+  def self.user_edited_flyer(metro_code,user,imported_event)
+    self.create(metro_code,user,ACTION_TYPE_EDITED,OBJECT_TYPE_IMPORTED_EVENT,imported_event.id,imported_event.body)
+#    Notifier.send_message(Notifier.topics['added_flyer'],user,"posted flyer","http://www.tourfilter.com/#@metro_code/users/#{user.name}")
   end
 
   def self.admin_approved_flyer(metro_code,user,imported_event,body,terms)
@@ -63,6 +69,7 @@ class Action < ActiveRecord::Base
   def self.create(metro_code,user,action_type,object_type,id,description,note=nil,note_entity=nil,referer_domain=nil,referer_path=nil)
     action = Action.new
     action.username = user.name.downcase
+    action.username += " (admin)" if user.is_admin
     action.user_registered_on=user.registered_on
     action.user_id=user.id
     action.metro_code=metro_code

@@ -170,7 +170,7 @@ class FlyerController < ApplicationController
     event.level='primary'
     event.status='new'
     event.venue_id = -1 # yes, it's a hack ..
-    if @youser
+    if @youser 
       u = @youser
       u = User.find_by_name(event.post_as) if event.post_as and not event.post_as.empty? and @youser.is_admin
       event.user_id=u.id
@@ -203,17 +203,21 @@ class FlyerController < ApplicationController
     event.do_term_search_process
     event.do_hashtag_process
     event.save
-    Action.user_added_flyer(metro_code,@youser,event)
     
     if @youser
-      ieu = ImportedEventsUser.new
-      ieu.user_id = @youser.id
-      ieu.imported_event_id = event.id
-      ieu.metro_code = @metro_code
-      ieu.save
+      unless ImportedEventsUser.find_by_imported_event_id_and_metro_code_and_user_id(event.id,@metro_code,event.user_id)
+        ieu = ImportedEventsUser.new
+        ieu.user_id = @youser.id
+        ieu.imported_event_id = event.id
+        ieu.metro_code = @metro_code
+        ieu.save
+        Action.user_added_flyer(metro_code,@youser,event)
+      else
+        Action.user_edited_flyer(metro_code,@youser,event)
+      end
     end
     
-    ImportedEventEditedMailer::deliver_imported_event_edited(event, metro_code, @youser, action)
+    ImportedEventEditedMailer::deliver_imported_event_edited(event, metro_code, @youser, action) if ENV['RAILS_ENV']!='development'
     
   # if direct_admin_submit
   #    handle_direct_submit(event) 

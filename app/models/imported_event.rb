@@ -401,6 +401,7 @@ class ImportedEvent < ActiveRecord::Base
   
   def do_hashtag_process
     tags = []
+    Tagging.delete_all("imported_event_id=#{id}")
     body.scan(/\#[^ ]+/).each{|_tag|
       tag = Tag.find_or_create(_tag)
       tags<<tag

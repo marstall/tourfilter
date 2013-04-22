@@ -430,12 +430,12 @@ c = GeoIP.new("/Users/chris/maxmind/GeoLiteCity.dat").city("76.24.220.14")
 
   def use_calendar_nav_array
     @options_label='calndar_view'
-    @nav_array=
+    @nav_array= 
       [
-        {'new'=>'flyers_partial'},
+        {"new"=>'flyers_partial'},
         {'popular'=>'popular_partial'},
         {'following'=>'friends_partial'},
-        {'alerts'=>'alerts_partial'}
+        {'alerts'=>'alerts_partial'},
         
 #        {'full_SP_calendar'=>'calendar_partial'},
 #        {'your_SP_calendar'=>'your_shows_partial'}

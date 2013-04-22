@@ -40,6 +40,9 @@ window.hud=false
 	  			<span class='header_menu_item '>
 	  				metro:: <%=@metro.downcase%> (<a href="<%=url('/metros')%>">switch</a>) &bull;
 	  			</span>
+	  			<span class='header_menu_item '>
+	  				<a href="<%=url('/calendar')%>">calendar</a> &bull;
+	  			</span>
 	  			<%if is_admin?%>
 		  			<span class='header_menu_item ' >
 		  				<input onclick='window.hud=!window.hud'  type='checkbox'/>hud&nbsp;&bull;
