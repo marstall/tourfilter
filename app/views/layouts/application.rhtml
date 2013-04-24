@@ -7,7 +7,6 @@
 #		  if @not_in_a_city
 #  			title="search - tourfilter | concert search engine, concert tickets, live music notifications, calendar of upcoming concerts" 
 #			else
-  			title="tourfilter: spam-free concert alerts" 
   			title="tourfilter, a free flyerboard for  #{@metro.downcase} events " if @metro
   			title="#{@page_title}" if @page_title
 #  			title="#{@page_title} - tourfilter: #{@metro||''.downcase} concert alerts" if @page_title and @append_minimal_title
@@ -34,7 +33,7 @@ window.hud=false
 		<form method='get' action='/<%=@metro_code%>/flyers'>
 	  	  <div class='above_header' >
 	          <div id="right-header" >
-					<%= text_field_with_auto_complete :tag, :text, {:class=>'search_field',:value=>@query,:autocomplete => "off",:style=>'',:placeholder=>'search boston'},
+					<%= text_field_with_auto_complete :tag, :text, {:class=>'search_field',:value=>@query,:autocomplete => "off",:style=>'',:placeholder=>'search boston flyers'},
 						{:after_update_element=> 'function(elem,value) {jQuery(elem).val(jQuery(value).html().substring(0).split(" ")[0])}'}%>
 						</form>
 	  			<span class='header_menu_item '>
@@ -84,8 +83,8 @@ window.hud=false
         </div>
         <div style='float:left'>
           <div class='logo_tourfilter'><a href='/'><img style='height:46px' src='/images/tourfilter_logo_4.png'/></a></div>
-          <div class='logo_metro'><a href='<%=url("/")%>'><%=@metro%></a></div>
-          <div class='logo_title'><%=@header_title%></div>
+          <!--div class='logo_metro'><a href='<%=url("/")%>'><%=@metro%></a></div-->
+          <div class='logo_title'><%=@header_title.sub("#","<span style='font-family:monospace;font-size:30px;'>#</span>") if @header_title%></div>
         </div>
 				<div style='float:right;margin-top:7px'>
 				<%=render(:partial=>'shared/post_button')%>

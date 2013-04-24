@@ -2869,6 +2869,7 @@ th
 	float:left;
 	color:#369;
 	padding:6px;
+	padding-right:0px;
 	background-color:#ddf5f5;
 	text-transform:none;
 }
@@ -2898,7 +2899,7 @@ th
 .logo_title
 {
 	font-weight:normal;
-	margin-left:10px;
+	margin-left:8px;
 	float:left;
  	color:#b7dfdf;
 	padding-top:9px;

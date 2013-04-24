@@ -104,6 +104,8 @@ class FlyerController < ApplicationController
     @header_title=@tags
     @header_title="##@header_title" unless Tag.is_supertag(@tags) or @tags.nil? or @tags.empty?
 
+  	@page_title="#{@metro_code} ##@tags events"
+
     @order=params[:order] || get_cookie(:order)
 #    @order = "random" #if not @order
     set_cookie(:order,@order)

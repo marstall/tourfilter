@@ -56,7 +56,6 @@ class ApplicationController < ActionController::Base
 
   def auto_complete_for_tag_text
     query = request.raw_post.downcase.split(/[=?&]/)[1]
-    puts query
     tags = Tag.find_by_prefix(query)
     s="<ul style='text-align:left'>"
     tags.each{|tag|
