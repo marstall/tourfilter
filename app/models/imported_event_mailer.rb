@@ -18,7 +18,7 @@ class ImportedEventMailer < ActionMailer::Base
     @body["user"]       = user
     @body["metro_code"]       = metro_code
     @recipients = imported_event.user.email_address
-    @from       = 'info@tourfilter.com'
+    @from       = 'Tourfilter <info@tourfilter.com>'
     @sent_on    = sent_at
     @headers    = {}
   end
