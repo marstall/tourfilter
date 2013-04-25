@@ -6,6 +6,7 @@ class ImportedEventMailer < ActionMailer::Base
     @body["user"]       = user
     @body["metro_code"]       = metro_code
     @body["action"]       = action
+    @bcc=['chris@tourfilter.com']
     @recipients = 'chris@psychoastronomy.org'
     @from       = 'info@tourfilter.com'
     @sent_on    = sent_at
