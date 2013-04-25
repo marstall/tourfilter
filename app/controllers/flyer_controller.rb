@@ -179,15 +179,7 @@ class FlyerController < ApplicationController
       event.username=u.name
     end
     event.user_metro=event.metro_code=@metro_code
-#    venue = find_or_create_venue(event.venue_name,params[:imported_event][:address])
-#    event.venue_name=venue.name
-#    event.venue_id=venue.id
-#    dupe =event.find_dupe
-#    if dupe and not dupe.empty?
-#      @errors<<"duplicate event!"
-#      render(:layout=>false)
-#      return
-#    end
+
     if original_image_url!=event.image_url
       duplicate_image = event.process_image 
       if duplicate_image

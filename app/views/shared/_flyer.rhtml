@@ -13,7 +13,8 @@
 					<span class='<%=highlight_class%>'>
 					<a href='<%=url("/flyers?tags=#{ie.category}")%>'><%=ie.category%></a> 
 					</span>
-					<%ie.tags.each{|tag|%>
+					<%ie.tags.each_with_index{|tag,i|%>
+						<%next if i>2%>
 						<%highlight_class= "#{@query}"=="##{tag.text}" ? "search_highlight" : ""%>
 						<span class='<%=highlight_class%>'>
 						<a href='<%=url("/flyers?tags=#{tag.text}")%>'>#<%=tag.text%></a> 
