@@ -51,7 +51,7 @@ class FlyerController < ApplicationController
       render(:js=>"document.location.href='/#{@metro_code}/basic_signup?redirect_url=#{request.referer}'")
       return
     end
-#    ImportedEventEditedMailer::deliver_imported_event_edited(event, metro_code, @youser, action)
+#    ImportedEventMailer::deliver_imported_event_edited(event, metro_code, @youser, action)
     imported_event_id = params[:id]
     imported_event = ImportedEvent.find(imported_event_id)
     ieu = ImportedEventsUser.find_by_user_id_and_imported_event_id(@youser.id,imported_event_id)
@@ -62,6 +62,9 @@ class FlyerController < ApplicationController
     ieu.deleted_flag = false
     ieu.save
     Action.user_reflyered(metro_code,@youser,imported_event)
+    
+    ImportedEventMailer::deliver_imported_event_reflyered(imported_event, metro_code, @youser) #if ENV['RAILS_ENV']!='development'
+
 #    render(:inline=>'reflyered!')
 #    render(:js=>"document.writeln(\"<button id='#{imported_event_id}' style='font-size:24px;' class='btn btn-primary unflyer_button' data-name='simple get'>+ unflyer</button>\");prep_huds()")
   render(:inline=>"reflyered")
@@ -73,7 +76,7 @@ class FlyerController < ApplicationController
       render(:inline=>"you must have an account to reflyer. <a href='/#{@metro_code}/basic_signup?redirect_url=#{request.referer}'>sign up for one!</a>")
       return
     end
-#    ImportedEventEditedMailer::deliver_imported_event_edited(event, metro_code, @youser, action)
+#    ImportedEventMailer::deliver_imported_event_edited(event, metro_code, @youser, action)
     imported_event_id = params[:id]
     imported_event = ImportedEvent.find(imported_event_id)
     ieu = ImportedEventsUser.find_by_user_id_and_imported_event_id(@youser.id,imported_event_id)
@@ -211,7 +214,7 @@ class FlyerController < ApplicationController
       end
     end
     
-    ImportedEventEditedMailer::deliver_imported_event_edited(event, metro_code, @youser, action) if ENV['RAILS_ENV']!='development'
+    ImportedEventMailer::deliver_imported_event_edited(event, metro_code, @youser, action) if ENV['RAILS_ENV']!='development'
     
   # if direct_admin_submit
   #    handle_direct_submit(event) 
@@ -242,8 +245,8 @@ class FlyerController < ApplicationController
     if button_pressed=='flag'
       puts "+++ saving ie #{ie.id} with flagged value of #{ie.flagged}"
       ie.save
-      ImportedEventEditedMailer::deliver_imported_event_edited(ie, metro_code, @youser, "flagged flyer" )
-      ImportedEventFlaggedMailer::deliver_imported_event_flagged(ie, metro_code, @youser, params[:flagged] )
+      ImportedEventMailer::deliver_imported_event_edited(ie, metro_code, @youser, "flagged flyer" )
+      ImportedEventMailer::deliver_imported_event_flagged(ie, metro_code, @youser, params[:flagged] )
       render(:inline=> "<script>jQuery('#ie_#{ie.id}').hide();alert('flyer #{ie.id} successfully flagged.')</script>")
       return
     else
@@ -317,7 +320,7 @@ class FlyerController < ApplicationController
       return
     end
     if (@youser.is_admin or @imported_event.is_owner(@youser,@metro_code))
-      ImportedEventEditedMailer::deliver_imported_event_edited(@imported_event, metro_code, @youser, "deleted flyer" )
+      ImportedEventMailer::deliver_imported_event_edited(@imported_event, metro_code, @youser, "deleted flyer" )
       ImportedEvent.find(id).destroy
       flash[:notice]="flyer successfully deleted."
       redirect_to("/flyers")
