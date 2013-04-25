@@ -20,7 +20,6 @@ class ImportedEventsUser < ActiveRecord::Base
       select ieu.* from imported_events_users ieu, imported_events ie
       where ie.id = ieu.imported_event_id
       and ieu.deleted_flag=false
-      and ie.date>now() 
       and ieu.user_id=#{user.id}
     SQL
     find_by_sql(sql)

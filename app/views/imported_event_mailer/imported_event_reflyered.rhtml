@@ -1,7 +1,9 @@
 <%=@imported_event.user.name%> re-flyered your flyer!
 
-<%=@imported_event.body if @imported_event.body && @imported_event.body.size>3%>
+<%if @imported_event.body && @imported_event.body.size>3-%>
+<%=@imported_event.body %>
 
+<%end-%>
 view flyer: http://ec2-50-16-88-138.compute-1.amazonaws.com<%=@imported_event.oneup_url(@metro_code)%>?email=true
 
 ------------------------------------------------------
