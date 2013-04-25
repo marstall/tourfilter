@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1><a href='http://www.tourfilter.com/<%=@metro_code%>/users/<%=@imported_event.user.name%>'><%=@imported_event.user.name%></a> re-flyered your flyer!</h1>
+    <p>
+		<a href='http://www.tourfilter.com/<%=@imported_event.oneup_url(@metro_code)%>'><img src='<%=@imported_event.image.medium_url%>?email=true'></a>
+    </p>
+    <p>change your notification settings <a href='http://www.tourfilter.com/<%=@metro_code%>/settings'>here</a></p>
+  </body>
+</html>
