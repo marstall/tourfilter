@@ -297,6 +297,7 @@ class ImportedEvent < ActiveRecord::Base
   end
   
   def ImportedEvent.all_flyers(params={},options={})
+    logger.debug "+++ #{params.inspect}"
      options||={}
      tags=params[:tags]
      query=params[:query]
@@ -357,6 +358,7 @@ class ImportedEvent < ActiveRecord::Base
         #{select_sql}
         where source='user'
         and image_url is not null
+        and date>now()
         #{metro_sql}
         #{flagged_sql}
         #{tags_sql}

@@ -3,6 +3,10 @@
 	@tags=nil if @tags=='all'
 
 	@order=params[:order] || @controller.get_cookie(:order)
+	@start = (params[:start]||0).to_i
+	@page_size=50
+	@num = (params[:num]||@page_size).to_i
+    
 	@order = "created" if not @order
 	@controller.set_cookie(:order,@order)
 	order_hash=
@@ -22,7 +26,8 @@
 	params = {
 	          :metro_code=>metro_code,
 	          :order=>_order,
-	          :tags=>@tags
+	          :tags=>@tags,
+			  :num=>@num
 	         }
 
 	@imported_events = ImportedEvent.all_flyers(params,options)

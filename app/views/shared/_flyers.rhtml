@@ -30,6 +30,8 @@ end
 	<!--no flyers found in this category.-->
 <%end%>
 </div>
+
+<div id='navigation'><a href='/<%=@metro_code%>/flyers?start=<%="#{(@start.to_i+@page_size)}"%>'>next <%=@page_size%></a></div>
 <script>
 
 jQuery(document).ready(function() {
@@ -40,7 +42,26 @@ jQuery(document).ready(function() {
 	  });
 	});
 	prep_huds();
-})
+	jQuery("#flyer_board").infinitescroll({
+		nextSelector: "#navigation a:first",
+		navSelector: "#navigation",
+		itemSelector: ".flyer"},
+	      // trigger Masonry as a callback
+			function(newElements) 
+			{
+				// hide new items while they are loading
+				var $newElems = jQuery( newElements ).css({ opacity: 0 });
+				// ensure that images load before adding to masonry layout
+				$newElems.imagesLoaded(
+					function()
+					{
+						// show elems now they're ready
+						$newElems.animate({ opacity: 1 });
+						$container.masonry( 'appended', $newElems, true ); 
+					})
+			}						   
+	)
+});
 
 function prep_huds()
 {

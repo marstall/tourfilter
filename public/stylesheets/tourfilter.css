@@ -2908,6 +2908,17 @@ th
 	vertical-align:-14px;
 }
 
+#navigation a:link { text-decoration: underline; }
+#navigation a:visited { text-decoration: underline; }
+#navigation a:hover { text-decoration: none; border-bottom:6px solid #369;padding-bottom:0px; }
+#navigation a:active { text-decoration: underline; }
+
+#navigation
+{
+	width:100%;
+	font-size:24px;
+	text-align:center;
+}
 
 #header_title
 {

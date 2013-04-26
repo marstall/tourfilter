@@ -98,9 +98,10 @@ class FlyerController < ApplicationController
   end
 
   def flyers
+    @page_size=50
     @tags=params[:tags] 
-    @start = params[:start]
-    @num = params[:num]
+    @start = params[:start]||0
+    @num = params[:num]||@page_size
     @query = params["tag"]["text"] if params["tag"] 
     @query= nil if @query and @query.strip.size==0
     @tags=nil if @tags=='all'
@@ -133,7 +134,7 @@ class FlyerController < ApplicationController
               :tags=>@tags,
               :query=>@query,
               :start=>@start,
-              :num=>@num
+              :num=>5
              }
 
 

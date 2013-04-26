@@ -19,6 +19,7 @@
 	<%= javascript_include_tag "application" %>	
 	<%= javascript_include_tag "effects" %>	
 	<%= javascript_include_tag "controls" %>	
+	<script src='/javascripts/infinite-scroll/jquery.infinitescroll.min.js'/>
   
 	
 <%end%>	
@@ -131,23 +132,7 @@ window.hud=false
 		<span class='footer_menu_item'>
 			<a href="http://www.tourfilter.com/about">about tourfilter</a>
 		</span>
-	<%unless @not_in_a_city%>
-	<span id="blargh" class='footer_menu_item'></span> 
-	<script>
-	var domain="filter.com"
-	domain="tour"+domain
-	var email="inf"+""+""+"o"
-	email=email+"@"
-	email=email+""
-	email=email+domain
-	blargh=email
-	// SPAMMERS - GET A LIFE!
-	$("blargh").innerHTML="<a href='mailto:"+blargh+"'>corrections/questions</a>"
-	</script>
-		<%end%>
-		<span class='footer_menu_item' style='float:right'>
-    	   <span style='vertical-align:-4px'> <img height='20px' src='/images/twitter.png'/></span> <a href='http://www.twitter.com/tourfilter'>follow us on twitter!</a>
-    	    </span>
+
 	</div>
 </div>
 
