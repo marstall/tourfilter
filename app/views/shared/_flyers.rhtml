@@ -31,7 +31,7 @@ end
 <%end%>
 </div>
 
-<div id='navigation'><a href='/<%=@metro_code%>/flyers?start=<%="#{(@start.to_i+@page_size)}"%>'>next <%=@page_size%></a></div>
+<div id='navigation'><a href='/<%=@metro_code%>/flyers?start=<%="#{(@start.to_i+@page_size.to_i)}"%>'>next <%=@page_size%></a></div>
 <script>
 
 jQuery(document).ready(function() {
