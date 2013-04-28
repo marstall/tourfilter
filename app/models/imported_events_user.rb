@@ -6,11 +6,14 @@ class ImportedEventsUser < ActiveRecord::Base
   
   def ImportedEventsUser.users_for(imported_event,include_author=true)
     subselect = <<-SUBSELECT
-      select user_id from tourfilter_shared.imported_events_users ieu  where ieu.imported_event_id=#{imported_event.id} and ieu.deleted_flag=false
+      select * from tourfilter_shared.imported_events_users ieu  where ieu.imported_event_id=#{imported_event.id} and ieu.deleted_flag=false
     SUBSELECT
     subselect+=" and ieu.user_id<>#{imported_event.user_id} "
+    ieus = ImportedEventsUser.find_by_sql(subselect)
+    return [] unless ieus.size>0
+    user_ids = ieus.collect {|ieu|ieu.user_id}.join(',')
     sql = <<-SQL
-      select * from users where id in (#{subselect})
+      select * from users where id in (#{user_ids})
     SQL
     User.find_by_sql(sql)
   end
