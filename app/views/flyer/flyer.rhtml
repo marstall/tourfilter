@@ -21,29 +21,51 @@ already_reflyered = @reflyered_ids_hash[ie.id] ? true : false
 	 		<img border=0  width=100% src='<%=ie.image.large_url%>' >
 		</div>
 	</div>
-	<div class='fullpage_flyer_footer' >
-		<div style='float:right;text-align:right;position:absolute;left:480px'>
-			<a href="http://pinterest.com/pin/create/button/" class="pin-it-button" count-layout="none"><img src="//assets.pinterest.com/images/PinExt.png" alt="Pin it" / ></a> <script type="text/javascript" src="http://assets.pinterest.com/js/pinit.js"></script>
-			<span id="fb-root"></span>
-			<a href="https://twitter.com/share" class="twitter-share-button" data-via="tourfilter">Tweet</a>
-			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-			<script>(function(d, s, id) {
-			  var js, fjs = d.getElementsByTagName(s)[0];
-			  if (d.getElementById(id)) return;
-			  js = d.createElement(s); js.id = id;
-			  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=251525421581783";
-			  fjs.parentNode.insertBefore(js, fjs);
-			}(document, 'script', 'facebook-jssdk'));</script>	
-			<div id='reflyer_button_container' style='margin-right:28px'>
-			<%unless @youser and @youser.id==ie.user_id%>
-				<%if already_reflyered%>
-					<button id="<%=ie.id%>" style="font-size:24px;" class="btn btn-primary unflyer_button" data-name="simple get">- unflyer</button>
-				<%else%>
-					<button id="<%=ie.id%>" style="font-size:24px;" class="btn btn-primary reflyer_button" data-name="simple get">+ reflyer</button>
+		<div class='fullpage_flyer_footer_header'>
+			<div style='float:left;whitespace:no-wrap'>
+				<span id='reflyer_button_container' style='vertical-align:5px'>
+				<%unless @youser and @youser.id==ie.user_id%>
+					<%if already_reflyered%>
+						<button id="<%=ie.id%>" style="font-size:14px;" class="btn btn-primary unflyer_button" data-name="simple get">- unflyer</button>
+					<%else%>
+						<button id="<%=ie.id%>" style="font-size:14px;" class="btn btn-primary reflyer_button" data-name="simple get">+ reflyer</button>
+					<%end%>
 				<%end%>
-			<%end%>
+				</span>
+			
+			
+				<a href="http://pinterest.com/pin/create/button/" class="pin-it-button" count-layout="none"><img src="//assets.pinterest.com/images/PinExt.png" alt="Pin it" / ></a> <script type="text/javascript" src="http://assets.pinterest.com/js/pinit.js"></script>
+				<span id="fb-root"></span>
+				<a href="https://twitter.com/share" class="twitter-share-button" data-via="tourfilter">Tweet</a>
+				<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+				<script>(function(d, s, id) {
+				  var js, fjs = d.getElementsByTagName(s)[0];
+				  if (d.getElementById(id)) return;
+				  js = d.createElement(s); js.id = id;
+				  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=251525421581783";
+				  fjs.parentNode.insertBefore(js, fjs);
+				}(document, 'script', 'facebook-jssdk'));</script>	
 			</div>
-			</div>
+			<div style='float:right'>
+				<span class='flyer_category'>
+					<%highlight_class= @query.sub("#","")==ie.category ? "search_highlight" : "" if @query%>
+					<span class='<%=highlight_class%>'>
+					<a href='<%=url("/flyers?tags=#{ie.category}")%>'><%=ie.category%></a> 
+					</span>
+					<%ie.tags.each_with_index{|tag,i|%>
+						<%next if i>2%>
+						<%highlight_class= "#{@query}"=="##{tag.text}" ? "search_highlight" : ""%>
+						<span class='<%=highlight_class%>'>
+						<a href='<%=url("/flyers?tags=#{tag.text}")%>'>#<%=tag.text%></a> 
+						</span>
+					<%}%>
+				</span>
+	      		<span class='flyer_when'><%=ie.short_time_description%></span>
+	</div>
+	<div style='clear:both'></div>
+		</div>
+			<div class='fullpage_flyer_footer' >
+			
 		<div style='float:left'>
 			<div class='fullpage_flyer_text' >
 				<%if ie.venue_name%>

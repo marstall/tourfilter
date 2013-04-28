@@ -67,14 +67,14 @@
 		</div>
 	</div>
 	
+	<%unless @youser and @youser.id==ie.user_id%>
 	<div id="flyer_hud_<%=ie.id%>" class='flyer_hud'>
-		<%unless @youser and @youser.id==ie.user_id%>
 		<div id='flyer_hud_feedback_<%=ie.id%>'></div>
 			<%if already_reflyered%>
 				<button id="<%=ie.id%>" style="font-size:24px;" class="btn btn-primary unflyer_button" data-name="simple get">- unflyer</button>
 			<%else%>
 				<button id="<%=ie.id%>" style="font-size:24px;" class="btn btn-primary reflyer_button" data-name="simple get">+ reflyer</button>
 			<%end%>
-		<%end%>
 	</div>
+	<%end%>
 </div>

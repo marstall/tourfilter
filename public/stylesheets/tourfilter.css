@@ -644,6 +644,15 @@ h3
 	-moz-border-radius:12px;
 }
 
+.fullpage_flyer_footer_header
+{
+	width:590px;
+	padding:4px;
+	margin:0px;
+	border:1px solid #ccc;
+	background-color:#fff;
+}
+
 .small_form_header
 {
 	font-size:12px;
@@ -759,7 +768,7 @@ h3
 
 .fullpage_flyer_text
 {
-	margin-top:28px;
+	margin-top:8px;
 	font-family:Helvetica;
 	font-size:16px;
 	width:600px;
@@ -781,6 +790,7 @@ font-size:20px;
 
 .flyer_when
 {
+	text-transform:lowercase;
 }
 
 .flyer_header
@@ -923,7 +933,7 @@ breakpoint<400: everything is 100%
 
 .fullpage_flyer
 {
-	margin-right: 20px;
+	margin-left: 10px;
 	width:600px;
 	text-transform:none;
 	padding:0px;
@@ -3544,8 +3554,8 @@ h1x {
 	font-size:14px;
  	color:#369;
 	padding:4px;
-	margin-bottom:0px;
-	width:600px;
+	margin-bottom:16px;
+	width:100%;
 }
 
 .above_header
