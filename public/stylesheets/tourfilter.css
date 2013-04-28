@@ -752,7 +752,6 @@ h3
 
 .flyer_text
 {
-	margin-left:text;
 	font-family:Helvetica;
 	font-size:13px;
 	
@@ -760,7 +759,7 @@ h3
 
 .fullpage_flyer_text
 {
-	margin-left:text;
+	margin-top:28px;
 	font-family:Helvetica;
 	font-size:16px;
 	width:600px;
