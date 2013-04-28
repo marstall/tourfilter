@@ -274,6 +274,9 @@ ActionController::Routing::Routes.draw do |map|
   map_connect map, "/www",
               :controller   => "www",
               :action       => "index"
+  map_connect map, "/www",
+                :controller   => "www",
+                :action       => "index"
   map_connect map, "/calendar",
               :controller   => "calendar",
               :action => "index"

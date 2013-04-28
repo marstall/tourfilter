@@ -726,12 +726,21 @@ h3
 
 }
 
+.fullpage_flyer_footer
+{
+	padding:8px;
+	width:400px;
+	font-size:16px;
+	line-height:20px;
+}
 
 .flyer_footer
 {
 	padding:8px;
 	font-size:16px;
 	line-height:20px;
+	max-height:192px;
+	overflow:hidden;
 }
 
 .flyer_posted_by
@@ -747,6 +756,18 @@ h3
 	font-family:Helvetica;
 	font-size:13px;
 	
+}
+
+.fullpage_flyer_text
+{
+	margin-left:text;
+	font-family:Helvetica;
+	font-size:16px;
+	width:600px;
+}
+.fullpage_flyer_text:first-line
+{
+font-size:24px;
 }
 
 .flyer_text:first-line

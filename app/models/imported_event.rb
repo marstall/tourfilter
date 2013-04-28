@@ -69,6 +69,7 @@ class ImportedEvent < ActiveRecord::Base
       desc2.gsub!(m,"<span class='flyer_url'><a href='#{m}'>#{anchor_text}</a></span>")
       }
     desc2.gsub!(/#{highlight}/i,"<span class='search_highlight'>#{highlight}</span>") if highlight
+    desc2.gsub!(/\r?\n/,"<br>")
     return desc2
   end
 
