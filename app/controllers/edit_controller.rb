@@ -433,13 +433,17 @@ c = GeoIP.new("/Users/chris/maxmind/GeoLiteCity.dat").city("76.24.220.14")
     @nav_array= 
       [
         {"new"=>'flyers_partial'},
-        {'popular'=>'popular_partial'},
-        {'following'=>'friends_partial'},
-        {'alerts'=>'alerts_partial'},
+        {'popular'=>'popular_partial'}
+
         
 #        {'full_SP_calendar'=>'calendar_partial'},
 #        {'your_SP_calendar'=>'your_shows_partial'}
       ]
+    if @youser
+      @nav_array<<{'your events'=>'your_shows_partial'}
+      @nav_array<<{'alerts'=>'alerts_partial'}
+      @nav_array<<{'following'=>'friends_partial'}
+    end
     return @options_label,@nav_array
   end
 

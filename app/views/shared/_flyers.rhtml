@@ -1,3 +1,8 @@
+<%@total_flyers = ImportedEvent.count_future_flyers(@metro_code)%>
+<%@page_size||=params[:page_size]%>
+<%@start||=params[:start]%>
+<%@page_size||=50%>
+<%@start||=0%>
 <%if @query%>
 	<div style='margin:1em;margin-left:2px'>
 	<%if @imported_events.size>0%>
@@ -30,9 +35,19 @@ end
 	<!--no flyers found in this category.-->
 <%end%>
 </div>
-
-<div id='navigation'><a href='/<%=@metro_code%>/flyers?start=<%="#{(@start.to_i+@page_size.to_i)}"%>'>next <%=@page_size%></a></div>
+<div id='navigation'>
+<%if @total_flyers>(@start.to_i+@page_size.to_i)%>
+<%page_size=@page_size%>
+<%page_size=@total_flyers-@start.to_i if @total_flyers-@start.to_i<@page_size%>
+<a href='/<%=@metro_code%>/flyers?start=<%="#{(@start.to_i+@page_size.to_i)}"%>'>next <%=page_size%></a>
+<%end%>
+<%if @start>0%>
+prev = (@start.to_i-@page_size.to_i)
+prev = 0 if prev>0
+<a href='/<%=@metro_code%>/flyers?start=<%="#{(@start.to_i+@page_size.to_i)}"%>'>prev <%=@page_size%></a>
+<%end%>
 <script>
+</div>
 
 jQuery(document).ready(function() {
 	var $container = jQuery('#flyer_board');

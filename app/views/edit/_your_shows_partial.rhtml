@@ -1,8 +1,14 @@
 <%@options_label,@nav_array = controller.use_calendar_nav_array%>
+<%@imported_events = ImportedEvent.all_flyers({:metro_code=>@metro_code,:user_id=>@youser.id,:order=>'ieu.id desc'},nil)%>
 <%=render(:partial=>'shared/calendar_options',:locals=>{:options_label=>@options_label,:nav_array=>@nav_array})%>
+<h2 style='text-transform:none'>posted/reflyered by you
+	<div id='manage_recommendations' class="manage_recommendations"></div>
+	
+	</h2>
+<%=render(:partial=>'shared/flyers',:locals=>{:highlight_reflyer_by=>@youser})%>
 <h2>your shows
   <a href='<%=url("/ical/about")%>'><img class='faded_80' height=12px src='/images/ical.gif'></a>
-  <div class='gray small'>These are shows by bands you've added. Not much here? Add more bands!</div>
+  <div class='gray small'>These are shows by artist, etc. you've added alerts for. Not much here? Add more alerts!</div>
   </h2>
 <%if @youser%>
 <div class='my_shows'>

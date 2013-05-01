@@ -262,6 +262,16 @@ class ImportedEvent < ActiveRecord::Base
 #      return super.image_url
 #    end
 #  end
+
+  def ImportedEvent.count_future_flyers(metro_code)
+    sql = <<-SQL
+    select count(*) from imported_events
+    where imported_events.date>now()
+    and imported_events.source='user'
+    and metro_code='#{metro_code}'
+    SQL
+    return ImportedEvent.count_by_sql(sql)
+  end
   
   def ImportedEvent.popular_flyers(params={},options={})
     limit = options[:limit]||50
