@@ -33,7 +33,7 @@ class ApplicationController < ActionController::Base
 =end
   
   def page_size
-    5
+    50
   end
 
   HTML_REGEXP=/[<>]|(update|delete|insert)\s/
