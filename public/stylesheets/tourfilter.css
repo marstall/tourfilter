@@ -2938,16 +2938,21 @@ th
 	vertical-align:-14px;
 }
 
-#navigation a:link { text-decoration: underline; }
-#navigation a:visited { text-decoration: underline; }
+#navigation a:link { text-decoration: none; border-bottom: 6px solid #369;color:#369}
+#navigation a:visited { text-decoration: none; border-bottom: 6px solid #369;color:#369 }
 #navigation a:hover { text-decoration: none; border-bottom:6px solid #369;padding-bottom:0px; }
 #navigation a:active { text-decoration: underline; }
 
 #navigation
 {
+	display:inline; 
 	width:100%;
 	font-size:24px;
+	background-color:#ffc;
+	padding:1em;
 	text-align:center;
+	margin:1em;
+	visibility:hidden;
 }
 
 #header_title

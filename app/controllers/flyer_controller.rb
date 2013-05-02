@@ -98,7 +98,7 @@ class FlyerController < ApplicationController
   end
 
   def flyers
-    @page_size=50
+    @page_size=self.page_size
     @tags=params[:tags] 
     @start = params[:start]||0
     @num = params[:num]||@page_size

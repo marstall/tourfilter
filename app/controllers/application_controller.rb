@@ -31,6 +31,10 @@ class ApplicationController < ActionController::Base
 	["reading","reading"],
 	["other","other"]]
 =end
+  
+  def page_size
+    5
+  end
 
   HTML_REGEXP=/[<>]|(update|delete|insert)\s/
   SALT="BRUN TAXMAN"

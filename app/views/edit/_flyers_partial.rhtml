@@ -4,7 +4,7 @@
 
 	@order=params[:order] || @controller.get_cookie(:order)
 	@start = (params[:start]||0).to_i
-	@page_size=50
+	@page_size=@controller.page_size
 	@num = (params[:num]||@page_size).to_i
     
 	@order = "created" if not @order
