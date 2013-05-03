@@ -266,7 +266,7 @@ class ImportedEvent < ActiveRecord::Base
   def ImportedEvent.count_future_flyers(metro_code)
     sql = <<-SQL
     select count(*) from imported_events
-    where imported_events.date>now()
+    where imported_events.date>adddate(now(),interval -20 hour)
     and imported_events.source='user'
     and metro_code='#{metro_code}'
     SQL
@@ -293,7 +293,7 @@ class ImportedEvent < ActiveRecord::Base
       from imported_events,imported_events_users 
       #{select_sql}
       where imported_events_users.imported_event_id=imported_events.id
-      and (imported_events.date>now() or imported_events.end_date>now())
+      and (imported_events.date>adddate(now(),interval -20 hour) or imported_events.end_date>adddate(now(),interval -20 hour))
       and imported_events_users.created_at>adddate(now(),interval -180 day)
       and imported_events_users.deleted_flag=false
       #{tags_sql}
@@ -369,7 +369,7 @@ class ImportedEvent < ActiveRecord::Base
         #{select_sql}
         where source='user'
         and image_url is not null
-        and (imported_events.date>now() or imported_events.end_date>now())
+        and (imported_events.date>adddate(now(),interval -20 hour) or imported_events.end_date>adddate(now(),interval -20 hour))
         #{metro_sql}
         #{flagged_sql}
         #{tags_sql}
