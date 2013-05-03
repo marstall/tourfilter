@@ -293,7 +293,7 @@ class ImportedEvent < ActiveRecord::Base
       from imported_events,imported_events_users 
       #{select_sql}
       where imported_events_users.imported_event_id=imported_events.id
-      and imported_events.date>now()
+      and (imported_events.date>now() or imported_events.end_date>now())
       and imported_events_users.created_at>adddate(now(),interval -180 day)
       and imported_events_users.deleted_flag=false
       #{tags_sql}
@@ -369,7 +369,7 @@ class ImportedEvent < ActiveRecord::Base
         #{select_sql}
         where source='user'
         and image_url is not null
-        and date>now()
+        and (imported_events.date>now() or imported_events.end_date>now())
         #{metro_sql}
         #{flagged_sql}
         #{tags_sql}

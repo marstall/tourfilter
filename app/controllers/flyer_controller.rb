@@ -146,9 +146,8 @@ class FlyerController < ApplicationController
     @errors=Array.new
     date=nil
     @errors<<"please choose an event type" if event.category==''
-    @errors<<"please enter a date in the future" if event.date<DateTime.now
+    @errors<<"please enter a date in the future" if event.date<DateTime.now && event.end_date<DateTime.now
     @errors<<"please enter an end date on or later than the start date" if event.multiple_days and event.end_date<event.date
-    @errors<<"must upload an image" unless event.image_url and event.image_url=~/^http/
     @errors<<"post as user not found." if (@youser.is_admin and (not event.post_as or not event.post_as.empty?)) and not User.find_by_name(event.post_as) 
 #    @errors<<"invalid character" if event.venue_name+event.body+event.description+event.url=~HTML_REGEXP
 #    @errors<<"must select a metro" unless params[:object][:metro_code] and params[:object][:metro_code].strip.size>3
@@ -183,7 +182,12 @@ class FlyerController < ApplicationController
       event.username=u.name
     end
     event.user_metro=event.metro_code=@metro_code
-
+    
+    unless flyer_validate(event)
+      render(:layout=>false)
+      return
+    end
+    
     if original_image_url!=event.image_url
       duplicate_image = event.process_image 
       if duplicate_image
@@ -193,7 +197,8 @@ class FlyerController < ApplicationController
         return
       end
     end
-    unless flyer_validate(event)
+    unless event.image_url and event.image_url=~/^http/
+      @errors<<"must upload an image" 
       render(:layout=>false)
       return
     end
