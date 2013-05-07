@@ -45,7 +45,7 @@ class ApplicationController < ActionController::Base
   before_filter :connect_to_the_correct_database
   before_filter :initialize_user, :except => :login
   before_filter :mark_time
-  before_filter :ensure_www
+#  before_filter :ensure_www
   before_filter :set_tracking_cookie,:except => :track_click
   before_filter :set_referer_cookie,:except => :track_click    
   before_filter :set_page_cache_directory
