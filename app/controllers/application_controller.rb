@@ -450,7 +450,7 @@ class ApplicationController < ActionController::Base
       return false     
     end
     return true if request.host=~/antiplex|amazon|localhost|tourfilter\.(com|local)|^192.168/
-    return true if request.env['HTTP_REFERER']~=/ELB-HealthChecker/
+    return true if request.env['HTTP_REFERER']=~/ELB-HealthChecker/
     redirect_to "http://www.tourfilter.com#{request.path}"
     return false     
   end
