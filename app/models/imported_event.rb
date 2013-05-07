@@ -262,13 +262,28 @@ class ImportedEvent < ActiveRecord::Base
 #      return super.image_url
 #    end
 #  end
+=begin
+select imported_events.* from imported_events
+       where source='user'
+       and image_url is not null
+       and (imported_events.date>adddate(now(),interval -20 hour) or imported_events.end_date>adddate(now(),interval -20 hour))
+        and imported_events.metro_code='boston' 
+        and flagged is null
+       
+       
+       
+       
+       group by imported_events.id
+       order by created_at desc
 
+=end
   def ImportedEvent.count_future_flyers(metro_code)
     sql = <<-SQL
-    select count(*) from imported_events
-    where imported_events.date>adddate(now(),interval -20 hour)
-    and imported_events.source='user'
-    and metro_code='#{metro_code}'
+    select count(distinct id) from imported_events
+      where (imported_events.date>adddate(now(),interval -20 hour) or imported_events.end_date>adddate(now(),interval -20 hour))
+      and imported_events.source='user'
+      and flagged is null and image_url is not null
+      and metro_code='#{metro_code}'
     SQL
     return ImportedEvent.count_by_sql(sql)
   end

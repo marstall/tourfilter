@@ -41,7 +41,7 @@ end
 <div id='navigation'>
 	<%if @start>0
 		prev = @start-@page_size
-		prev = 0 if prev
+		prev = 0 if prev<0
 	%>
 		<a href='/<%=@metro_code%>/flyers?start=<%="#{prev}"%>'>prev <%=@page_size%></a>
 	<%end%>
