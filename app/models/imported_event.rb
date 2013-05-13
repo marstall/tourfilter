@@ -131,10 +131,30 @@ class ImportedEvent < ActiveRecord::Base
   end
 
   
-  def precis(foo=nil,boo=nil,moo=nil)
-    body
-  end
-  
+    def raw_page_precis_for_admin(query,highlight_left="<strong>",highlight_right="</strong>")
+      begin
+        body.downcase!
+        query.downcase!
+        query.strip!
+        ind = body.index("#{query}")
+        return nil if not ind
+        precis_start = ind-500
+        precis_start=0 if ind<0
+        precis =body[precis_start,1000]
+  #      precis.gsub! ("<","&lt;")
+  #      precis.gsub! (">","&gt;")
+        precis.gsub! /(#{query})/i,"#{highlight_left} #{query} #{highlight_right}" if precis
+        ind_gt=precis.index(">")+1
+        precis=precis[ind_gt,precis.size-ind_gt]
+  #      precis = Tidy.open(:show_warnings=>false) do |tidy|
+  #        tidy.options.show_body_only = true
+  #        precis = tidy.clean(precis)
+  #      end
+        return precis
+      rescue => e
+        return e
+      end
+    end  
   def domain
     begin
       url =url(true)

@@ -65,9 +65,9 @@ ats.each{|at|
 			
 		</td>
 		<td valign="top" class="track_name_<%=i%2+1%>" onClick="invalidate_import(<%=at.id%>)">
-			<%=at.artist_name.downcase.gsub(term_text,"<strong>#{term_text}</strong>")%>
+			<%=event.raw_page_precis_for_admin(term_text)%>
 		</td>
-		<td onClick="invalidate_import(<%=at.id%>)">
+		<td onClick="invalidate_	import(<%=at.id%>)">
 		<a target="0" href="<%=url('/flyers/#{event.category}')%>"><%=event.category%></a>
 		<%event.tags.each{|tag|%>
 			<a target="0" href="<%=url('/flyers/#{tag.text}')%>">#<%=tag.text%></a>
