@@ -445,6 +445,7 @@ class ApplicationController < ActionController::Base
   end
 
   def ensure_www
+    return true
     if request.host=='tourfilter.com'
       redirect_to "http://www.tourfilter.com#{request.path}"
       return false     
