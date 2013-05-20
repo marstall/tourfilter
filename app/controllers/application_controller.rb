@@ -36,6 +36,14 @@ class ApplicationController < ActionController::Base
     50
   end
 
+  def portrait_flyer_width
+    400
+  end
+
+  def landscape_flyer_width
+    450
+  end
+
   HTML_REGEXP=/[<>]|(update|delete|insert)\s/
   SALT="BRUN TAXMAN"
 #  before_filter :perform_hostname_corrections

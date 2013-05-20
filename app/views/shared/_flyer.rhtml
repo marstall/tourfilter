@@ -3,7 +3,32 @@
 <%return unless ie and ie.image%>	
 <%users = ImportedEventsUser.users_for(ie,false)%>
 <%status_class = "unprocessed_flyer" if ie.status=='new'%>
-<div id="ie_<%=ie.id%>" imported_event_id="<%=ie.id%>" class='flyer <%=status_class%>'
+<%
+=begin
+style="width:400px"
+style="width:300px" if ie.image.width
+	width = ie.image.width
+	if width 
+		if width<@controller.portrait_flyer_width
+			style="width:#{width}px"
+		else
+			#width is greater than 400 - if width is greater than height, widen flyer a little
+			if ie.image.orientation and ie.image.orientation=='landscape'
+				if width<@controller.landscape_flyer_width
+					style="width:#{width}px"
+				else
+					style="width:#{@controller.landscape_flyer_width}px"
+				end
+			else
+				style="width:#{@controller.portrait_flyer_width}px"
+			end
+		end
+	else
+		style="width:#{@controller.portrait_flyer_width}px"
+	end
+=end
+%>
+<div id="ie_<%=ie.id%>" imported_event_id="<%=ie.id%>" class='flyer <%=status_class%>' 
 	>
 	<div class='rounded_image_container_container'>
 		<div class='rounded_image_container'>
@@ -23,7 +48,7 @@
 				</span>
 	      		<span class='flyer_when'><%=ie.short_time_description%></span>
 			</div>
-	 		<a href='<%=ie.oneup_url(@metro_code)%>'><img style='display:none' onload='jQuery(this).show()' border=0  width='400px'  src='<%=ie.image.medium_url%>' ></a>
+	 		<a href='<%=ie.oneup_url(@metro_code)%>'><img style='display:none' onload='jQuery(this).show()' border=0  width='100%'  src='<%=ie.image.medium_url%>' ></a>
 		</div>
 	</div>
 	<div class='flyer_footer' >

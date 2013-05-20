@@ -773,7 +773,8 @@ h3
 	font-size:16px;
 	width:600px;
 }
-.fullpage_flyer_text:first-line
+.fullpage
+_text:first-line
 {
 font-size:24px;
 }
@@ -2819,7 +2820,7 @@ th
 	width:100%;
 	-webkit-border-radius:10px;
 	-moz-border-radius:10px;
-	background-color:#ddf5f5;
+	background-color:#a4d3e9;
 	text-transform:lowercase;
 }
 
@@ -2892,20 +2893,48 @@ th
 .co_logo_tourfilter
 {
 	color:#369;
+	text-shadow: 2px 2px 2px #000;
 }
 
+.logo_filter
+{
+	letter-spacing:-1px;
+	margin-left:2px;
+	xcolor:#fd5555;
+	xtext-shadow: 
+    	1px 1px 0 #920,
+	    2px 2px 0 #820,
+	    3px 3px 0 #720,
+	    4px 4px 0 #620,
+	    5px 5px 0 #500,
+	    6px 6px 0 #400,
+	    7px 7px 0 #300,
+	    8px 8px 0 #200;
+	
+}
 .logo_tourfilter
 {
 	float:left;
 	color:#369;
 	padding:6px;
 	padding-right:0px;
-	background-color:#ddf5f5;
-	text-transform:none;
+	text-transform:lowercase;
+	font-family:helvetica;
+	letter-spacing:-2px;
+	text-shadow: 
+    	1px 1px 0 #229,
+	    2px 2px 0 #228,
+	    3px 3px 0 #227,
+	    4px 4px 0 #226,
+	    5px 5px 0 #225,
+	    6px 6px 0 #224,
+	    7px 7px 0 #223,
+	    8px 8px 0 #222;
 }
 
-.logo_tourfilter a:link { text-decoration: none; color: #333; }
-.logo_tourfilter a:visited { text-decoration: none; color: #333; }
+.logo_tourfilter a:link { text-decoration: none; color: #333;text-shadow: 20px 20px 20px #009; }
+.logo_tourfilter a:visited { text-decoration: none; color: #333;   
+}}
 .logo_tourfilter a:hover { text-decoration: none; border-bottom:6px solid #369;padding-bottom:0px; }
 .logo_tourfilter a:active { text-decoration: non; }
 
@@ -2928,14 +2957,21 @@ th
 
 .logo_title
 {
-	font-weight:normal;
 	margin-left:8px;
 	float:left;
- 	color:#b7dfdf;
-	padding-top:9px;
-	padding-left:0px;
+	padding-top:7px;
+	letter-spacing:-1px;
 	margin-bottom-left:0px;
-	vertical-align:-14px;
+	color:#f96d67;
+	text-shadow: 
+    	1px 1px 0 #900,
+	    2px 2px 0 #800,
+	    3px 3px 0 #700,
+	    4px 4px 0 #600,
+	    5px 5px 0 #500,
+	    6px 6px 0 #400,
+	    7px 7px 0 #300,
+	    8px 8px 0 #200;
 }
 
 #navigation a:link { text-decoration: none; border-bottom: 6px solid #369;color:#369}

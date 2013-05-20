@@ -160,8 +160,10 @@ class Image < ActiveRecord::Base
     # ratio = width/x
     # shrink width to x,
     # then crop height to y
-    width = file.columns
-    puts width
+    self.width = file.columns
+    self.height = file.rows
+    
+    self.orientation = self.width > self.height ? "landscape" : "portrait"
     
     r_s = make_size(file,100,200)
     r_m = make_size(file,400,800)

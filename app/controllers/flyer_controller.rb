@@ -326,8 +326,8 @@ class FlyerController < ApplicationController
       return
     end
     if (@youser.is_admin or @imported_event.is_owner(@youser,@metro_code))
-      ImportedEventMailer::deliver_imported_event_edited(@imported_event, metro_code, @youser, "deleted flyer" )
       ImportedEvent.find(id).destroy
+      ImportedEventMailer::deliver_imported_event_edited(@imported_event, metro_code, @youser, "deleted flyer" ) if ENV['RAILS_ENV']!='development'
       flash[:notice]="flyer successfully deleted."
       redirect_to("/flyers")
     end
