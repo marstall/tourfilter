@@ -2809,11 +2809,19 @@ th
 	text-transform:lowercase;
 }
 
+.rounded_button
+{
+	-webkit-border-radius:4px;
+	-moz-border-radius:4px;
+}
+
 #new_logo
 {
 	margin-left:0px;
 	margin-top:10px;
 	margin-bottom:10px;
+	padding-bottom:7px;
+	padding-left:4px;
 	font-size:36px;
 	font-family:Helvetica;
 	font-weight:bold;
