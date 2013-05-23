@@ -2,7 +2,7 @@
 class Image < ActiveRecord::Base
   include UrlFetcher
   begin
-    include Magick 
+    include 'RMagick'
   rescue
     puts "could not find RMagick, continuing ..."
   end

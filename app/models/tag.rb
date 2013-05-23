@@ -30,8 +30,10 @@ class Tag < ActiveRecord::Base
   
   def Tag.find_by_prefix(prefix)
     sql = <<-SQL
-      select tags.*,count(*) cnt from tags,taggings where text like ?
+      select tags.*,count(*) cnt from tags,taggings,imported_events where text like ?
       and tags.id=taggings.tag_id
+      and taggings.imported_event_id=imported_events.id
+      and (imported_events.date>now() or imported_events.end_date>now())
       group by tag_id
       order by cnt desc
       limit 7

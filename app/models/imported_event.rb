@@ -240,7 +240,11 @@ class ImportedEvent < ActiveRecord::Base
 	 	  s+="-#{end_date.day}" if multiple_days && end_date && end_date>date
 	 	else
 	 	  s= "#{Date::MONTHNAMES[date.month]} #{date.day}"
-	 	  s+="-#{end_date.day}" if multiple_days && end_date && end_date>date
+      if multiple_days && end_date && end_date>date
+	 	    s+="-"
+	 	    s+="#{Date::MONTHNAMES[end_date.month]} " if end_date.month!=date.month
+	 	    s+="#{end_date.day}" 
+ 	    end
 	 	end
 	 	return s
   end

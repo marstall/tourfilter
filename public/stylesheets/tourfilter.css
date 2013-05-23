@@ -5,7 +5,8 @@ line-height:1.5em	;
 
 body {
 	background-color: #fff;
-	margin:0px;
+	margin:2px;
+	margin-right:4px;
  	color: #333;
 }
 
@@ -2819,6 +2820,7 @@ th
 {
 	margin-left:0px;
 	margin-top:10px;
+	margin-right:4px;
 	margin-bottom:10px;
 	padding-bottom:7px;
 	padding-left:4px;
