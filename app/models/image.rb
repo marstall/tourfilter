@@ -54,6 +54,9 @@ class Image < ActiveRecord::Base
   def make_size(img,x,y)
     require 'RMagick' 
     
+    img.auto_orient! # read exif data an orient appropriately
+    
+    
     # shrink x first, by appropriate amount.
     # then crop to y
     original_x = img.columns.to_f
@@ -115,7 +118,6 @@ class Image < ActiveRecord::Base
   end
 
   def make_width(img,x)
-    require 'RMagick' 
     
     # shrink x first, by appropriate amount.
     # then crop to y
@@ -152,6 +154,11 @@ class Image < ActiveRecord::Base
     s_m = make_size(file,200,200)
     s_l = make_size(file,400,400)
 
+    r_s = make_size(file,100,200)
+    r_m = make_size(file,400,800)
+    r_l = make_size(file,800,1600)
+    
+
     # ratio = width/x
     # shrink width to x,
     # then crop height to y
@@ -160,9 +167,6 @@ class Image < ActiveRecord::Base
     
     self.orientation = self.width > self.height ? "landscape" : "portrait"
     
-    r_s = make_size(file,100,200)
-    r_m = make_size(file,400,800)
-    r_l = make_size(file,800,1600)
 
 #    n_s = make_width(file,100)
 #    n_m = make_size(file,400)
