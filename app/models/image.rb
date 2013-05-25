@@ -139,7 +139,6 @@ class Image < ActiveRecord::Base
   def process(detect_dupes=true)
 #    term_text = Term.make_url_text(self.term_text)
     # download jpg from urls
-    require 'RMagick' 
     puts "+++ downloading #{self.url} ..."
     filename = download_jpg(self.url)
     self.md5 = Digest::MD5.file(filename).hexdigest
