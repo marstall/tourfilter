@@ -1,11 +1,7 @@
+include 'RMagick'
 
 class Image < ActiveRecord::Base
   include UrlFetcher
-  begin
-    include 'RMagick'
-  rescue
-    puts "could not find RMagick, continuing ..."
-  end
 
 
   belongs_to :imported_event
