@@ -1,4 +1,4 @@
-include 'RMagick'
+require 'RMagick'
 
 class Image < ActiveRecord::Base
   include UrlFetcher
