@@ -134,6 +134,41 @@ class Image < ActiveRecord::Base
     return img
   end
 
+
+  def extract_geolocation(img)
+    return unless img
+    img_lat = img.get_exif_by_entry('GPSLatitude')[0][1].split(', ') rescue nil
+    img_lng = img.get_exif_by_entry('GPSLongitude')[0][1].split(', ') rescue nil
+
+    lat_ref = img.get_exif_by_entry('GPSLatitudeRef')[0][1] rescue nil
+    lng_ref = img.get_exif_by_entry('GPSLongitudeRef')[0][1] rescue nil
+
+    return unless img_lat && img_lng && lat_ref && lng_ref
+
+    latitude = to_frac(img_lat[0]) + (to_frac(img_lat[1])/60) + (to_frac(img_lat[2])/3600)
+    longitude = to_frac(img_lng[0]) + (to_frac(img_lng[1])/60) + (to_frac(img_lng[2])/3600)
+
+    latitude = latitude * -1 if lat_ref == 'S'  # (N is +, S is -)
+    longitude = longitude * -1 if lng_ref == 'W'   # (W is -, E is +)
+
+    self.lat = latitude
+    self.lng = longitude
+  end
+
+  def extract_other_exif(img)
+    return unless img
+    self.make = img.get_exif_by_entry('Make')
+    self.camera_model_name = img.get_exif_by_entry('CameraModelName')
+    self.exif = img.get_exif_by_entry
+  end
+
+  def to_frac(strng)
+    numerator, denominator = strng.split('/').map(&:to_f)
+    denominator ||= 1
+    numerator/denominator
+  end
+  
+    
   def process(detect_dupes=true)
 #    term_text = Term.make_url_text(self.term_text)
     # download jpg from urls
@@ -150,6 +185,8 @@ class Image < ActiveRecord::Base
     # create 3 scaled versions -s, m & l
     puts "creating 6 scaled copies ..."
     file = Magick::Image.read(filename).first
+    extract_geolocation(file)
+    extract_other_exif(file)
     s_s = make_size(file,100,100)
     s_m = make_size(file,200,200)
     s_l = make_size(file,400,400)
