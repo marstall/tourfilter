@@ -148,7 +148,7 @@ class FlyerController < ApplicationController
     @errors<<"please choose an event type" if event.category==''
     @errors<<"please enter a date in the future" if event.date<DateTime.now && event.end_date<DateTime.now
     @errors<<"please enter an end date on or later than the start date" if event.multiple_days and event.end_date<event.date
-    @errors<<"post as user not found." if (@youser.is_admin and (not event.post_as or not event.post_as.empty?)) and not User.find_by_name(event.post_as) 
+#    @errors<<"post as user not found." if (@youser.is_admin and (not event.post_as or not event.post_as.empty?)) and not User.find_by_name(event.post_as) 
 #    @errors<<"invalid character" if event.venue_name+event.body+event.description+event.url=~HTML_REGEXP
 #    @errors<<"must select a metro" unless params[:object][:metro_code] and params[:object][:metro_code].strip.size>3
     return @errors.empty?
