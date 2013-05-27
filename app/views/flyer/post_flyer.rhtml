@@ -88,7 +88,7 @@
 					<%=start_date_string%>
 				</div>
 				</td><td style='white-space:nowrap'>
-				<%=datetime_select "imported_event","date",:order=>[:month,:day,:year]%>
+				<%=date_select "imported_event","date",:order=>[:month,:day,:year]%>
 				<span style='font-size:10px;white-space:nowrap;color:#777'>
 					<%=check_box("imported_event","multiple_days",{:id=>'multiple_days_toggle'},"1","0")%>multiple days</span>
 			</td>
@@ -99,7 +99,7 @@
 					end date
 				</div>
 				</td><td style='white-space:nowrap'>
-				<%=datetime_select "imported_event","end_date",:order=>[:month,:day,:year]%>
+				<%=date_select "imported_event","end_date",:order=>[:month,:day,:year]%>
 				<span style='font-size:10px;white-space:nowrap;color:#777'>
 			</td>
 		</tr>
