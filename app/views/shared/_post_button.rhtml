@@ -10,10 +10,10 @@
 			filepicker.pick({
 			    mimetypes: ['image/*'],
 			    services:['COMPUTER', 'URL','IMAGE_SEARCH','FLICKR', 'PICASA', 'EVERNOTE', 'INSTAGRAM', 'GMAIL', 'DROPBOX', 'FACEBOOK'],
-			  }, function(url, data)
+			  }, function(fpfile)
 			{
-				console.log("uploaded file to "+url)
-				document.location.href='/<%=@metro_code%>/post?url='+url
+//				console.log("uploaded file to "+fpfile.url)
+				document.location.href='/<%=@metro_code%>/post?url='+fpfile.url
 			});
 		}
 </script>
