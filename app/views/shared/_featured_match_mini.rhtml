@@ -22,7 +22,7 @@
 	<div class='match_feature_blog_text'>
       	<div class='featured_match_meta' style='margin-top:2px'>
             <%=place.name%>
-          	<%=match.short_time_description%>
+          	<%=match.short_time_description rescue ""%>
       	</div>
 				<div class='blog_style_description' >	
           <%if feature.description and not feature.description.empty? %>  

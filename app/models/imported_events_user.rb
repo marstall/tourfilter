@@ -5,6 +5,7 @@ class ImportedEventsUser < ActiveRecord::Base
   has_one :user
   
   def ImportedEventsUser.users_for(imported_event,include_author=true)
+    return [] if !imported_event or !imported_event.user_id
     subselect = <<-SUBSELECT
       select * from tourfilter_shared.imported_events_users ieu  where ieu.imported_event_id=#{imported_event.id} and ieu.deleted_flag=false
     SUBSELECT

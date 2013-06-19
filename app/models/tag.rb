@@ -29,6 +29,17 @@ class Tag < ActiveRecord::Base
   end
   
   def Tag.find_by_prefix(prefix)
+    tags = []
+    puts "+++ looking for #{prefix}"
+    Tag.SUPERTAGS.each{|st|
+      puts "+++ st #{st[0]}"
+      if st[0][prefix]
+        puts "+++ found #{prefix} in #{st[0]}"
+        tag = Tag.new
+        tag.text=st[0]
+        tags<<tag
+      end
+      }
     sql = <<-SQL
       select tags.*,count(*) cnt from tags,taggings,imported_events where text like ?
       and tags.id=taggings.tag_id
@@ -38,8 +49,16 @@ class Tag < ActiveRecord::Base
       order by cnt desc
       limit 7
     SQL
-    
-    Tag.find_by_sql([sql,"#{prefix}%"])
+    tags+=Tag.find_by_sql([sql,"#{prefix}%"])
+    return tags
+  end
+  
+  def formatted_text
+    if Tag.is_supertag(text)
+      return text
+    else
+      return "##{text}"
+    end
   end
   
   

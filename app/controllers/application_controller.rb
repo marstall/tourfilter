@@ -69,13 +69,20 @@ class ApplicationController < ActionController::Base
   def auto_complete_for_tag_text
     query = request.raw_post.downcase.split(/[=?&]/)[1]
     tags = Tag.find_by_prefix(query)
-    s="<ul style='text-align:left'>"
-    tags.each{|tag|
-      s+="<li class='foo'>##{tag.text} (#{tag.cnt})</li>"
-      }
-    s+="</ul>"
+    s=""
+    if tags and tags.size>0
+      s="<ul style='text-align:left'>"
+      tags.each{|tag|
+        count=""
+        begin
+          count="(#{tag.cnt})"
+        rescue
+        end
+        s+="<li class='foo'>#{tag.formatted_text} #{count}</li>"
+        }
+      s+="</ul>"
+    end
     render(:inline=>s)
-    
   end
 
   def geoip
