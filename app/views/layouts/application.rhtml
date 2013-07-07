@@ -1,17 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns:fb="http://www.facebook.com/2008/fbml">
 <%if !@fragment%>
+	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 	<head>
-<meta name="verify-v1" content="XkDMxOJ8KMbX5WUCSaSSZ5DwuwkjBBfcTBW50KE84+k=" />
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
 		<%
-#		  if @not_in_a_city
-#  			title="search - tourfilter | concert search engine, concert tickets, live music notifications, calendar of upcoming concerts" 
-#			else
   			title="tourfilter, a free community flyer-board for #{@metro.downcase} events " if @metro
   			title="#{@page_title}" if @page_title
-#  			title="#{@page_title} - tourfilter: #{@metro||''.downcase} concert alerts" if @page_title and @append_minimal_title
   			title=@page_title if @page_title and @no_append_title
-#			end
 		%>
 	  <title><%=title%></title>
 	  <%= stylesheet_link_tag 'tourfilter' %>
