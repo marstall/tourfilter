@@ -557,13 +557,12 @@ h2
 	text-transform:none;
 	font-size:16px;
 	padding:6px;
-	margin-top:0px;
+	margin-top:8px;
 	font-weight:bold;
 	font-size:24px;
 	margin-bottom:12px;
-	background-color:#ddf5f5;
+	background-color:#a4d3e9;
  	color:#333;
-	width:100%;
 }
 
 h2.secondary_column
@@ -3033,14 +3032,20 @@ th
 
 #navigation
 {
+	visibility:hidden;
+	padding-top:2em;
+	padding-bottom:2em;
+	padding-left:0.25em;
+}
+
+#navigation_inner
+{
 	display:inline; 
 	width:100%;
 	font-size:24px;
 	background-color:#ffc;
 	padding:1em;
 	text-align:center;
-	margin:1em;
-	visibility:hidden;
 }
 
 #header_title
@@ -3068,7 +3073,7 @@ th
 #footer 
 {
 	display:none;
-	clear:left;
+		clear:left;
 		margin-right:10.75em;
 		background-color: #EDF5F5;	
 	 color:#EAEAEA;
@@ -3080,17 +3085,40 @@ th
 
 #footer-full-width {
 	display:none;
+	margin-top:3em;
 	clear:left;
 	background-color: #EDF5F5	;
  color:#EAEAEA;
 	padding: 0.5em;
-	padding-left:0.25em;
+	padding-left:0.5em;
 	text-align:left;
 	margin-top:2px;
+	font-size:10px;
 	}
+	
+.fine_print
+{
+	text-align:right;
+	font-size:9px !important;
+	margin-right:36px;
+	color:#999;
+	text-transform:lowercase;
+}
+.fine_print a:link { text-decoration: none; color: #999; }
+.fine_print a:visited { text-decoration: none; color: #999; }
 
 
-#left-header { background-color: inherit;float:left}
+
+
+h1, #left-header { 
+	background-color: inherit;
+	float:left;
+	padding-left:12px;
+	padding-top:6px;
+	text-transform:lowercase;
+	font-size:14px;
+}
+
 #right-header 
 { 
 	background-color: inherit;

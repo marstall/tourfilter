@@ -34,10 +34,10 @@
 <%=render(:partial=>'shared/calendar_options',:locals=>{:options_label=>@options_label,:nav_array=>@nav_array})%>
 <%#=render(:partial=>'shared/flyer_control')%>
 <%if @youser%>
+<h2>flyers from people you follow</h2>
 <%=render(:partial=>"shared/flyers")%>
-<br><Br><br>
 <h2>
-you follow
+people you follow
 </h2>
 <%
 	recommenders = @youser.recommenders

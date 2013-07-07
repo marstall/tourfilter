@@ -7,7 +7,7 @@
 #		  if @not_in_a_city
 #  			title="search - tourfilter | concert search engine, concert tickets, live music notifications, calendar of upcoming concerts" 
 #			else
-  			title="tourfilter, a free flyerboard for  #{@metro.downcase} events " if @metro
+  			title="tourfilter, a free community flyer-board for #{@metro.downcase} events " if @metro
   			title="#{@page_title}" if @page_title
 #  			title="#{@page_title} - tourfilter: #{@metro||''.downcase} concert alerts" if @page_title and @append_minimal_title
   			title=@page_title if @page_title and @no_append_title
@@ -34,8 +34,11 @@ window.hud=false
 	    <%unless @hide_login or @not_in_a_city%>
 		<form method='get' action='/<%=@metro_code%>/flyers'>
 	  	  <div class='above_header' >
+	          <div id="left-header" >
+			  tourfilter, a free community flyer-board for <%=@metro%> events
+			 </div>
 	          <div id="right-header" >
-					<%= text_field_with_auto_complete :tag, :text, {:class=>'search_field',:value=>@query,:autocomplete => "off",:style=>'',:placeholder=>'search boston flyers'},
+					<%= text_field_with_auto_complete :tag, :text, {:class=>'search_field',:value=>@query,:autocomplete => "off",:style=>'',:placeholder=>"search #{@metro.downcase} flyers"},
 						{:after_update_element=> 'function(elem,value) {jQuery(elem).val(jQuery(value).html().substring(0).split(" ")[0])}'}%>
 						</form>
 	  			<span class='header_menu_item '>
@@ -123,17 +126,15 @@ window.hud=false
 
 <%= @content_for_layout %>
 
-<%if !@fragment and not @hide_footert%>
+<%if !@fragment and not @hide_footer%>
 	<%
 #		footer_style="footer"
 		footer_style="footer-full-width" #if @full_width_footer
 #		footer_style="footer-doublenarrow" if @double_wide_right_column
 	%>
+	<br><br>
 	<div class='footer' id="<%=footer_style%>">
 		<span class='footer_menu_item'>
-			<a href="http://www.tourfilter.com/about">about tourfilter</a>
-		</span>
-
 	</div>
 </div>
 
@@ -148,15 +149,7 @@ window.hud=false
 	pageTracker._trackPageview();
 </script>
 
-<%if false%>
-<!-- Start Quantcast tag -->
-<script type="text/javascript" src="http://edge.quantserve.com/quant.js"></script>
-<script type="text/javascript">_qacct="p-6dfYUhvdgBulU";quantserve();</script>
-<noscript>
-<a href="http://www.quantcast.com/p-6dfYUhvdgBulU" target="_blank"><img src="http://pixel.quantserve.com/pixel/p-6dfYUhvdgBulU.gif" style="display: none;" border="0" height="1" width="1" alt="Quantcast"/></a>
-</noscript>
-<!-- End Quantcast tag -->
-<%end%>
+
 <%end%>
 </div>
 

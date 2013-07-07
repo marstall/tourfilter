@@ -440,7 +440,7 @@ c = GeoIP.new("/Users/chris/maxmind/GeoLiteCity.dat").city("76.24.220.14")
 #        {'your_SP_calendar'=>'your_shows_partial'}
       ]
     if @youser
-      @nav_array<<{'your events'=>'your_shows_partial'}
+      @nav_array<<{'your flyers'=>'your_shows_partial'}
       @nav_array<<{'alerts'=>'alerts_partial'}
       @nav_array<<{'following'=>'friends_partial'}
     end

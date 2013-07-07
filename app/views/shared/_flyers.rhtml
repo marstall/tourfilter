@@ -1,4 +1,4 @@
-<%@total_flyers = ImportedEvent.count_future_flyers(@metro_code)%>
+<%@total_flyers=total_flyers.to_i rescue 0%>
 <%@page_size||=params[:page_size]%>
 <%@start||=params[:start]%>
 <%@page_size||=@controller.page_size%>
@@ -39,6 +39,7 @@ end
 <%end%>
 </div>
 <div id='navigation'>
+	<div id='navigation_inner'>
 	<%if @start>0
 		prev = @start-@page_size
 		prev = 0 if prev<0
@@ -46,12 +47,13 @@ end
 		<a href='/<%=@metro_code%>/flyers?start=<%="#{prev}"%>'>prev <%=@page_size%></a>
 	<%end%>
 	showing <%=@start+1%>-<%=@last%> of <%=@total_flyers%> flyers
-	
+
 <%if @total_flyers>@last%>
 <%page_size=@page_size%>
 <%page_size=@total_flyers-@last if @total_flyers-@last<@page_size%>
 <a href='/<%=@metro_code%>/flyers?start=<%="#{(@start+@page_size)}"%>'>next <%=page_size%></a>
 <%end%>
+</div>
 </div>
 <script>
 
@@ -109,7 +111,7 @@ function prep_huds()
 			});
 /*			new Ajax.Updater(
 			         'flyer_hud_feedback'+imported_event_id,
-			 		 
+		 		 
 			         );*/
 		})
 	jQuery(".unflyer_button").on("click",

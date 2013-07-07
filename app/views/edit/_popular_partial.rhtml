@@ -30,5 +30,11 @@
 %>
 <%@options_label,@nav_array = controller.use_calendar_nav_array%>
 <%=render(:partial=>'shared/calendar_options',:locals=>{:options_label=>@options_label,:nav_array=>@nav_array})%>
-<%=render(:partial=>'shared/flyer_control')%>
-<%=render(:partial=>"shared/flyers")%>
+<%total_flyers = ImportedEvent.count_future_flyers(@metro_code)%>
+<%if total_flyers==0%>
+	<%=render(:partial=>'shared/flyers_scarcity')%>
+	<%@hide_footer=true%>
+<%else%>
+	<%=render(:partial=>'shared/flyer_control')%>
+	<%=render(:partial=>"shared/flyers")%>
+<%end%>
