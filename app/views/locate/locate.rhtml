@@ -16,7 +16,7 @@ if you are not automatically redirected within 5 seconds,choose your metro from 
 //    console.log("pick_metro called back: "+json['metros'][0]['code'])
     metros = json['metros']
     metro = metros[0]
-    document.location.href='/'+metro.code
+    if (metro.code!='wichita') document.location.href='/'+metro.code // wichita is maxmind's default when it can't determine location
   }
 
 jQuery(function() {
