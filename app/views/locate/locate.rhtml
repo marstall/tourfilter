@@ -3,7 +3,7 @@
 locating you ... 
 </h2>
 <div class='content' style='vertical-align:4px'>
-if you are not automatically redirected within 5 seconds,choose your metro from this list: <%= select 'metro', 'code', Metro.find_all_active.collect{|m|[m.name,m.code]},{:id=>'metro_code',:include_blank=>'',:index=>5,:selected=>''}%>
+if you are not automatically redirected within 5 seconds, choose your metro from this list: <%= select 'metro', 'code', Metro.find_all_active.collect{|m|[m.name,m.code]},{:id=>'metro_code',:include_blank=>'',:index=>5,:selected=>''}%>
 </div>
 </div>
 </div>

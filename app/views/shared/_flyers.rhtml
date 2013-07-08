@@ -38,7 +38,7 @@ end
 	<!--no flyers found in this category.-->
 <%end%>
 </div>
-<div id='navigation'>
+<div id='navigation' class='show_on_load'>
 	<div id='navigation_inner'>
 	<%if @start>0
 		prev = @start-@page_size
@@ -64,7 +64,7 @@ jQuery(document).ready(function() {
 	    itemSelector : '.flyer',
 	  });
 	});
-	setTimeout(function() {jQuery("#navigation").css("visibility","visible")},2000)
+	setTimeout(function() {jQuery(".show_on_load").css("visibility","visible")},2000)
 	prep_huds();
 	jQuery("#flyer_board").infinitescroll({
 		nextSelector: "#navigation a:first",

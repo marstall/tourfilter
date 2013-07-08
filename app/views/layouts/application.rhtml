@@ -86,12 +86,21 @@ window.hud=false
           <%#=render(:partial=>'shared/instant_search')%>
         </div>
         <div style='float:left'>
-          <div class='logo_tourfilter'><a href='/'>tour<span class='logo_filter'>filter</span></a><!--img style='height:46px' src='/images/tourfilter_logo_4.png'/--></div>
+          <div class='logo_tourfilter'><a href='/'>tour<span class='logo_filter'>filter</span></a><!--img style='height:46px' src='/images/tourfilter_logo_4.png'/-->
+		  </div>
+		<%if @show_logo_subhead%>
+		<div id='logo_subhead'>
+		  a free community flyer-board for <%=@metro%> events
+		</div>
+		<%end%>
+		
           <!--div class='logo_metro'><a href='<%=url("/")%>'><%=@metro%></a></div-->
           <div class='logo_title'><%=@header_title.sub("#","<span style='font-family:monospace;font-size:30px;'>#</span>") if @header_title%></div>
         </div>
 				<div style='float:right;margin-top:12px'>
-				<%=render(:partial=>'shared/post_button')%>
+				<%unless @hide_post_flyer_button%>
+					<%=render(:partial=>'shared/post_button')%>
+				<%end%>
 				</div>
 
         <div style='clear:both'></div>
