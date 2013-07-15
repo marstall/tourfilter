@@ -1,5 +1,7 @@
 <%ie=imported_event%>
+<%return unless ie%>
 <%user = ie.user%>
+<%return unless user%>
 <%width||=400%>
 <div class='flyer_admin' id="flyer_admin_<%=ie.id%>" style='width:<%=width%>px '>
 	<b><%=ie.id%> posted <%=user.name%>, <!--member since <%#=user.short_registered_on%>-->.</b>
