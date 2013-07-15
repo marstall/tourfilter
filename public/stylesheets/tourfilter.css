@@ -926,7 +926,7 @@ font-size:20px;
     /* phones */
 		.flyer 
 		{
-			width:100%;
+			width:96%;
 		}
 		
 		.post_instructions
@@ -2995,6 +2995,13 @@ th
 	    6px 6px 0 #224,
 	    7px 7px 0 #223,
 	    8px 8px 0 #222;
+}
+
+.logo_tourfilter_mobile a:link,.logo_tourfilter a:visited
+{
+	text-shadow: none
+	padding:0px;
+	letter-spacing:0px;
 }
 
 .logo_tourfilter a:hover
