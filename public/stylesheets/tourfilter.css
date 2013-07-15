@@ -10,6 +10,7 @@ body {
  	color: #333;
 }
 
+
 a img { border: 0; }
 a:link { text-decoration: none; color: #333; }
 a:visited { text-decoration: none; color: #333; }
@@ -24,6 +25,19 @@ a:active { text-decoration: underline; }
 	background-color: #fff;
 	margin:4px;
 }
+
+@media only screen and (max-width: 400px) {
+	body {
+		margin:0px;
+		margin-right:0px;
+	}
+
+	#inner_body
+	{
+		margin:0px;
+	}
+}
+
 
 abbr {
 	border-bottom:none
@@ -914,6 +928,11 @@ font-size:20px;
 		{
 			width:100%;
 		}
+		
+		.post_description
+		{
+			display:none;
+		}
 }
 /*
 responsive design for flyer view
@@ -1103,6 +1122,12 @@ breakpoint<400: everything is 100%
 	margin-top:0px;
 	padding-top:0px;
 	margin-left:6px;
+}
+@media only screen and (max-width: 400px) {
+	#calndar_view
+	{
+		margin-left:0px;
+	}
 }
 
 #list_view
