@@ -46,7 +46,7 @@ class FlyerController < ApplicationController
   end
 
   def reflyer
-    if not quick_authenticate_with_user(@youser,params)
+    if (not @youser) || (not quick_authenticate_with_user(@youser,params))
       flash[:error]="To reflyer this, first create an account!"
       render(:js=>"document.location.href='/#{@metro_code}/basic_signup?redirect_url=#{request.referer}'")
       return
