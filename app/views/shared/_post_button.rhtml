@@ -1,3 +1,5 @@
+<%style||="font-size:24px;"%>
+<%cl||="btn btn-primary"%>
 <span id='post_button'>
 <!-- Adds the Filepicker.io javascript library to the page -->
 <script src="https://api.filepicker.io/v1/filepicker.js"></script>
@@ -18,7 +20,7 @@
 		}
 </script>
 
-<button style="font-size:24px;" class="btn btn-primary" data-name="simple get" onClick="on_upload()">+ post flyer</button>
+<button style="<%=style%>" class="<%=cl%>" data-name="simple get" onClick="on_upload()">+ post flyer</button>
 
 <!-- end upload button -->
 </span>

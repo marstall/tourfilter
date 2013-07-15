@@ -19,7 +19,7 @@
 				<a href='/'>tourfilter</a> <a href='/<%=@metro_code%>'><%=@metro_code%></a>
 			</div>
 			<div id='right-header' style='font-size:13px' >
-				<a class='basic_button'  href='/'>+ post flyer</a>
+				<%=render(:partial=>'shared/post_button',:locals=>{:style=>'',:cl=>'basic_button'})%>
 			</div>
 			<div style='clear:both'></div>
 	  	  </div>
