@@ -907,6 +907,14 @@ font-size:20px;
 	-moz-box-shadow: 5px 5px 5px #bbb;
 }
 
+
+@media only screen and (max-width: 400px) {
+    /* phones */
+		.flyer 
+		{
+			width:100%;
+		}
+}
 /*
 responsive design for flyer view
 
@@ -940,6 +948,14 @@ breakpoint<400: everything is 100%
 	padding:0px;
 	margin-bottom:20px;
 	background-color:white;
+}
+
+@media only screen and (max-width: 400px) {
+    /* phones */
+		.fullpage_flyer 
+		{
+			width:100%;
+		}
 }
 
 
@@ -3135,6 +3151,10 @@ h1, #left-header {
 	font-size:14px;
 }
 
+.search_field_mobile
+{
+	width:60px;
+}
 #right-header 
 { 
 	background-color: inherit;
@@ -3683,7 +3703,18 @@ h1x {
 {
 }
 
-.minimal_above_header
+.minimal_header
+{
+	background-color:#EDF5F5;
+	font-family:helvetica;
+	text-align:left;
+	font-size:14px;
+ 	color:#369;
+	padding:4px;
+	margin-bottom:16px;
+	width:100%;
+}
+.minimal_footer
 {
 	background-color:#EDF5F5;
 	font-family:helvetica;

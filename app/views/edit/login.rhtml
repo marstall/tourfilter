@@ -1,6 +1,6 @@
-<div id='main-full-width' >
+<div>
 <h2>
-	Login to Tourfilter <%=@metro%>
+	login
 </h2>
 <div style='background-color:#fff'>
 <%if !@youser_logged_in-%>
@@ -32,16 +32,14 @@
 </table>
 </td>
 <td valign=top style='padding:0.5em;'>
-<span style='padding:0.5em;background-color:#eee' >
-	Don't have a Tourfilter <%=@metro%> account yet? <span class='underline'><a href="<%=url signup_url(params)%>">sign up</a></span>!
-</span>
+<div style='padding:0.5em;background-color:#eee' >
+	Don't have an account yet? <span class='underline'><a href="<%=url signup_url(params)%>">sign up</a></span>!
+</div>
 </td></tr>		
 	</form>
 </table>
 <%else-%>
 <%end%>
-<br>
-
 </div>
 </div>
  <script>

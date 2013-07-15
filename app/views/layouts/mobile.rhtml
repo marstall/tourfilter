@@ -2,6 +2,10 @@
 <html xmlns:fb="http://www.facebook.com/2008/fbml">
 <%if !@fragment%>
 	<head>
+		<meta content="yes" name="apple-mobile-web-app-capable">
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+    	
 		<title><%=@page_title%></title>
 		<%= stylesheet_link_tag 'tourfilter' %>
 		<%unless @no_javascript%>
@@ -11,14 +15,34 @@
 	<body >
 		<div class='minimal_layout_container'>
 	  	  <div class='minimal_header'>
-			<a href='/'>tourfilter</a> <a href='/<%=@metro_code%>'><%=@metro_code%></a>
+			<div id='left-header' >
+				<a href='/'>tourfilter</a> <a href='/<%=@metro_code%>'><%=@metro_code%></a>
+			</div>
+			<div id='right-header' style='font-size:13px' >
+				<a class='basic_button'  href='/'>+ post flyer</a>
+			</div>
+			<div style='clear:both'></div>
 	  	  </div>
     <div id='inner_body' >
 <%end%> <!-- if ! fragment -->
-
+<div style='width:100%'>
 <%= @content_for_layout %>
+</div>
 
 <%if !@fragment and not @hide_footer%>
+	<div class='minimal_footer'>
+	<div id='left-header'>
+		<%if @youser%>
+		<a href='<%=url("/login/logout")%>'>logout</a> &bull;
+		<%else%>
+		<a href='<%=url("/login")%>'>login</a> &bull;
+		<%end%>
+		<a href='<%=url("/metros")%>'>change metro</a> &bull;
+		<a href='<%=url("/?full_version=1")%>'>full version</a>
+	</div>
+	<div style='clear:both'></div>
+  </div>
+
 	<%if ENV['RAILS_ENV']!='development'%>
 	<script type="text/javascript">
 	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");

@@ -9,11 +9,14 @@ require 'geoip'
 @@geoip = nil
 
 class ApplicationController < ActionController::Base
+layout Proc.new { |controller| controller.request.user_agent =~ /iPhone|Blackberry|Android/ ? "mobile" : "application" }
 
   
   include CalendarModule
   include RefererModule
   
+
+
 #  caches_page :bands_wrapper
 
 =begin

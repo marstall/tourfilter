@@ -1,4 +1,4 @@
-<div id='main-full-width' >
+<div>
 <h2>
 	Sign up
 </h2>
@@ -25,7 +25,7 @@
 </td>
 </tr>
 <tr>    
-<td>email address</td>
+<td>email</td>
 <td>
 	<%=text_field(:youser,:email_address,"size" => 16)%>
 	
@@ -37,7 +37,7 @@
 	<%=password_field(:youser,:password,"size" => 16)%>
 </td>
 </tr>
-<tr><td colspan=2>
+<tr><td colspan=3>
 		<div style="padding:2px"></div>
 		<div style="margin:0px;padding:2px;border:0	" class="term_more"><%=check_box(:youser,:wants_weekly_newsletter,{},"true","false")%>send me a weekly <%=@metro.downcase%> concert calendar</div>
 		<div style="padding:2px"></div>
@@ -48,14 +48,9 @@
 </table>
 </td>
 <td valign=top style='padding:0.5em;'>
-<span style='padding:0.5em;background-color:#eee' >
+<div style='padding:0.5em;background-color:#eee' >
 	Already have a Tourfilter <%=@metro%> account? <span class='underline'><a href="<%=url login_url(params[:redirect_url])%>">log in</a></span>!
-</span>
-<br>
-<br>
-<span style='padding:0.5em;background-color:#eee' >
-	We will never send you spam!
-</span>
+</div>
 </td></tr>		
 	</form>
 </table>

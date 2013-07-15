@@ -2,10 +2,7 @@ load "itunes.rb"
 require "base64" 
 
 class EditController < ApplicationController
-#  caches_page :me
-#  caches_page :homepage
-  #cache_sweeper :terms_users_sweeper
-  #@redirect_if_not_youser=true
+
   include QuickAuthModule
   caches_page :term_more_info
 
