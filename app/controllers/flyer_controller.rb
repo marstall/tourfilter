@@ -23,7 +23,7 @@ class FlyerController < ApplicationController
   def post_flyer
     @tags_array = calculate_tags_array(false)
     
-    return if not must_be_known_user("You've successfully uploaded your flyer, but you must create an account to post it!")
+    return if not @youser or  must_be_known_user("You've successfully uploaded your flyer, but you must create an account to post it!")
     @image_url = params[:url]
     id = params[:id]
     if id
