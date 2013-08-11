@@ -362,17 +362,17 @@ layout Proc.new { |controller| controller.request.user_agent =~ /iPhone|Blackber
     # if not, redirect to /locate
     
     redirected=false
-    @metro_code=params[:metro_code]
-    if not @metro_map[@metro_code]
-      @metro_code = get_cookie("metro_code") 
-      if @metro_map[@metro_code]
-        redirect_to "/#{@metro_code}#{request.path}"
-        redirected=true
-      else
-        redirect_to "/locate"
-        redirected=true
-      end
-    end
+    @metro_code=params[:metro_code]||"boston"
+#    if not @metro_map[@metro_code]
+#      @metro_code = get_cookie("metro_code")
+#      if @metro_map[@metro_code]
+#        redirect_to "/#{@metro_code}#{request.path}"
+#        redirected=true
+#      else
+#        redirect_to "/locate"
+#        redirected=true
+#      end
+#    end
     if @metro_map[@metro_code] and not @metro_map[@metro_code].name.empty?
       @metro = @metro_map[@metro_code].name
       @num_places = @metro_map[@metro_code].num_places 
