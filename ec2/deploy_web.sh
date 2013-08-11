@@ -1,6 +1,6 @@
 echo "deploying to web autoscaling group <$2> ..."
 i=0
-web_successes=0
+web_successes=0 
 web_failures=0
 for instance_id in $(as-describe-auto-scaling-groups $2 | grep INSTANCE | cut -d " " -f 3)
 do
