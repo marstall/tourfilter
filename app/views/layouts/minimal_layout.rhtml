@@ -3,7 +3,7 @@
 <%if !@fragment%>
 	<head>
 		<title><%=@page_title%></title>
-		<%= stylesheet_link_tag 'tourfilter' %>
+		<%= stylesheet_link_tag 'reflyer' %>
 		<%unless @no_javascript%>
 		<%= javascript_include_tag "application" %>	
 		<%end%>	
@@ -11,7 +11,7 @@
 	<body >
 		<div class='minimal_layout_container'>
 	  	  <div class='minimal_header'>
-			<a href='/'>tourfilter</a> <a href='/<%=@metro_code%>'><%=@metro_code%></a>
+			<a href='/'>reflyer</a><!-- <a href='/<%=@metro_code%>'><%=@metro_code%></a>-->
 	  	  </div>
     <div id='inner_body' >
 <%end%> <!-- if ! fragment -->

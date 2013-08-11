@@ -227,7 +227,7 @@ class FlyerController < ApplicationController
   #    term_url=url("/#{event.body}")
   #    render(:inline=>"Show submitted. It will appear on the site within 24 hrs, once caches have cleared. You should be able to see it here: <a href='#{term_url}'>#{event.body}</a>",:layout=>false)
   #  else
-  flash[:notice]="flyer successfully posted to tourfilter!"# " Here are some other ways to promote your show."
+  flash[:notice]="flyer successfully posted to reflyer.com!"# " Here are some other ways to promote your show."
   render(:inline=>"<script>location.href='/#{@metro_code}';</script>")#"/promote/#{event.id}';</script>",:layout=>false)
   #  end
   end

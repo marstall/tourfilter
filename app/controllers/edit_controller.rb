@@ -817,7 +817,7 @@ c = GeoIP.new("/Users/chris/maxmind/GeoLiteCity.dat").city("76.24.220.14")
           end
           login_user(@youser,false)
           if params[:redirect_url]
-#            flash[:notice] = 'Account created. Check your inbox for more information about tourfilter.' 
+#            flash[:notice] = 'Account created. Check your inbox for more information about reflyer.' 
           elsif params[:match_id]
           else
 #            flash[:notice] = "Account created. But that doesn't mean you need to stop adding bands!"
@@ -845,7 +845,7 @@ c = GeoIP.new("/Users/chris/maxmind/GeoLiteCity.dat").city("76.24.220.14")
           end
           error_string="error: #{e.message.downcase}" if errors.empty? 
           
-#          error_string="unknown error - please error us about this: <a href='mailto:chris@tourfilter.com'>chris@tourfilter.com</a>" if error_string.nil? or error_string.strip.empty?
+#          error_string="unknown error - please error us about this: <a href='mailto:chris@reflyer.com'>chris@tourfilter.com</a>" if error_string.nil? or error_string.strip.empty?
           set_metro_code('')
           render(:inline=>error_string)  
         end

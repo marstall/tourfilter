@@ -4,12 +4,12 @@
         <meta charset="utf-8" />
 
 		<%
-  			title="tourfilter, a free community flyer-board for #{@metro.downcase} events " if @metro
+  			title="reflyer: boston culture & community. in flyer form." if @metro
   			title="#{@page_title}" if @page_title
   			title=@page_title if @page_title and @no_append_title
 		%>
 	  <title><%=title%></title>
-	  <%= stylesheet_link_tag 'tourfilter' %>
+	  <%= stylesheet_link_tag 'reflyer' %>
 <%unless @no_javascript%>
 	<%= javascript_include_tag "application" %>	
 	<%= javascript_include_tag "effects" %>	
@@ -30,16 +30,16 @@ window.hud=false
 		<form method='get' action='/<%=@metro_code%>/flyers'>
 	  	  <div class='above_header' >
 	          <div id="left-header" >
-			  tourfilter, a free community flyer-board for <%=@metro%> events
+			  boston culture & community. in flyer form.
 			 </div>
 	          <div id="right-header" >
-					<%= text_field_with_auto_complete :tag, :text, {:class=>'search_field',:value=>@query,:autocomplete => "off",:style=>'',:placeholder=>"search #{@metro.downcase} flyers"},
+					<%= text_field_with_auto_complete :tag, :text, {:class=>'search_field',:value=>@query,:autocomplete => "off",:style=>'',:placeholder=>"search"},
 						{:after_update_element=> 'function(elem,value) {jQuery(elem).val(jQuery(value).html().substring(0).split(" ")[0])}'}%>
 						</form>
-	  			<span class='header_menu_item '>
+	  			<span style='display:none' class='header_menu_item '>
 	  				metro: <%=@metro.downcase%> (<a href="<%=url('/metros')%>">switch</a>) &bull;
 	  			</span>
-	  			<span class='header_menu_item '>
+	  			<span style='display:none' class='header_menu_item '>
 	  				<a href="<%=url('/calendar')%>">calendar</a> &bull;
 	  			</span>
 	  			<%if is_admin?%>
@@ -111,7 +111,7 @@ window.hud=false
 <%end%>
 <div id="tf_header">
 	<div id="left-header">
-		<span id='logo'><a href='/<%=@metro_code%>'>tourfilter</a></span>
+		<span id='logo'><a href='/<%=@metro_code%>'>reflyer</a></span>
 		<%if not @hide_metro and not @not_in_a_city%>
 		<span id="logo_metro"><a href='/<%=@metro_code%>'><%=@metro.downcase unless @not_in_a_city%></a></span>
 		<%end%><br>
@@ -159,7 +159,7 @@ window.hud=false
 
 </body>
 <script type="text/javascript">
-var _sf_async_config={uid:21126,domain:"tourfilter.com"};
+var _sf_async_config={uid:21126,domain:"reflyer.com"};
 (function(){
   function loadChartbeat() {
     window._sf_endpt=(new Date()).getTime();

@@ -353,7 +353,7 @@ layout Proc.new { |controller| controller.request.user_agent =~ /iPhone|Blackber
     SETTINGS['date_type']='us'
     @metro_map = Hash.new
     @metro_map=make_metro_map
-    request.host =~ /(\w+)\.(tourfilter\.(?:org|com|net|local))/
+    request.host =~ /(\w+)\.(reflyer\.(?:org|com|net|local))/
     @domain_stub=$2
     subdomain=$1
     

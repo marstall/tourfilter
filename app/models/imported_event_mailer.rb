@@ -6,9 +6,9 @@ class ImportedEventMailer < ActionMailer::Base
     @body["user"]       = user
     @body["metro_code"]       = metro_code
     @body["action"]       = action
-    @bcc=['chris@tourfilter.com']
+    @bcc=['chris@reflyer.com']
     @recipients = 'chris@psychoastronomy.org'
-    @from       = 'info@tourfilter.com'
+    @from       = 'info@reflyer.com'
     @sent_on    = sent_at
     @headers    = {}
   end
@@ -19,7 +19,7 @@ class ImportedEventMailer < ActionMailer::Base
     @body["user"]       = user
     @body["metro_code"]       = metro_code
     @recipients = imported_event.user.email_address
-    @from       = 'Tourfilter <info@tourfilter.com>'
+    @from       = 'Reflyer <info@reflyer.com>'
     @sent_on    = sent_at
     @headers    = {}
   end
@@ -31,7 +31,7 @@ class ImportedEventMailer < ActionMailer::Base
     @body["user"]       = user
     @body["metro_code"]       = metro_code
     @recipients = user.email_address
-    @from       = 'info@tourfilter.com'
+    @from       = 'info@reflyer.com'
     @sent_on    = sent_at
     @headers    = {}
   end
@@ -42,7 +42,7 @@ class ImportedEventMailer < ActionMailer::Base
     @body["user"]       = user
     @body["metro_code"]       = metro_code
     @recipients = user.email_address
-    @from       = 'info@tourfilter.com'
+    @from       = 'info@reflyer.com'
     @sent_on    = sent_at
     @headers    = {}
   end

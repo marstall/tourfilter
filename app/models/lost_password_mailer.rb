@@ -4,7 +4,7 @@ class LostPasswordMailer < ActionMailer::Base
     @subject    = "Your Tourfilter password"
     @body["user"]       = user
     @recipients = user.email_address
-    @from       = 'info@tourfilter.com'
+    @from       = 'info@reflyer.com'
     @sent_on    = sent_at
     @headers    = {}
   end
