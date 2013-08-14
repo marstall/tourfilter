@@ -7,6 +7,11 @@
 		<%unless @no_javascript%>
 		<%= javascript_include_tag "application" %>	
 		<%end%>	
+		<%if @imported_event%>
+		<meta property="og:title" content="<%=@imported_event.body%>" />
+		<meta property="og:type" content="image.jpeg" />
+		<meta property="og:url" content="http://reflyer.com/flyer/<%=@imported_event.id%>" />
+		<meta property="og:image" content="<%=@imported_event.image.large_url%>" />		<%end%>
 	</head>
 	<body >
 		<div class='minimal_layout_container'>
