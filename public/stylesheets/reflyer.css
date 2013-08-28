@@ -2883,7 +2883,8 @@ th
 	width:100%;
 	-webkit-border-radius:10px;
 	-moz-border-radius:10px;
-	background-color:#a4d3e9;
+	x-background-color:#a4d3e9;
+	background-color:white;
 	text-transform:lowercase;
 }
 
