@@ -23,9 +23,7 @@
 window.hud=false
 </script>
 <script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
-
 	<body >
-		
 	    <%unless @hide_login or @not_in_a_city%>
 		<form method='get' action='/<%=@metro_code%>/flyers'>
 	  	  <div class='above_header' >
@@ -82,8 +80,11 @@ window.hud=false
           <%#=render(:partial=>'shared/instant_search')%>
         </div>
         <div style='float:left'>
-          <div class='logo_tourfilter'><a href='/'><img src='/images/ariel_reflyer_1.jpg'></span></a><!--img style='height:46px' src='/images/tourfilter_logo_4.png'/-->
+			<div class='rounded_image_container_container'>
+		<div class='rounded_image_container' >
+          <a href='/'><img style='width:400px' src='/images/ariel_reflyer_2.jpg'></span></a><!--img style='height:46px' src='/images/tourfilter_logo_4.png'/-->
 		  </div>
+		</div>
 		<%if @show_logo_subhead%>
 		<div id='logo_subhead'>
 		  a free community flyer-board for <%=@metro%> events

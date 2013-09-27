@@ -2846,7 +2846,7 @@ th
 	width:830px;
 	-webkit-border-radius:10px;
 	-moz-border-radius:10px;
-	background-color:#ddf5f5;
+	xbackground-color:#ddf5f5;
 	text-transform:lowercase;
 }
 
@@ -2884,8 +2884,8 @@ th
 	-webkit-border-radius:10px;
 	-moz-border-radius:10px;
 	x-background-color:#a4d3e9;
-	background-color:white;
 	text-transform:lowercase;
+	text-align:center;
 }
 
 
@@ -2987,6 +2987,9 @@ th
 	font-family:helvetica;
 	letter-spacing:-2px;
 	text-decoration: none; 
+	-webkit-border-radius:10px;
+	-moz-border-radius:10px;
+	
 	text-shadow: 
     	1px 1px 0 #229,
 	    2px 2px 0 #228,
@@ -3178,10 +3181,10 @@ th
 h1, #left-header { 
 	background-color: inherit;
 	float:left;
-	padding-left:12px;
+	padding-left:24px;
 	padding-top:6px;
 	text-transform:lowercase;
-	font-size:14px;
+	font-size:18px;
 }
 
 .search_field_mobile
