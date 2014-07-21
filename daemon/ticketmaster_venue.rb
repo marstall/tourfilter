@@ -19,6 +19,20 @@ include FileUtils
 # =>      does it exist (based on unique event identifier)? if not:
 # =>        save artist name, tm artist id, majorcatid,minorcatid, date, time,url,unique event identifier
 
+
+  def TicketmasterVenue.find_valid_venues
+    # return all source=ticketmaster venues that have a status of 'valid'
+    sql = <<-SQL
+      select venues.*
+      from venues,metros_venues,metros
+      where metros_venues.venue_id=venues.id 
+        and metros_venues.status='valid'
+        and metros_venues.metro_code=metros.code
+        and metros.status='active'
+    SQL
+    find_by_sql(sql)
+  end
+
   def extract_total_events(body)
     # first determine how many pages there are
     doc = Hpricot(body)

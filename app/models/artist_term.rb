@@ -75,8 +75,8 @@ class ArtistTerm < ActiveRecord::Base
   )
   end
 
-  def self.find_likely_matches(order_by,offset,num)
-    find_matches_by_probability("likely",order_by,offset,num)
+  def self.find_likely_matches(order_by,metro_code,offset,num)
+    find_matches_by_probability("likely",order_by,metro_code,offset,num)
   end 
 
   def self.find_unlikely_matches(order_by)

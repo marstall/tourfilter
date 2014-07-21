@@ -9,7 +9,7 @@ Make sure all these imports are really shows that people would want to know abou
 	elsif params[:unlikely]=="1"
 		ats =  ArtistTerm.find_unlikely_matches(params[:order])
 	else
-		ats =  ArtistTerm.find_likely_matches(params[:order],params[:offset]||"0",params[:num]||"10000")
+		ats =  ArtistTerm.find_likely_matches(params[:order],params[:metro_code],params[:offset]||"0",params[:num]||"10000")
 	end
 %>
 <div style='background-color:dad;padding:1em'>

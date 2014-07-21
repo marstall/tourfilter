@@ -110,6 +110,7 @@ class AddShowController < ApplicationController
       venue.user_id=@youser.id
       venue.username=@youser.name
       venue.user_metro=@metro_code
+      venue.state=Metro.find_by_code(@metro_code).state
       venue.save
       mv = MetrosVenue.new  
       mv.metro_code=@metro_code#params[:object][:metro_code]

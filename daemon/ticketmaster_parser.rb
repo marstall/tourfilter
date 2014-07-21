@@ -81,7 +81,7 @@ class TicketmasterParser < ImportParser
       venues=[TicketmasterVenue.find_by_code(code)]
       puts "loaded one venue: #{@code} #{venues[0].name}"
     else
-      venues = TicketmasterVenue.find_all_by_source("ticketmaster")
+      venues = TicketmasterVenue.find_valid_venues
       puts "loaded #{venues.size} venues."
     end
     total = venues.size
