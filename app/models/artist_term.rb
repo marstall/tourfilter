@@ -50,15 +50,20 @@ class ArtistTerm < ActiveRecord::Base
     find_by_sql([sql,"%#{term_text}%"])
   end
 
-  def self.find_matches_by_probability(probability,order_by,offset='0',num='1000000')
+  def self.find_matches_by_probability(probability,order_by,metro_code,offset='0',num='1000000')
    order_by||="imported_events.source,venues.state,venues.city,venues.name,artist_name asc"
+   metro_code_sql = metro_code.nil? ? "" : " and metros_venues.metro_code='#{metro_code}' "
    find_by_sql( <<-SQL
     select artist_terms.id,term_text,artist_terms.imported_event_id,artist_name,imported_events.url,venues.name,
       imported_events.date,venues.city,venues.state
-    from artist_terms,imported_events,venues,metros_venues
+    from artist_terms,imported_events,venues,metros_venues,metros
     where artist_terms.imported_event_id=imported_events.id 
     and imported_events.venue_id=venues.id
     and venues.id=metros_venues.venue_id 	
+    and metros_venues.status='valid'
+    and metros_venues.metro_code=metros.code
+    and metros.status='active'
+    #{metro_code_sql}
     and artist_terms.status='new' 
 	  and imported_events.date>now()    
     and artist_terms.match_probability="#{probability}"
