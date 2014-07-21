@@ -3,12 +3,7 @@ DB_USERNAME=test
 DB_PASSWORD=test
 MAILTO=marstall@gmail.com
 
-0 0 * * 7 /bin/bash -lc "send_newsletters_all_metros.sh"
-
-#0 16 * * * /bin/bash -lc "import_tickets.sh stubhub"
-#0 16 * * * /bin/bash -lc "import_tickets.sh ticketmaster"
-#0 16 * * * /bin/bash -lc "import_tickets.sh ticketsnow"
-#0 16 * * * /bin/bash -lc "import_tickets.sh ticketnetwork"
+#0 0 * * 7 /bin/bash -lc "send_newsletters_all_metros.sh"
 
 0 3 * * * /bin/bash -lc "merge_terms.sh"
 

@@ -23,7 +23,7 @@ create_user_data_file.sh $1
 echo "committing and pushing new production_tag file and git tag $1"
 git commit -am "new production tag: $1"
 git tag -a $1 -m 'tagging release $1'
-git push origin master --tags
+git push origin tourfilterdotcom --tags
 
 $TOURFILTER_HOME/ec2/deploy_web.sh $1
 web_failures=$? # return value
