@@ -19,7 +19,15 @@ include FileUtils
 # =>      does it exist (based on unique event identifier)? if not:
 # =>        save artist name, tm artist id, majorcatid,minorcatid, date, time,url,unique event identifier
 
-
+=begin
+select venues.code,left(venues.name,50),venues.status
+from venues,metros_venues,metros
+where metros_venues.venue_id=venues.id 
+  and metros_venues.status='valid'
+  and metros_venues.metro_code=metros.code
+  and source='ticketmaster'
+  and metros.status='active'
+=end
   def TicketmasterVenue.find_valid_venues
     # return all source=ticketmaster venues that have a status of 'valid'
     sql = <<-SQL
@@ -27,6 +35,7 @@ include FileUtils
       from venues,metros_venues,metros
       where metros_venues.venue_id=venues.id 
         and metros_venues.status='valid'
+        and source='ticketmaster'
         and metros_venues.metro_code=metros.code
         and metros.status='active'
     SQL
