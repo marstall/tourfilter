@@ -4,7 +4,7 @@ do=`cat do`
 if [ $do = "Y" ] 
 then
  echo "OK You said yes, we're going to $action"
-for name in $(m shared "select code from metros")
+for name in $(m shared "select code from metros where status='active'")
 do
  if [ $name != "code" ]; then
  echo m $name -e"update matches set status='invalid' where status='new'"
