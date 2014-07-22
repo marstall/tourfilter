@@ -6,7 +6,7 @@ m shared "update artist_terms set status='valid' where status='new' and match_pr
 echo m shared "update artist_terms set status='invalid' where status='new' and match_probability='unlikely'"
 m shared "update artist_terms set status='invalid' where status='new' and match_probability='unlikely'"
 
-for name in $(m shared "select code from metros order by code asc")
+for name in $(m shared "select code from metros where status='active' order by code asc")
 do
  if [ $name != "code" ]; then 
         echo $name :
