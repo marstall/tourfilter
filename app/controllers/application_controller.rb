@@ -789,7 +789,7 @@ class ApplicationController < ActionController::Base
         @youser.metro_code=@metro_code
         logger.info( "+++ #{metro_code}: #{@youser.metro_code}")
         @youser.save 
-        cookies['calndar_view']='add_SP_bands'
+        cookies['calndar_view']='your_SP_alerts'
         
 #       domain="#{@metro_code}.#{@domain_stub}" 
 #       domain=@domain_stub if @youser.privs=='admin' 

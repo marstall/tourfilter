@@ -433,7 +433,7 @@ c = GeoIP.new("/Users/chris/maxmind/GeoLiteCity.dat").city("76.24.220.14")
     @options_label='calndar_view'
     @nav_array=
       [
-        {'add_SP_bands'=>'add_bands_partial'},
+        {'your_SP_alerts'=>'add_bands_partial'},
         {'full_SP_calendar'=>'calendar_partial'},
         {'your_SP_shows'=>'your_shows_partial'},
         {'friends'=>'friends_partial'}
@@ -815,7 +815,7 @@ c = GeoIP.new("/Users/chris/maxmind/GeoLiteCity.dat").city("76.24.220.14")
 #           flash[:notice]="Thanks for signing up. Invite some friends to share shows with!"
 #           flash[:notice]="Thanks for signing up. Vote for us in the Webbys!"
 #          render(:inline=>"<script>location.href='/#{@metro_code}/welcome/#{@youser.registration_code}';</script>",:layout=>false)
-          cookies['calndar_view']='add_SP_bands'
+          cookies['calndar_view']='your_SP_alerts'
           if params[:redirect_url]
             render(:inline=>"<script>location.href='<%=params[:redirect_url]%>';</script>",:layout=>false)
             return

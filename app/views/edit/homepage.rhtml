@@ -25,7 +25,7 @@
             <%=render_component(:controller=>'edit',:action=>'venues_partial',:params=>params+{:metro_code=>@metro_code})%>
     			<%elsif cookies['calndar_view']=='friends'&&@view!=:calendar%>
             <%=render('friends_partial',:params=>params+{:metro_code=>@metro_code})%>
-    			<%elsif cookies['calndar_view']=='add_SP_bands'&&@view!=:calendar%>
+    			<%elsif cookies['calndar_view']=='your_SP_alerts'&&@view!=:calendar%>
           	<%=render("add_bands_partial",:params=>params+{:metro_code=>@metro_code})%>
     			<%elsif cookies['calndar_view']=='your_SP_shows'&&@view!=:calendar%>
 	           <%=render("your_shows_partial",:params=>params+{:metro_code=>@metro_code})%>

@@ -6,7 +6,7 @@ MAILTO=marstall@gmail.com
 0 4 * * * rm -rf /tourfilter/log/*
 0 4 * * * rm -rf /tourfilter/log/*
 0 4 * * * rm -rf /tmp/*
-0 4 * * * rm -rf /tourfilter/cache
+0 9 * * * rm -rf /tourfilter/cache
 
 0 4 * * * rm -rf /tourfilter/public/*/badge/*
 
