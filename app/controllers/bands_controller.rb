@@ -56,7 +56,7 @@ class BandsController < ApplicationController
     #id = params[:id].gsub(/([A-Z])/,' \1').strip
     #use request_uri instead of params[:id] so that question marks aren't stripped out
     id = request.request_uri
-    id.gsub!(/^\/\w+/,'')
+    #id.gsub!(/^\/\w+/,'')
     id.gsub!(/^\/bands/,"")
     id.gsub!(/^\/trackers/,"")
     id.gsub!(/^\/admin/,"")

@@ -1,0 +1,45 @@
+<%if @shared_events.empty?%>
+<%if @youser%>
+<div class='secondary_column_body track_this' >
+<span id="track_this">
+<%if @youser.tracks_term(@query)%>
+  You track <%=@query.text.downcase%>.
+<%else%>
+					<div style='font-size:14px;color:#777;margin-bottom:4px'>no shows found.</div>
+			    <%= link_to_remote("<span style='color:black;vertical-align:-2px;margin-right:3px'><img src='/images/add.gif'></span>track #{@query}", 
+	                    :loading => "Element.show('tracking')",
+	                    :complete => "$('track_this').innerHTML='you now track #{@query}!';new Effect.Highlight('track_this');$('track_this').innerHTML='You now track #{@query}';Element.hide('tracking')",
+                        :url =>{
+                            :controller => 'user',
+                            :action => 'term',
+                            :term_text => @query,
+							:parent_user_id => nil}) 
+                        %>
+	&nbsp;&nbsp;<span style="display:none;color:green" id="tracking">tracking ...</span>
+	<%end%>
+<%
+	else
+		query_for_url = "#{Term.make_url_text(@query)}"
+		url = "/basic_signup?term=#{query_for_url}"
+%>
+	
+	<div id='instant_scarcity' class='underline' onclick="location.href='<%=url%>'">
+	 No shows found for <b><%=@query%></b>, but we can <a href='<%=url%>'>email you</a> next time he/she/they come to town!
+	</div>
+<%end%>
+<%end%>
+<%@shared_events.each_with_index{|shared_event,i|-%>
+	<%
+		url = shared_event.url
+		url = "/#{Term.make_url_text(shared_event.summary)}" if not url
+	%>
+	<div class='instant_search_result' onclick="location.href='<%=url%>'">
+	<div class='instant_search_name'>
+	<%=shared_event.summary-%> 
+	</div>
+	<div class='instant_search_location' >
+	<%=shared_event.location%>
+ 	<%=shared_event.date.month%>/<%=shared_event.date.day%>
+	</div>
+	</div>
+<%}-%>

@@ -67,6 +67,34 @@ class ImportedEvent < ActiveRecord::Base
     SQL
     self.find_by_sql(sql)
   end
+  
+=begin
+select imported_events.* from imported_events,venues,metros_venues mv
+where date>now()
+and imported_events.venue_id=venues.id
+and mv.metro_code='boston'
+and mv.venue_id=venues.id
+and match body against ('-parking -vip' in boolean mode)
+and imported_events.source='ticketmaster'
+=end
+
+  def self.find_all_future(metro_code)
+    sql = <<-SQL
+      select imported_events.* from imported_events,venues,metros_venues mv
+      where date>now()
+      and imported_events.venue_id=venues.id
+      and mv.metro_code=?
+      and mv.venue_id=venues.id
+      and imported_events.source='ticketmaster'
+    SQL
+    imported_events = self.find_by_sql([sql,metro_code])
+    ret = Array.new
+    imported_events.each{|ie|
+      ret<<ie if ie.body !~ /parking|vip/i
+    }
+    return ret
+  end
+    
 
   def self.find_by_term_and_date(term_text,date)
     sql = <<-SQL

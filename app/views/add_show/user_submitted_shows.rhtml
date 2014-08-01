@@ -1,6 +1,6 @@
 <title>add show</title>
-<div id="main_full_width">
-	<h2>
+<div id="main-full-width" style='width:100%'>
+	<h2 style='width:820px'>
 		shows you've submitted
 	</h2>
 <div > 
@@ -23,26 +23,30 @@
 	<%events.each_with_index{|event,i|%>
 <div class="result">
 		<tr>
-<td class="result_cell" >
+<td class="result_cell" style='width:200px' >
 				<span class='gray smaller'><%=i+1%></span> <%=event.body%>&nbsp;<span class='gray smaller'><%=event.venue.name rescue "n/a"%>, <%=event.date.month%>/<%=event.date.day%></span>
 			</td>
 <td class="result_cell" style='font-size:smaller;font-family:terminal,monospace'>
 				<%valid_terms=event.valid_terms%>
 				<%if valid_terms.size>0%>
-					<span class='underline' style="background-color:#cfc;padding:0.5em">
 					<%if event.status=='term_found'%>
+					<span class='underline' style="background-color:#cfc;padding:0.5em">
 					approved (<%=event.valid_terms.collect{|at|
 						at.term_text.downcase}.join(',')%>)
+					</span>
 					<%end%>
 					<%if event.status=='made_match'%>
+					<span class='underline' style="background-color:#cfc;padding:0.5em">
 					approved + live (<%=event.valid_terms.collect{|at|
 						"<a href='/#{event.venue.metro_code.downcase}/#{at.term_text.downcase.gsub(' ','-')}'>#{at.term_text.downcase}</a>"}.join(',')%>)
+					</span>
 					<%end%>
-				</span>
+				<%if event.status=='no_term_found'||event.status=='rejected'%>
 					<span style="background-color:#fcc;padding:0.5em" class='underline'>
 					<%="rejected (no recognized bands)" if event.status=='no_term_found'%>
 					<%="rejected (by <a href='mailto:chris@tourfilter.com'>editor</a>)" if event.status=='rejected'%>
 					</span>
+				<%end%>
 					<%if event.status=='no_term_found' or event.status=='rejected'%>
 					&nbsp;
 					<span class='underline'>
@@ -50,18 +54,22 @@
 					</span>
 					<%end%>
 				<%else%>
-					<span style="background-color:#ffc;padding:0.5em">
-					<%="new" if event.status=='new'%>
-					</span>
-					<span style="background-color:#ccf;padding:0.5em">
-					<%if event.status=='term_found'%>
-					being reviewed (<%=event.likely_terms.collect{|at|at.term_text.downcase}.join(',')%>)
+				 	<%if event.status=='new'%>
+						<span style="background-color:#ffc;padding:0.5em">
+					<%="new"%>
 					<%end%>
 					</span>
-					<span style="background-color:#fcc;padding:0.5em" class='underline'>
-					<%="rejected (no recognized bands)" if event.status=='no_term_found'%>
-					<%="rejected (by <a href='mailto:chris@tourfilter.com'>editor</a>)" if event.status=='rejected'%>
+					<%if event.status=='term_found'%>
+					<span style="background-color:#ccf;padding:0.5em">
+					being reviewed (<%=event.likely_terms.collect{|at|at.term_text.downcase}.join(',')%>)
 					</span>
+					<%end%>
+					<%if event.status=='no_term_found'||event.status=='rejected'%>
+						<span style="background-color:#fcc;padding:0.5em" class='underline'>
+						<%="rejected (no recognized bands)" if event.status=='no_term_found'%>
+						<%="rejected (by <a href='mailto:chris@tourfilter.com'>editor</a>)" if event.status=='rejected'%>
+						</span>
+					<%end%>
 					</span>
 					&nbsp;
 					<span class='underline'>

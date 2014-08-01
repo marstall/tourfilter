@@ -123,13 +123,14 @@ def fetch(metro)
   ical
 end
 
-def delete_existing(metro)
-  header "deleting existing records for metro #{metro.code} ..."
-  SharedEvent.delete_all(["metro_code=?",metro.code])
+def delete_existing
+  header "deleting existing records ..."
+  SharedEvent.delete_all
 end
 
+
 def save(metro,ical)
-  header "saving new records for metro #{metro.code} ..."
+  header "saving new records from ical for metro #{metro.code} ..."
   raise "ical is blank for metro #{metro.code}" if ical.nil? or ical.strip.empty?
   cals = Icalendar.parse(ical)
   cal = cals.first
@@ -142,7 +143,7 @@ def save(metro,ical)
     shared_event.date = event.dtstart
     shared_event.uid = event.uid
     shared_event.location = event.location
-    shared_event.url = event.url.to_s
+    shared_event.url = nil
     shared_event.metro_code = metro.code
     shared_event.metro_name = metro.name
     shared_event.metro_state = metro.state
@@ -154,6 +155,64 @@ def save(metro,ical)
     shared_event.save
     @shared_events_count[metro.code]+=1
   }
+  
+  save_active_imported_events
+end
+=begin
+| Field         | Type                                                                                             | Null | Key | Default | Extra          |
++---------------+--------------------------------------------------------------------------------------------------+------+-----+---------+----------------+
+| id            | int(11)                                                                                          | NO   | PRI | NULL    | auto_increment |
+| uid           | char(64)                                                                                         | YES  | MUL | NULL    |                |
+| date          | datetime                                                                                         | YES  |     | NULL    |                |
+| time          | time                                                                                             | YES  |     | NULL    |                |
+| venue_id      | int(11)                                                                                          | YES  | MUL | NULL    |                |
+| url           | char(255)                                                                                        | YES  |     | NULL    |                |
+| body          | text                                                                                             | YES  | MUL | NULL    |                |
+| created_at    | datetime                                                                                         | YES  |     | NULL    |                |
+| updated_at    | datetime                                                                                         | YES  |     | NULL    |                |
+| artist_id     | int(11)                                                                                          | YES  |     | NULL    |                |
+| major_cat_id  | int(11)                                                                                          | YES  | MUL | NULL    |                |
+| minor_cat_id  | int(11)                                                                                          | YES  |     | NULL    |                |
+| cancelled     | enum('yes','no')                                                                                 | YES  |     | no      |                |
+| status        | enum('new','term_found','no_term_found','made_match','rejected','processed_unknown_disposition') | YES  | MUL | NULL    |                |
+| level         | enum('primary','secondary')                                                                      | YES  |     | primary |                |
+| venue_name    | char(255)                                                                                        | YES  |     | NULL    |                |
+| source        | char(16)                                                                                         | YES  | MUL | NULL    |                |
+| user_id       | int(11)                                                                                          | YES  | MUL | NULL    |                |
+| username      | char(32)                                                                                         | YES  |     | NULL    |                |
+| user_metro    | char(32)                                                                                         | YES  |     | NULL    |                |
+| num_tickets   | int(11)                                                                                          | YES  |     | NULL    |                |
+| price_high    | float(10,2)                                                                                      | YES  |     | NULL    |                |
+| price_low     | float(10,2)                                                                                      | YES  |     | NULL    |                |
+| onsale_date   | datetime                                                                                         | YES  | MUL | NULL    |                |
+| presale_date  | datetime                                                                                         | YES  |     | NULL    |                |
+| image_url     | varchar(255)                                                                                     | YES  |     | NULL    |                |
+| metro_code    | varchar(32)                                                                                      | YES  |     | NULL    |                |
+| flagged       | varchar(255)                                                                                     | YES  |     | NULL    |                |
+| category      | varchar(32)                                                                                      | YES  |     | NULL    |                |
+| multiple_days | tinyint(1)                                                                                       | YES  |     | 0       |                |
+| end_date      | datetime                                                                                         | YES  |     | NULL    |                |
+=end
+
+def save_active_imported_events
+  header "saving new records from imported_events  ..."
+  imported_events = ImportedEvent.find_all_future("boston")
+  imported_events.each{|event|
+    puts "saving #{event.body} at #{event.venue.name} ..."
+    shared_event = SharedEvent.new
+    shared_event.date = event.date
+    shared_event.uid = event.uid
+    shared_event.location = event.venue.name
+    shared_event.url = event.url
+#    shared_event.metro_code = metro.code
+#    shared_event.metro_name = metro.name
+#    shared_event.metro_state = metro.state
+#    shared_event.metro_lat = metro.lat
+#    shared_event.metro_lng = metro.lng
+    shared_event.summary = event.body
+    shared_event.description = event.body
+    shared_event.save
+    }
 end
 
 =begin
@@ -217,7 +276,7 @@ def main(args)
     metros.each{|metro|
       begin
         ical = fetch(metro) if _fetch
-        delete_existing(metro) if _delete_existing
+        delete_existing if _delete_existing
         save(metro,ical) if _save
       rescue => e
         handle_exception e
@@ -237,11 +296,11 @@ def main(args)
 end
 
 def handle_exception (e)
+  puts e if e
+  puts e.backtrace.join("\n") if e
   ExceptionMailer.logger=@logger
   ExceptionMailer.template_root="../app/views"
   ExceptionMailer::deliver_snapshot("#{@metro_code} daemon",e) 
-  puts e if e
-  puts e.backtrace.join("\n") if e
 end
 
 

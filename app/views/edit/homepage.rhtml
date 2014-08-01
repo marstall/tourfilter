@@ -61,12 +61,6 @@
 	<%#=render(:partial =>"shared/calendar")%>
 	<%#=render(:partial =>"shared/recently_added_shows")%>
 	<div align="right">
-	<%if false #@metro_code=="boston"%>
-	<span style="vertical-align:super">
-		|
-	<a href='<%=url("/feed.pcast")%>'>podcast</a> of bands with upcoming shows in <%=@metro.capitalize%>.
-	</span>
-	<%end%>
 	</div>
 	</div>
 	<div style='clear:right'></div>
@@ -86,6 +80,7 @@
 </form>
 <script>
   
+  jQuery("#search_box").focus();
   function add(term_text,term_id)
   {
     ta = $('youser_terms_as_text')

@@ -41,7 +41,11 @@ function add(term_text)
   <div style='clear:left'></div>
   </div>
   <h2>
+  <%if @metro_active%>
   Edit band list
+  <%else%>
+	Your band list
+	<%end%>
   </h2>
 <div style='margin-top:16px'>
 <%=form_remote_tag (:update =>"result",
@@ -62,13 +66,14 @@ function add(term_text)
   <div style='clear:both'></div>
 <div style='float:left'>
 <%=text_area_tag ("terms_as_text",terms_as_text,{:size => "48x32",:style=>'text-transform:capitalize;font-size:16px;font-family:Helvetica;background-color:#eee;padding:4px;line-height:20px;height:400px'}) -%>
+<%if @metro_active%>
 <div style="clear:both;padding:2px"></div>
 <%= submit_tag 'Save',:id =>"submit"%>
 <input type="submit" name="Cancel" value="Cancel"
 	onclick='document.location.href="/<%=@metro_code%>";return false;'
 	>
 </div>
-
+<%end%>
 
 </form>
 </div>

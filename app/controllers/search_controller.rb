@@ -37,6 +37,10 @@ class SearchController < ApplicationController
     @total_shared_events= SharedEvent.count_by_sql("select count(*) from shared_events")
   end
   
+  def instant
+    render(:action=>"instant",:layout=>false)
+  end
+
   def json
     
   end
@@ -54,6 +58,7 @@ class SearchController < ApplicationController
     render(:inline=>page_with_js,:layout=>false)
   end
 
+  
   def ical
     cal = Icalendar::Calendar.new
     cal.custom_property("X-WR-CALNAME","#{@query.downcase}/tourfilter")
@@ -109,12 +114,23 @@ class SearchController < ApplicationController
     render(:layout=>false)
   end
 
+
+
   def search
     @not_in_a_city=true
     @full_width_footer=true    
     @no_javascript=true
-   if params[:query]
-     @query=params[:query].sub(/\-concerts\-tickets$/,'')
+    if request.raw_post
+      raw_post = request.raw_post.split("&").shift  #comes through like 'superwolf&_' - strip off the part after and including the &        
+      raw_post.gsub!("%20"," ") if raw_post
+    else
+      raw_post = nil
+    end
+    
+    query = params[:query]||raw_post
+    logger.info("+++ query: #{query}")
+   if query
+     @query=query.sub(/\-concerts\-tickets$/,'')
      @query=@query.gsub(/[+-]/," ")
      @query=@query.gsub(/[+-]/," ")
     end
@@ -134,7 +150,7 @@ class SearchController < ApplicationController
 #      render(:inline=>"<script>location.href='/search/#{urlized_query}';</script>",:layout=>false)
 #      return
 #    end
-    return if @query.nil?
+    render :nothing=>true and return if @query.nil?
     if params[:url]
       @query=process_url_for_terms(params[:url]) 
     end
@@ -143,26 +159,29 @@ class SearchController < ApplicationController
     @shared_event_hash=Hash.new
     @shared_event_hash[:summary]=@query
     @format = params[:format]||"html"
+    @shared_events = SharedEvent.search(@shared_event_hash,10000)
+    logger.info("+++ #{@format}")
     if @format=="rss"
-      @shared_events = SharedEvent.search(@shared_event_hash,10000)
       render(:action=>"rss",:layout=>false)
       return
     elsif @format=="json"
-      @shared_events = SharedEvent.search(@shared_event_hash,10000)
       render(:action=>"json",:layout=>false)
       return
     elsif @format=="ical"
-      @shared_events = SharedEvent.search(@shared_event_hash,10000)
       ical
       return
     elsif @format=="badge"
-      @shared_events = SharedEvent.search(@shared_event_hash,10000)
       badge
       return
+    elsif @format=="instant"
+      Action.instant_search_performed(metro_code,@youser,@query,@shared_events.size)
+      instant
+      return
     end
+    logger.info("+++  2 #{@format}")
     cache_total_shared_events
-    @shared_events = SharedEvent.search(@shared_event_hash,200)
-    render :action => "search"
+#    @shared_events = SharedEvent.search(@shared_event_hash,200)
+#    render :action => "search"
   end
   
   def search_results

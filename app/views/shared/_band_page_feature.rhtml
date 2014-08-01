@@ -1,17 +1,17 @@
 <%return unless feature and feature.image%>	
 <div class='featured_match_mini'
 	>
-      <div class='rounded_image_container_container' style='float:left;padding-right:4px;padding-bottom:2px'>
+      <div class='rounded_image_container_container' style='float:left;padding-right:4px;margin-bottom:6px'>
         <div class='rounded_image_container'>
-  			<img border=0 width=120px src='<%=feature.image.large_url%>' >
+  			<img border=0 width=230px src='<%=feature.image.large_url%>' >
 			</div>
 		</div>
 	<div class='match_feature_blog_text'>
 				<div class='blog_style_description' >	
-				  <div class='band_page_editors_pick_header'><%=@term.text%> is a tourfilter editors' pick.</div>
+					<span style='color:red;font-size:smaller'>EDITORS' PICK</span>
           <%if feature.description and not feature.description.empty? %>  
 					<span style='font-weight:bold'>&ldquo;</span><%=feature.description%><span style='font-weight:bold'>&rdquo;</span>
-            <br>-- <a href='/<%=feature.editor_metro_code%>/users/<%=feature.username%>'><%=feature.username%></a>,&nbsp;<%=feature.short_date%>
+            -- <a href='/<%=feature.editor_metro_code%>/users/<%=feature.username%>'><%=feature.username%></a>&nbsp;<%=feature.short_date%>
 					<%end%>
     	  </div>
 	</div>

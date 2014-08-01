@@ -114,9 +114,10 @@ module ApplicationHelper
   end
     
   def url(url)
-    return unless url =~ /^\//
+    return url
+#    return unless url =~ /^\//
     # add metro_code to url
-    "/#{controller.metro_code}#{url}"
+#   "/#{controller.metro_code}#{url}"
   end
   
   def math_based_form_validator
@@ -133,7 +134,11 @@ module ApplicationHelper
 	  session[:auth]=n1*n2
   end
 
-  def redirect_to(options)
+  def _redirect_to(options)
+    if @metro_code=='boston'
+      super(options)
+      return
+    end
     if options.is_a? Hash
       options[:controller]="#{@metro_code}/#{options[:controller]}" if options[:controller]
     elsif options.is_a? String and options =~/^\//
@@ -142,11 +147,11 @@ module ApplicationHelper
     super(options)
   end
 
-  def redirect_to(options,*parameters_for_method_reference)
+  def _redirect_to(options,*parameters_for_method_reference)
     controller.redirect(options,*parameters_for_method_reference)
   end
 
-  def redirect_to(options)
+  def _redirect_to(options)
     controller.redirect(options)
   end
 
@@ -158,7 +163,7 @@ module ApplicationHelper
 
 
 
-  def link_to(name, options = {}, html_options = nil, *parameters_for_method_reference)
+  def _link_to(name, options = {}, html_options = nil, *parameters_for_method_reference)
     if options.is_a? Hash
       return super(name,options,html_options,*parameters_for_method_reference)
     elsif options.is_a? String and options =~/^\//

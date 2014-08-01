@@ -8,7 +8,7 @@ class ClubsController < ApplicationController
       id = params[:id]
       id = id.gsub(/\%26/,'&')
       id = id.gsub(/\%27/,'\'')
-      id = id.gsub(/(\_|%20)/,' ').strip
+      id = id.gsub(/(\_|-|%20)/,' ').strip
       puts "id: #{id}"
       @place=Place.find_by_name(id)
       if @place.nil?

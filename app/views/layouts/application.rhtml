@@ -7,9 +7,9 @@
 		  if @not_in_a_city
   			title="search - tourfilter | concert search engine, concert tickets, live music notifications, calendar of upcoming concerts" 
 			else
-  			title="tourfilter: spam-free concert alerts" 
-  			title="tourfilter #{@metro.downcase}: spam-free concert alerts" if @metro
-  			title="#{@page_title}" if @page_title
+  			title="tourfilter: 	boston concert stuff" 
+#  			title="tourfilter #{@metro.downcase}: spam-free concert alerts" if @metro
+#  			title="#{@page_title}" if @page_title
 #  			title="#{@page_title} - tourfilter: #{@metro||''.downcase} concert alerts" if @page_title and @append_minimal_title
   			title=@page_title if @page_title and @no_append_title
 			end
@@ -65,16 +65,13 @@ jQuery(document).ready(function(){
     			</span>
     			<%end%>
     			<span class='header_menu_item '>
-    				<a href="/search">search</a>
+    				<a href="<%=url('/metros')%>">other metros?</a>
     			</span>
-    			<span class='header_menu_item '>
-    				<a href="<%=url('/metros')%>">other metros</a>
-    			</span>
-    			<span >
+    			<span>
     			  <%unless @hide_login%>
               <%if !@youser_logged_in-%>
         			<span class='header_menu_item' >
-        				<a href="<%=url('/edit/homepage_signup_link')%>">sign up</a>
+        				<a href="<%=url('/signup')%>">sign up for alerts</a>
         			</span>
                 <span class='header_menu_item '>
                 <a href="<%=url('/login')%>">log in</a>
@@ -84,7 +81,7 @@ jQuery(document).ready(function(){
         				<a href="<%=url('/submit_show')%>">submit a show</a>
         			</span>
                 <span class='header_menu_item '>
-                <%= link_to 'logout', :action => :logout%>
+                <%= link_to 'logout', :controller => :logout%>
                 <%="<span style='color:#e77'>a</span>" if is_admin?%>
                 </span>
             <%end%>
@@ -92,38 +89,30 @@ jQuery(document).ready(function(){
             <%end%>
     		</div>
   	  </div>
+
   	  <br>
     	<%end%>	  
     <div id='inner_body'>
-			<%unless @hide_header%>
-      <div id='logo' >
-        <div style='float:right;padding:12px'>
-          <%#=render(:partial=>'shared/instant_search')%>
-        </div>
-        <div style='float:left'>
+	<%unless @hide_header%>
+      <h1>
           <div class='logo_tourfilter'><a href='/'>Tourfilter</a></div>
-          <div class='logo_metro'><a href='<%=url("/")%>'><%=@metro%></a></div>
           <div class='logo_title'><%=@header_title%></div>
-        </div>
-        <div style='clear:both'></div>
-      </div>
-      <div class='signup ' style='display:none'>
-        <div class='gray_links underline' style='float:right'><a href='/login'>login</a></div>
-        <div style='float:left' class='underline'>
-          spam-free concert alerts: <a href="<%=url('/edit')%>">sign up</a>
-        </div>
-        <div style='clear:both'></div>
-        </div>
-<%end%>
-<div id="tf_header">
-	<div id="left-header">
-		<span id='logo'><a href='/<%=@metro_code%>'>tourfilter</a></span>
-		<%if not @hide_metro and not @not_in_a_city%>
-		<span id="logo_metro"><a href='/<%=@metro_code%>'><%=@metro.downcase unless @not_in_a_city%></a></span>
-		<%end%><br>
-	</div>
-    <br>
-</div>
+		  <div id='search_box_container' style='float:right'>
+			<input id='search_box' name='search_box' autocomplete="off" 
+				placeholder='search <%=@show_count%> boston shows	 ' type=text>
+			<div id='instant_search_results'></div>
+			</div>
+			<%= observe_field(:search_box,
+											  :frequency => 1,
+											  :update => :instant_search_results,
+											  :evalScripts => true,
+											  :url => {:controller=>:search,:action => :search,:format => 'instant'}
+												)%>
+          <div style='clear:both'></div>
+		  <div class = 'header_text'>boston concert stuff: email alerts, listings, editors' picks, etc.</div>
+	  </h1>
+	
+	<%end%> <!-- end hide_header -->
 	<div style="clear:both;"></div>
 	<div style="padding:2px"></div>
 <%if flash[:notice]%>

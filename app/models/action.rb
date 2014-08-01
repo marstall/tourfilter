@@ -4,6 +4,7 @@ class Action < ActiveRecord::Base
   
   OBJECT_TYPE_TERM = "term"
   OBJECT_TYPE_USER = "user"
+  OBJECT_TYPE_INSTANT_SEARCH = "instant_search"
   OBJECT_TYPE_WEEKLY_NEWSLETTER = "weekly_newsletter"
   OBJECT_TYPE_MONTHLY_NEWSLETTER = "monthly_newsletter"
 
@@ -11,6 +12,7 @@ class Action < ActiveRecord::Base
   ACTION_TYPE_ADDED = "added"
   ACTION_TYPE_REMOVED = "removed"
   ACTION_TYPE_SENT = "sent"
+  ACTION_TYPE_PERFORMED = "performed"
   
 
   def self.user_registered(user,referer_domain=nil,referer_path=nil)
@@ -39,11 +41,15 @@ class Action < ActiveRecord::Base
     self.create(metro_code,user,ACTION_TYPE_SENT,OBJECT_TYPE_MONTHLY_NEWSLETTER,user.id,"sent monthly newsletter")
   end
   
+  def self.instant_search_performed(metro_code,user,query,num_results)
+    self.create(metro_code,user,ACTION_TYPE_PERFORMED,OBJECT_TYPE_INSTANT_SEARCH,nil,query,"results:#{num_results}")
+  end
+  
   def self.create(metro_code,user,action_type,object_type,id,description,note=nil,note_entity=nil,referer_domain=nil,referer_path=nil)
     action = Action.new
-    action.username = user.name.downcase
-    action.user_registered_on=user.registered_on
-    action.user_id=user.id
+    action.username = user.name.downcase if user
+    action.user_registered_on=user.registered_on if user
+    action.user_id=user.id if user
     action.metro_code=metro_code
     action.object_id=id
     action.action=action_type

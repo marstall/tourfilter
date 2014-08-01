@@ -404,7 +404,7 @@ c = GeoIP.new("/Users/chris/maxmind/GeoLiteCity.dat").city("76.24.220.14")
   end
 
   def term_more_info_popup
-    render(:partial=>'shared/term_more_info_popup',:locals=>params+{:match_id=>params[:id]})
+    render(:partial=>'shared/term_more_info_popup',:locals=>params+{:match_id=>params[:id],:term_id=>params[:term_id]})
     return false
   end
 
@@ -435,7 +435,7 @@ c = GeoIP.new("/Users/chris/maxmind/GeoLiteCity.dat").city("76.24.220.14")
       [
         {'your_SP_alerts'=>'add_bands_partial'},
         {'full_SP_calendar'=>'calendar_partial'},
-        {'your_SP_shows'=>'your_shows_partial'},
+        {'your_SP_calendar'=>'your_shows_partial'},
         {'friends'=>'friends_partial'}
       ]
     return @options_label,@nav_array
@@ -597,7 +597,6 @@ c = GeoIP.new("/Users/chris/maxmind/GeoLiteCity.dat").city("76.24.220.14")
   end
 
   def homepage
-    puts "+++ RENDERING EDIT#HOMEPAGE"
     @jquery=true
     @days_to_show = params[:id]||60
     @offset = params[:offset].to_i 
@@ -677,10 +676,7 @@ c = GeoIP.new("/Users/chris/maxmind/GeoLiteCity.dat").city("76.24.220.14")
   end
 
   def edit
-    if not @youser
-      redirect_to "/"
-      return false
-    end
+    return if not must_be_known_user("First, log in.")
     render(:action=>'edit',:layout=>true)
   end
 
@@ -790,8 +786,6 @@ c = GeoIP.new("/Users/chris/maxmind/GeoLiteCity.dat").city("76.24.220.14")
              @youser.name="anon-#{@youser.id}"
              @youser.save!
           end
-#          handle_invitations(@youser)
-#          handle_user_tickets(@youser,params[:body],params[:match_id]) if params[:match_id]
             
           terms_as_text = params[:youser][:terms_as_text]||""
           params[:more_terms_as_text].each_key{|key| terms_as_text+="\r\n#{key}"} if params[:more_terms_as_text]
@@ -804,24 +798,12 @@ c = GeoIP.new("/Users/chris/maxmind/GeoLiteCity.dat").city("76.24.220.14")
             logger.info("+++ error sending email:"+e.message+"\n"+e.backtrace.join("\n"))
           end
           login_user(@youser,false)
-          if params[:redirect_url]
-#            flash[:notice] = 'Account created. Check your inbox for more information about tourfilter.' 
-          elsif params[:match_id]
-          else
-#            flash[:notice] = "Account created. But that doesn't mean you need to stop adding bands!"
-          end
-#          flash[:notice] = 'Welcome to Tourfilter! Check your mailbox for a helpful email.' 
-#          render(:partial=>"edit_account_column.rhtml")
-#           flash[:notice]="Thanks for signing up. Invite some friends to share shows with!"
-#           flash[:notice]="Thanks for signing up. Vote for us in the Webbys!"
-#          render(:inline=>"<script>location.href='/#{@metro_code}/welcome/#{@youser.registration_code}';</script>",:layout=>false)
           cookies['calndar_view']='your_SP_alerts'
-          if params[:redirect_url]
+          if params[:redirect_url] && !params[:redirect_url].empty?
             render(:inline=>"<script>location.href='<%=params[:redirect_url]%>';</script>",:layout=>false)
             return
           else
-            render(:inline=>"<script>location.href='/#{@metro_code}/';</script>",:layout=>false)
-#            render(:inline=>"REDIRECT",:layout=>false)
+            render(:inline=>"<script>alert('Successfully signed up. Now add some more bands!');location.href='/';</script>",:layout=>false)
           end
           return
         rescue =>e
@@ -847,19 +829,7 @@ c = GeoIP.new("/Users/chris/maxmind/GeoLiteCity.dat").city("76.24.220.14")
         expire_user_page(@youser)
 #        flash[:notice]= 'Your band list was updated!'
       end
-      
-      # can't get sweeper to activate on delete, can't get access to caching system from
-      # model objects, so i'm doing this hack. If the save operation resulted in a deletion
-      # of terms in before_save, user.deleted_terms will contain a list of those terms.
-#      if @youser
-#        expire_youser_page # redraw the me page and the /users/username page next time they are requested
-#        terms_to_update = Array.new
-#        terms_to_update+=@youser.deleted_terms if @youser.deleted_terms
-#        terms_to_update+=@youser.added_terms if @youser.added_terms
-#        terms_to_update.each { |term|
-#            expire_term_fragment(term) unless basic
-#          } if terms_to_update
-#      end
+   
     end
   end
 

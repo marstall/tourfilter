@@ -32,9 +32,11 @@
 </table>
 </td>
 <td valign=top style='padding:0.5em;'>
-<span style='padding:0.5em;background-color:#eee' >
+<%if @metro_active%>
+<span style='padding:0.5em;background-color:#eee' >	
 	Don't have a Tourfilter <%=@metro%> account yet? <span class='underline'><a href="<%=url signup_url(params)%>">sign up</a></span>!
 </span>
+<%end%>
 </td></tr>		
 	</form>
 </table>

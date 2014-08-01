@@ -15,7 +15,7 @@ development:
 
 #development:
 #  adapter: mysql
-# database: tourfilter_boston
+#  database: tourfilter_boston
 #  username: test
 #  password: test
 #  host: test.cbeerawtyv8a.us-east-1.rds.amazonaws.com

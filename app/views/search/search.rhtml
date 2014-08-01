@@ -1,3 +1,4 @@
+
 <%if @query%>
 <div id="main-full-width" style=''>
   <h2>
@@ -48,9 +49,9 @@ free <%=@query%> concert email alerts! choose metro =></span>
 <div id="results"> 
 <%if @query and not @query.empty?%>
 <%=render(:partial =>"search_results",
-		:locals=>{:@shared_events=>@shared_events,
-		:@term=>@query,
-		:@controller=>controller
+		:locals=>{:shared_events=>@shared_events,
+		:term=>@query,
+		:controller=>controller
 		})%>
 <%end%>
 </div>

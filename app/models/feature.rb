@@ -43,7 +43,7 @@ class Feature < ActiveRecord::Base
   end
 
   def short_date
-    return "#{created_at.month}/#{created_at.day}"
+    return "#{created_at.month}.#{created_at.day}.#{created_at.year}"
   end
 
   def before_update

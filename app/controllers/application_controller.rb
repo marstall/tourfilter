@@ -17,9 +17,10 @@ class ApplicationController < ActionController::Base
   HTML_REGEXP=/[<>;]|(update|delete|insert)\s/
   SALT="BRUN TAXMAN"
 #  before_filter :perform_hostname_corrections
-  before_filter :signup_intercept, :only=>[:homepage]
+#  before_filter :signup_intercept, :only=>[:homepage]
 #  before_filter :convert_to_new_url_structure_2
-  before_filter :initialize_metro, :except=>[:locate,:geolocate,:redirect,:related_terms]
+  before_filter :setup_show_count
+  before_filter :initialize_metro
   before_filter :connect_to_the_correct_database
   before_filter :initialize_user, :except => :login
   before_filter :mark_time
@@ -57,11 +58,17 @@ class ApplicationController < ActionController::Base
   @show_venues=false
   @@metro_map=nil
   
+  @@show_count=nil
+  
+  def setup_show_count
+    @show_count = @@show_count||= SharedEvent.count_by_sql("select count(distinct summary) from shared_events")
+  end
+  
   def prepare_external_click_hash
     @external_click_hash=Hash.new('link_source'=>"web")
   end
   
-  def redirect_to(options)
+  def _redirect_to(options)
     if options.is_a? Hash
       options[:controller]="#{@metro_code}/#{options[:controller]}" if options[:controller]
     elsif options==:homepage
@@ -72,7 +79,7 @@ class ApplicationController < ActionController::Base
     super(options)
   end
 
-  def redirect_to(options,*parameters_for_method_reference)
+  def _redirect_to(options,*parameters_for_method_reference)
     if options.is_a? Hash
       options[:controller]="#{@metro_code}/#{options[:controller]}" if options[:controller]
     elsif options==:homepage
@@ -297,7 +304,35 @@ class ApplicationController < ActionController::Base
     @metro_code=metro_code
   end
 
-  def initialize_metro
+  def initialize_metro #boston-only version
+    # if there is a metro_code in the url and not login/edit, redirect to version of url without metro_code
+    # else set metro_code for this request (not session) to url metro_code and serve login/edit
+    url_metro_code=params[:metro_code]
+    @metro_map=make_metro_map
+    @metro_active = url_metro_code ? @metro_map[url_metro_code].active? : true
+    @metro_code='boston'
+    @metro='Boston'
+    return if not url_metro_code # if there's no city in the url, do nothing further - this is the default, desired case.
+    if /(login|edit)$/=~request.request_uri && !@metro_active #if we're in an inactive city on either the login or edit page 
+      @metro_code=url_metro_code
+      @metro = @metro_map[url_metro_code].name
+      @metro_active=false
+      return # set the metro_code appropriately in the request (not session) and render the page
+    elsif @metro_active # active metro specified in url, redirect to url sans embedded metro_code 
+      url_components = request.request_uri.split(/[\/]+/)
+      logger.info("+++ #{url_components.inspect}")
+      url_components.shift # remove first element
+      url_components.shift
+      new_url=""
+      url_components.each{|component| logger.info "+++ #{new_url}";new_url+="/#{component}"}
+      redirect_to new_url 
+      return
+    else # inactive metro specified in url, not login or edit ...
+    end
+  end
+    
+
+  def __initialize_metro
     SETTINGS['date_type']='us'
     @metro_map = Hash.new
     @metro_map=make_metro_map
@@ -489,7 +524,7 @@ class ApplicationController < ActionController::Base
     return true if session[:is_admin]
     if !@youser_known
       flash[:error]=msg
-      redirect_to login_url
+      redirect_to "/#{@metro_code}#{login_url}"
       return false
     end
     return true
@@ -539,7 +574,7 @@ class ApplicationController < ActionController::Base
   def set_tracking_cookie
     # generate permanent tracking cookie based on session_id
     cookies[:psid] = {
-                          :value => String(session.id),
+                          :value => String(session.object_id),
                           :expires => 10.years.from_now,
                           :path => "/#{@metro_code}"
                         }     if not cookies[:psid]

@@ -1,6 +1,17 @@
+<%
+	term = params[:term].gsub(/(\-|\_|%20)/,' ').strip if params[:term]
+%>
+<%#if term%>
+<script>
+//	var e = jQuery.Event("keydown");
+//	 e.which = "x"; // # Some key code value
+//	 jQuery("#youser_terms_as_text").append("x");
+</script>
+<%#end%>
 <div id='main-full-width' >
-<h2>
+<h2 >
 	Sign up
+	<div class='header_text'  >Enter your favorite bands (we'll recommend more as you type). You'll get one email when they come to the Boston area.</div>
 </h2>
 <div style='background-color:#fff'>
 <%if !@youser_logged_in-%>
@@ -17,24 +28,46 @@
 <input type="hidden" name="youser[registration_type]" value="submission"/>
 <input type="hidden" name="redirect_url" value="<%=params[:redirect_url]%>"/>
 <table>
+<tr>
+	<td valign=top style='margin-right:5em;'>
+		bands&nbsp;to&nbsp;track
+	</td>
+	<td>
+		<div>
+			<div style='float:left'>
+        		<%=text_area(:youser, :terms_as_text,:cols => "25", :rows => "6", :value=>term, :onkeydown=>"jQuery('.explain').css('display','none')") -%>
+			</div>
+	    	<div style='float:left' id="related_terms" class="signup_related_terms" >
+	    		<%#=render_component(:controller=>'edit',:action=>'related_terms')%>
+				<%=render("related_terms")%>
+	    	</div>
+			<div class='clear_left'></div>
+		</div>
+        <%= observe_field(:youser_terms_as_text,
+                          :frequency => 1,
+                          :update => :related_terms,
+                          :evalScripts => true,
+                          :url => {:controller=>:edit,:action => :related_terms}
+                          )%>
+	</td>
 <tr>    
 <td>username</td>
 <td>
-	<%=text_field(:youser,:name,"size" => 16)%>
+	<%=text_field(:youser,:name,"size" => 27)%>
 	
 </td>
 </tr>
 <tr>    
 <td>email address</td>
 <td>
-	<%=text_field(:youser,:email_address,"size" => 16)%>
+	<%=text_field(:youser,:email_address,"size" => 27)%>
 	
 </td>
 </tr>
 <tr>
 	<td>password</td>
 <td>
-	<%=password_field(:youser,:password,"size" => 16)%>
+	<%=password_field(:youser,:password,"size" => 27)%>
 </td>
 </tr>
 <tr><td colspan=2>
@@ -47,15 +80,16 @@
 </tr>
 </table>
 </td>
-<td valign=top style='padding:0.5em;'>
-<span style='padding:0.5em;background-color:#eee' >
-	Already have a Tourfilter <%=@metro%> account? <span class='underline'><a href="<%=url login_url(params[:redirect_url])%>">log in</a></span>!
-</span>
-<br>
-<br>
-<span style='padding:0.5em;background-color:#eee' >
-	We will never send you spam!
-</span>
+<td valign=top style='padding:1.5em;'>
+	<span class='explain' style='padding:0.5em;background-color:#eee;font-size:14px;font-family:helvetica' >
+		Already have a Tourfilter <%=@metro%> account? <span class='underline'><a href="<%=url login_url(params[:redirect_url])%>">log in</a></span>!
+	</span>
+	<br>
+	<br>
+	<span class='explain' style='padding:0.5em;background-color:#eee;font-size:14px;font-family:helvetica' >
+		We will never send you spam!
+	</span>
+
 </td></tr>		
 	</form>
 </table>
@@ -64,8 +98,40 @@
 <br>
 
 </div>
+
 </div>
   
  <script>
- $('youser_name').focus();
+ 	_$=jQuery;
+	if ($('youser_terms_as_text')) $('youser_terms_as_text').focus();
+</script>
+
+<script>
+
+  function add(term_text,term_id)
+  {
+    ta = $('youser_terms_as_text')
+  	if ($('youser_terms_as_text').value==null) $('youser_terms_as_text').value="";
+  	$('youser_terms_as_text').value=trim($('youser_terms_as_text').value)
+  	if ($('youser_terms_as_text').value.match(/\n$/)==null)
+  	{
+  		$('youser_terms_as_text').value+="\n";
+  	}
+  	$('youser_terms_as_text').value+=term_text.toLowerCase();
+  	$('youser_terms_as_text').value=trim($('youser_terms_as_text').value+'\n');
+    try
+    {
+      jQuery("#image_"+term_id).attr('src','/images/check.png')
+      jQuery("#"+term_id).addClass('term_added');
+    }
+    catch(e)
+    {
+      
+    }
+  	ta.focus();
+  	ta.scrollTop = ta.scrollHeight;
+//    jQuery('#related_terms').load('/edit/related_terms');
+  }
+
+  
 </script>

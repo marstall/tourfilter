@@ -206,7 +206,7 @@ ActionController::Routing::Routes.draw do |map|
               :requirements => {:id => /.*/}
   map_connect map, "/signup",
               :controller   => "edit",
-              :action       => "signup"
+              :action       => "basic_signup"
   map_connect map, "/lastfm",
               :controller   => "edit",
               :action       => "lastfm"
@@ -464,6 +464,9 @@ ActionController::Routing::Routes.draw do |map|
   map_connect map, '/login',
               :controller   => "edit",
               :action       => "login"
+  map_connect map, '/logout',
+              :controller   => "edit",
+              :action       => "logout"
   map_connect map, 'homepage_old',
               :controller   => "edit",
               :action       => "homepage"
