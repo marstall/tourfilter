@@ -23,6 +23,7 @@ class ApplicationController < ActionController::Base
   before_filter :initialize_metro
   before_filter :connect_to_the_correct_database
   before_filter :initialize_user, :except => :login
+#  before_filter :new_autologin_code
   before_filter :mark_time
   before_filter :ensure_www
   before_filter :set_tracking_cookie,:except => :track_click
@@ -38,6 +39,11 @@ class ApplicationController < ActionController::Base
 #  end
 
 
+  def new_autologin_code
+    return unless @youser
+    @youser.autologin_code = User.generate_autologin_code
+    @youser.save
+  end
   def geoip
     @@geoip||=GeoIP.new("#{RAILS_ROOT}/maxmind/GeoLiteCity.dat")
   end
@@ -750,8 +756,10 @@ class ApplicationController < ActionController::Base
   def initialize_user
     @youser_known = false
     @youser_logged_in = false
-    cookie_user_id = cookies[:"#{@metro_code}_user_id"]
-    id_hash = cookies[:"#{@metro_code}_id_hash"]
+    if @metro_active
+      cookie_user_id = cookies[:"#{@metro_code}_user_id"]
+      id_hash = cookies[:"#{@metro_code}_id_hash"]
+    end
     session_user_id = session[:"#{@metro_code}_user_id"]
     if !session_user_id.nil?
       @youser_known = true
@@ -792,6 +800,13 @@ class ApplicationController < ActionController::Base
     return true
   end
   
+  def destructive_autologin(autologin_code,redirect_url="/")
+    user = User.onetime_identify_by_autologin_code(autologin_code)
+    return nil if not user
+    login_user(user,false)
+    return user
+  end
+
   def login
     login_with_name_password(params[:name],params[:password])
   end
@@ -804,7 +819,7 @@ class ApplicationController < ActionController::Base
   end
   
   def login_with_name_password(name,password,redirect=true)
-    if request.post?
+    if true #request.post?
       # HACK
       if name=~/\@/
         @youser = User.find_by_email_address_and_password(name,password) 
@@ -824,36 +839,39 @@ class ApplicationController < ActionController::Base
         @youser.metro_code=@metro_code
         logger.info( "+++ #{metro_code}: #{@youser.metro_code}")
         @youser.save 
+        logger.info (" +++ successful login for #{@youser.name}")
         cookies['calndar_view']='your_SP_alerts'
         
 #       domain="#{@metro_code}.#{@domain_stub}" 
 #       domain=@domain_stub if @youser.privs=='admin' 
-        cookies[:calendar_view] = {
-                      :value => "my",
-                      :expires => 360.days.from_now,
-                      :path => "/#{@metro_code}"
-                    }
         session[:"#{@metro_code}_user_id"] = @youser.id
-        session[:is_admin] = true if @youser.privs=~/admin/ # for all cities, note!!
-        cookies[:"#{@metro_code}_user_id"] = {
-                              :value => String(@youser.id),
-#                              :domain => domain,
-                              :expires => 360.days.from_now,
-                              :path => "/#{@metro_code}"
-                            }
-        cookies['admin']='1'
-        id_hash= generate_cookie_hash(@youser.id)
-        cookies[:"#{@metro_code}_id_hash"] = {
-                              :value => String(id_hash),
-                              :expires => 360.days.from_now,
-                              :path => "/#{@metro_code}"
-                            }
-        if @youser.privs=~/admin|manage_matches/
-          cookies[:"manage_matches"] = {
-                              :value => 'true',
-                              :expires => 360.days.from_now,
-                              :path => "/#{@metro_code}"
-                            }
+        if @metro_active # no cookies or admin status for inactive metros
+          cookies[:calendar_view] = {
+                        :value => "my",
+                        :expires => 360.days.from_now,
+                        :path => "/"
+                      }
+          session[:is_admin] = true if @youser.privs=~/admin/ # for all cities, note!!
+          cookies[:"#{@metro_code}_user_id"] = {
+                                :value => String(@youser.id),
+  #                              :domain => domain,
+                                :expires => 360.days.from_now,
+                                :path => "/"
+                              }
+          cookies['admin']='1'
+          id_hash= generate_cookie_hash(@youser.id)
+          cookies[:"#{@metro_code}_id_hash"] = {
+                                :value => String(id_hash),
+                                :expires => 360.days.from_now,
+                                :path => "/"
+                              }
+          if @youser.privs=~/admin|manage_matches/
+            cookies[:"manage_matches"] = {
+                                :value => 'true',
+                                :expires => 360.days.from_now,
+                                :path => "/"
+                              }
+        end
         end
       end
 #      if request.env['HTTP_REFERER'] =~ /edit/
@@ -874,22 +892,22 @@ class ApplicationController < ActionController::Base
     cookies[:calendar_view] = {
                           :value => "",
                           :expires => 360.days.from_now,
-                          :path => "/#{@metro_code}"
+                          :path => "/"
                         }
     cookies[:"#{@metro_code}_user_id"] = {
                           :value => "",
                           :expires => 360.days.from_now,
-                          :path => "/#{@metro_code}"
+                          :path => "/"
                         }
     cookies[:"#{@metro_code}_id_hash"] = {
                           :value => "",
                           :expires => 360.days.from_now,
-                          :path => "/#{@metro_code}"
+                          :path => "/"
                         }
     cookies[:"manage_matches"] = {
                         :value => '',
                         :expires => 360.days.from_now,
-                        :path => "/#{@metro_code}"
+                        :path => "/"
                       }
 #    flash[:notice] = 'Logged out!'
     redirect_to "/"

@@ -458,6 +458,9 @@ ActionController::Routing::Routes.draw do |map|
   map_connect map, '',
               :controller   => "edit",
               :action       => "homepage"
+  map_connect map, '/add_bands/:autologin_code',
+              :controller   => "edit",
+              :action       => "add_bands"
   map_connect map, '/concerts',
               :controller   => "edit",
               :action       => "concerts_homepage"

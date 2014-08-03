@@ -2046,7 +2046,6 @@ th
 	line-height: 1.1em;
 	font-size:16px;
  color: #777;
-	background-color: #EDF5F5;
 	padding:0.2em;
 }
 
@@ -2311,7 +2310,6 @@ th
 	-moz-border-radius: 5px;
 	margin-right:5px;
 	padding:3px;
-	background-color:#ddf5f5;
 	border:2px solid #dee;
 	color:#369;
 }
@@ -2323,7 +2321,6 @@ th
 
 .footer_link_about
 {
-	background-color:#ffc;
 	border:2px solid #dee;
 }
 
@@ -2794,7 +2791,6 @@ h2 .header_text
 	color:#369;
 	padding:6px;
 	padding-bottom:0px;
-	background-color:#ddf5f5;
 	text-transform:lowercase;
 }
 
@@ -2860,12 +2856,12 @@ h2 .header_text
 
 #footer-full-width {
 	clear:left;
-	background-color: #EDF5F5	;
+	background-color: #dDF5F5	;
  	color:#EAEAEA;
 	padding: 0.5em;
 	padding-left:0.25em;
 	text-align:left;
-	margin-top:2px;
+	margin-top:16px;
 	width:818px;
 	margin-bottom:8px;
 	}

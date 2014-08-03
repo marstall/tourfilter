@@ -138,9 +138,10 @@
 		footer_style="footer-full-width" #if @full_width_footer
 #		footer_style="footer-doublenarrow" if @double_wide_right_column
 	%>
+	<div style='clear:left'></div>
 	<div class='footer' id="<%=footer_style%>">
 		<span class='footer_menu_item'>
-			<a href="http://www.tourfilter.com/about">about tourfilter</a>
+			<a href="/about">about tourfilter</a>
 		</span>
 	<%unless @not_in_a_city%>
 	<span id="blargh" class='footer_menu_item'></span> 
@@ -173,15 +174,6 @@
 	pageTracker._trackPageview();
 </script>
 
-<%if false%>
-<!-- Start Quantcast tag -->
-<script type="text/javascript" src="http://edge.quantserve.com/quant.js"></script>
-<script type="text/javascript">_qacct="p-6dfYUhvdgBulU";quantserve();</script>
-<noscript>
-<a href="http://www.quantcast.com/p-6dfYUhvdgBulU" target="_blank"><img src="http://pixel.quantserve.com/pixel/p-6dfYUhvdgBulU.gif" style="display: none;" border="0" height="1" width="1" alt="Quantcast"/></a>
-</noscript>
-<!-- End Quantcast tag -->
-<%end%>
 <%end%>
 </div>
 
@@ -213,9 +205,3 @@ var _sf_async_config={uid:21126,domain:"tourfilter.com"};
 
 //pageTracker._trackEvent('1test3', '21test', '1tes2t', 3);
 </script>
-
-<%if false #ENV['RAILS_ENV']!='development'%>
-<script>
-track_page_view()
-</script>
-<%end%>

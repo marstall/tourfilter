@@ -408,6 +408,19 @@ c = GeoIP.new("/Users/chris/maxmind/GeoLiteCity.dat").city("76.24.220.14")
     return false
   end
 
+=begin
+  def generate_autologin_for_chris
+    user = User.find(2)
+    user.reset_autologin_code
+    url = "/add_bands/#{user.autologin_code}"
+    render(:inline=>"<a href='#{url}'>#{url}</a>")    
+  end
+=end
+
+  def add_bands
+    destructive_autologin(params[:autologin_code])
+    redirect_to "/"
+  end
 
   def venues
     @by_venue=true

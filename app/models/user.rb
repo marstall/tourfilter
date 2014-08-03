@@ -130,6 +130,45 @@ class User < ActiveRecord::Base
     Recommendation.find_by_sql(sql)
   end
   
+  def User.generate_autologin_code
+    # generate a random 8-character alphanum string, like 57aAN9m0
+    # 218,340,105,584,896 (218 trillion) combos
+    s=""
+#    require 'Random'
+    0.upto(7).each{|i|
+      r = rand(62)
+      if r<10 # for 0-9
+        r+='0'.ord # ascii value of 0
+      elsif r>=10 && r<36
+        r-=10
+        r+='a'.ord # ascii value of a
+      else 
+        r-=36
+        r+='A'.ord # ascii value of A
+      end
+      s+=r.chr
+    }
+    return s
+  end
+  
+  def reset_autologin_code
+    if !autologin_code
+      self.autologin_code = User.generate_autologin_code
+      self.save
+    end
+    return autologin_code
+  end
+
+  def self.onetime_identify_by_autologin_code(autologin_code)
+    # find user with this autologin code - if found, nil it out and return user, else return nil
+    users = User.find_by_sql(["select * from users where binary autologin_code=?",autologin_code]) # case sensitive
+    return nil if users.empty?
+    user = users[0]
+    user.autologin_code=nil
+    user.save
+    return user
+  end
+
   def tracks_term(term_text)
     terms(nil,true) # make sure hash is loaded
     @term_texts_hash[term_text]
