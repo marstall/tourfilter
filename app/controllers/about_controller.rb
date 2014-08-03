@@ -2,7 +2,8 @@ class AboutController < ApplicationController
 #  caches_page :index
     
   def about
-    @full_width_footer=true    
+    @full_width_footer=true  
+    @page_title='about tourfilter'  
     @feature1_sources=Source.find_featured("feature1")
     @feature2_sources=Source.find_featured("feature2")
     @feature3_sources=Source.find_featured("feature3")

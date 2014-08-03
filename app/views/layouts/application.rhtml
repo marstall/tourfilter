@@ -9,7 +9,7 @@
 			else
   			title="tourfilter: 	boston concert stuff" 
 #  			title="tourfilter #{@metro.downcase}: spam-free concert alerts" if @metro
-#  			title="#{@page_title}" if @page_title
+  			title="#{@page_title}" if @page_title
 #  			title="#{@page_title} - tourfilter: #{@metro||''.downcase} concert alerts" if @page_title and @append_minimal_title
   			title=@page_title if @page_title and @no_append_title
 			end
@@ -22,11 +22,15 @@
 </head>
 <script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
 <script>
-jQuery(document).ready(function(){
-	jQuery(".pop").colorbox({
-		width:800,scrolling:false,opacity:0.5,transition:'none',speed	:0,
-		onComplete:function(){jQuery.fn.colorbox.resize()}});
-});
+	jQuery(document).ready(function(){
+		instant_search_loaded = function() {
+			jQuery("#loading").hide()
+		}
+		instant_search_loading = function() {
+			jQuery("#loading").show()
+		}
+
+	});
 </script>
 	<body>
 	  <!--
@@ -99,12 +103,15 @@ jQuery(document).ready(function(){
           <div class='logo_title'><%=@header_title%></div>
 		  <div id='search_box_container' style='float:right'>
 			<input id='search_box' name='search_box' autocomplete="off" 
-				placeholder='search <%=@show_count%> boston shows	 ' type=text>
+				placeholder=' search <%=@show_count%> <%=@metro.downcase%> concerts	' type=text>
+			<div id='loading'>searching ...</div>
 			<div id='instant_search_results'></div>
 			</div>
 			<%= observe_field(:search_box,
 											  :frequency => 1,
 											  :update => :instant_search_results,
+												:loading => "instant_search_loading()",
+												:loaded => "instant_search_loaded()",
 											  :evalScripts => true,
 											  :url => {:controller=>:search,:action => :search,:format => 'instant'}
 												)%>
@@ -138,15 +145,15 @@ jQuery(document).ready(function(){
 	<%unless @not_in_a_city%>
 	<span id="blargh" class='footer_menu_item'></span> 
 	<script>
-	var domain="filter.com"
-	domain="tour"+domain
-	var email="inf"+""+""+"o"
+	var domain="mail.com"
+	domain="g"+domain
+	var email="marsta"+""+""+"ll"
 	email=email+"@"
 	email=email+""
 	email=email+domain
 	blargh=email
 	// SPAMMERS - GET A LIFE!
-	$("blargh").innerHTML="<a href='mailto:"+blargh+"'>corrections/questions</a>"
+	$("blargh").innerHTML="contact: "+blargh
 	</script>
 		<%end%>
 		<span class='footer_menu_item' style='float:right'>
@@ -180,6 +187,7 @@ jQuery(document).ready(function(){
 
 </body>
 <script type="text/javascript">
+/*
 var _sf_async_config={uid:21126,domain:"tourfilter.com"};
 (function(){
   function loadChartbeat() {
@@ -196,7 +204,7 @@ var _sf_async_config={uid:21126,domain:"tourfilter.com"};
   window.onload = (typeof window.onload != 'function') ?
      loadChartbeat : function() { oldonload(); loadChartbeat(); };
 })();
-
+*/
 </script>
 	</html>
 <%end%> <!-- if ! fragment -->

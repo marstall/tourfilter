@@ -7,27 +7,26 @@ class SharedEvent < ActiveRecord::Base
   belongs_to :venue
   establish_connection "shared_#{ENV['RAILS_ENV']}" unless $mode=="daemon"
 
-  # if there is a space
-=begin
-  if summary.index(' ') 
-    # get the final word
-    words = summary.scan(/w+/)
-    if words 
-      if words.size>1
-        if metro_name_hash[words.last]
-          metro_code= metro_name_hash[words.last] 
-          summary=summary[0..summary.index(words.last)].strip
-        elsif words.size>2
-          potential_city_name=words[words.size-2]+" "+words[word.size-1]
-          if metro_name_hash[potential_city_name]
-            metro_code=metro_name_hash[potential_city_name] 
-            summary=summary[0..summary.index(potential_city_name)].strip
-          end
-        end
-      end
+  def self.add_leading_zero(s)
+    s=s.to_s
+    s="0#{s}" if s.size==1
+    s
+  end
+
+  def self.is_substring_dupe_for_date?(term_text,date)
+    sql = <<-SQL
+      select summary from shared_events
+      where summary like ?
+      and left(date,10)='#{date.year}-#{add_leading_zero(date.month)}-#{add_leading_zero(date.day)}'
+    SQL
+    shared_events = SharedEvent.find_by_sql([sql,"%#{term_text}%"])
+    if shared_events.size>0
+      return shared_events[0].summary
+    else
+      return false
     end
   end
-=end
+
   def imported_events
 #    ImportedEvent.new.search(summary)
   ImportedEvent.find_by_term_and_date(summary,date)

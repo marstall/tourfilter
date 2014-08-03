@@ -130,6 +130,10 @@ end
 
 
 def save(metro,ical)
+
+  # first save the imported events so we can detect dupes on the band-name only matches
+  save_active_imported_events
+
   header "saving new records from ical for metro #{metro.code} ..."
   raise "ical is blank for metro #{metro.code}" if ical.nil? or ical.strip.empty?
   cals = Icalendar.parse(ical)
@@ -138,6 +142,11 @@ def save(metro,ical)
   # Now you can access the cal object in just the same way I created it
     @shared_events_count[metro.code]=0
   cal.events.each{|event|
+    dupe = SharedEvent.is_substring_dupe_for_date?(event.summary,event.dtstart)
+    if dupe
+      puts "+++ substring dupe found. [#{event.summary}] contained in [#{dupe}] #{event.dtstart}"
+      next
+    end
     puts "saving #{event.summary} at #{event.location} ..."
     shared_event = SharedEvent.new
     shared_event.date = event.dtstart
@@ -156,43 +165,7 @@ def save(metro,ical)
     @shared_events_count[metro.code]+=1
   }
   
-  save_active_imported_events
 end
-=begin
-| Field         | Type                                                                                             | Null | Key | Default | Extra          |
-+---------------+--------------------------------------------------------------------------------------------------+------+-----+---------+----------------+
-| id            | int(11)                                                                                          | NO   | PRI | NULL    | auto_increment |
-| uid           | char(64)                                                                                         | YES  | MUL | NULL    |                |
-| date          | datetime                                                                                         | YES  |     | NULL    |                |
-| time          | time                                                                                             | YES  |     | NULL    |                |
-| venue_id      | int(11)                                                                                          | YES  | MUL | NULL    |                |
-| url           | char(255)                                                                                        | YES  |     | NULL    |                |
-| body          | text                                                                                             | YES  | MUL | NULL    |                |
-| created_at    | datetime                                                                                         | YES  |     | NULL    |                |
-| updated_at    | datetime                                                                                         | YES  |     | NULL    |                |
-| artist_id     | int(11)                                                                                          | YES  |     | NULL    |                |
-| major_cat_id  | int(11)                                                                                          | YES  | MUL | NULL    |                |
-| minor_cat_id  | int(11)                                                                                          | YES  |     | NULL    |                |
-| cancelled     | enum('yes','no')                                                                                 | YES  |     | no      |                |
-| status        | enum('new','term_found','no_term_found','made_match','rejected','processed_unknown_disposition') | YES  | MUL | NULL    |                |
-| level         | enum('primary','secondary')                                                                      | YES  |     | primary |                |
-| venue_name    | char(255)                                                                                        | YES  |     | NULL    |                |
-| source        | char(16)                                                                                         | YES  | MUL | NULL    |                |
-| user_id       | int(11)                                                                                          | YES  | MUL | NULL    |                |
-| username      | char(32)                                                                                         | YES  |     | NULL    |                |
-| user_metro    | char(32)                                                                                         | YES  |     | NULL    |                |
-| num_tickets   | int(11)                                                                                          | YES  |     | NULL    |                |
-| price_high    | float(10,2)                                                                                      | YES  |     | NULL    |                |
-| price_low     | float(10,2)                                                                                      | YES  |     | NULL    |                |
-| onsale_date   | datetime                                                                                         | YES  | MUL | NULL    |                |
-| presale_date  | datetime                                                                                         | YES  |     | NULL    |                |
-| image_url     | varchar(255)                                                                                     | YES  |     | NULL    |                |
-| metro_code    | varchar(32)                                                                                      | YES  |     | NULL    |                |
-| flagged       | varchar(255)                                                                                     | YES  |     | NULL    |                |
-| category      | varchar(32)                                                                                      | YES  |     | NULL    |                |
-| multiple_days | tinyint(1)                                                                                       | YES  |     | 0       |                |
-| end_date      | datetime                                                                                         | YES  |     | NULL    |                |
-=end
 
 def save_active_imported_events
   header "saving new records from imported_events  ..."

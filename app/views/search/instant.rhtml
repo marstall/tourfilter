@@ -39,7 +39,10 @@
 	</div>
 	<div class='instant_search_location' >
 	<%=shared_event.location%>
- 	<%=shared_event.date.month%>/<%=shared_event.date.day%>
+		<div style='float:right'>
+	 	<%=Date::MONTHNAMES[shared_event.date.month][0..2]%> <%=shared_event.date.day%>
+		</div>
+		<div style='clear:right'></div>
 	</div>
 	</div>
 <%}-%>
