@@ -33,6 +33,7 @@
 	});
 </script>
 	<body>
+		
 	  <!--
 	  <div class='above_header'>
 	    <span class='above_header_span'>
@@ -60,6 +61,10 @@
 	  <%end%>
     	<%unless @hide_login or @not_in_a_city%>
   	  <div class='above_header'>
+				<div class='underline' style='background-color:#ffd;padding:12px;margin-left:0px;font-size:14px;text-align:left;margin-bottom:15px;margin-top:10px;line-height:18px'>
+					<span style='color:red'>BIG NEWS</span>: As of Aug. 4, we have discontinued all tourfilter cities except Boston. You can retrieve your band list <a href='/metros'>here</a>. 
+					Please read our <a href='https://medium.com/p/2c5e5818e4d3'>blog&nbsp;post</a> about this tough decision.
+				</div>
           <div id="right-header">
           <%unless @youser%>
     			<%end%>
@@ -69,7 +74,7 @@
     			</span>
     			<%end%>
     			<span class='header_menu_item '>
-    				<a href="<%=url('/metros')%>">other metros?</a>
+    				<a href="<%=url('/metros')%>">other cities?</a>
     			</span>
     			<span>
     			  <%unless @hide_login%>
