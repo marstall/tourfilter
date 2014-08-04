@@ -113,9 +113,9 @@ end
 def fetch(metro)
   header "fetching ical for metro #{metro.code} ..."
   if @local
-    url = "http://www.tourfilter.local:3000/#{metro.code}/ical"
+    url = "http://www.tourfilter.local:3000/ical"
   else
-    url = "http://www.tourfilter.com/#{metro.code}/ical"
+    url = "http://www.tourfilter.com/ical"
   end
   ical = fetch_url2(url)
   raise "retrieved blank ical file from #{url}" if ical.nil? or ical.strip.empty?
