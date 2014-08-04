@@ -477,7 +477,7 @@ class ApplicationController < ActionController::Base
       redirect_to "http://www.tourfilter.com#{request.path}"
       return false     
     end
-    return true if request.host=~/antiplex|amazon|localhost|tourfilter\.(com|local)|^192.168|54.224.106.105/
+    return true if request.host=~/antiplex|amazon|localhost|tourfilter\.(com|local)|^192.168|^10.|^172./ #AWS ELB uses private IPs to do health check, so don't 302 on those 
     redirect_to "http://www.tourfilter.com#{request.path}"
     return false     
   end
