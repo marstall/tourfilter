@@ -67,7 +67,7 @@ class ApplicationController < ActionController::Base
   @@show_count=nil
   
   def setup_show_count
-    @show_count = @@show_count||= SharedEvent.count_by_sql("select count(distinct summary) from shared_events")
+    @show_count = SharedEvent.count_by_sql("select count(distinct summary) from shared_events")
   end
   
   def prepare_external_click_hash
