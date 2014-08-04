@@ -152,11 +152,17 @@ class User < ActiveRecord::Base
   end
   
   def reset_autologin_code
-    if !autologin_code
+    puts "+++ resetting autologin_code ..."
+    if !self.autologin_code
+      my_id = self.id
       self.autologin_code = User.generate_autologin_code
-      self.save
+      puts "+++ saving user #{self.id}/#{self.name} with code #{self.autologin_code} ..."
+      User.update_all("autologin_code='#{self.autologin_code}'","id=#{self.id}")
+      puts "+++ saved."
+      test_user = User.find(my_id)
+      puts "+++ check code: #{test_user.autologin_code}"
     end
-    return autologin_code
+    return self.autologin_code
   end
 
   def self.onetime_identify_by_autologin_code(autologin_code)
