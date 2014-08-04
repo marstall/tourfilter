@@ -477,7 +477,7 @@ class ApplicationController < ActionController::Base
       redirect_to "http://www.tourfilter.com#{request.path}"
       return false     
     end
-    return true if request.host=~/antiplex|amazon|localhost|tourfilter\.(com|local)|^192.168/
+    return true if request.host=~/antiplex|amazon|localhost|tourfilter\.(com|local)|^192.168|54.224.106.105/
     redirect_to "http://www.tourfilter.com#{request.path}"
     return false     
   end
