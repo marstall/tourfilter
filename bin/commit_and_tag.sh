@@ -1,6 +1,6 @@
 a=$(git tag | grep 't' | cut -c2-4 | sort -n | tail -1) #find highest existing tag
 let "b=a+1" #increment by 1
-b="r$b" #prepend 'r' to it
+b="t$b" #prepend 'r' to it
 
 echo "writing tag $b to $TOURFILTER_HOME/public/production_tag ..."
 echo $b>$TOURFILTER_HOME/public/production_tag
