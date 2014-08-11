@@ -1,6 +1,6 @@
 class RelatedTerm < ActiveRecord::Base
 
-  establish_connection "shared_#{ENV['RAILS_ENV']}" unless $mode=="daemon"
+  establish_connection "shared_#{ENV['RAILS_ENV']}" #unless $mode=="daemon"
 
   belongs_to :term
   

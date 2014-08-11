@@ -41,8 +41,8 @@ require "../app/models/place_image.rb"
 require "../app/models/term_url.rb"
 require "../app/models/exception_mailer.rb"
 require "../app/models/amazon.rb"
-require "../app/models/related_terms_manager.rb"
 =end
+require "../app/models/related_terms_manager.rb"
 
 tourfilter_base="http://www.tourfilter.local:3000/boston"
 SETTINGS = YAML.load(File.open("../config/settings.yml"))
