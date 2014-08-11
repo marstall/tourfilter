@@ -319,7 +319,7 @@ class ApplicationController < ActionController::Base
     @metro_code='boston'
     @metro='Boston'
     return if not url_metro_code # if there's no city in the url, do nothing further - this is the default, desired case.
-    if /(login|edit)$/=~request.request_uri && !@metro_active #if we're in an inactive city on either the login or edit page 
+    if /(login|ical|edit)$/=~request.request_uri && !@metro_active #if we're in an inactive city on either the login or edit page 
       @metro_code=url_metro_code
       @metro = @metro_map[url_metro_code].name
       @metro_active=false

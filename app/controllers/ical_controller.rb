@@ -76,7 +76,7 @@ class IcalController < ApplicationController
         term.text=match.match_term_text rescue match.term.text
         url_text=term.url_text
         event.description="#{precis}"
-        event.url="http://www.tourfilter.com/#{metro_code}/#{term.url_text}"
+        event.url="http://www.tourfilter.com/#{term.url_text}"
         event.uid=match.id
         # tickets
         #ticket_urls,price_low,price_high = match.ticket_urls
