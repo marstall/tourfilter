@@ -61,10 +61,12 @@
 	  <%end%>
     	<%unless @hide_login or @not_in_a_city%>
   	  <div class='above_header'>
+				<%unless @no_news_announcement%>
 				<div class='underline' style='background-color:#ffd;padding:12px;margin-left:0px;font-size:14px;text-align:left;margin-bottom:15px;margin-top:10px;line-height:18px'>
 					<span style='color:red'>TOURFILTER NEWS</span>: As of Aug. 4, we have discontinued all tourfilter cities except Boston. You can retrieve your band list <a href='/metros'>here</a>. 
 					Please read our <a href='https://medium.com/p/2c5e5818e4d3'>blog&nbsp;post</a> about this tough decision.
 				</div>
+				<%end%>
           <div id="right-header">
           <%unless @youser%>
     			<%end%>
