@@ -458,6 +458,14 @@ ActionController::Routing::Routes.draw do |map|
   map_connect map, '',
               :controller   => "edit",
               :action       => "homepage"
+  map_connect map,"/show/:match_id/:autologin_code",
+              :controller   => "edit",
+              :action       => "show",
+              :requirements => {
+                                  :match_id => /[0-9]+/,
+                                  :autologin_code => /[0-9a-z]{8}/i
+                                }              
+              
   map_connect map, '/add_bands/:autologin_code',
               :controller   => "edit",
               :action       => "add_bands"

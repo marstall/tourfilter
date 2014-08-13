@@ -1,10 +1,13 @@
 <%page_section||=page_section%>
 <%ticket_url = match.ticket_url%>
+<%label||='tickets'%>
+<%cl||='underline buy_tickets'%>
 <%if ticket_url and not ticket_url.empty?%>
-<span class='underline buy_tickets' id='buy_tickets_<%=match.id%>'>
-<%=ticket_link(@external_click_hash,{'url'=>ticket_url},"tickets",
+<span class='<%=cl%>' id='buy_tickets_<%=match.id%>'>
+<%=ticket_link(@external_click_hash,{'url'=>ticket_url},label,
 			{
 				:page_section=>page_section,
+				:page_type=>page_type,
 				:term_text=>term_text
 			},
 			{

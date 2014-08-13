@@ -1,8 +1,8 @@
 hi,
 
-<%=@match.term.text.downcase%> is coming to <%=@match.page.place.name.downcase%>!
+<%=@match.term.text.downcase%> is coming to <%=@match.page.place.name.downcase%> <%="on #{@match.very_short_time_description}" if @match.day%>!
 
-tickets/more info: http://www.tourfilter.com/n/<%=@match.id%>
+tickets/more info: http://www.tourfilter.com/show/<%=@match.id%>/<%=@user.reset_autologin_code%>
 
 enjoy!
 tourfilter

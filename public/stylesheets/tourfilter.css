@@ -430,8 +430,9 @@ max-width:5em;
 {
 	text-transform:lowercase;
 	font-size:9px;
- 	color:#777;
+ 	color:#aaa;
 }
+
 
 .added_by a:link { text-decoration: none; color: #777;font-weight:bold;}
 .added_by a:visited { text-decoration: none; color: #777;font-weight:bold;}
@@ -1033,12 +1034,15 @@ h3
 
 .calendar_match_row
 {
-	text-transform:capitalize;
+	text-transform:lowercase;
 	padding-right:0em;
-	padding:0.35em;
+	padding:0em;
 	padding-right:0em;
-	margin-bottom:1px;
+	margin-bottom:2px;
+	padding:4px;
+	
 }
+
 
 .mini_calendar_match_row
 {
@@ -1072,7 +1076,7 @@ h3
 
 .calendar_match_row_2
 {
-	text-transform:lowercase;
+	background-color:#f5f5f5;
 }
 
 

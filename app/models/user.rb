@@ -151,16 +151,21 @@ class User < ActiveRecord::Base
     return s
   end
   
+  def email_stats
+    sql = <<-SQL
+      select count(*) num_emails,min(created_at) first_notification_date from events where user_id=? and object_type='email';
+    SQL
+    users = User.find_by_sql([sql,self.id])
+    user = users[0]
+    return user.num_emails,user.first_notification_date
+  end
+  
   def reset_autologin_code
-    puts "+++ resetting autologin_code ..."
     if !self.autologin_code
       my_id = self.id
       self.autologin_code = User.generate_autologin_code
-      puts "+++ saving user #{self.id}/#{self.name} with code #{self.autologin_code} ..."
       User.update_all("autologin_code='#{self.autologin_code}'","id=#{self.id}")
-      puts "+++ saved."
       test_user = User.find(my_id)
-      puts "+++ check code: #{test_user.autologin_code}"
     end
     return self.autologin_code
   end
@@ -386,6 +391,10 @@ class User < ActiveRecord::Base
   def normal?
     registration_type=='normal'
   end
+  
+  def name_chosen?
+    name !~ /^anon|none/
+  end
 
   def before_save
     #  logger.info("@terms_as_text: #{@terms_as_text}")
@@ -395,6 +404,7 @@ class User < ActiveRecord::Base
     about = about.gsub(/<([^>]+)>/," ") if about # get rid of all html
     registration_type="normal" unless name=~/^anon/
   end
+  
   
   def do_save
     update_terms

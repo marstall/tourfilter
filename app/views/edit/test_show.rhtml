@@ -1,0 +1,7 @@
+<%0.upto(10).each{|i|%>
+	<%
+		user = User.find(rand(15000)) rescue next
+		num_emails,first_notification_date = user.email_stats
+	%>
+	<a target="_" href='/show/37798/<%=user.reset_autologin_code%>'><%=user.name%> (<%=num_emails%>)</a><br>
+	<%}%>

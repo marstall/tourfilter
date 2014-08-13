@@ -11,32 +11,27 @@
 	<%page=match.page%>
 	<%place=match.page.place%>
 		<div class='calendar_match_row' style="<%=style%>">
-			<div class='calendar_match_column_0' style='float:left;'>
-        <%=render(:partial=>'shared/tracker_icon',:locals=>{:term=>term})%>
-			</div>
 			<div>
-				<div style='float:right'>
-				<%=render(:partial=>'shared/tickets',:locals=>{:match=>match,:page_type=>'calendar',:show_icon=>true})%>
-				</div>
-				<div id='match_<%=match.id%>' style='margin-top:4px'>
-						<%=link_to term.text_with_the,"/"+term.url_text%> 
-						<%=render(:partial=>'shared/more_less_info_link',
+				<%#=render(:partial=>'shared/tickets',:locals=>{:match=>match,:page_type=>'calendar',:show_icon=>true})%>
+				<div id='match_<%=match.id%>' style='margin-top:0px;padding:0px;margin:0px'>
+					<div style='margin-bottom:2px'>
+						<span style='font-weight:bold;font-size:14px'><%=link_to term.text_with_the,"/"+term.url_text%></span>
+						<%#=render(:partial=>'shared/more_less_info_link',
 						  :locals=>{:calendar_view=>true,:narrowest=>:true,:match=>match,:cl=>'calendar_listen'})%>
+							<span class="gray_links smaller smaller" >
+							<%=link_to place.name, 
+								:controller=>"clubs",
+								:action=>place.url_name rescue ""%>
+								<span class='gray smaller' style='' >
+										<%=match.date_for_sorting.month%>/<%=match.date_for_sorting.day%>
+					        <%#=render(:partial=>'shared/tracker_icon',:locals=>{:term=>term})%>
+								</span>
+
+							</span>
 				</div>
-				<div class="gray_links smaller" >
-				<%=link_to place.name, 
-					:controller=>"clubs",
-					:action=>place.url_name rescue ""%>
-					<%unless show_date_headers%>
-  					<span class="gray">
-  						<%=match.date_for_sorting.month%>/<%=match.date_for_sorting.day%>
-  					</span>
-  				<%end%>
-  				<%if show_created_at%>
-            <span class='added'>(added <%=match.created_at.month%>/<%=match.created_at.day%>)</span>
-          <%end%>
-          
-				</div>
+				<%if show_created_at%>
+	        <div class='added'>added <%=match.created_at.month%>/<%=match.created_at.day%>, <%=term.num_trackers%> trackers</div>
+	      <%end%>
+			</div>
 			</div> <!-- column 1 -->
-  		<div style='clear:both'></div>
 		</div> <!-- calendar_match_row -->

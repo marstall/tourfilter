@@ -477,13 +477,13 @@ class Term < ActiveRecord::Base
     text.each(" "){|word|
 #      logger.info("word: #{word}")
       ret+=" "
-      ret+=word.capitalize
+      ret+=word.strip.capitalize
     }
     ret.strip
   end
 
   def text_with_initial_caps
-    self.initial_capsify(text)
+    Term.initial_capsify(text)
   end
 
   def self.make_wikipedia_url_text(text)

@@ -398,6 +398,21 @@ c = GeoIP.new("/Users/chris/maxmind/GeoLiteCity.dat").city("76.24.220.14")
     render(:layout => false)
   end
   
+  
+  def show
+    @match=Match.find(params[:match_id])
+    @page_title = "#{@match.term.text} show"
+    user = destructive_autologin(params[:autologin_code])
+    @youser = user if user
+    if @youser
+      @num_emails,@first_notification_date = @youser.email_stats
+      @num_emails = @num_emails.to_i
+      @first_notification_date = @first_notification_date[0..3] rescue ''
+    else
+      render(:string=>"user not found.") and return false
+    end
+  end
+  
   def term_more_info
     render(:partial=>'shared/term_more_info',:locals=>params)
     return false
