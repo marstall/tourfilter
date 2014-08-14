@@ -1,5 +1,6 @@
 load "itunes.rb"
 require "base64" 
+include RedirectModule
 
 class EditController < ApplicationController
 #  caches_page :me
@@ -397,7 +398,7 @@ c = GeoIP.new("/Users/chris/maxmind/GeoLiteCity.dat").city("76.24.220.14")
     setup_related_terms(terms,5)
     render(:layout => false)
   end
-  
+
   
   def show
     @no_news_announcement=true
@@ -413,7 +414,7 @@ c = GeoIP.new("/Users/chris/maxmind/GeoLiteCity.dat").city("76.24.220.14")
       @num_emails = @num_emails.to_i
       @first_notification_date = @first_notification_date[0..3] rescue ''
     else
-      ticket_redirect("show")
+      redirect_to(evented_redirect_url(@match.ticket_url,{:page_type=>"show"}))
     end
   end
   

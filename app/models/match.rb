@@ -17,13 +17,13 @@ class Match < ActiveRecord::Base
   # hack so that match can masquerade as imported_event
   # select l,r,count(*) cnt  from term_edges  where l='destroyer' and network='played_with' group by l,r  order by l,cnt;
   
-  def url
-    if super=~/ticketmaster.com/
-      return "http://ticketsus.at/tourfilter?CTY=37&DURL=#{super}"
-    else
-      return super
-    end
-  end
+#  def url
+#    if super=~/ticketmaster.com/
+#      return "http://ticketsus.at/tourfilter?CTY=37&DURL=#{super}"
+#    else
+#      return super
+#    end
+#  end
   
 =begin
 select terms.*
