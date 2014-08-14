@@ -413,7 +413,7 @@ c = GeoIP.new("/Users/chris/maxmind/GeoLiteCity.dat").city("76.24.220.14")
       @num_emails = @num_emails.to_i
       @first_notification_date = @first_notification_date[0..3] rescue ''
     else
-      render(:string=>"user not found.") and return false
+      ticket_redirect("show")
     end
   end
   
