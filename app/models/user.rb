@@ -171,6 +171,7 @@ class User < ActiveRecord::Base
   end
 
   def self.onetime_identify_by_autologin_code(autologin_code)
+    return nil if autologin_code==nil
     # find user with this autologin code - if found, nil it out and return user, else return nil
     users = User.find_by_sql(["select * from users where binary autologin_code=?",autologin_code]) # case sensitive
     return nil if users.empty?
