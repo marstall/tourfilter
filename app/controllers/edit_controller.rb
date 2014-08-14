@@ -405,6 +405,9 @@ c = GeoIP.new("/Users/chris/maxmind/GeoLiteCity.dat").city("76.24.220.14")
     @page_title = "#{@match.term.text} show"
     user = destructive_autologin(params[:autologin_code])
     @youser = user if user
+    @youser||=nil
+    @match||=nil
+    Event.show_page_viewed(@youser,@match)
     if @youser
       @num_emails,@first_notification_date = @youser.email_stats
       @num_emails = @num_emails.to_i

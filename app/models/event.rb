@@ -40,8 +40,12 @@ class Event < ActiveRecord::Base
     event.save
   end
   
+  def self.show_page_viewed(user,match)
+    Event.add(user,"show",match.id,"view",match.term.text)
+  end
+
   def self.monthly_newsletter_sent(user)
-      Event.add(user,"montly",nil,"create",user.email_address)
+      Event.add(user,"monthly",nil,"create",user.email_address)
   end
 
   def self.weekly_newsletter_sent(user)
