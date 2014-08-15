@@ -14,12 +14,22 @@ jQuery(document).ready(function(){
   <%page||="new_calendar"%>
   <%page_type||="new_calendar"%>
   <%terms_shown=Hash.new%>
-	<div style='border-top:4px solid #eee'>
+	<div style='border-top:0px solid #eee'>
+	<%last_created_at=""%>
   <%matches.each_with_index{|match,i|%>
     <%break if i>num%>
     <%next if terms_shown[match.term.text_with_the]%>
     <%terms_shown[match.term.text_with_the]=true%>
-  	<div>
+		<%created_at = "#{Date::MONTHNAMES[match.created_at.month][0..2]} #{match.created_at.day}"%>
+		<%if show_date_headers%>
+			<%if created_at!=last_created_at%>
+				<%="</div>" if i>0%>
+				<div class='date_block_header'>added <%=created_at%></div>
+				<%last_created_at=created_at%>
+				<div class='date_block'>
+			<%end%>
+		<%end%>
+  	<div >
   			<%=render(:partial=>'shared/calendar_match_no_feature_narrowest',
   				:locals=>{:show_date_headers=>false,:show_created_at=>show_created_at,:day=>nil,:matches=>[match],:index=>i})%>
     </div>

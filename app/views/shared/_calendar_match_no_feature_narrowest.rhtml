@@ -11,10 +11,8 @@
 	<%page=match.page%>
 	<%place=match.page.place%>
 		<div class='calendar_match_row' style="<%=style%>">
-			<div>
 				<%#=render(:partial=>'shared/tickets',:locals=>{:match=>match,:page_type=>'calendar',:show_icon=>true})%>
-				<div id='match_<%=match.id%>' style='margin-top:0px;padding:0px;margin:0px'>
-					<div style='margin-bottom:2px'>
+				<div id='match_<%=match.id%>' style='margin-top:0px;padding:0px;margin:0px;margin-bottom:2px'>
 						<span style='font-weight:bold;font-size:14px'><%=link_to term.text_with_the,"/"+term.url_text%></span>
 						<%#=render(:partial=>'shared/more_less_info_link',
 						  :locals=>{:calendar_view=>true,:narrowest=>:true,:match=>match,:cl=>'calendar_listen'})%>
@@ -28,10 +26,9 @@
 								</span>
 
 							</span>
-				</div>
+			</div>
 				<%if show_created_at%>
 	        <div class='added'>added <%=match.created_at.month%>/<%=match.created_at.day%>, <%=term.num_trackers%> trackers</div>
 	      <%end%>
-			</div>
 			</div> <!-- column 1 -->
-		</div> <!-- calendar_match_row -->
+</div> <!-- calendar_match_row -->

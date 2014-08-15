@@ -1032,6 +1032,23 @@ h3
 	border-color:#eee;
 }
 
+.date_block_header
+{
+	text-transform:lowercase;
+	background-color:#eef5f5;
+	font-size:16px;
+	padding:8px;
+	color:#369;
+	font-weight:bold;
+}
+
+.date_block
+{
+	margin-bottom:16px;
+	border:8px solid #eef5f5;
+	border-top:0px;
+}
+
 .calendar_match_row
 {
 	text-transform:lowercase;
