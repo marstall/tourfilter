@@ -7,7 +7,7 @@ jQuery(document).ready(function(){
 </script>
 <%show_created_at=true if show_created_at.nil?%>
 <%order_by||="created_at desc"%>
-<%#metro_cache(
+<%metro_cache(
   :controller => "nightly", 
   :action => "uncollated_calendar_narrowest_#{order_by}") do%>
 <%matches=Match.matches_within_n_days_for_user(180,0,nil,"#{order_by},page_id",num)%>
@@ -35,4 +35,4 @@ jQuery(document).ready(function(){
     </div>
   <%}%>
   </div>
-<%#end%>
+<%end%>
