@@ -1,16 +1,31 @@
+<%calendar_view||=false%>
+<%no_title_line||=false%>
 <%match=matches.first%>
 <%term=match.term%>
 <%page=match.page%>
 <%place=page.place%>
-<div class='calendar_match_row_<%=index%2+1%> feature_calendar_item'  id="match_<%=match.id %>"  onmouseover='mouseover("<%=day.to_s%>",this,<%=match.id%>);' onmouseout='mouseout("<%=day.to_s%>",this,<%=match.id%>,"<%=match.term_text.gsub(" ","_")%>");'>
-	<%match=matches.first%>
-	<%feature=match.feature%>
-	<div class='feature_calendar_item_image' style='float:left;padding-right:0.25em'>
-		<img id='<%=term.id%>' width=160px src='<%=feature.image.medium_url%>' >
-	</div>
+<%feature=match.feature%>
+<div class='calendar_match_row_<%=index%2+1%> feature_calendar_item'  id="match_<%=match.id %>" >
+	<%return unless feature and feature.image%>	
 	<div>
-	<%=render(:partial=>'shared/featured_match_blog_style_narrow',:locals=>{:match=>match,:calendar_view=>true})%>
+		<a border=0 href='<%=url("/"+term.url_text)%>'>
+		<img border=0  width=100% src='<%=feature.image.large_url%>' ></a>
+		<div class='match_feature_blog_text'>
+	  	<div class='calendar_match_row' style='margin-top:0px'>
+				<span style='font-weight:bold'><%=link_to term.text_with_the,"/"+term.url_text%></span>
+				<%=link_to place.name, 
+					:controller=>"clubs",
+					:action=>place.url_name rescue ""%>
+					<span class='gray smaller' >
+							<%=match.date_for_sorting.month%>/<%=match.date_for_sorting.day%>
+		        <%#=render(:partial=>'shared/tracker_icon',:locals=>{:term=>term})%>
+					</span>
+	      </div>
+	          <%if false # feature.description and not feature.description.empty? %>  
+						<div class='blog_style_description' >	
+						<%=feature.description%>
+		          -- <a href='/<%=feature.editor_metro_code%>/users/<%=feature.username%>'> <%=feature.username%></a>, <%=feature.short_date%>
+						<%end%>
+		</div>
 	</div>
-		<div style='clear:both'></div>
-	</div>
-<div id='more_info_<%=matches.first.id%>'></div>
+</div>

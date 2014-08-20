@@ -7,7 +7,7 @@
   <%page||="new_calendar"%>
   <%page_type||="new_calendar"%>
   <%terms_shown=Hash.new%>
-	<div style='border-top:0px solid #eee'>
+	<div >
 	<%last_created_at=""%>
   <%matches.each_with_index{|match,i|%>
     <%break if i>num%>
@@ -23,8 +23,13 @@
 			<%end%>
 		<%end%>
   	<div >
-  			<%=render(:partial=>'shared/calendar_match_no_feature_narrowest',
+		<%if match.feature%>
+  			<%=render(:partial=>'shared/calendar_match_with_feature_narrower',
   				:locals=>{:show_date_headers=>false,:show_created_at=>show_created_at,:day=>nil,:matches=>[match],:index=>i})%>
+			<%else%>
+			<%=render(:partial=>'shared/calendar_match_no_feature_narrowest',
+				:locals=>{:show_date_headers=>false,:show_created_at=>show_created_at,:day=>nil,:matches=>[match],:index=>i})%>
+			<%end%>
     </div>
   <%}%>
   </div>
