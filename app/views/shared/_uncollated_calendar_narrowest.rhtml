@@ -1,5 +1,5 @@
 <%show_created_at=true if show_created_at.nil?%>
-<%order_by||="updated_at desc"%>
+<%order_by||="created_at desc"%>
 <%metro_cache(
   :controller => "nightly", 
   :action => "uncollated_calendar_narrowest_#{order_by}") do%>
@@ -13,7 +13,7 @@
     <%break if i>num%>
     <%next if terms_shown[match.term.text_with_the]%>
     <%terms_shown[match.term.text_with_the]=true%>
-		<%created_at = "#{Date::MONTHNAMES[match.updated_at.month][0..2]} #{match.updated_at.day}"%>
+		<%created_at = "#{Date::MONTHNAMES[match.created_at.month][0..2]} #{match.created_at.day}"%>
 		<%if show_date_headers%>
 			<%if created_at!=last_created_at%>
 				<%="</div>" if i>0%>
