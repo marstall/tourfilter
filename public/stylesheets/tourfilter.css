@@ -1046,7 +1046,7 @@ h3
 }
 
 .calendar_match_row a:link { text-decoration: none; color: #777; }
-.calendar_match_row a:visited { text-decoration: none; color: #369; }
+.calendar_match_row a:visited { text-decoration: none; color: #777; }
 .calendar_match_row a:hover { text-decoration: underline; }
 .calendar_match_row a:active { text-decoration: underline; }
 
