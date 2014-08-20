@@ -1011,17 +1011,19 @@ h3
 	font-weight:bold;
 	padding:12px;
 	padding-left:12px;
-	padding-bottom:4px;
+	padding-bottom:0px;
 	text-align:left;
 	color:#369;
-	border-top:3px solid #eef5f5;
+	border-top:0px solid #eef5f5;
 	-background-color:#eee;
 }
 
 .calendar_narrowest
 {
-	background-color:#ffd;
+	background-color:#eef5f5;
 	padding-top:0px;
+	-webkit-border-radius:10px;
+	-moz-border-radius:10px;
 }
 
 .date_block
@@ -1042,7 +1044,7 @@ h3
 	padding-right:0em;
 	margin-bottom:0px;
 	padding:4px;
-	
+	padding-bottom:0px;
 }
 
 .calendar_match_row a:link { text-decoration: none; color: #777; }
