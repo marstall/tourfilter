@@ -1,8 +1,10 @@
 <%
+	calendar_options_style||=""
+	calendar_option_pressed_style||=""
   default_cookie_value=nav_array[0].keys.first
   cookies[options_label]||=default_cookie_value
 %>
-<div class='calendar_options'>
+<div class='calendar_options' style='<%=calendar_options_style%>'>
 <%nav_array.each{|elem|%>
     <%code=elem.keys.first-%>
     <%
@@ -30,7 +32,7 @@
       ONCLICK
     -%>
     <span >
-		<span  id='<%=code%>_pressed' class='calendar_option_pressed' style='display:<%=pressed_display%>'><%=display_code%></span>
+		<span  id='<%=code%>_pressed' class='calendar_option_pressed ' style='<%=calendar_option_pressed_style%>;display:<%=pressed_display%>'><%=display_code%></span>
 		<span id='<%=code%>_unpressed' class='calendar_option_unpressed' style='display:<%=unpressed_display%>'>
       <%= link_to_remote(display_code, 
           :update=>"#{options_label}",

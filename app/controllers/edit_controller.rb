@@ -474,21 +474,21 @@ c = GeoIP.new("/Users/chris/maxmind/GeoLiteCity.dat").city("76.24.220.14")
     return @options_label,@nav_array
   end
 
+#  {'editors_QT__SP_picks'=>'featured_partial'},
   def use_list_nav_array
     @options_label='list_view'
     @featured_matches=Match.current_with_feature(-1,"features.updated_at desc")
     if @featured_matches and @featured_matches.size>0
       @nav_array=
         [
-          {'editors_QT__SP_picks'=>'featured_partial'},
-          {'popular'=>'popular_partial'},
-          {'new'=>'new_partial'}
+          {'new'=>'new_partial'},
+          {'popular'=>'popular_partial'}
         ]
     else
       @nav_array=
         [
-          {'popular'=>'popular_partial'},
-          {'new'=>'new_partial'}
+          {'new'=>'new_partial'},
+          {'popular'=>'popular_partial'}
         ]
     end
     return @options_label,@nav_array,@featured_matches

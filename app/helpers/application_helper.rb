@@ -50,6 +50,7 @@ module ApplicationHelper
     DateTime.now.day==dt.day and DateTime.now.month==dt.month and DateTime.now.year==dt.year
   end
 
+
   def ticket_link(external_link_hash,ticket_hash,label,extra_hash,options,relative_url=true)
     external_link_hash||=Hash.new
     extra_hash||=Hash.new
