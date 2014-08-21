@@ -411,7 +411,7 @@ def make_matches_from_imported_events
 		next
 end	
 match=Match.new
-      match.ticket_url = event.url
+      match.url = event.url
       match.venue_id=event.venue_id
       match.venue_name=event.name
       match.imported_event_id=event.id

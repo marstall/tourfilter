@@ -140,6 +140,7 @@ sql = <<-SQL
     # 1. VENUE URL
     # 2. PRIMARY TICKETSELLER 
     # 3. SECONDARY TICKETSELLER
+    return url if url
     page = self.page
     return page.url(true) if page.url
     imported_events.each{|ie|
