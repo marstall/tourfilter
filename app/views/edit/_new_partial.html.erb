@@ -3,13 +3,6 @@
 																												:calendar_option_pressed_style=>'background-color:#ffd',
 																												:calendar_options_style=>'margin-bottom:0px'
 																												})%>
-<!--div class='editors_pick_header'>
-  new
-  <div  style='vertical-align:bottom;float:right;font-size:12px'>
-  ... experimental: <a href='<%=url("/edit/rich_matches?num=50&order_by=created_at+desc")%>'>reviewers view</a>
-  </div>
-  <div style='clear:right'></div>
-</div-->
 <div class='calendar_narrowest'>
 <%=render(:partial =>"shared/uncollated_calendar_narrowest",:locals=>{:order_by=>"created_at desc",:num=>150,:narrower=>true,:show_date_headers=>true,:show_created_at=>false,:show_reviews=>true})%>
 </div>
