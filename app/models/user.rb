@@ -176,7 +176,7 @@ class User < ActiveRecord::Base
     users = User.find_by_sql(["select * from users where binary autologin_code=?",autologin_code]) # case sensitive
     return nil if users.empty?
     user = users[0]
-    logger.info ("+++ setting autologin_code to nil for #{user.name}")
+    logger.info("+++ setting autologin_code to nil for #{user.name}")
     User.update_all("autologin_code=null","id=#{user.id}")
     return user
   end

@@ -55,7 +55,7 @@ where metros_venues.venue_id=venues.id
 
   # look in cache - if it finds it there, return it. else wait <delay> seconds and fetch it
   def fetch_url(agent,url,delay=0) # returns body + was_cached
-    cache_timeout=12*60*60 # 1/2 day
+    cache_timeout=1*60*60 # 1 hour
     digest = Digest::MD5.hexdigest(url)
     filename="/tmp/tourfilter/#{digest}"
     # return the cached version if it exists and it is less that <cache_timeout> seconds old
