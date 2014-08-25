@@ -55,8 +55,17 @@ class User < ActiveRecord::Base
   @num_terms=nil
   def num_terms
     return @num_terms if @num_terms
-    @num_terms = term.size
-    return
+    @num_terms = self.terms.size
+    return @num_terms
+  end
+  
+  def num_terms_since(days)
+    sql = <<-SQL
+    select count(*) from terms_users 
+    where user_id=?
+    and adddate(terms_users.created_at,interval ? day)>now()
+    SQL
+    return User.count_by_sql([sql,self.id,days])
   end
   
   def cache_terms(terms)
@@ -151,6 +160,10 @@ class User < ActiveRecord::Base
     return s
   end
   
+  def User.recently_active(limit)
+    User.find_by_sql(["select * from users order by last_visited_on desc limit ?",limit])
+  end
+  
   def email_stats
     sql = <<-SQL
       select count(*) num_emails,min(created_at) first_notification_date from events where user_id=? and object_type='email';
@@ -164,7 +177,7 @@ class User < ActiveRecord::Base
     if !self.autologin_code
       my_id = self.id
       self.autologin_code = User.generate_autologin_code
-      User.update_all("autologin_code='#{self.autologin_code}'","id=#{self.id}")
+      User.update_all_all("autologin_code='#{self.autologin_code}'","id=#{self.id}")
       test_user = User.find(my_id)
     end
     return self.autologin_code

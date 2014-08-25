@@ -3,7 +3,7 @@
 <%metro_cache(
   :controller => "nightly", 
   :action => "uncollated_calendar_narrowest_#{order_by}") do%>
-<%matches=Match.matches_within_n_days_for_user(180,0,nil,"#{order_by},page_id",num)%>
+<%matches=Match.matches_within_n_days_for_user(360,0,nil,"#{order_by},page_id",num)%>
   <%page||="new_calendar"%>
   <%page_type||="new_calendar"%>
   <%terms_shown=Hash.new%>
