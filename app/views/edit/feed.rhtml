@@ -5,19 +5,39 @@
 <%cnt = Action.count%>
 <%max = offset+(page_size-1)%>
 <%max=cnt if max>cnt %>
-<div style='float:left;margin-left:610px;position:absolute;width:220px'>
+<div style='margin-left:610px;position:absolute;width:220px'>
 	<h2>users</h2>
+	<table style='font-size:12px'>
+		<tr style='background-color:#eee;padding:2px'>
+			<td style='vertical-align:bottom'>last<br>visit</td>
+			<td style='vertical-align:bottom'>user</td>
+			<td style='vertical-align:bottom'>reg<br>in</td>
+			<td style='vertical-align:bottom'>tot<br>terms</td>
+			<td style='vertical-align:bottom'>last<br>7d adds</td>
+			</tr>
 	<%User.recently_active(100).each{|user|%>
-		<div class='underline' style='font-size:14px'>
-			<a href='/users/<%=user.name%>'><%=user.name%></a>
-			<%=user.last_visited_on.month%>/<%=user.last_visited_on.day%>
-			<%=user.registered_on.month%>/<%=user.registered_on.day%>/<%=user.registered_on.year%>
-			<div style='float:right'><%=user.num_terms%> <%=user.num_terms_since(7)%></div>
-		</div>
-		<div style='clear:right'></div>
+		<tr>
+			<td>
+				<%term_string = user.terms("created_at desc")[0..10].collect{|term| term.text}.join(", ")%>
+				<%=user.last_visited_on.month%>/<%=user.last_visited_on.day%>
+			</td>
+		<td class='underline' style='font-size:14px'>
+			<a title='recent adds: <%=term_string%>' href='/users/<%=user.name%>'><%=user.name%></a>
+		</td>
+		<td>
+			<span class='gray smaller smaller' style='font-size:10px;color:#aaa' title="<%=user.registered_on.month%>/<%=user.registered_on.day%>/<%=user.registered_on.year%>"><%=user.registered_on.year%></span>
+		</td>
+		<td>
+			<%=user.num_terms%> 
+		</td>
+		<td>
+			<%=user.num_terms_since(7)%>
+			</td>
+		</tr>
 		<%}%>
+		</table>
 </div>
-<div id="main-full-width" style='width:600px;float:left'>
+<div id="main-full-width" style='width:600px'>
 <h2>feed
   <div style='float:right;padding-top:10px;padding-right:4px;' class='gray small underline'>
     
@@ -81,3 +101,4 @@
 </h2>
 </div>
 </div>
+<div style='clear:both'></div>
