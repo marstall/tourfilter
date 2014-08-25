@@ -66,8 +66,8 @@
     <td><a href='/<%=action.metro_code%>'><%=action.metro_code%></a></td>
 <!--    <td><%=action.created_at.month%>/<%=action.created_at.day%> <%=action.created_at.hour%>:<%=action.created_at.min%></td>-->
     <td style='white-space:nowrap;' ><%=time_ago_in_words action.created_at%> ago</td>
-    <td style='' ><a href='/<%=action.metro_code%>/users/<%=action.username%>'><%=action.username%></a>
-    <span style='font-weight:bold;white-space:nowrap;'><%=action.action%>
+    <td style='white-space:nowrap;' ><a href='/<%=action.metro_code%>/users/<%=action.username%>'><%=action.username%></a>
+    <span style='font-weight:bold;'><%=action.action%>
     <%=action.object_type%></span> <%=action.object_description%></span></td>
     <td class='underline' style='white-space:nowrap;'>
       <%if action.note && action.note.size>1%>
