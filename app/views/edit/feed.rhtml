@@ -5,7 +5,7 @@
 <%cnt = Action.count%>
 <%max = offset+(page_size-1)%>
 <%max=cnt if max>cnt %>
-<div style='margin-left:610px;position:absolute;width:220px'>
+<div style='margin-left:850px;position:absolute;width:230px'>
 	<h2>users</h2>
 	<table style='font-size:12px'>
 		<tr style='background-color:#eee;padding:2px'>
@@ -37,7 +37,7 @@
 		<%}%>
 		</table>
 </div>
-<div id="main-full-width" style='width:600px'>
+<div id="main-full-width" style='width:830px'>
 <h2>feed
   <div style='float:right;padding-top:10px;padding-right:4px;' class='gray small underline'>
     
@@ -53,7 +53,7 @@
   <div style='clear:right' ></div>
 </h2>
 <div class='feed ' style='margin-top:6px'>
-<table cellpadding=6 cellspacing=0 width=600px>
+<table cellpadding=6 cellspacing=0 width=830px>
 <%Action.find(:all,:offset=>offset,:limit=>250,:order=>'id desc').each_with_index{|action,i|%>
   <%
     cl=nil
