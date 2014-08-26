@@ -236,6 +236,11 @@ text-transform: lowercase
 .no_underline a:hover { text-decoration: underline; }
 .no_underline a:active { text-decoration: underline; }
 
+.black_link a:link { color: #333; }
+.black_link a:visited { color: #333; }
+.black_link a:hover { color: #333;}
+.black_link a:active { color: #333;}
+
 .bulleted ul {
 }
 .bulleted li {

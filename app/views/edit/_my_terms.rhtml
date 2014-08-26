@@ -56,11 +56,11 @@ terms.each_with_index { |_term,j|%>
         <%next if i>num_related%>
         <%terms_used[related_term.related_term_text]=true%>
         <td style='padding-left:6px;padding-top:4px;border-top:1px solid #eee;background-color:<%=alternating%>' valign=top nowrap>
-        <span class='my_related_term' id='<%=id%>'>
+        <span class='my_related_term no_underline black_link' id='<%=id%>'>
           <span style='vertical-align:-4px'>
             <a  href="#" 
                 onclick="return direct_add('<%=related_term.related_term_text%>',<%=id%>,'your bands/similar band','<%=term.text%>')">
-              <img id='image_<%=id%>' src='/images/add.gif'/></a></span><a href='<%=url("/#{Term.make_url_text(related_term.related_term_text)}")%>'><%=related_term.related_term_text[0..20]%></a>
+              <img id='image_<%=id%>' src='/images/add.gif'/></span><%=related_term.related_term_text[0..20]%></a>
         </span>
         </td>
       <%}%>
