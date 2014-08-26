@@ -15,16 +15,25 @@
 			<td style='vertical-align:bottom'>tot<br>terms</td>
 			<td style='vertical-align:bottom'>last<br>7d adds</td>
 			</tr>
+	<%old_dts=""%>
 	<%User.recently_active(100).each{|user|%>
 		<%
+			styl=""
 			styl='background-color:#ddf' if user.registered_on.strftime("%F")==user.last_logged_in_on.strftime("%F")
 		%>
+		<%dts = "#{user.last_visited_on.month}/#{user.last_visited_on.day}"%>
+		<%styl+=";margin-top:10px" if dts!=old_dts%>
 		<tr style='<%=styl%>'>
-			<td>
-				<%term_string = user.terms("created_at desc")[0..10].collect{|term| term.text}.join(", ")%>
-				<%=user.last_visited_on.month%>/<%=user.last_visited_on.day%>
+			<td style='padding-top:2px;font-size:14px;color:#333'>
+				<%if dts!=old_dts%>
+					<div style='vertical-align:top'><%=dts%></div>
+				<%else%>
+				<span style='color:#333;'></span>
+				<%end%>
+				<%old_dts=dts%>
 			</td>
 		<td class='underline' style='font-size:14px'>
+			<%term_string = user.terms("created_at desc")[0..10].collect{|term| term.text}.join(", ")%>
 			<a title='recent adds: <%=term_string%>' href='/users/<%=user.name%>'><%=user.name%></a>
 		</td>
 		<td>
