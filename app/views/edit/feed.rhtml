@@ -7,7 +7,7 @@
 <%max=cnt if max>cnt %>
 <div style='margin-left:850px;position:absolute;width:230px'>
 	<h2>users</h2>
-	<table style='font-size:12px'>
+	<table style='font-size:12px' cellpadding=1px>
 		<tr style='background-color:#eee;padding:2px'>
 			<td style='vertical-align:bottom'>last<br>visit</td>
 			<td style='vertical-align:bottom'>user</td>
@@ -16,7 +16,10 @@
 			<td style='vertical-align:bottom'>last<br>7d adds</td>
 			</tr>
 	<%User.recently_active(100).each{|user|%>
-		<tr>
+		<%
+			styl='background-color:#ddf' if user.registered_on.strftime("%F")==user.last_logged_in_on.strftime("%F")
+		%>
+		<tr style='<%=styl%>'>
 			<td>
 				<%term_string = user.terms("created_at desc")[0..10].collect{|term| term.text}.join(", ")%>
 				<%=user.last_visited_on.month%>/<%=user.last_visited_on.day%>
@@ -36,6 +39,7 @@
 		</tr>
 		<%}%>
 		</table>
+		<div style='padding:2px;background-color:#ddf;margin-top:12px;font-size:14px'>purple background indicates a signup</div>
 </div>
 <div id="main-full-width" style='width:830px'>
 <h2>feed
