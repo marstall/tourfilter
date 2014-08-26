@@ -16,7 +16,7 @@
 			<td style='vertical-align:bottom'>last<br>7d adds</td>
 			</tr>
 	<%old_dts=""%>
-	<%User.recently_active(500).each{|user|%>
+	<%User.recently_active(200).each{|user|%>
 		<%
 			styl=""
 			styl='background-color:#ddf' if user.registered_on.strftime("%F")==user.last_logged_in_on.strftime("%F")
