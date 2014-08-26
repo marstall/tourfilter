@@ -409,7 +409,9 @@ class Term < ActiveRecord::Base
     return if not id
     sql = <<-SQL
       select matches.* from matches
-      where matches.status='notified' and matches.time_status<>'future' and matches.term_id=#{id} 
+      where matches.status='notified' and matches.time_status<>'future' 
+      and date_for_sorting<now() 
+      and matches.term_id=#{id} 
       order by matches.date_for_sorting desc
       SQL
     sql+= " limit #{num}" if num!=-1

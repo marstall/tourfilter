@@ -177,7 +177,7 @@ class User < ActiveRecord::Base
     if !self.autologin_code
       my_id = self.id
       self.autologin_code = User.generate_autologin_code
-      User.update_all_all("autologin_code='#{self.autologin_code}'","id=#{self.id}")
+      User.update_all("autologin_code='#{self.autologin_code}'","id=#{self.id}")
       test_user = User.find(my_id)
     end
     return self.autologin_code

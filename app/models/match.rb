@@ -847,7 +847,7 @@ group by matches.feature_id
       # ok, we need to perform a search for this term
       pages = Page.find_all_matching_term(term) 
       if pages.size>20            
-        puts "                    ... more than 20 results found, returning."
+        puts "                    ... more than 20 results found, returning." # why? (later) oh, cause of matches with common words like 'is' or 'the'
         return
       end
       pages.each { |page|
@@ -867,18 +867,18 @@ group by matches.feature_id
 #        begin
           match.page=page
           match.term=term
-          match.calculate_date_of_event(false)
+          match.calculate_date_of_event(false) # do the fancy regexp stuff to create the date_for_sorting
           if ((not match.day) and (not term.has_users?)) # don't bother with undated matches that no-one is tracking.
             puts "undated match that no-one is tracking, skipping ...."
             next
           end
           now = DateTime::now
           midnight = DateTime.new(now.year,now.month,now.day,0,0,0)
-          if match.day and match.date_for_sorting and match.date_for_sorting< midnight # don't bother if the date is calculable and it's in the past
+          if match.day and match.date_for_sorting and match.date_for_sorting<midnight # don't bother if the date is calculable and it's in the past
             puts "match is in the past, skipping ..."
             next
           end
-          recent_place_matches = page.place.recent_matches_for(term,match)               # get a list of all recent matches for this place
+          recent_place_matches = page.place.recent_matches_for(term,match)               # get a list of all recent matches for this place, time and term.
           if recent_place_matches&&!recent_place_matches.empty?                   # if there are any matches
             recent_place_matches.each { |match|                                   # loop through place.recent_matches
               next if not match
@@ -897,17 +897,10 @@ group by matches.feature_id
               end
               match.save                                                          # save
               }
-            next                                                                  # don't create a new match
+            next # don't create a new match
           end
-#        rescue => e
-#          puts "non fatal error encountered in searching for a match for '#{term.text}' - bad page record?"
-#          puts $!
-#          puts e.backtrace.join("\n") if e
-#            # in case of error, presume the match is still happening.
-#          match.time_status='future' if match.time_status=='reevaluating'      # if the status is reevaluating, meaning it was future pre-daemon, mark it future
-#          match.save                                                          # save
-#          next
-#        end
+        # falling through to here only if we didn't find a matching match in the above loop
+        
         match.time_status='future'
         match.status="new"
         puts "new match: #{term.text} at #{page.place.name}"
@@ -916,10 +909,6 @@ group by matches.feature_id
         match.date_position=page.place.date_type
         match.month_position=page.month_position
         match.save!
- #       match.page= page
-#        match.term= term
-#        match.calculate_date_of_event(false)
-#        match.save
       }
   end
   

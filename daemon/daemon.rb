@@ -166,15 +166,13 @@ def expire_match_caches(match)
 end
 
 def perform_searches
-  #   3. for each user, perform each saved search on all pages in the 
-  #     appropriate metros
   puts "retrieving complete list of terms ..."
-terms=Array.new
+  terms=Array.new
   if @term_id
     terms = [Term.find(@term_id)]
   elsif @term_text
     terms = [Term.find_by_text(@term_text)]
-else
+  else
     terms = Term.find(:all,:order =>"text asc") # get all terms
   end
   puts "found #{terms.size} terms"
@@ -185,8 +183,8 @@ else
       match.status='reevaluating' if match.status='future' and not match.imported_event_id.nil?
     }
   else
-    puts "marking all future matches as 'reevaluating' ... they will have to prove that they are still active."
-    Match.update_all("time_status='reevaluating'","time_status='future' and imported_event_id is null") 
+    puts "marking all future non-imported matches with no date_for_sorting as 'reevaluating' ... they will have to prove that they are still active."
+    Match.update_all("time_status='reevaluating'","time_status='future' and day is null and imported_event_id is null") # so that non-ticketmaster matches without days become past
   end
   puts "searching all 'future' urls for all terms..."
   terms.each { |term|
