@@ -624,7 +624,7 @@ limit 10000
   def Match.matches_within_n_days_for_user(num,offset,user,order_by="date_for_sorting asc,page_id",limit=10000)
     num=num.to_i
     offset=offset.to_i
-    sql =  " select matches.*,terms.aggregate_num_trackers term_num_trackers,terms.text term_text, terms.url term_url from matches,terms"
+    sql =  " select matches.*,terms.num_trackers term_num_trackers,terms.text term_text, terms.url term_url from matches,terms"
     sql += " ,terms_users " if user 
     sql += " where matches.status='notified' and time_status='future' "
     sql += " and matches.term_id=terms.id "
@@ -899,6 +899,7 @@ group by matches.feature_id
               }
             next # don't create a new match
           end
+
         # falling through to here only if we didn't find a matching match in the above loop
         
         match.time_status='future'

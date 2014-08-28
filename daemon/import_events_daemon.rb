@@ -178,11 +178,11 @@ def search
 
       puts "#{term.text}: #{(imported_events||[]).size} matches" 
       imported_events.each{|event|
-        at = ArtistTerm.find_by_artist_name_and_term_text_and_status(term.text,event.body,'invalid')
-        if at
-          puts "found invalid at like this (#{at.id}:#{at.status})"
-          next
-        end
+#        at = ArtistTerm.find_by_artist_name_and_term_text_and_status(term.text,event.body,'invalid') # has this term been found to be invalid in this string?
+#        if at and at.artist_name!=at.term_text # exact matches are probably valid so ignore this check
+#          puts "found invalid at like this (#{at.id}:#{at.status})"
+#          next
+#        end
         # mark event as found
         event.status='term_found'
         event.save
@@ -204,8 +204,10 @@ def search
 #      puts time_end
   }
   # now mark all new imported_events as "no_term_found"
-  puts "marking remainder as 'no_term_found'"
-  ImportedEvent.update_all("status='no_term_found'","status='new'")
+  unless @term_text
+    puts "marking remainder as 'no_term_found'" 
+    ImportedEvent.update_all("status='no_term_found'","status='new'")
+  end
 end
 
 def assign_match_probability
