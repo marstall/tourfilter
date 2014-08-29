@@ -1,4 +1,3 @@
-<meta http-equiv="refresh" content="60">
 
 <%page_size=500%>
 <%offset=(params[:offset]||0).to_i%>
@@ -6,6 +5,33 @@
 <%max = offset+(page_size-1)%>
 <%max=cnt if max>cnt %>
 <div style='margin-left:850px;position:absolute;width:230px'>
+	<h2>stats</h2>
+	<table style='font-size:12px' cellpadding=1px width=100%>
+		<%@stats.each_key{|key|%>
+		<%value = @stats[key]%>
+		<%if value.is_a? Array%>
+		<h4><%=key%></h4>
+		<table style='font-size:12px' cellpadding=1px width=100%>
+			<tr>
+			<%value.first.each{|heading|%>
+				<td style='background-color:#ddf'><%=heading%></td>
+			<%}%>
+			</tr>
+			<%value[1..value.size].each{|row|%>
+				<tr>
+				<%row.each{|column|%>
+					<td><%=column%></td>
+					<%}%>
+			  </tr>
+			<%}%>
+			</table>
+		<%else%>
+		<tr style='padding:2px'>
+			<td style='background-color:#fff'><%=key%></td><td  style='background-color:#eee'><%=@stats[key]%></td>
+		</tr>
+		<%end%>
+		<%}%>
+	</table>
 	<h2>users</h2>
 	<table style='font-size:12px' cellpadding=1px>
 		<tr style='background-color:#eee;padding:2px'>

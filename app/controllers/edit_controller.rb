@@ -1,6 +1,7 @@
 load "itunes.rb"
 require "base64" 
 include RedirectModule
+include StatsModule
 
 class EditController < ApplicationController
 #  caches_page :me
@@ -522,6 +523,10 @@ c = GeoIP.new("/Users/chris/maxmind/GeoLiteCity.dat").city("76.24.220.14")
   def friends_partial
     use_calendar_nav_array
     render(:partial=>'friends_partial',:layout=>false)
+  end
+
+  def feed
+    @stats=generate_stats(true)
   end
 
   def feed_partial

@@ -215,7 +215,14 @@ text-transform: lowercase
 text-transform: lowercase
 }
 
-
+h4
+{
+	padding:4px;
+	margin-bottom:2px;
+	font-size:14px;
+	font-weight:bold;
+	background-color:#eef;
+}
 
 .underline a img { border: 0; }
 .underline a:link { text-decoration: underline; color: #369; }
