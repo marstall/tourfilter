@@ -17,31 +17,12 @@ require 'rss/syndication'
 require 'rss/content'
 require 'rss/trackback'
 
-require "net/http"
 require "logger"
-require 'open-uri'
-=begin
-require "../app/models/imported_event.rb"
-#require "../app/models/shared_events.rb"
-require "../app/models/shared_term.rb"
-require "../app/models/metro.rb"
-require "../app/models/artist_term.rb"
-require "../app/models/ticketmaster_parser.rb"
-require "../app/models/terms_users.rb"
-require "../app/models/page.rb"
-require "../app/models/place.rb"
-require "../app/models/match.rb"
-require "../app/models/term.rb"
-require "../app/models/related_term.rb"
-require "../app/models/user.rb"
-require "../app/models/event.rb"
-require "../app/models/item.rb"
-require "../app/models/match_mailer.rb"
-require "../app/models/place_image.rb"
-require "../app/models/term_url.rb"
-require "../app/models/exception_mailer.rb"
-require "../app/models/amazon.rb"
-=end
+#require "net/http"
+#require 'open-uri'
+
+require 'url_fetcher'
+
 require "../app/models/related_terms_manager.rb"
 
 tourfilter_base="http://www.tourfilter.local:3000/boston"
@@ -97,6 +78,7 @@ def initialize_daemon(metro_code)
   puts "daemon initialized."
 end
 
+=begin
 def fetch_url(url_text)
   begin
     user_agent = "Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en-us) AppleWebKit/XX (KHTML, like Gecko) Safari/YY"
@@ -110,7 +92,7 @@ def fetch_url(url_text)
   end
     
 end
-
+=end
 
 
 #def update_default_listings_pages
@@ -144,7 +126,13 @@ def generate_template_based_urls
 end
 
 def perform_crawl
-  places = Place.find(:all)
+  if @place_id
+    places = [Place.find(@place_id)]
+  elsif @place_name
+    places = Place.find_by_sql("select * from places where name like \"%#{@place_name}%\"")
+  else
+    places = Place.find_all_active(@metro_code)
+  end
   places.each{|place|
     begin
       puts "fetching urls for #{place.name} ... "

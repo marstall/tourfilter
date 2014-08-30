@@ -1,3 +1,4 @@
+require 'mechanize'
 module UrlFetcher
  
   include FileUtils
@@ -5,29 +6,32 @@ module UrlFetcher
   # look in cache - if it finds it there, return it. else wait <delay> seconds and fetch it
   def fetch_url(url,delay=0) # returns body + was_cached
     agent = WWW::Mechanize.new 
+    agent.user_agent = "Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en-us) AppleWebKit/XX (KHTML, like Gecko) Safari/YY"
+  
     cache_timeout=144*60*60 # 1/2 day
     digest = Digest::MD5.hexdigest(url)
     dir="/tmp/tourfilter/"
     mkdir dir rescue
-    filename="#{dir}#{digest}"
-#    puts filename
-    # return the cached version if it exists and it is less that <cache_timeout> seconds old
-    return File.read(filename),true if File.exists?(filename) and Time.now-File.atime(filename)<cache_timeout
-#    atime = File.atime(filename)
-#    puts "file exists?: #{File.exists?(filename)}"
-#    puts "atime: #{atime}"
-#    puts "now: #{Time.now}"
-#    puts "cache_timeout: 180"
-#    puts "Time.now-atime: #{Time.now-atime}"
+    filename = "#{dir}#{digest}"
+    s = "#{dir}#{digest}"
+    return File.read(s) if File.exists?(s) and Time.now-File.atime(s)<cache_timeout
     sleep delay
-    page = agent.get(url)
-#    puts "creating filename for url #{url}: #{filename}"
-    rm_rf(filename)
-    file = File.new(filename,"w")
+    page=nil
+    begin
+      puts "+++ FETCHING! #{url} ..."
+      page = agent.get(url)
+    rescue TimeoutError
+      puts "FAILED! fetching #{url}, trying via proxy ..."
+      agent.set_proxy("psychoastronomy.org",51234) # try it with the proxy if it failed
+      page = agent.get(url)      
+    end
+    rm_rf(s)
+    file = File.new(s,"w")
     file.write(page.body)
     file.close
-    return page.body,false
+    return page.body
   end
+  
 
   def fetch_url_no_cache(url_text,fake_user_agent=true)
     begin

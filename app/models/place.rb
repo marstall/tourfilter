@@ -1,8 +1,9 @@
-require "net/http"
-require 'open-uri'
+#require "net/http"
+#require 'open-uri'
 require 'digest/md5'
 require 'hpricot'
 
+include UrlFetcher
 
 class Place < ActiveRecord::Base
   belongs_to :metro
@@ -460,16 +461,20 @@ class Place < ActiveRecord::Base
     end
   end
 
+=begin
   def fetch_url(url_text)
     begin
       user_agent = "Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en-us) AppleWebKit/XX (KHTML, like Gecko) Safari/YY"
       obj = open(url_text, "User-Agent" => user_agent)
       obj.read
     rescue Exception
+      agent.set_proxy("psychoastronomy.org",51234)
+      
       puts "error fetching url: #{$!}"
       puts "continuing ... "
     end
   end
+=end
   
   def remove_meta_tag(body)
     return if not body
