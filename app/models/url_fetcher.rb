@@ -22,6 +22,8 @@ module UrlFetcher
       page = agent.get(url)
     rescue TimeoutError
       puts "FAILED! fetching #{url}, trying via proxy ..."
+      agent = WWW::Mechanize.new 
+      agent.user_agent = "Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en-us) AppleWebKit/XX (KHTML, like Gecko) Safari/YY"
       agent.set_proxy("psychoastronomy.org",51234) # try it with the proxy if it failed
       page = agent.get(url)      
     end
