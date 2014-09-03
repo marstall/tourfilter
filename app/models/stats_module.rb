@@ -1,6 +1,6 @@
 module StatsModule
 
-  def num_emails(days)
+  def number_of_emails(days=7)
     sql = <<-SQL
       select left(created_at,10) dt, count(*) cnt 
       from events 
@@ -60,7 +60,7 @@ module StatsModule
 =end
   def generate_stats(cache=false)
     stats = Hash.new
-    stats["emails last 14 days"]=num_emails(14) #test_stats
+    stats["emails last 14 days"]=number_of_emails(14) #test_stats
     stats["show views last 7 days"]=num_show_views(7) #test_stats
     #stats = test_stats
     return stats

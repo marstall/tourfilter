@@ -408,6 +408,8 @@ c = GeoIP.new("/Users/chris/maxmind/GeoLiteCity.dat").city("76.24.220.14")
       @page_title = "#{@match.term.text} show"
       user = destructive_autologin(params[:autologin_code])
       @youser = user if user
+      logger.info ("+++ @autologin_code: #{@autologin_code}")
+      logger.info ("+++ @youser: #{@youser}")
       @youser||=nil
       @match||=nil
       Event.show_page_viewed(@youser,@match)
@@ -418,8 +420,8 @@ c = GeoIP.new("/Users/chris/maxmind/GeoLiteCity.dat").city("76.24.220.14")
       else
         redirect_to(evented_redirect_url(@match.ticket_url,{:page_type=>"show"}))
       end
-    rescue
-      redirect_to(evented_redirect_url(@match.ticket_url,{:page_type=>"show"}))
+#    rescue
+#      redirect_to(evented_redirect_url(@match.ticket_url,{:page_type=>"show"}))
     end
   end
   
@@ -433,14 +435,14 @@ c = GeoIP.new("/Users/chris/maxmind/GeoLiteCity.dat").city("76.24.220.14")
     return false
   end
 
-=begin
+begin
   def generate_autologin_for_chris
     user = User.find(2)
     user.reset_autologin_code
     url = "/add_bands/#{user.autologin_code}"
     render(:inline=>"<a href='#{url}'>#{url}</a>")    
   end
-=end
+end
 
   def add_bands
     destructive_autologin(params[:autologin_code])
