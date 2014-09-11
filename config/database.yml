@@ -5,22 +5,13 @@
 #   (on OS X: gem install mysql -- --include=/usr/local/lib)
 # And be sure to use new-style password hashing:
 #   http://dev.mysql.com/doc/refman/5.0/en/old-client.html
-#development:
-#  adapter: mysql
-#  database: tourfilter_boston
-#  username: chris
-#  password: chris
-#  host: 127.0.0.1
-#  port: 3306
-
 development:
   adapter: mysql
   database: tourfilter_boston
-  username: test
-  password: test
-  host: test.cbeerawtyv8a.us-east-1.rds.amazonaws.com
+  username: chris
+  password: chris
+  host: 127.0.0.1
   port: 3306
-
 
 test:
   adapter: mysql
@@ -48,21 +39,14 @@ shared_test:
   host: 127.0.0.1
   port: 3306
 
-#shared_development:
-#  adapter: mysql
-#  database: tourfilter_shared
-#  username: chris
-#  password: chris
-#  host: 127.0.0.1
-#  port: 3306
-
 shared_development:
   adapter: mysql
   database: tourfilter_shared
-  username: test
-  password: test
-  host: test.cbeerawtyv8a.us-east-1.rds.amazonaws.com
+  username: chris
+  password: chris
+  host: 127.0.0.1
   port: 3306
+
 
 shared_production:
   adapter: mysql

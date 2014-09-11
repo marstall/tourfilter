@@ -2,6 +2,7 @@
 <%cl||=''%>
 <%cutoff=10%>
 <%num_related||=3%>
+<%num_terms||=1000%>
 <%terms = @youser.terms("terms_users.created_at desc",false)%>
 <%if terms and not terms.empty?%>
 <div class='<%=cl%>'>

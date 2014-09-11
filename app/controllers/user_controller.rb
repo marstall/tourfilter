@@ -118,7 +118,7 @@ class UserController < ApplicationController
       @tracked_term = Term.find_by_text(term_text)
     end
     @youser.add_term(@tracked_term,note,note_entity)
-    render(:inline => "<span style='vertical-align:1px'><img src='/images/check.png'></span>")
+    render(:inline => "<span style='vertical-align:2px'><img src='/images/check.png'><span class='faded_50'> #{@tracked_term.text}</span></span>")
   end
 
   def term_

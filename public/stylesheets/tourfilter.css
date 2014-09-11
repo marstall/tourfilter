@@ -801,6 +801,18 @@ h3
 	border-left:0px;
 }
 
+.recommend_block
+{
+	margin:18px;
+	margin-left:0px;
+	margin-top:0px;
+	background-color:#eef5f5;
+	padding-left:15px;
+	width:220px;
+	padding:18px;
+	float:left;
+}
+
 .show_row
 {
 	vertical-align:top;

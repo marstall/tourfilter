@@ -82,7 +82,44 @@ class User < ActiveRecord::Base
     @terms=nil
     @term_text=nil
   end
+  
+=begin
 
+select distinct related_terms.related_term_text,terms.num_trackers from related_terms,terms_users,terms, terms terms1
+where terms_users.user_id=2
+  and terms_users.term_id=terms.id  
+  and terms.text=related_terms.term_text 
+  and related_terms.related_term_text=terms1.text
+  and terms1.id not in (select terms_users.term_id from terms_users where user_id=2)
+  order by terms.num_trackers asc;
+  
+=end
+  
+    def related_terms_combo(num=50)
+  #    return @@related_terms_combo[text] if @@related_terms_combo[text]
+      #ranking is
+      # first, any rt with both count and played_with count, in order of played_with_count
+      # then, one played_with
+      # then, the rest based on shared followers
+      rts = RelatedTerm.find_by_sql <<-SQL
+        select related_terms.* from related_terms,terms_users
+        where terms_users.user_id=#{self.id}
+        and terms_users.term_id=related_terms.term_id
+        and count>0 and played_with_count>0
+        order by played_with_count desc
+       SQL
+       rts+=RelatedTerm.find_by_sql <<-SQL
+         select related_terms.* from related_terms,terms_users
+         where terms_users.user_id=#{self.id}
+         and terms_users.term_id=related_terms.term_id
+         and played_with_count>0
+         order by played_with_count desc
+         limit 1
+        SQL
+   #    @@related_terms_combo[text] = 
+  #     return @@related_terms_combo[text]
+      return rts#+related_terms(num-rts.size)
+    end
   def terms(order="terms_users.created_at asc",cache=false)
     return @terms if @terms and cache
     sql = <<-SQL

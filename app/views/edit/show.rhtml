@@ -1,44 +1,92 @@
-<div id="main-full-width">
-<h2>
-	<%=@match.term.text_with_initial_caps%> at <%=@match.page.place.name%> <%=@match.very_short_time_description%>
-</h2>
-<div style='margin-top:1em;padding:1em;border:8px solid #eef5f5;background-color:#eef5f5;font-family:monospace;font-size:16px;'>
-	<%if @youser.name_chosen?%>
-		<p>Hi, <%=@youser.name%>.</p>
-	<%else%>
-		<p>Hi!</p>
-	<%end%>
-	<br>
-	<%if @num_emails==0%>
-	<p>That was your first tourfilter notification!</p>
-	<br>
-	<p>The first of many, we hope.</p>
-	<%elsif @num_emails==1%>
-	<p>This is the second concert notification tourfilter has sent you since you joined in <%=@first_notification_date%>.</p>
-	<br>
-	<p>The second of many, we hope.</p>
-	<%elsif @num_emails>1%>
-	<p>Since you joined in <%=@first_notification_date%>, we've sent you <span style='background-color:#ffd;padding:0.5em;font-weight:bold'> <%=@num_emails%> email notifications</span> for Boston shows you care about.</p>
-	<br>
-	<p>We'd like to keep that up, far into the future.</p>
-	<%end%>
-	<br>
-	<p>Tourfilter is a solo operation with minimal income. </p> 
-	<br>
-	<p><span style='vertical-align:8px'>Can I ask for your help spreading the word about tourfilter on twitter?</span> 
-		<a href="https://twitter.com/share" class="twitter-share-button" 
-			data-url="http://www.tourfilter.com/<%=@match.term.url_text%>" 
-			data-text="I'm psyched for <%=@match.term.text_with_initial_caps%> at <%=@match.page.place.name%> <%=@match.very_short_time_description%>. Thanks @tourfilter!" 
-			data-size="large" data-count="none">Tweet</a>
-		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>	</p>
-	<br>
-	<p>Thanks in advance,</p>
-	<p><a href='mailto:chris@tourfilter.com'>Chris M</a></p>
-	<br>
-	<p class='underline' style='font-size:16px;margin-top:0px;background-color:#eef5f5'>
+<%@page_title = "tourfilter.com: #{@match.term.text.downcase} show"%>
+<div >
+<div style='margin-top:1em;padding:1em;font-family:helvetica;font-size:20px;'>
+  <div >
+    <div  id='my_related_terms' style='float:right;margin-right:3px'>
+      <%#=render(:partial=>'my_related_terms')%>
+    </div>
+    <div >
+			<%terms_listed=Hash.new%>
+
+		  <%related_terms=@match.term.related_terms_combo(60)||[]%>
+		  <%if related_terms and not related_terms.empty?%>
+		  <div style='padding-left:5px'>
+				<h3 style='font-size:32px;margin-bottom:30px'>
+					<!--<%=@youser.name.downcase%>! tourfilter's computer brain recommends you follow these bands:-->
+					"add some bands?" asks tourfilter's computer brain. 
+				</h3>
+				<div class='recommend_block' style='border:4px dotted #faa;padding:14px'>
+		    <h3 style='font-size:smaller'>similiar to <%=@match.term.text.downcase%></h3>
+		    <div class='secondary_column_body' style='font-size:20px;line-height:22px;padding-left:0px'>
+					<%i=0%>
+		      <%related_terms.each{|related_term|-%>
+						<%next if @youser.tracks_term related_term.related_term_text%>
+						<%next if terms_listed[related_term.related_term_text]%>
+						<%terms_listed[related_term.related_term_text]=true%>
+		        <%disp = i<5 ? "block" : "none"%>
+						<%i+=1%>
+		        <span class='rt' style='display:<%=disp%>' >
+		          <%=render(:partial=>'shared/term',:locals=>
+		          {
+		            :term_text=>related_term.related_term_text,
+		            :note=>'band page',
+		            :note_entity=>@term.text,
+		            :cl=>'band_page_related_term'
+		          }
+		          )%><br>
+		        </span>
+		      <%}-%>
+		    </div>
+		</div>
+		<%j=1%>
+		<%max_to_show=7%>
+		<%max_per_row=4%>
+		<%@youser.terms.each{|term|%>
+			<%term = @youser.terms[rand(@youser.terms.size)] if @youser.terms.size>10%>
+			<%break if j>max_to_show%>
+			<%_related_terms = term.related_terms_combo(65)||[]%>
+			<%related_terms=Array.new%>
+			<%_related_terms.each{|related_term|
+				related_terms<<related_term unless @youser.tracks_term related_term.related_term_text or terms_listed[related_term.related_term_text]
+				terms_listed[related_term.related_term_text]=true
+				
+				}%>
+		  <%next if not related_terms or related_terms.empty?%>
+			<%j+=1%>
+		<div class='recommend_block' >
+		    <h3 style='font-size:smaller'>similar to <%=term.text.downcase%></h3>
+		    <div class='secondary_column_body' style='font-size:20px;line-height:22px;margin-top:6px;'>
+		      <%related_terms.each_with_index{|related_term,i|-%>
+			
+		        <%disp = i<5 ? "block" : "none"%>
+		        <span class='rt' style='display:<%=disp%>' >
+		          <%=render(:partial=>'shared/term',:locals=>
+		          {
+		            :term_text=>related_term.related_term_text,
+		            :note=>'band page',
+		            :note_entity=>@term.text,
+		            :cl=>'band_page_related_term'
+		          }
+		          )%><br>
+		        </span>
+		      <%}-%>
+		    </div>
+	    </div>
+			<%if j % max_per_row==0%>
+				<div style='clear:left'></div>
+			<%end%>
+			<%}%>			
+			  <%end%>
+
+
+    </div>
+  </div>
+
+	<div style='clear:left'></div>
+	<div class='underline' style='font-size:20px;margin-top:16px;margin-left:8px;white-space:nowrap;font-weight:bold;'>
 		<span style='vertical-align:-3px'><img src='/images/ticket.png'></span>
-		<%=render(:partial=>'shared/ticket',:locals=>{:match=>@match,:page_type=>'show',:cl=>'',:term_text=>@match.term.text,
-																									:label=>"buy tickets for this show"}
+		<%=render(:partial=>'shared/ticket',:locals=>{:match=>@match,:page_type=>'show',:cl=>'no_underline',:term_text=>@match.term.text,
+																									:label=>"buy tickets for #{@match.term.text}"}
 																									) %>
 
 		<a href='<%=@match.ticket_url%>'>

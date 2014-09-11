@@ -402,8 +402,13 @@ c = GeoIP.new("/Users/chris/maxmind/GeoLiteCity.dat").city("76.24.220.14")
 
   
   def show
+      @page_title = "tourfilter.com"
+      @hide_header=true
+      @hide_footer=true
+      @hide_login=true
       @no_news_announcement=true
       @match=Match.find(params[:match_id])
+      @term=@match.term if @match
     begin
       @page_title = "#{@match.term.text} show"
       user = destructive_autologin(params[:autologin_code])

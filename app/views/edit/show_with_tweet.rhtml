@@ -1,0 +1,49 @@
+<div id="main-full-width">
+<h2>
+	<%=@match.term.text_with_initial_caps%> at <%=@match.page.place.name%> <%=@match.very_short_time_description%>
+</h2>
+<div style='margin-top:1em;padding:1em;border:8px solid #eef5f5;background-color:#eef5f5;font-family:monospace;font-size:16px;'>
+	<%if @youser.name_chosen?%>
+		<p>Hi, <%=@youser.name%>.</p>
+	<%else%>
+		<p>Hi!</p>
+	<%end%>
+	<br>
+	<%if @num_emails==0%>
+	<p>That was your first tourfilter notification!</p>
+	<br>
+	<p>The first of many, we hope.</p>
+	<%elsif @num_emails==1%>
+	<p>This is the second concert notification tourfilter has sent you since you joined in <%=@first_notification_date%>.</p>
+	<br>
+	<p>The second of many, we hope.</p>
+	<%elsif @num_emails>1%>
+	<p>Since you joined in <%=@first_notification_date%>, we've sent you <span style='background-color:#ffd;padding:0.5em;font-weight:bold'> <%=@num_emails%> email notifications</span> for Boston shows you care about.</p>
+	<br>
+	<p>We'd like to keep that up, far into the future.</p>
+	<%end%>
+	<br>
+	<p>Tourfilter is a solo operation with minimal income. </p> 
+	<br>
+	<p><span style='vertical-align:8px'>Can I ask for your help spreading the word about tourfilter on twitter?</span> 
+		<a href="https://twitter.com/share" class="twitter-share-button" 
+			data-url="http://www.tourfilter.com/<%=@match.term.url_text%>" 
+			data-text="I'm psyched for <%=@match.term.text_with_initial_caps%> at <%=@match.page.place.name%> <%=@match.very_short_time_description%>. Thanks @tourfilter!" 
+			data-size="large" data-count="none">Tweet</a>
+		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>	</p>
+	<br>
+	<p>Thanks in advance,</p>
+	<p><a href='mailto:chris@tourfilter.com'>Chris M</a></p>
+	<br>
+	<p class='underline' style='font-size:16px;margin-top:0px;background-color:#eef5f5'>
+		<span style='vertical-align:-3px'><img src='/images/ticket.png'></span>
+		<%=render(:partial=>'shared/ticket',:locals=>{:match=>@match,:page_type=>'show',:cl=>'',:term_text=>@match.term.text,
+																									:label=>"buy tickets for this show"}
+																									) %>
+
+		<a href='<%=@match.ticket_url%>'>
+			
+		</a>
+	</p>
+</div>
+</div>
