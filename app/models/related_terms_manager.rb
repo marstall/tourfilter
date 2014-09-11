@@ -55,9 +55,12 @@
   # for each new entry, create a graph item term with 
   def connect_to_metro_database(metro)
     ActiveRecord::Base.establish_connection(
-      :adapter=>"mysql",
-      :host=>"localhost",
-      :database=> "tourfilter_#{metro.code}")
+      :adapter  => "mysql",
+      :host     => ActiveRecord::Base.configurations[ENV['RAILS_ENV']]['host'],
+      :username => ActiveRecord::Base.configurations[ENV['RAILS_ENV']]['username'],
+      :password => ActiveRecord::Base.configurations[ENV['RAILS_ENV']]['password'],
+      :database => "tourfilter_#{metro.code}"
+      )
   end
 
   def generate_user_network(metro)
