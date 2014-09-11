@@ -803,6 +803,8 @@ h3
 
 .recommend_block
 {
+	-webkit-border-radius:12px;
+	-moz-border-radius:12px;
 	margin:18px;
 	margin-left:0px;
 	margin-top:0px;
