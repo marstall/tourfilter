@@ -702,6 +702,10 @@ end
     render(:action=>"index")
   end
   
+  def homepage_signup
+    @fragment=true
+  end
+  
   def homepage_signup_link
     set_cookie('metro_code',"")
     redirect_to(:homepage)

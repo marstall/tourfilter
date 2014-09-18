@@ -61,11 +61,6 @@
 	  <%end%>
     	<%unless @hide_login or @not_in_a_city%>
   	  <div class='above_header'>
-				<%unless @no_news_announcement%>
-				<div class='underline' style='background-color:#ffd;padding:6px;margin-left:0px;font-size:14px;text-align:right;margin-bottom:15px;margin-top:10px;line-height:18px'>
-					<a href='https://medium.com/p/2c5e5818e4d3'>about our recent changes</a>
-				</div>
-				<%end%>
           <div id="right-header">
           <%unless @youser%>
     			<%end%>
@@ -74,18 +69,12 @@
     				<a href="<%=url('/feed')%>">feed</a>
     			</span>
     			<%end%>
-    			<span class='header_menu_item '>
-    				<a href="<%=url('/metros')%>">other cities?</a>
-    			</span>
     			<span>
     			  <%unless @hide_login%>
               <%if !@youser_logged_in-%>
-        			<span class='header_menu_item' >
+        			<span class='larger_header_menu_item' >
         				<a href="<%=url('/signup')%>">sign up for alerts</a>
         			</span>
-                <span class='header_menu_item '>
-                <a href="<%=url('/login')%>">log in</a>
-                </span>
               <%else-%>
         			<span class='header_menu_item'>
         				<a href="<%=url('/submit_show')%>">submit a show</a>
@@ -98,9 +87,14 @@
             </span>
             <%end%>
     		</div>
+				<div id='left-header'>
+					<span class='header_menu_item '>
+          <a href="<%=url('/login')%>">log in</a>
+          </span>
+          
+					</div>
   	  </div>
-
-  	  <br>
+			<div style='clear:both'></div>
     	<%end%>	  
     <div id='inner_body'>
 	<%unless @hide_header%>
@@ -168,6 +162,14 @@
 				 <span style='vertical-align:9px;height:20px'> <a href='http://www.twitter.com/tourfilter'>follow us on twitter!</a></span>
     	    </span>
 	</div>
+	<div class='above_header'>
+		
+		<%unless @no_news_announcement%>
+		<div class='underline' style='background-color:#ffd;padding:6px;margin-left:0px;font-size:14px;text-align:right;margin-bottom:15px;margin-top:10px;line-height:18px'>
+			We recently decided to focus 100% on Boston and discontinue all other cities. If you have an account in one of those cities, you can <a href='/metros'>retrieve your band list here</a>. We also wrote <a href='https://medium.com/p/2c5e5818e4d3'>a post about the reasons for the change</a>.
+		</div>
+		<%end%>
+  </div>
 </div>
 
 <%if ENV['RAILS_ENV']!='development'%>
