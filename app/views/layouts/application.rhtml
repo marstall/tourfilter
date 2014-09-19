@@ -88,9 +88,11 @@
             <%end%>
     		</div>
 				<div id='left-header'>
+					<%if !@youser_logged_in-%>
 					<span class='header_menu_item '>
           <a href="<%=url('/login')%>">log in</a>
           </span>
+					<%end%>
           
 					</div>
   	  </div>
