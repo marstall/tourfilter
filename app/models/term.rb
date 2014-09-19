@@ -44,9 +44,9 @@ class Term < ActiveRecord::Base
     Term.find_by
   end
   
-  def num_trackers
-    (aggregate_num_trackers||0).to_i
-  end
+#  def num_trackers
+#    (aggregate_num_trackers||0).to_i
+#  end
 
 =begin
   select terms.text,terms.num_trackers,count(*) cnt 
