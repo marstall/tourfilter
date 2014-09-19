@@ -12,7 +12,7 @@
 	<%place=match.page.place%>
 		<div class='calendar_match_row' style="<%=style%>">
 				<%#=render(:partial=>'shared/tickets',:locals=>{:match=>match,:page_type=>'calendar',:show_icon=>true})%>
-				<div id='match_<%=match.id%>' style='margin-top:0px;padding:0px;margin:0px;margin-bottom:2px'>
+				<div id='match_<%=match.id%>' style='margin-top:0px;padding:0px;margin:0px;margin-bottom:2px' title='<%=term.num_trackers%> trackers'>
 						<span style='font-weight:bold'><%=link_to term.text_with_the,"/"+term.url_text%></span>
 							<%=link_to place.name, 
 								:controller=>"clubs",
