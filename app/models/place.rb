@@ -779,6 +779,7 @@ class Place < ActiveRecord::Base
       page.url=url
       page.meth=meth
       page.status='future' # innocent until proven guilty
+      puts ("++++ CREATE NEW PAGE #{line}")
       pages<<page
     #rescue
       #flash[:error]="error saving urls!"
@@ -808,6 +809,7 @@ class Place < ActiveRecord::Base
     # subtract the list of numbered ones from the list in the database.
     # if there is anything left over, delete it.
      #pages.each {|p| Page.destroy(p.id)}
+     puts ("++++ PLACE BEFORE SAVE: #{@pages_as_text}")
      @entered_page_ids=Hash.new
      lines_to_save=Array.new
      lines_to_add=Array.new

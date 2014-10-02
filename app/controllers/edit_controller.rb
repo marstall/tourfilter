@@ -346,6 +346,42 @@ c = GeoIP.new("/Users/chris/maxmind/GeoLiteCity.dat").city("76.24.220.14")
   def my_terms
     render(:partial=>'my_terms',:layout=>false)
   end
+  
+
+  def admin_search
+    @fragment=true
+    terms_as_text=request.raw_post        
+    logger.info("+++ term_as_text: #{terms_as_text}")
+    @hits = Array.new
+    @hit_counts = Array.new
+    @hit_pages = Array.new
+    @misses = Array.new
+    terms_as_text.chomp.split(/[\n,&]+/).each_with_index { |term_text,i|
+      logger.info("+++ term_text: #{term_text}")
+      term_text.strip!
+      next if term_text=~ /&_=/
+      next if term_text.size<3
+      logger.info("+++ term_text2: #{term_text}")
+      pages = Page.find_all_matching_term(term_text,11) if i<150 # don't go out of control searching for every one
+
+      if not pages.empty?
+        page=pages.first
+        #pages.each {|page|
+    #          puts term_text+":"+page.url(true)
+          @hits<<term_text
+          @hit_counts<<pages.size
+          @hit_pages<<page
+        #}
+          #      if pages
+          #         @hits<<term_text
+          #        @hit_pages<<page
+      else
+        @misses<<term_text  if (term_text !~ /&_=/) && (term_text.size>=3) #ignore cruft
+      end
+    }
+#    setup_related_terms(terms,5)
+    render(:layout => false)  
+  end
 
   def search
     @user=@youser

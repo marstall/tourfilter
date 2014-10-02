@@ -23,7 +23,7 @@ Enter band names from below - make sure they generate a result with a date.
 <%=observe_field(:terms_as_text,
                   :frequency => 1,
                   :update => :results,
-                  :url => {:controller=>"edit",:action => :search}
+                  :url => {:controller=>"edit",:action => :admin_search}
                   )%>
 
 <div style="background-color:yellow" id="results"></div>
@@ -40,7 +40,8 @@ Enter band names from below - make sure they generate a result with a date.
 <br>
 </div>
 <div style="margin-right:300px">
-<%= form_tag :controller=>"#{@metro_code}/place", :action => 'update', :id => @place %>
+<form action='/place/update'>
+	<input type='hidden' name='id' value='<%=@place.id%>'>
   <%= render :partial => 'form' %>
 </form>
 <%= link_to 'Back', :action => 'list' %> |

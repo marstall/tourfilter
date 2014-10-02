@@ -96,7 +96,7 @@ class PlaceController < ApplicationController
     end
     return just_save if params[:just_save]
     return just_save(true) if params[:just_save_and_return]
-    logger.info("updating place #{@place}")
+    logger.info("updating place #{@place.id}")
     if @place.update_attributes(params[:place])
       if @place.errors and not @place.errors.empty?
         logger.info("ERROR SAVING PLACE!")
@@ -106,9 +106,7 @@ class PlaceController < ApplicationController
         redirect_to :controller=>"place", :action => 'edit', :id => @place
         return
       end
-      logger.info("generating urls for place #{@place}")
       @place.generate_urls
-      logger.info("crawling urls for place #{@place}")
       @place=Place.find(@place.id) # reload pages ...
       error=@place.fetch_urls
       if error
