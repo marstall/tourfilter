@@ -1,0 +1,30 @@
+<%=@hits.size%> results
+<div style='padding:4px;margin:0px;margin-bottom:4px;margin-top:4px'>
+<%if @hits!=nil&&@hits.size>0%>
+<%i=0
+@hits.each { |hit|
+%>
+
+				<%@hit_pages[i].determine_date_from_context(hit)%>
+				 <b><%=hit%><br><span ><%=@hit_pages[i].place.name%> <%=@hit_pages[i].calculated_month%>/<%=@hit_pages[i].calculated_day%></span></b>
+				 <br><%=@hit_pages[i].precis(hit)%>
+				<br>
+<%
+	if @hit_counts[i]>100
+		%>
+		<div class="subhead">
+		(<a href="">and <%=@hit_counts[i]-1%><%="+" if @hit_counts[i]>=10%> other place<%="s" if @hit_counts[i]>2%></a>)</div>
+	<%end%>
+	<%i=i+1}%>
+<%end%>
+<%if @misses.size>0%>
+<div class="header1">nothing scheduled (yet!)</div>
+<%@misses.each { |miss|%>
+<%=render(	:partial => 'shared/term',
+				:locals => { :term_text => miss,
+							 :parent_user_id =>@youser_id
+							}
+				)%>
+<%}%>
+<%end%> 
+</div>
