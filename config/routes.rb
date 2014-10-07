@@ -236,6 +236,9 @@ ActionController::Routing::Routes.draw do |map|
   map_connect map, "/calendar",
               :controller   => "calendar",
               :action => "index"
+  map_connect map, "/env",
+              :controller   => "admin",
+              :action => "env"
   map_connect map, "/admin",
               :controller   => "admin",
               :action => "index"
