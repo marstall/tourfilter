@@ -45,7 +45,7 @@
               :params=>params+{:metro_code=>@metro_code,:some_featured=>some_featured})%>
 	          <%=render('popular_partial',:params=>params+{:metro_code=>@metro_code,:some_featured=>some_featured})%>
     			<%elsif cookies['list_view']=='new'%>
-          <%=render('new_partial',:params=>params+{:metro_code=>@metro_code,:some_featured=>some_featured})%>
+          <%#=render('new_partial',:params=>params+{:metro_code=>@metro_code,:some_featured=>some_featured})%>
           <%else%>
           <%=render('featured_partial',:params=>params+{:metro_code=>@metro_code,:some_featured=>some_featured})%>
           <%end%>

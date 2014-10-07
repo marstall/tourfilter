@@ -651,7 +651,7 @@ end
     @metro_code='boston'
     @hide_header=@hide_footer=true
     @jquery=true
-    @days_to_show = params[:id]||60
+    @days_to_show = params[:id]||params[:days_to_show]||60
     @offset = params[:offset].to_i 
     @days_to_show=180 if @days_to_show=='all'
     @days_to_show=@days_to_show.to_i

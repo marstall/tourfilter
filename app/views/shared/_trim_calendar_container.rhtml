@@ -36,7 +36,7 @@ jQuery(document).ready(function(){
     action_cache_name="calendar_#{days_to_show}_hv:#{hide_venues}_#{offset}__#{term_text}_#{place ? place.id : 'x'}"
   end
 %>
-<%metro_cache(:controller => "nightly", :action => action_cache_name) do%>
+<%begin #metro_cache(:controller => "nightly", :action => action_cache_name) do%>
 <%user||=nil%>
 <%place||=nil%>
 <%term||=nil%>
@@ -44,6 +44,7 @@ jQuery(document).ready(function(){
 <%
   days,days_venue_ids,shows=
     controller.setup_calendar_collated(user,place,days_to_show,offset,10000,order_by,{:term=>term,:past=>past})
+
 %>
 <%if shows.nil? or shows.empty?%>
 	<div class='show_row'>none found</div> 
@@ -69,7 +70,7 @@ jQuery(document).ready(function(){
 <%end%>
 <%num_shows_shown=0%>
 <%days.each_with_index{|day,i|%>
-  <%features = []#Feature.on_this_day(day)%>
+  <%features = Feature.on_this_day(day,@metro_code)%>
   <%yesterday=day-1%>
 		<%num_pages=days_venue_ids[day].size%>
     <tr class='day'>
@@ -99,12 +100,12 @@ jQuery(document).ready(function(){
   		<%=Date::DAYNAMES[day.to_date.wday]%>
   		</div>
   		<%end%>
-  		<%if features and not features.empty?%>
+  		<%if num_pages>3 && features and not features.empty?%>
   		  <div class='gutter_features'>
   		    <%features.each{|feature|%>
             <div class='gutter_feature'>
-            	<img src='<%=feature.image.large_url%>' style='width:120px;padding:0px'/>
-            	<div  style='width:120px;font-size:12px;line-height:12px;text-align:right;padding-right:1em;margin-bottom:8px'>
+            	<img src='<%=feature.image.large_url%>' style='width:100%'/>
+            	<div style='margin-top:4px'>
                 <%=feature.term_text%>
               </div>
             </div>

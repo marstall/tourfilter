@@ -6,6 +6,7 @@ require 'open4'
 #  Tidy.path='/usr/lib/libtidy.dylib'
 #end
 
+
 class Match < ActiveRecord::Base
   belongs_to :term
 #  belongs_to :page

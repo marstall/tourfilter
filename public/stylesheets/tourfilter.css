@@ -2940,7 +2940,12 @@ h2 .header_text
 
 .highlight {background-color: #DDF5F5;padding-top: 2px;padding-left: 2px;padding-right: 2px;}
 
-
+.gutter_feature
+{
+	width:110px;
+	margin-top:4px;
+	background-color:white;
+}
 
 .metro_odd {}
 .metro_even {}
