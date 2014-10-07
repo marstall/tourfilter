@@ -36,7 +36,7 @@ jQuery(document).ready(function(){
     action_cache_name="calendar_#{days_to_show}_hv:#{hide_venues}_#{offset}__#{term_text}_#{place ? place.id : 'x'}"
   end
 %>
-<%begin #metro_cache(:controller => "nightly", :action => action_cache_name) do%>
+<%metro_cache(:controller => "nightly", :action => action_cache_name) do%>
 <%user||=nil%>
 <%place||=nil%>
 <%term||=nil%>
