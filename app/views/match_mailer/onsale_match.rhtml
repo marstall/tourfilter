@@ -1,20 +1,12 @@
-*** NOTE! DO NOT REPLY TO THIS EMAIL!
-
 hi,
 
-looks like <%=@match.term.text.downcase%> will be performing at <%=@match.page.place.name.downcase%> <%=@match.time_description.downcase%>.
+<%=@match.term.text.downcase%> is coming to <%=@match.page.place.name.downcase%> <%="on #{@match.very_short_time_description}" if @match.day%>!
 
-TICKETS GO ON SALE TODAY. BUY 'EM HERE: http://www.tourfilter.com/<%=@metro_code%>/o/<%=@match.id%>
+tickets/more info: http://www.tourfilter.com/show/<%=@match.id%>/<%=@user.reset_autologin_code%>
 
 enjoy!
 tourfilter
-http://www.tourfilter.com/<%=@metro_code%>
 
-p.s. you can reply to this email to ask questions, provide feedback, or cancel your account.
+Add more bands! => http://www.tourfilter.com/add_bands/<%=@user.reset_autologin_code%>
 
-listing excerpt:
-"... <%=@match.page.precis(@match.term.text)%> ..."
-
-Question? email chris at marstall@gmail.com.
-
-*** NOTE! DO NOT REPLY TO THIS EMAIL!
+Question? email chris@tourfilter.com
