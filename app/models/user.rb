@@ -207,7 +207,6 @@ where terms_users.user_id=2
     SQL
     users = User.find_by_sql([sql,self.id])
     user = users[0]
-    logger.info ("+++ user.num_emails: #{user.num_emails.inspect}")
     return user.num_emails,user.first_notification_date
   end
   
