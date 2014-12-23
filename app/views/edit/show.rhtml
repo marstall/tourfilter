@@ -13,7 +13,7 @@
 		  <div style='padding-left:5px'>
 				<h3 style='font-size:32px;margin-bottom:30px'>
 					<!--<%=@youser.name.downcase%>! tourfilter's computer brain recommends you follow these bands:-->
-					"add some bands?" asks tourfilter's computer brain. 
+					we recommend you follow ... 
 				</h3>
 				<div class='recommend_block' style='border:4px dotted #faa;padding:14px'>
 		    <h3 style='font-size:smaller'>similiar to <%=@match.term.text.downcase%></h3>
@@ -23,7 +23,7 @@
 						<%next if @youser.tracks_term related_term.related_term_text%>
 						<%next if terms_listed[related_term.related_term_text]%>
 						<%terms_listed[related_term.related_term_text]=true%>
-		        <%disp = i<5 ? "block" : "none"%>
+		        <%disp = i<3 ? "block" : "none"%>
 						<%i+=1%>
 		        <span class='rt' style='display:<%=disp%>' >
 		          <%=render(:partial=>'shared/term',:locals=>
