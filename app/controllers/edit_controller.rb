@@ -453,7 +453,7 @@ c = GeoIP.new("/Users/chris/maxmind/GeoLiteCity.dat").city("76.24.220.14")
       logger.info ("+++ @youser: #{@youser}")
       @youser||=nil
       @match||=nil
-      if match.source=='ticketmaster'
+      if @match.source=='ticketmaster'
         redirect_to(evented_redirect_url(@match.ticket_url,{:page_type=>"show"}))
       else
         Event.show_page_viewed(@youser,@match)
