@@ -66,16 +66,17 @@ class RedirectController < ApplicationController
     url = request.path
     url +="?lp=1"
     ec_params.each_key{|key,i|
+      logger.info("+++++  ec[#{key}]=#{ec_params[key]}")
         url+=URI::encode("&ec[#{key}]=#{ec_params[key]}")
       }
     render(:inline=>"<script>document.location.href='#{url};'</script>")
   end
   
   def redirect
-    if not params[:lp]
-      preredirect
-      return
-    end
+    #if not params[:lp]
+    #  preredirect
+    #  return
+    #end
     logger.info("params[:ec]: #{params[:ec]}")
     ec = ExternalClick.new(params[:ec])
     log_external_click(ec)

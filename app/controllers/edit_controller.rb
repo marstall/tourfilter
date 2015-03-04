@@ -453,13 +453,17 @@ c = GeoIP.new("/Users/chris/maxmind/GeoLiteCity.dat").city("76.24.220.14")
       logger.info ("+++ @youser: #{@youser}")
       @youser||=nil
       @match||=nil
-      Event.show_page_viewed(@youser,@match)
-      if @youser
-        @num_emails,@first_notification_date = @youser.email_stats
-        @num_emails = @num_emails.to_i
-        @first_notification_date = @first_notification_date[0..3] rescue ''
-      else
+      if match.source=='ticketmaster'
         redirect_to(evented_redirect_url(@match.ticket_url,{:page_type=>"show"}))
+      else
+        Event.show_page_viewed(@youser,@match)
+        if @youser
+          @num_emails,@first_notification_date = @youser.email_stats
+          @num_emails = @num_emails.to_i
+          @first_notification_date = @first_notification_date[0..3] rescue ''
+        else
+          redirect_to(evented_redirect_url(@match.ticket_url,{:page_type=>"show"}))
+        end
       end
 #    rescue
 #      redirect_to(evented_redirect_url(@match.ticket_url,{:page_type=>"show"}))

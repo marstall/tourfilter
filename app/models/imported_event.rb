@@ -144,7 +144,8 @@ and imported_events.source='ticketmaster'
   def url(real=false)
     if not real
       if super=~/ticketmaster.com/
-        return "http://www.awin1.com/cread.php?awinmid=4103&awinaffid=139757&clickref=&p=#{super}"
+        redirector = "http://www.awin1.com/cread.php?awinmid=4103&awinaffid=139757&clickref=&p="
+        return "#{redirector}#{super}"
       elsif super
         return super
       else

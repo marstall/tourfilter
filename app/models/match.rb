@@ -20,7 +20,8 @@ class Match < ActiveRecord::Base
   
   def url
     if super=~/ticketmaster.com/
-      return "http://www.awin1.com/cread.php?awinmid=4103&awinaffid=139757&clickref=&p=#{super}"
+      redirector = encode("http://www.awin1.com/cread.php?awinmid=4103&awinaffid=139757&clickref=&p=")
+      return "#{redirector}#{super}"
     else
       return super
     end
