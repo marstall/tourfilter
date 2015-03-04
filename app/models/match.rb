@@ -18,13 +18,13 @@ class Match < ActiveRecord::Base
   # hack so that match can masquerade as imported_event
   # select l,r,count(*) cnt  from term_edges  where l='destroyer' and network='played_with' group by l,r  order by l,cnt;
   
-#  def url
-#    if super=~/ticketmaster.com/
-#      return "http://ticketsus.at/tourfilter?CTY=37&DURL=#{super}"
-#    else
-#      return super
-#    end
-#  end
+  def url
+    if super=~/ticketmaster.com/
+      return "http://www.awin1.com/cread.php?awinmid=4103&awinaffid=139757&clickref=&p=#{super}"
+    else
+      return super
+    end
+  end
   
 =begin
 select terms.*
@@ -143,9 +143,11 @@ sql = <<-SQL
     # 3. SECONDARY TICKETSELLER
     return url if url
     page = self.page
-    return page.url(true) if page.url
+    return page.url(false) if page.url
     imported_events.each{|ie|
-        return ie.url if ie.source=='ticketmaster'
+      logger.info "+++here3"
+        return "TICKETMASTER" if ie.source=='ticketmaster'
+#        return ie.url(false) if ie.source=='ticketmaster'
         return ie.url if ie.url
       }
   end

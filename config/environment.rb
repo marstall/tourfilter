@@ -125,7 +125,7 @@ QUIT
     :address => "email-smtp.us-east-1.amazonaws.com",
     :port =>  465,
     :enable_starttls_auto => true,
-#    :openssl_verify_mode => 'none', 
+    :openssl_verify_mode => 'none', 
     :domain => "tourfilter.com",
     :authentication =>  :plain,
     :user_name => amazon_creds['smtp_username'],
