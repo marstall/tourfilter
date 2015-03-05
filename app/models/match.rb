@@ -146,11 +146,11 @@ sql = <<-SQL
     page = self.page
     return page.url(false) if page.url
     imported_events.each{|ie|
-      logger.info "+++here3"
         return "TICKETMASTER" if ie.source=='ticketmaster'
 #        return ie.url(false) if ie.source=='ticketmaster'
         return ie.url if ie.url
       }
+      return nil
   end
 
   def ticket_urls(imported_only=false)
