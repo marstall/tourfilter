@@ -1,7 +1,7 @@
 hi,
 
 <%=@match.term.text.downcase%> is coming to <%=@match.page.place.name.downcase%> <%="on #{@match.very_short_time_description}" if @match.day%>!
-<%name_string = user.name_chosen? ? "#{user.name}, " :""%>
+<%name_string = @user.name_chosen? ? "#{@user.name}, " :""%>
 		
 
 SHAMELESS COMMERCE DEPT.
