@@ -66,7 +66,6 @@ class RedirectController < ApplicationController
     url = request.path
     url +="?lp=1"
     ec_params.each_key{|key,i|
-      logger.info("+++++  ec[#{key}]=#{ec_params[key]}")
         url+=URI::encode("&ec[#{key}]=#{ec_params[key]}")
       }
     render(:inline=>"<script>document.location.href='#{url};'</script>")

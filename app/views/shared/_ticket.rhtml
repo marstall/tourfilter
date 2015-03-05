@@ -1,6 +1,6 @@
 <%page_section||=page_section%>
 
-<%ticket_url = URI.decode(match.ticket_url)%>
+<%ticket_url = URI.decode(match.ticket_url) rescue match.ticket_url%>
 <%label||='tickets'%>
 <%cl||='underline buy_tickets'%>
 <%if ticket_url and not ticket_url.empty?%>
