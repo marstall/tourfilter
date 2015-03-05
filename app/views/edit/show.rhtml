@@ -86,6 +86,7 @@
 		<span style='vertical-align:-3px'><img src='/images/ticket.png'></span>
 		<%if @match.imported_event && @match.imported_event && !@match.imported_event.venue.nil?%>
 		<p><%=@match.imported_event.venue%></p>
+		<%end%>
 	<%if @match.ticket_url%>
 		<%=render(:partial=>'shared/ticket',:locals=>{:match=>@match,:page_type=>'show',:cl=>'no_underline',:term_text=>@match.term.text,
 																									:label=>"buy tickets for #{@match.term.text}"}
