@@ -84,7 +84,7 @@
 	<div style='clear:left'></div>
 	<div class='underline' style='font-size:20px;margin-top:16px;margin-left:8px;white-space:nowrap;font-weight:bold;'>
 		<%if @match.imported_event && @match.imported_event && !@match.imported_event.venue_name.nil?%>
-		<p><%=@match.imported_event.venue)name%></p>
+		<p><%=@match.imported_event.venue_name%></p>
 		<%end%>
 		<span style='vertical-align:-3px'><img src='/images/ticket.png'></span>
 	<%if @match.ticket_url%>
