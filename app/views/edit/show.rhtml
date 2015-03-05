@@ -83,17 +83,17 @@
   </div>
 	<div style='clear:left'></div>
 	<div class='underline' style='font-size:20px;margin-top:16px;margin-left:8px;white-space:nowrap;font-weight:bold;'>
-		<span style='vertical-align:-3px'><img src='/images/ticket.png'></span>
-		<%if @match.imported_event && @match.imported_event && !@match.imported_event.venue.nil?%>
-		<p><%=@match.imported_event.venue%></p>
+		<%if @match.imported_event && @match.imported_event && !@match.imported_event.venue_name.nil?%>
+		<p><%=@match.imported_event.venue)name%></p>
 		<%end%>
+		<span style='vertical-align:-3px'><img src='/images/ticket.png'></span>
 	<%if @match.ticket_url%>
 		<%=render(:partial=>'shared/ticket',:locals=>{:match=>@match,:page_type=>'show',:cl=>'no_underline',:term_text=>@match.term.text,
 																									:label=>"buy tickets for #{@match.term.text}"}
 																									) %>
 
 		<a href='<%=@match.ticket_url%>'></a>
-		<%else%>(no ticket link available)<%end%>
+		<%else%><span class='gray smaller'>(no ticket link available)</span><%end%>
 	</div>
 </div>
 </div>
