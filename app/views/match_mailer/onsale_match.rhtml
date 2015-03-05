@@ -1,12 +1,20 @@
 hi,
 
 <%=@match.term.text.downcase%> is coming to <%=@match.page.place.name.downcase%> <%="on #{@match.very_short_time_description}" if @match.day%>!
+<%name_string = user.name_chosen? ? "#{user.name}, " :""
+		
 
-tickets/more info: http://www.tourfilter.com/show/<%=@match.id%>/<%=@user.reset_autologin_code%>
+SHAMELESS COMMERCE DEPT.
 
-enjoy!
-tourfilter
+<%=name_string%>tourfilter could make a little money (25 cents, usually) if you buy tickets through the following link. 
 
-Add more bands! => http://www.tourfilter.com/add_bands/<%=@user.reset_autologin_code%>
+It's the only way we have of making $$. It will help put a dent in our Amazon hosting costs (~$150/month).
+
+CLICK TO BUY TIX AND HELP TOURFILTER => http://www.tourfilter.com/show/<%=@match.id%>/<%=@user.reset_autologin_code%>
+
+Thanks!
+chris
+tourfilter.com
+
 
 Question? email chris@tourfilter.com
