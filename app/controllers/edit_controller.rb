@@ -449,15 +449,10 @@ c = GeoIP.new("/Users/chris/maxmind/GeoLiteCity.dat").city("76.24.220.14")
       @page_title = "#{@match.term.text} show"
       user = destructive_autologin(params[:autologin_code])
       @youser = user if user
-      logger.info ("+++ @autologin_code: #{@autologin_code}")
-      logger.info ("+++ @youser: #{@youser}")
       @youser||=nil
       @match||=nil
-      logger.info ("+++ here 1")
-      if @match.source=='ticketmaster'
-        logger.info ("+++ here 2")
+      if false # @match.source=='ticketmaster'
         _url =evented_redirect_url(URI.decode(@match.ticket_url),{:page_type=>"show"}) rescue @match.url
-        logger.info("+++ _url: #{_url}")
         redirect_to(_url)
       else
         Event.show_page_viewed(@youser,@match)
