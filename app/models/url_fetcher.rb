@@ -24,7 +24,7 @@ module UrlFetcher
       puts "FAILED! fetching #{url}, trying via proxy ..."
       agent = WWW::Mechanize.new 
       agent.user_agent = "Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en-us) AppleWebKit/XX (KHTML, like Gecko) Safari/YY"
-      agent.set_proxy("psychoastronomy.org",51234) # try it with the proxy if it failed
+      agent.set_proxy("208.113.128.45",51234) # try it with the proxy if it failed
       page = agent.get(url)      
     end
     rm_rf(s)

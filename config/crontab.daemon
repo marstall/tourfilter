@@ -7,9 +7,9 @@ MAILTO=marstall@gmail.com
 
 0 3 * * * /bin/bash -lc "merge_terms.sh"
 
-0 8 * * * /bin/bash -lc "ssh -t marstall@psychoastronomy.org \"bash -c '~/node/out/Release/node ~/proxy/proxy.js' \""
+0 8 * * * /bin/bash -lc "ssh -t marstall@208.113.128.45 \"bash -c '~/node/out/Release/node ~/proxy/proxy.js' \""
 0 8 * * * /bin/bash -lc "import_events_1.sh"
-0 7 * * * /bin/bash -lc "ssh -t marstall@psychoastronomy.org \"bash -c '~/node/out/Release/node ~/proxy/proxy.js' \""
+0 7 * * * /bin/bash -lc "ssh -t marstall@208.113.128.45 \"bash -c '~/node/out/Release/node ~/proxy/proxy.js' \""
 0 7 * * * /bin/bash -lc "daemon_all_metros.sh"
 0 8 * * * rm -rf /tourfilter/log/*
 30 8 * * * /bin/bash -lc "generate_all_cities_index.sh"
