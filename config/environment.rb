@@ -12,6 +12,7 @@ require File.join(File.dirname(__FILE__), 'boot')
 #require 'tlsmail'
 
 $AMAZON_CREDS = amazon_creds = YAML::load(open("#{RAILS_ROOT}/config/amazon.yml"))
+$SENDGRID_CREDS = sendgrid_creds = YAML::load(open("#{RAILS_ROOT}/config/sendgrid.yml"))
 
 # extend ActionMailer
 #puts "extending ActionMailer for AWS ..."
@@ -112,26 +113,46 @@ QUIT
 #      :password => "sup3rw0lf-" 
 #    }
 #else
-  puts "mail will be sent via AWS."
-  puts "smtp username:"+amazon_creds['smtp_username']
-#  Net::SMTP.enable_tls(OpenSSL::SSL::VERIFY_NONE)
-  ActionMailer::Base.delivery_method = :smtp
-  ActionMailer::Base.perform_deliveries = true
-  ActionMailer::Base.default_charset = "utf-8"
-  ActionMailer::Base.default_url_options = { :host => "tourfilter.com"}
-  ActionMailer::Base.raise_delivery_errors = true
-  ActionMailer::Base.logger = Logger.new("mailer.log")
-  ActionMailer::Base.smtp_settings = {
-    :address => "email-smtp.us-east-1.amazonaws.com",
-    :port =>  465,
-    :enable_starttls_auto => true,
-    :openssl_verify_mode => 'none', 
-    :domain => "tourfilter.com",
-    :authentication =>  :plain,
-    :user_name => amazon_creds['smtp_username'],
-    :password =>  amazon_creds['smtp_password']
-  }
+    puts "Mail will be sent via SendGrid."
+    puts "SendGrid username:"+sendgrid_creds['smtp_username']
+    #Net::SMTP.enable_tls(OpenSSL::SSL::VERIFY_NONE)
+    ActionMailer::Base.delivery_method = :smtp
+    ActionMailer::Base.perform_deliveries = true
+    ActionMailer::Base.default_charset = "utf-8"
+    ActionMailer::Base.default_url_options = { :host => "tourfilter.com"}
+    ActionMailer::Base.raise_delivery_errors = true
+    ActionMailer::Base.logger = Logger.new("mailer.log")
+    ActionMailer::Base.smtp_settings = {
+      :address => "smtp.sendgrid.com",
+      :port =>  587,
+#      :enable_starttls_auto => true,
+#      :openssl_verify_mode => 'none', 
+      :domain => "tourfilter.com",
+      :authentication =>  :plain,
+      :user_name => sendgrid_creds['smtp_username'],
+      :password =>  sendgrid_creds['smtp_password']
+    }
 #end
+    
+#  puts "mail will be sent via AWS."
+#  puts "smtp username:"+amazon_creds['smtp_username']
+#  Net::SMTP.enable_tls(OpenSSL::SSL::VERIFY_NONE)
+#  ActionMailer::Base.delivery_method = :smtp
+#  ActionMailer::Base.perform_deliveries = true
+#  ActionMailer::Base.default_charset = "utf-8"
+#  ActionMailer::Base.default_url_options = { :host => "tourfilter.com"}
+#  ActionMailer::Base.raise_delivery_errors = true
+#  ActionMailer::Base.logger = Logger.new("mailer.log")
+#  ActionMailer::Base.smtp_settings = {
+#    :address => "email-smtp.us-east-1.amazonaws.com",
+#    :port =>  465,
+#    :enable_starttls_auto => true,
+#    :openssl_verify_mode => 'none', 
+#    :domain => "tourfilter.com",
+#    :authentication =>  :plain,
+#    :user_name => amazon_creds['smtp_username'],
+#    :password =>  amazon_creds['smtp_password']
+#  }
 
 # These defaults are used in GeoKit::Mappable.distance_to and in acts_as_mappable
 GeoKit::default_units = :miles
@@ -191,8 +212,8 @@ GeoKit::Geocoders::provider_order = [:google,:yahoo]
 # but this is an easier way to make sure tlsconnect (which does SMTP AUTH) gets called
 module Net
   class SMTP
-    def tls?
-      true
-    end
+#    def tls?
+#      true
+#    end
   end
 end
