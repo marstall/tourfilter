@@ -1,6 +1,7 @@
-for name in $(mysql tourfilter_boston -uchris -pchris -e "select code from metros")
+for name in $(m shared "select code from metros where status='active' order by code asc")
 do
  if [ $name != "code" ]; then 
-   echo "$name is fun"
+	echo $name :
+ 	m $name "$1" 
  fi
 done

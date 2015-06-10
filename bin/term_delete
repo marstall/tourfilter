@@ -1,0 +1,6 @@
+for var in "$@"
+do
+	echo "deleting $var ..."
+	m boston "delete from terms_users where term_id in (select id from terms where text='$var');delete from matches where term_id in (select id from terms where text='$var');delete from terms where text='$var'"
+ 	m shared "delete from shared_terms where text='$var';update artist_terms set status='invalid' where term_text='$var';"
+done
