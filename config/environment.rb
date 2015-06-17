@@ -11,12 +11,12 @@ require File.join(File.dirname(__FILE__), 'boot')
 
 #require 'tlsmail'
 
-require 'aws'
+#require 'aws'
 
 $AMAZON_CREDS = amazon_creds = YAML::load(open("#{RAILS_ROOT}/config/amazon.yml"))
-AWS.config(
-  :access_key_id => amazon_creds['access_key_id'],
-  :secret_access_key => amazon_creds['secret_access_key'])
+#AWS.config(
+#  :access_key_id => amazon_creds['access_key_id'],
+#  :secret_access_key => amazon_creds['secret_access_key'])
 
 # extend ActionMailer
 #puts "extending ActionMailer for AWS ..."

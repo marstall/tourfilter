@@ -3,6 +3,9 @@
   cookies[options_label]||=default_cookie_value
 %>
 	<div class='calendar_options'>
+		<div style='float:right'>
+			<%=right_html%>
+		</div>
 		<%nav_array.each{|elem|%>
 		    <%code=elem.keys.first-%>
 		    <%

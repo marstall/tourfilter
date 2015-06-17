@@ -21,18 +21,7 @@
 <div >
 <%#=render(:partial=>'shared/search')%>
         	<div id='calndar_view'>  
-    			<%if cookies['calndar_view']=='venues'&&@view!=:calendar%>
-            		<%=render_component(:controller=>'edit',:action=>'venues_partial',:params=>params+{:metro_code=>@metro_code})%>
-    			<%elsif cookies['calndar_view']=='friends'&&@view!=:calendar%>
-            		<%=render('friends_partial',:params=>params+{:metro_code=>@metro_code})%>
-    			<%elsif cookies['calndar_view']=='alerts'&&@view!=:calendar%>
-          			<%=render("alerts_partial",:params=>params+{:metro_code=>@metro_code})%>
-    			<%elsif cookies['calndar_view']=='my_bands'&&@view!=:calendar%>
-	        		<%=render("your_shows_partial",:params=>params+{:metro_code=>@metro_code})%>
-				<%elsif cookies['calndar_view']=='full_SP_calendar'&&@view!=:calendar%>
-	           		<%=render("calendar_partial",
-							:params=>params+{:metro_code=>@metro_code,:offset=>@offset,:days_to_show=>@days_to_show})%>
-				<%elsif cookies['calndar_view']=='popular'&&@view!=:calendar%>
+				<%if cookies['calndar_view']=='popular'&&@view!=:calendar%>
 	           		<%=render("popular_partial",
 							:params=>params+{:metro_code=>@metro_code,:offset=>@offset,:days_to_show=>@days_to_show})%>
           <%else%>

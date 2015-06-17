@@ -13,6 +13,10 @@ GEM
       activesupport (= 2.3.9)
     activesupport (2.3.9)
     attr_required (0.0.5)
+    aws (2.10.2)
+      http_connection
+      uuidtools
+      xml-simple
     aws-s3 (0.6.2)
       builder
       mime-types
@@ -32,6 +36,7 @@ GEM
     hoe (3.5.2)
       rake (>= 0.8, < 11.0)
     hpricot (0.8.6)
+    http_connection (1.4.4)
     httpclient (2.3.3)
     i18n (0.6.4)
     icalendar (1.0.2)
@@ -73,6 +78,7 @@ PLATFORMS
 DEPENDENCIES
   Text (= 1.1.2)
   attr_required (~> 0.0.5)
+  aws
   aws-s3 (= 0.6.2)
   aws-sdk
   fb_graph

@@ -3186,7 +3186,12 @@ h1, #left-header {
 	text-transform:lowercase;
 	font-size:18px;
 }
-
+.search_field
+{
+	font-family:monospace;
+	font-size:16px;
+	width:120px;
+}
 .search_field_mobile
 {
 	width:60px;
@@ -3440,6 +3445,16 @@ h1x {
 	-webkit-border-radius:6px;
 	-moz-border-radius:6px;
 }
+
+.upload_button
+{
+	padding:2px;
+	xbackground-color:#fff;
+}
+.upload_button a:link { text-decoration: none; color: #333; }
+.upload_button a:visited { text-decoration: underline; color: #333; }
+.upload_button a:hover { text-decoration: underline; }
+.upload_button a:active { text-decoration: underline; }
 
 .pill
 {
@@ -3764,13 +3779,24 @@ h1x {
 
 .above_header
 {
-	background-color:white;
-	font-family:helvetica;
+	font-family:monospace;
+	background-color:#ddd;
+	color:#d3100a;
+	padding-bottom:2em;
 	text-align:right;
-	font-size:20px;
+	font-size:14px;
  	color:black;
 	padding-top:8px;
 	width:100%;
+    opacity: .1;
+    filter: alpha(opacity=10);
+}
+
+.above_header:hover
+{
+	background-color:#95c3d6;
+    opacity: 1;
+    filter: alpha(opacity=100);
 }
 
 .above_header_item

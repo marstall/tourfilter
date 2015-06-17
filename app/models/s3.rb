@@ -1,6 +1,7 @@
 require "rubygems"
 require "net/http"
 require "aws"
+require "aws_s3"
 
 class S3
 

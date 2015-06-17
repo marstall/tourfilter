@@ -7,7 +7,7 @@
 #   http://dev.mysql.com/doc/refman/5.0/en/old-client.html
 development:
   adapter: mysql
-  database: tourfilter_boston
+  database: reflyer_boston
   username: chris
   password: chris
   host: 127.0.0.1
@@ -51,7 +51,7 @@ shared_test:
 
 shared_development:
   adapter: mysql
-  database: tourfilter_shared
+  database: reflyer_shared
   username: chris
   password: chris
   host: 127.0.0.1

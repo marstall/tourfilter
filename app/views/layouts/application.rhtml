@@ -26,7 +26,7 @@ window.hud=false
 	<body >
 	    <%unless @hide_login or @not_in_a_city%>
 		<form method='get' action='/<%=@metro_code%>/flyers'>
-	  	  <div class='above_header' >
+	  	  <div class='above_header'  style=''>
 	          <div id="left-header" >
 			  boston culture & community. in flyer form.
 			 </div>
@@ -42,7 +42,7 @@ window.hud=false
 	  			</span>
 	  			<%if is_admin?%>
 		  			<span class='header_menu_item ' >
-		  				<input onclick='window.hud=!window.hud'  type='checkbox'/>hud&nbsp;&bull;
+		  				<input onclick='window.hud=!window.hud'  type='checkbox'/>hud&nbsp;
 		  			</span>
 		  			<span class='header_menu_item ' >
 		  				<a href="<%=url('/feed')%>">feed</a>&nbsp;&bull;
@@ -51,13 +51,16 @@ window.hud=false
 	  			<span >
 		    		<%unless @hide_login%>
 		              <%if !@youser_logged_in-%>
-		       			<span class='header_menu_item'>
-		       				<a href="<%=url('/edit/homepage_signup_link')%>">sign up</a>&nbsp;&bull;
+		       			<span class='dheader_menu_item'>
+		       				<a href="<%=url('/edit/homepage_signup_link')%>">signup</a>
 		       			</span>
-		                <span class='header_menu_item '>
-		                	<a href="<%=url('/login')%>">log in</a>
+		                <span class='dheader_menu_item '>
+		                	<a href="<%=url('/login')%>">login</a>
 		                </span>
 		              <%else-%>
+		                <span class='dheader_menu_item '>
+		                	<a href="<%=url('/post')%>">post</a>
+		                </span>
 		       			<!--span class='header_menu_item'>
 		       				<a href="<%=url('/submit_show')%>">submit a show</a>
 		       			</span-->
@@ -79,7 +82,7 @@ window.hud=false
         <div style='float:right;padding:12px'>
           <%#=render(:partial=>'shared/instant_search')%>
         </div>
-        <div style='float:left'>
+        <div style='float:center'>
 			<div class='rounded_image_container_container'>
 		<div class='rounded_image_container' >
           <a href='/'><img style='width:400px' src='/images/ariel_reflyer_2.jpg'></span></a><!--img style='height:46px' src='/images/tourfilter_logo_4.png'/-->
