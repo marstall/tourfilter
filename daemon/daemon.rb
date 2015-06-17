@@ -291,6 +291,7 @@ break if @num and i>=@num
           successes=0
           users.each{|user|
             begin
+              next if user.invalid_email=='true'
               onsale = (match.onsale_date and is_today(match.onsale_date)) ? true : false
               puts "sending #{onsale ? 'onsale' : 'normal'} to #{user.email_address} ... "
               if onsale 
